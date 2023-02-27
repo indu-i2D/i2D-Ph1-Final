@@ -1,6 +1,6 @@
 //
 //  UpdateProfileVC.swift
-//  iDonate
+//  i2Donate
 //
 //  Created by Im043 on 27/05/19.
 //  Copyright © 2019 Im043. All rights reserved.
