@@ -20,5 +20,9 @@ target 'i2-Donate' do
     pod 'GooglePlaces'
     pod 'BraintreeDropIn'
     pod "BraintreeDropIn/UIKit"
+    pod 'SwiftyJSON'
+    pod 'TwitterKit'
+    pod 'TwitterCore'
+    
 #    pod 'PayPal-iOS-SDK'
 end

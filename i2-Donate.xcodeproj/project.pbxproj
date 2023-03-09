@@ -101,10 +101,10 @@
 		3FFAD64E22EACB6A00D6F197 /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFAD64D22EACB6A00D6F197 /* ForgotVC.swift */; };
 		3FFAD65022EACF8F00D6F197 /* VerifyOTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFAD64F22EACF8F00D6F197 /* VerifyOTP.swift */; };
 		3FFAD65322EB32C000D6F197 /* CardPaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFAD65222EB32BE00D6F197 /* CardPaymentVC.swift */; };
-		5107B568DFF4FD61BABCD4BE /* Pods_i2_Donate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88887300BA2FAB78A6B02F03 /* Pods_i2_Donate.framework */; };
 		732D18C1255AE9DA0039AD71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC72DEB22706C62004B2FB3 /* Assets.xcassets */; };
 		73D6A88425458D6300CAD41C /* MyDonationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D6A88325458D6300CAD41C /* MyDonationsViewController.swift */; };
 		73D6A8872545925A00CAD41C /* TransactionHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D6A8862545925A00CAD41C /* TransactionHistoryTableViewCell.swift */; };
+		7E42D32FD62E804D28E0C63A /* Pods_i2_Donate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1BBB735BC703992C765F3E2 /* Pods_i2_Donate.framework */; };
 		93267744227F08BB00FE65F0 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93267743227F08BB00FE65F0 /* MenuVC.swift */; };
 		932A2DD1227E20F4005BBBDB /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932A2DD0227E20F4005BBBDB /* LoginVC.swift */; };
 		932A2DD3227E278E005BBBDB /* iDonateClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932A2DD2227E278E005BBBDB /* iDonateClass.swift */; };
@@ -112,7 +112,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		032AF5CB35FE083C31EB93B4 /* Pods-i2~Donate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2~Donate.debug.xcconfig"; path = "Target Support Files/Pods-i2~Donate/Pods-i2~Donate.debug.xcconfig"; sourceTree = "<group>"; };
 		18F485B2295DFF0F00731ED3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		18F485B4295DFF1F00731ED3 /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		1B41CA55249E06CB00839F65 /* TwitterHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterHandler.swift; sourceTree = "<group>"; };
@@ -138,6 +137,7 @@
 		1BD556B324B840DD001D616F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		1BD556B524B840E7001D616F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1BD556B724B84105001D616F /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		2057627D8E6035F93005CC08 /* Pods-i2-Donate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.debug.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.debug.xcconfig"; sourceTree = "<group>"; };
 		3F016E0C228A8F1400F91FAC /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		3F05ADAF233DEA3B0088734C /* ParentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParentModel.swift; path = StaticModel/ParentModel.swift; sourceTree = "<group>"; };
 		3F05ADB0233DEA3B0088734C /* ChildModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildModel.swift; path = StaticModel/ChildModel.swift; sourceTree = "<group>"; };
@@ -212,16 +212,14 @@
 		3FFAD64D22EACB6A00D6F197 /* ForgotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
 		3FFAD64F22EACF8F00D6F197 /* VerifyOTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOTP.swift; sourceTree = "<group>"; };
 		3FFAD65222EB32BE00D6F197 /* CardPaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentVC.swift; sourceTree = "<group>"; };
-		5D6FD7785E6E5F7500AD1B40 /* Pods-i2-Donate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.release.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.release.xcconfig"; sourceTree = "<group>"; };
-		608FB5916D75F7C6AD67DCC6 /* Pods-i2-Donate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.debug.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.debug.xcconfig"; sourceTree = "<group>"; };
 		73D6A88325458D6300CAD41C /* MyDonationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		73D6A8862545925A00CAD41C /* TransactionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryTableViewCell.swift; sourceTree = "<group>"; };
-		7FE013C953F88DE6A96922AC /* Pods-i2~Donate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2~Donate.release.xcconfig"; path = "Target Support Files/Pods-i2~Donate/Pods-i2~Donate.release.xcconfig"; sourceTree = "<group>"; };
-		88887300BA2FAB78A6B02F03 /* Pods_i2_Donate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_i2_Donate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93267743227F08BB00FE65F0 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		932A2DD0227E20F4005BBBDB /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		932A2DD2227E278E005BBBDB /* iDonateClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iDonateClass.swift; sourceTree = "<group>"; };
 		937069DD227CC87500E30220 /* customview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customview.swift; sourceTree = "<group>"; };
+		C5DA6DA2025C80535C49EF92 /* Pods-i2-Donate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.release.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.release.xcconfig"; sourceTree = "<group>"; };
+		F1BBB735BC703992C765F3E2 /* Pods_i2_Donate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_i2_Donate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,7 +239,7 @@
 				1B533667249C739E00D9C622 /* Accelerate.framework in Frameworks */,
 				1BD556B224B840D2001D616F /* CoreGraphics.framework in Frameworks */,
 				1BD556B424B840DD001D616F /* CoreVideo.framework in Frameworks */,
-				5107B568DFF4FD61BABCD4BE /* Pods_i2_Donate.framework in Frameworks */,
+				7E42D32FD62E804D28E0C63A /* Pods_i2_Donate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,10 +638,8 @@
 		7DB6591AE4A352EF0FFEF370 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				032AF5CB35FE083C31EB93B4 /* Pods-i2~Donate.debug.xcconfig */,
-				7FE013C953F88DE6A96922AC /* Pods-i2~Donate.release.xcconfig */,
-				608FB5916D75F7C6AD67DCC6 /* Pods-i2-Donate.debug.xcconfig */,
-				5D6FD7785E6E5F7500AD1B40 /* Pods-i2-Donate.release.xcconfig */,
+				2057627D8E6035F93005CC08 /* Pods-i2-Donate.debug.xcconfig */,
+				C5DA6DA2025C80535C49EF92 /* Pods-i2-Donate.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -674,7 +670,7 @@
 				1B533668249C73A900D9C622 /* AudioToolbox.framework */,
 				1B533666249C739E00D9C622 /* Accelerate.framework */,
 				3FBCBC2722C233B20010AED0 /* MapKit.framework */,
-				88887300BA2FAB78A6B02F03 /* Pods_i2_Donate.framework */,
+				F1BBB735BC703992C765F3E2 /* Pods_i2_Donate.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -686,12 +682,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FC72DF322706C62004B2FB3 /* Build configuration list for PBXNativeTarget "i2-Donate" */;
 			buildPhases = (
-				C2B26B82D7DDB811B8064B9C /* [CP] Check Pods Manifest.lock */,
+				F853E59E78E51C30B4403BD1 /* [CP] Check Pods Manifest.lock */,
 				3FC72DDD22706C40004B2FB3 /* Sources */,
 				3FC72DDE22706C40004B2FB3 /* Frameworks */,
 				3FC72DDF22706C40004B2FB3 /* Resources */,
-				2027A9011906BA34890097DC /* [CP] Embed Pods Frameworks */,
-				8CB50D94D845EC9EF7C9DB2A /* [CP] Copy Pods Resources */,
+				D4C4863F62F07CB28C845AAD /* [CP] Embed Pods Frameworks */,
+				CA0EA96A0FE24160CA3905F2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -767,24 +763,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2027A9011906BA34890097DC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8CB50D94D845EC9EF7C9DB2A /* [CP] Copy Pods Resources */ = {
+		CA0EA96A0FE24160CA3905F2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -801,7 +780,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C2B26B82D7DDB811B8064B9C /* [CP] Check Pods Manifest.lock */ = {
+		D4C4863F62F07CB28C845AAD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F853E59E78E51C30B4403BD1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1049,13 +1045,13 @@
 		};
 		3FC72DF422706C62004B2FB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 608FB5916D75F7C6AD67DCC6 /* Pods-i2-Donate.debug.xcconfig */;
+			baseConfigurationReference = 2057627D8E6035F93005CC08 /* Pods-i2-Donate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1081,13 +1077,13 @@
 		};
 		3FC72DF522706C62004B2FB3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5D6FD7785E6E5F7500AD1B40 /* Pods-i2-Donate.release.xcconfig */;
+			baseConfigurationReference = C5DA6DA2025C80535C49EF92 /* Pods-i2-Donate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (

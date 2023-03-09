@@ -64,7 +64,11 @@ PODS:
   - GTMSessionFetcher/Core (1.7.2)
   - MBProgressHUD (1.2.0)
   - SideMenu (6.5.0)
+  - SwiftyJSON (5.0.1)
   - TKFormTextField (0.3.1)
+  - TwitterCore (3.2.0)
+  - TwitterKit (3.4.2):
+    - TwitterCore (>= 3.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0)
@@ -80,7 +84,10 @@ DEPENDENCIES:
   - GoogleSignIn (~> 5.0.2)
   - MBProgressHUD
   - SideMenu
+  - SwiftyJSON
   - TKFormTextField
+  - TwitterCore
+  - TwitterKit
 
 SPEC REPOS:
   trunk:
@@ -102,7 +109,10 @@ SPEC REPOS:
     - GTMSessionFetcher
     - MBProgressHUD
     - SideMenu
+    - SwiftyJSON
     - TKFormTextField
+    - TwitterCore
+    - TwitterKit
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
@@ -123,8 +133,11 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   TKFormTextField: def6294d3d3bd944d864ee48d5cc6e36863d6ade
+  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
+  TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: 21d70a67ac32d963c874a3c45309ff1e354a4186
+PODFILE CHECKSUM: 8a8e379a6a5b5f6765cb906dbb488bc55f3668b8
 
 COCOAPODS: 1.11.3

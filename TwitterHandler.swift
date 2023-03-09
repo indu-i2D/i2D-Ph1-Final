@@ -11,6 +11,7 @@ import UIKit
 import WebKit
 
 
+
 struct UserInfo {
     let userfName: String
     let userlName: String
@@ -55,6 +56,7 @@ struct EmailIdVerification {
     let email: String
     let userfName: String
     let userlName: String
+    let userProfileUrl:String
 }
 
 public typealias Credentials = (key: String, secret: String)
@@ -98,6 +100,22 @@ class TwitterHandler: NSObject {
             NotificationCenter.default.removeObserver(token)
         }
     }
+    
+//    // Initialize Twitter API client
+//    let client = TWTRAPIClient()
+//
+//    // Request access to user's email address
+//    func client.requestEmail { email, error in
+//        if let error = error {
+//            print("Error requesting email: \(error.localizedDescription)")
+//        } else if let email = email {
+//            print("User's email address: \(email)")
+//        } else {
+//            print("No email address provided by user")
+//        }
+//    }
+//
+    
 }
 
 extension TwitterHandler {
@@ -144,7 +162,6 @@ extension TwitterHandler {
                 guard let oauthUrl = URL(string: urlString) else { return }
                 DispatchQueue.main.async {
                     self.openWebviewWithAction(authorizationURL: oauthUrl)
-                    print("Twitter oauth : \(oauthUrl)")
                     
                     complete(oauthUrl)
                 }
@@ -174,26 +191,23 @@ extension TwitterHandler {
 extension TwitterHandler {
    private func getRequestToken(args: RequestOAuthTokenInput, _ complete: @escaping (RequestOAuthTokenResponse) -> Void) {
         let cc = (key: TWITTER_CONSUMER_KEY, secret: TWITTER_CONSUMER_SECRET)
-        
         let request = (url: "https://api.twitter.com/oauth/request_token", httpMethod: "POST")
-        let callback = args.callbackScheme // + "://success"
-        
+//       let callback = "twitterkit-pBjkBJoBpsMl1QHWsE1UjbAo2"
+       let callback = args.callbackScheme // + "://success"
+       
         // Build the OAuth Signature
         let params: [String: String] = [
             "oauth_callback": callback
         ]
-        
         guard let url = URL(string: request.url) else { return }
         var urlRequest = URLRequest(url: url)
         urlRequest.signOAuth1(method: "POST", urlFormParameters: params, consumerCredentials: cc)
-        
         let task = URLSession.shared.dataTask(with: urlRequest) { data, _, _ in
             guard let data = data else { return }
             guard let dataString = String(data: data, encoding: .utf8) else { return }
             
-            print("TWTR-request_token: \(dataString)")
             let attributes = dataString.urlQueryStringParameters
-            
+            print("TWTR-request_token: \(attributes)")
             let result = RequestOAuthTokenResponse(oauthToken: attributes["oauth_token"] ?? "",
                                                    oauthTokenSecret: attributes["oauth_token_secret"] ?? "",
                                                    oauthCallbackConfirmed: attributes["oauth_callback_confirmed"] ?? "")
@@ -225,6 +239,7 @@ extension TwitterHandler {
             print("Twitter access_token dataString : \(dataString)")
             
             let attributes = dataString.urlQueryStringParameters
+            print(attributes)
             print("Auth Token 4 \(attributes["oauth_token"] ?? "")")
             
             let result = RequestAccessTokenResponse(accessToken: attributes["oauth_token"] ?? "",
@@ -272,7 +287,6 @@ extension TwitterHandler {
         twitterOAuthTokenSecretKey = args.accessTokenSecret
 
         
-        
         guard let url = URL(string: request.url) else { return }
         var urlRequest = URLRequest(url: url)
         urlRequest.signOAuth1(method: "GET", urlFormParameters: [:], consumerCredentials: cc, userCredentials: uc)
@@ -282,16 +296,16 @@ extension TwitterHandler {
             guard let dataString = String(data: data, encoding: .utf8) else { return }
             
             //            let attributes = dataString.urlQueryStringParameters
-            print(dataString)
             print(data)
-            print(response)
             print("Twitter verify_credentials dataString : \(dataString)")
             
             DispatchQueue.main.async {
                 if let response = response as? HTTPURLResponse, response.isResponseOK() {
                     if let json = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] {
+                        print(json)
+                        print(json["profile_image_url"])
                         if let Name: String = json["screen_name"] as? String  {
-                            let userinfoEmail = EmailIdVerification(requestToken: args.accessToken, requestTokenSecret: args.accessTokenSecret, email: json["email"] as? String ?? "", userfName: json["name"] as? String ?? "", userlName: Name )
+                            let userinfoEmail = EmailIdVerification(requestToken: args.accessToken, requestTokenSecret: args.accessTokenSecret, email: json["email"] as? String ?? "", userfName: json["name"] as? String ?? "", userlName: Name,userProfileUrl: json["profile_image_url"] as? String ?? "" )
                             complete(userinfoEmail)
                             print(Name)
                         } else {

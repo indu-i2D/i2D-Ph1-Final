@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import MBProgressHUD
+import SwiftyJSON
+
 
 public typealias APIDictionary = Dictionary<String, Any>
 
@@ -34,7 +36,6 @@ class WebserviceClass {
        
     func performRequest <T:Codable>(type: T.Type, urlString:String, methodType: HTTPMethod ,parameters:Parameters, success:@escaping ((T) -> Void), failure: @escaping ((T) -> Void)) -> Void {
         
-        print("parameters", parameters)
         
         var param = parameters
         
@@ -47,7 +48,7 @@ class WebserviceClass {
         
         print("**************************")
         
-        print("Request param", param)
+//        print("Request param", param)
         print("Request urlString", urlString)
 
         print("**************************")
@@ -74,6 +75,8 @@ class WebserviceClass {
                     print(response.result)
                     // Convert This in JSON
                     do {
+                        let json = try JSONSerialization.jsonObject(with: data) as! [String:Any]
+                        print(JSON(json))
                         let utf8Data = String(decoding: data, as: UTF8.self).data(using: .utf8)
                         let responseDecoded = try JSONDecoder().decode(T.self, from: utf8Data!)
                         success(responseDecoded)

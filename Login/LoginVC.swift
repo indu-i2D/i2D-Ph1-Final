@@ -339,8 +339,8 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
             self.view.isUserInteractionEnabled = true
             print(userinfo.userfName)
             self.userName = userinfo.userfName
-//            self.email = userinfo.email
-            self.profileUrl = ""
+            self.email = userinfo.email
+            self.profileUrl = userinfo.userProfileUrl
             self.soacialLogin(socialType: "Twitter")
         }, {
             

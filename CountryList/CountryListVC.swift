@@ -167,7 +167,10 @@ class CountryListVC: BaseViewController,UISearchBarDelegate,UISearchResultsUpdat
             self.navigationController?.isNavigationBarHidden = true
            self.navigationController?.popViewController(animated: true)
         }
-        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "UpdateProfileVC") as! UpdateProfileVC
+        self.navigationController?.pushViewController(vc, animated: true)
+        self.view .endEditing(true)
+        dismiss(animated: true, completion: nil)
     }
     
     func filterContentForSearchText(_ searchText: String) {

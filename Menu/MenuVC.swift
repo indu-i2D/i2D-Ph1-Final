@@ -10,6 +10,7 @@ import UIKit
 import AlamofireImage
 import Alamofire
 import SafariServices
+import MBProgressHUD
 
 class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
     
@@ -23,6 +24,8 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        updateProfile()
         
         self.view.borderColor = iDonatecolor.menuBackColor
         
@@ -45,10 +48,13 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
         self.view .addSubview(menuBtn)
         menuBtn.setImage(UIImage(named: "back"), for: .normal)
 
-        updateProfile()
         self.profileImage.layer.cornerRadius = 50//self.profileImage.frame.size.width / 2
         self.profileImage.clipsToBounds = true
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateProfile()
     }
     
     @objc func menuAction() {
@@ -57,10 +63,10 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
     
     @IBAction func updatection(_ sender:UIButton) {
         if UserDefaults.standard.data(forKey: "people") != nil{
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileVC
-            vc?.updateType = "update"
-            vc?.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(vc!, animated: true, completion: nil)
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UpdateProfileVC") as! UpdateProfileVC
+            vc.updateType = "update"
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(vc, animated: true, completion: nil)
         }
         else{
             let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
@@ -82,7 +88,7 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
     }
     
     func updateProfile() {
-        
+
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
             

@@ -217,9 +217,17 @@ class ChangePasswordVC: BaseViewController,UITextFieldDelegate {
             }
             alertController.addAction(contact)
             self.present(alertController, animated: true, completion: nil)
-        }
-        else{
-            
+        }else if self.oldPassword.text?.tk_isValidPassword() == false && self.newPassword.text?.tk_isValidPassword() == false {
+            let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+            let messageAttrString = NSMutableAttributedString(string: "Please enter valid password", attributes: messageFont)
+            alertController.setValue(messageAttrString, forKey: "attributedMessage")
+            let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            }
+            alertController.addAction(contact)
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }else{
             let postDict = ["user_id": userId!,"password":newPassword.text as Any] as [String : Any]
             let updatePasswordString = String(format: URLHelper.iDonateUpdatePassword)
             let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
@@ -250,7 +258,9 @@ class ChangePasswordVC: BaseViewController,UITextFieldDelegate {
             showAlert(msg: "Please enter all fields")
         } else if oldPassword.text == newPassword.text {
             showAlert(msg: "Old and New password have to be different")
-        } else {
+        }else if self.newPassword.text?.tk_isValidPassword() == false{
+            showAlert(msg: "Please enter valid new password")
+        }else {
             if let data = UserDefaults.standard.data(forKey: "people"),
                 let user = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
                 let postDict = ["user_id": user.userID,"token":user.token,"old_password":oldPassword.text as Any,"new_password":newPassword.text as Any] as [String : Any]
@@ -275,18 +285,18 @@ class ChangePasswordVC: BaseViewController,UITextFieldDelegate {
         if(status == 1){
             let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
             let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-            let messageAttrString = NSMutableAttributedString(string: "Continue to change password?", attributes: messageFont)
+            let messageAttrString = NSMutableAttributedString(string: message, attributes: messageFont)
             alertController.setValue(messageAttrString, forKey: "attributedMessage")
             let ok = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
                 
                 self.navigationController?.pushViewController(vc!, animated: true)
             }
-            let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
-                
-            }
+//            let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+//
+//            }
             alertController.addAction(ok)
-            alertController.addAction(cancel)
+//            alertController.addAction(cancel)
             self.present(alertController, animated: true, completion: nil)
         }
         else {
@@ -311,4 +321,5 @@ class ChangePasswordVC: BaseViewController,UITextFieldDelegate {
         alertController.addAction(contact)
         self.present(alertController, animated: true, completion: nil)
     }
+    
 }

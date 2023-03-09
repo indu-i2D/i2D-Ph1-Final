@@ -101,6 +101,8 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
         // Do any additional setup after loading the view.
     }
     
+    
+    
     func addTargetForErrorUpdating(_ textField: TKFormTextField) {
         textField.addTarget(self, action: #selector(clearErrorIfNeeded), for: .editingChanged)
         textField.addTarget(self, action: #selector(updateError), for: .editingDidEnd)
@@ -167,9 +169,18 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
     }
     
     func openCamera(){
-        picker.allowsEditing = true
-        picker.sourceType = .camera
-        present(picker, animated: true, completion: nil)
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
+        {
+            picker.sourceType = UIImagePickerController.SourceType.camera
+            picker.allowsEditing = true
+            self.present(picker, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func openGallary(){
@@ -489,8 +500,6 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
          
         loadingNotification.label.text = "Loading"
          
-         
-         
         let imageData = profileImage.image?.jpegData(compressionQuality: 0.25)
          
         let photoString = imageData!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
@@ -498,7 +507,6 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
         if let data = UserDefaults.standard.data(forKey: "people"),
          
         let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
-         
          
          
         let postDict = ["name": name, //myPeopleList.name,
@@ -522,13 +530,7 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
         "business_name":businessName.text ?? "",
          
         "terms":termcondition == false ? "No" : "Yes"] as [String : Any]
-         
-         
-         
-        print(postDict)
-         
-         
-         
+   
         WebserviceClass.sharedAPI.performRequest(type: UpdateModel.self, urlString: updateProfileUrl, methodType: HTTPMethod.post, parameters: postDict as Parameters, success: { (response) in
          
         self.UpdateModelResponse = response
@@ -579,7 +581,7 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
                 }
             }
             else{
-                guard let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController else { return }
+                let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController)!
                 self.navigationController?.pushViewController(vc, animated: true)
 //                self.present(vc, animated: true, completion: nil)
             }
