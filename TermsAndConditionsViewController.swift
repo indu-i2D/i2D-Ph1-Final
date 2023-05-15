@@ -30,8 +30,9 @@ class TermsAndConditionsViewController: BaseViewController {
         
         // Do any additional setup after loading the view.
         
-        let url = URL(string: "https://prod.i2-donate.com/i2D-Publish-Docs/i2-Donate%20Terms%20and%20Conditions.html") //URL(string: "https://admin.i2-donate.com/about_us.html)
-        let requestObj = URLRequest(url: url!)
+       /* let url = URL(string: "https://prod.i2-donate.com/i2D-Publish-Docs/i2-Donate%20Terms%20and%20Conditions.html") //URL(string: "https://admin.i2-donate.com/about_us.html) */
+        let urlString = URLHelper.getTermsAndConditionUrl
+        let requestObj = URLRequest(url:URL(string: urlString)!)
         self.webView.load(requestObj)
         
         header.text = "Terms and Conditions"

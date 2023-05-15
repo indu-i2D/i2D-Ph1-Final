@@ -32,6 +32,7 @@ enum URLName : String {
     case iDonateUpdatePassword = "UpdatePassword"
     case iDonateNotification = "Notification"
     case iDonateTransactionList = "TransactionList"
+    case iDonateTermsUrl = "TermsUrl"
 
 }
 
@@ -118,6 +119,12 @@ final class URLHelper : NSObject {
     }()
     static var iDonateTransactionList : String = {
         return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTransactionList.rawValue]!
+    }()
+    static var getTermsAndConditionUrl : String = {
+        let baseUrl = URL(string: URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]!)
+        let terms = String(format: "https://%@/%@", (baseUrl?.host!)!,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTermsUrl.rawValue]!)
+        debugPrint("baseUrl",terms)
+        return terms
     }()
 }
 

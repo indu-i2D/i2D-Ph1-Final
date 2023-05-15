@@ -25,4 +25,7 @@ target 'i2-Donate' do
     pod 'TwitterCore'
     
 #    pod 'PayPal-iOS-SDK'
+
 end
+
+
