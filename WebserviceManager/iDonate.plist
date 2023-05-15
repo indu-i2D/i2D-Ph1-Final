@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Base-url</key>
-	<string>https://prod.i2-donate.com/webservice/</string>
+	<string>https://test.i2-donate.com/webservice/</string>
 	<key>Register</key>
 	<string>register</string>
 	<key>Login</key>
