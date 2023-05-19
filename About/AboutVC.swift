@@ -36,12 +36,13 @@ class AboutVC: BaseViewController,WKNavigationDelegate,UITabBarDelegate {
         self.view .addSubview(menuBtn)
         
         if(headerString == "About i2~Donate") {
-            let url = URL(string: "https://prod.i2-donate.com/i2D-Publish-Docs/i2D-App-About.html") //URL(string: "https://admin.i2-donate.com/about_us.html)
-            let requestObj = URLRequest(url: url!)
+            let urlString = URLHelper.getAboutUrl
+            let requestObj = URLRequest(url:URL(string: urlString)!)
             self.aboutText.load(requestObj)
             header.text = headerString
         } else {
-            let requestObj = URLRequest(url: URL(string:"https://prod.i2-donate.com/i2D-Publish-Docs/i2-Donate%20Help%20and%20Support.html")!)
+            let urlString = URLHelper.getHelpUrl
+            let requestObj = URLRequest(url:URL(string: urlString)!)
             self.aboutText.load(requestObj)
             header.text = headerString
         }

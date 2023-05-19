@@ -84,7 +84,7 @@
 		3FC72DEA22706C41004B2FB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC72DE822706C41004B2FB3 /* Main.storyboard */; };
 		3FC72DEF22706C62004B2FB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC72DED22706C62004B2FB3 /* LaunchScreen.storyboard */; };
 		3FC72DF7227074E3004B2FB3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC72DF6227074E3004B2FB3 /* HomeVC.swift */; };
-		3FC78DB8229FB42B00ED1804 /* iDonate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC78DB7229FB42B00ED1804 /* iDonate.plist */; };
+		3FC78DB8229FB42B00ED1804 /* ApiParams.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC78DB7229FB42B00ED1804 /* ApiParams.plist */; };
 		3FC78DBA229FB50100ED1804 /* SwiftHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC78DB9229FB50000ED1804 /* SwiftHelper.swift */; };
 		3FC78DBC229FB50600ED1804 /* UIALertController + DAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC78DBB229FB50500ED1804 /* UIALertController + DAlert.swift */; };
 		3FC78DBE229FB50B00ED1804 /* URLHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC78DBD229FB50B00ED1804 /* URLHelper.swift */; };
@@ -195,7 +195,7 @@
 		3FC72DEE22706C62004B2FB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FC72DF022706C62004B2FB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC72DF6227074E3004B2FB3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		3FC78DB7229FB42B00ED1804 /* iDonate.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iDonate.plist; sourceTree = "<group>"; };
+		3FC78DB7229FB42B00ED1804 /* ApiParams.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiParams.plist; sourceTree = "<group>"; };
 		3FC78DB9229FB50000ED1804 /* SwiftHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHelper.swift; sourceTree = "<group>"; };
 		3FC78DBB229FB50500ED1804 /* UIALertController + DAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIALertController + DAlert.swift"; sourceTree = "<group>"; };
 		3FC78DBD229FB50B00ED1804 /* URLHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLHelper.swift; sourceTree = "<group>"; };
@@ -549,7 +549,7 @@
 				3FC78DBD229FB50B00ED1804 /* URLHelper.swift */,
 				3FC78DBB229FB50500ED1804 /* UIALertController + DAlert.swift */,
 				3FC78DBF229FB51C00ED1804 /* WebserviceClass.swift */,
-				3FC78DB7229FB42B00ED1804 /* iDonate.plist */,
+				3FC78DB7229FB42B00ED1804 /* ApiParams.plist */,
 			);
 			path = WebserviceManager;
 			sourceTree = "<group>";
@@ -746,7 +746,7 @@
 				3FC72DEF22706C62004B2FB3 /* LaunchScreen.storyboard in Resources */,
 				3FA8666022C34C2A0008D333 /* Snell Roundhand Bold Script.ttf in Resources */,
 				732D18C1255AE9DA0039AD71 /* Assets.xcassets in Resources */,
-				3FC78DB8229FB42B00ED1804 /* iDonate.plist in Resources */,
+				3FC78DB8229FB42B00ED1804 /* ApiParams.plist in Resources */,
 				3F05ADB7233DEA3B0088734C /* FamilyData.plist in Resources */,
 				3FBF4AC6228C1F2D0095FCBD /* SF-Compact-Display-Light.otf in Resources */,
 				3FBF4AC0228C1EAC0095FCBD /* SF-Pro-Display-LightItalic.otf in Resources */,
@@ -1051,9 +1051,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 54;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 60;
+				DEVELOPMENT_TEAM = A3C8934K5J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iDonate/Helper",
@@ -1083,9 +1083,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 54;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 60;
+				DEVELOPMENT_TEAM = A3C8934K5J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iDonate/Helper",

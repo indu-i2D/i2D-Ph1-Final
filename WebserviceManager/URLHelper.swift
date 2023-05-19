@@ -33,6 +33,9 @@ enum URLName : String {
     case iDonateNotification = "Notification"
     case iDonateTransactionList = "TransactionList"
     case iDonateTermsUrl = "TermsUrl"
+    case iDonatePrivacyUrl = "PrivacyUrl"
+    case iDonateHelpUrl = "HelpUrl"
+    case iDonateAboutUrl = "AboutUrl"
 
 }
 
@@ -44,7 +47,7 @@ final fileprivate class URLFetcher : NSObject {
         return helper
     }()
     
-    fileprivate let baseURLFile = "iDonate"
+    fileprivate let baseURLFile = "ApiParams"
     fileprivate let fileType = "plist"
     
     private(set) var urlDictionary = [String : String]()
@@ -120,10 +123,25 @@ final class URLHelper : NSObject {
     static var iDonateTransactionList : String = {
         return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTransactionList.rawValue]!
     }()
-    static var getTermsAndConditionUrl : String = {
+    static var getDocsBaseurl : String = {
         let baseUrl = URL(string: URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]!)
-        let terms = String(format: "https://%@/%@", (baseUrl?.host!)!,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTermsUrl.rawValue]!)
-        debugPrint("baseUrl",terms)
+        let url = String(format: "https://%@/", (baseUrl?.host!)!)
+        return url
+    }()
+    static var getTermsAndConditionUrl : String = {
+        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTermsUrl.rawValue]!)
+        return terms
+    }()
+    static var getPrivacyUrl : String = {
+        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonatePrivacyUrl.rawValue]!)
+        return terms
+    }()
+    static var getAboutUrl : String = {
+        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateAboutUrl.rawValue]!)
+        return terms
+    }()
+    static var getHelpUrl : String = {
+        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateHelpUrl.rawValue]!)
         return terms
     }()
 }

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Base-url</key>
-	<string>https://prod.i2-donate.com/webservice/</string>
+	<string>https://prod.i2-donate.com/Webservice/</string>
 	<key>Register</key>
 	<string>register</string>
 	<key>Login</key>
@@ -40,5 +40,11 @@
 	<string>transaction_list</string>
 	<key>TermsUrl</key>
 	<string>i2D-Publish-Docs/i2-Donate%20Terms%20and%20Conditions.html</string>
+	<key>PrivacyUrl</key>
+	<string>i2D-Publish-Docs/i2-Donate%20Privacy%20Policy.html</string>
+	<key>HelpUrl</key>
+	<string>i2D-Publish-Docs/i2-Donate%20Help%20and%20Support.html</string>
+	<key>AboutUrl</key>
+	<string>i2D-Publish-Docs/i2-Donate%20About%20App.html</string>
 </dict>
 </plist>
