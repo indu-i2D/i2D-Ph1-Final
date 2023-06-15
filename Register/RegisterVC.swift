@@ -250,11 +250,14 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     @IBAction func businessAction(_ sender: UIButton){
         businessBtn.isSelected = true
         individualBtn.isSelected = false
-        self.fileOptionsHeight.constant = 370
+       
       //  nameTopConstraint.constant = 70
         self.businessName.isHidden = false
-        self.fileViews.isHidden = false
+        
         self.nameText.isHidden = true
+        
+      /*  self.fileOptionsHeight.constant = 370
+        self.fileViews.isHidden = false */
        
     }
     
@@ -313,13 +316,15 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         present(documentPicker, animated: true, completion: nil)
     }
     func isAllFilesUpdated() -> Bool {
-        debugPrint("selectedFiles",self.selectedFiles)
+       /* debugPrint("selectedFiles",self.selectedFiles)
         let keys = self.selectedFiles.keys
         debugPrint("selectedFiles.keys",keys)
         if keys.contains(0) && keys.contains(1) && keys.contains(2) {
             return true
         }
-        return false
+        return false */
+        
+        return true
     }
     func getKeyName(tag:Int) -> String {
         switch tag{
@@ -376,7 +381,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             }
            else{
                
-               var postDict: Parameters = ["name":nameText.text ?? "",
+            /*   var postDict: Parameters = ["name":nameText.text ?? "",
                                            "email":emailText.text ?? "" ,
                                            "password":passwordText1.text ?? "",
                                            "phone":mobileText.text ?? "",
@@ -394,7 +399,18 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
                for (key,val) in self.selectedFiles {
                    let keyName = self.getKeyName(tag:key)
                    postDict[keyName] = val
-               }
+               } */
+               
+               let postDict: Parameters = ["name":nameText.text ?? "",
+                                                          "email":emailText.text ?? "" ,
+                                                          "password":passwordText1.text ?? "",
+                                                          "phone":mobileText.text ?? "",
+                                                          "country":UserDefaults.standard.value(forKey: "selectedcountry") ?? "US",
+                                                          "gender":genterText ?? "",
+                                                          "type": businessBtn.isSelected ? "business" : "individual",
+                                                          "business_name": businessName.text ?? "",
+                                                          "terms":"Yes"]
+               
                debugPrint("postDict",postDict)
                let registerUrl = String(format: URLHelper.iDonateRegister)
                let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
