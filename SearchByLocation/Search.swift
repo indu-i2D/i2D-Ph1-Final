@@ -511,9 +511,9 @@ class SearchByLocation: BaseViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     //MARK: - websevice method
-    @objc func charityWebSerice() {
-        
-        let postDict: Parameters = ["name":searchName,
+    @objc func charityWebSerice(searchKeyWord:String = "") {
+//        "city":"phoenix"
+        var postDict: Parameters = ["name":searchName,
                                     "latitude":lattitude,
                                     "longitude":longitute,
                                     "page":pageCount,
@@ -526,8 +526,11 @@ class SearchByLocation: BaseViewController,UITableViewDelegate,UITableViewDataSo
                                     "sub_category_code":subCategoryCode ?? [String](),
                                     "child_category_code":childCategory ?? [String](),
                                     "user_id":userID]
+        if !searchKeyWord.isEmpty {
+            postDict["city"] = searchKeyWord
+        }
         
-        print(postDict)
+        print("postDict",postDict)
         print(searchName)
         print(lattitude)
         print(longitute)
@@ -709,13 +712,13 @@ class SearchByLocation: BaseViewController,UITableViewDelegate,UITableViewDataSo
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
         
-      
-        if textField == txtdata, let str = txtdata.text, str.count > 0{
+        if textField == txtdata, let str = txtdata.text, str.count >= 3 {
             strSearch = txtdata.text!
-            let arr: [charityListArray]? = self.charityListArray?.filter({$0.city?.lowercased().contains(str.lowercased()) as! Bool
+            self.charityWebSerice(searchKeyWord: strSearch)
+          /*  let arr: [charityListArray]? = self.charityListArray?.filter({$0.city?.lowercased().contains(str.lowercased()) as! Bool
             })
            
-                self.filterdCharityListArray = arr
+            self.filterdCharityListArray = arr */
             
         }else{
             self.filterdCharityListArray = self.charityListArray

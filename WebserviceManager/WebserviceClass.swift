@@ -34,7 +34,7 @@ class WebserviceClass {
            return manager?.isReachable ?? false
        }
        
-    func performRequest <T:Codable>(type: T.Type, urlString:String, methodType: HTTPMethod ,parameters:Parameters, success:@escaping ((T) -> Void), failure: @escaping ((T) -> Void)) -> Void {
+    func performRequest <T:Codable>(isFileAdded:Bool = false,type: T.Type, urlString:String, methodType: HTTPMethod ,parameters:Parameters, success:@escaping ((T) -> Void), failure: @escaping ((T) -> Void)) -> Void {
         
         
         var param = parameters
@@ -57,7 +57,13 @@ class WebserviceClass {
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.httpMethod = methodType.rawValue
-        request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+        if isFileAdded {
+            request.setValue("multipart/form-data; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+
+        }else{
+            request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+
+        }
         
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: param, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body

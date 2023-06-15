@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.6.2)
+  - Alamofire (5.6.4)
   - AlamofireImage (4.2.0):
     - Alamofire (~> 5.4)
   - AlamofireNetworkActivityIndicator (3.1.0):
@@ -41,16 +41,6 @@ PODS:
     - Braintree/UnionPay (~> 4.32)
     - BraintreeDropIn/UIKit
   - BraintreeDropIn/UIKit (8.2.0)
-  - FBAEMKit (12.3.2):
-    - FBSDKCoreKit_Basics (= 12.3.2)
-  - FBSDKCoreKit (12.3.2):
-    - FBAEMKit (= 12.3.2)
-    - FBSDKCoreKit_Basics (= 12.3.2)
-  - FBSDKCoreKit_Basics (12.3.2)
-  - FBSDKLoginKit (12.3.2):
-    - FBSDKCoreKit (= 12.3.2)
-  - FBSDKShareKit (12.3.2):
-    - FBSDKCoreKit (= 12.3.2)
   - GoogleMaps/Base (4.2.0)
   - GooglePlaces (4.2.0):
     - GoogleMaps/Base (= 4.2.0)
@@ -67,8 +57,8 @@ PODS:
   - SwiftyJSON (5.0.1)
   - TKFormTextField (0.3.1)
   - TwitterCore (3.2.0)
-  - TwitterKit (3.4.2):
-    - TwitterCore (>= 3.2.0)
+  - TwitterKit5 (5.2.0):
+    - TwitterCore (>= 3.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0)
@@ -77,9 +67,6 @@ DEPENDENCIES:
   - Braintree/PayPal
   - BraintreeDropIn
   - BraintreeDropIn/UIKit
-  - FBSDKCoreKit
-  - FBSDKLoginKit
-  - FBSDKShareKit
   - GooglePlaces
   - GoogleSignIn (~> 5.0.2)
   - MBProgressHUD
@@ -87,7 +74,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - TKFormTextField
   - TwitterCore
-  - TwitterKit
+  - TwitterKit5
 
 SPEC REPOS:
   trunk:
@@ -97,11 +84,6 @@ SPEC REPOS:
     - AppAuth
     - Braintree
     - BraintreeDropIn
-    - FBAEMKit
-    - FBSDKCoreKit
-    - FBSDKCoreKit_Basics
-    - FBSDKLoginKit
-    - FBSDKShareKit
     - GoogleMaps
     - GooglePlaces
     - GoogleSignIn
@@ -112,20 +94,15 @@ SPEC REPOS:
     - SwiftyJSON
     - TKFormTextField
     - TwitterCore
-    - TwitterKit
+    - TwitterKit5
 
 SPEC CHECKSUMS:
-  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   AlamofireNetworkActivityIndicator: 6564782bd7b9e6c430ae67d9277af01907b01ca4
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   Braintree: 78a33deb6f6ec617c2c4891fbe352854358b3a8d
   BraintreeDropIn: b57b653d130981aad7ad9bc97a69d3d7ef86f7a1
-  FBAEMKit: 955ca52eba8219c20f90774e8c6ff8bc7b3192a3
-  FBSDKCoreKit: 678f64eda3f0ff25c189c2ebbfe87b1d96a85a6d
-  FBSDKCoreKit_Basics: 6bee7c1f0932432901781203fa5e587ec5099148
-  FBSDKLoginKit: 56d55e23fe66a6db045826190b0b4dbc0e1ca0a0
-  FBSDKShareKit: 4ef957addab76816116ea92bd872e792f7137669
   GoogleMaps: eb03e327edfd70b06de1e6e321653f73712df7ad
   GooglePlaces: 196a9dd88580dcb3f3df46f415057703d0d2a310
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
@@ -136,8 +113,8 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   TKFormTextField: def6294d3d3bd944d864ee48d5cc6e36863d6ade
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
-  TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
+  TwitterKit5: 64095dfefcf39be2355711ef27112d55e340d90e
 
-PODFILE CHECKSUM: 8a8e379a6a5b5f6765cb906dbb488bc55f3668b8
+PODFILE CHECKSUM: a9e5d059892770a1b2c99a33017c0ed83b20f880
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2

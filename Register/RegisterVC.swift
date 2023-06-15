@@ -12,6 +12,7 @@ import MBProgressHUD
 import Alamofire
 import GoogleSignIn
 import FBSDKLoginKit
+import UniformTypeIdentifiers
 
 class RegisterVC: BaseViewController,GIDSignInDelegate {
     @IBOutlet var maleBtn: UIButton!
@@ -33,6 +34,12 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
 
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
     @IBOutlet weak var nameTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fileOptionsHeight: NSLayoutConstraint!
+    @IBOutlet weak var fileViews: UIView!
+    @IBOutlet var inCorporationDocName: UIButton!
+    @IBOutlet var taxIDName: UIButton!
+    @IBOutlet var businessCertifi: UIButton!
+    @IBOutlet var otherDocName: UIButton!
     
     var activeField: UITextField?
     var lastOffset: CGPoint?
@@ -48,6 +55,9 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     var loginType:String = ""
     var loginArray : loginModelArray?
     var loginModelResponse :  loginModel?
+    var selectedFiles = [Int:Any]()
+    var selectedFileTag = 0
+    var fileMetaData = [Int:String]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -240,8 +250,10 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     @IBAction func businessAction(_ sender: UIButton){
         businessBtn.isSelected = true
         individualBtn.isSelected = false
+        self.fileOptionsHeight.constant = 370
       //  nameTopConstraint.constant = 70
         self.businessName.isHidden = false
+        self.fileViews.isHidden = false
         self.nameText.isHidden = true
        
     }
@@ -250,13 +262,79 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         businessBtn.isSelected = false
         individualBtn.isSelected = true
        // nameTopConstraint.constant = 0
+        self.fileOptionsHeight.constant = 0
+        self.fileViews.isHidden = true
         self.businessName.isHidden = true
         self.nameText.isHidden = false
 
     }
     
+    func updateFileSelection(){
+        if self.fileMetaData[0] != nil {
+            self.inCorporationDocName.setTitle(self.fileMetaData[0], for: .normal)
+            self.inCorporationDocName.setTitleColor(.blue, for: .normal)
+        }else{
+            self.inCorporationDocName.setTitle("No file choosen", for: .normal)
+            self.inCorporationDocName.setTitleColor(.black, for: .normal)
+        }
+        if self.fileMetaData[1] != nil {
+            self.taxIDName.setTitle(self.fileMetaData[0], for: .normal)
+            self.taxIDName.setTitleColor(.blue, for: .normal)
+        }else{
+            self.taxIDName.setTitle("No file choosen", for: .normal)
+            self.taxIDName.setTitleColor(.black, for: .normal)
+        }
+        if self.fileMetaData[2] != nil {
+            self.businessCertifi.setTitle(self.fileMetaData[0], for: .normal)
+            self.businessCertifi.setTitleColor(.blue, for: .normal)
+        }else{
+            self.businessCertifi.setTitle("No file choosen", for: .normal)
+            self.businessCertifi.setTitleColor(.black, for: .normal)
+        }
+        if self.fileMetaData[3] != nil {
+            self.otherDocName.setTitle(self.fileMetaData[0], for: .normal)
+            self.otherDocName.setTitleColor(.blue, for: .normal)
+        }else{
+            self.otherDocName.setTitle("No file choosen", for: .normal)
+            self.otherDocName.setTitleColor(.black, for: .normal)
+        }
+    }
+    @IBAction func onFileUploadAction(sender:UIButton){
+        debugPrint("onFileUploadAction",sender.tag)
+        self.selectedFileTag = sender.tag
+        self.openFilePicker(tag: sender.tag)
+    }
     
-    
+    func openFilePicker(tag:Int){
+        
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["com.apple.iwork.pages.pages", "com.apple.iwork.numbers.numbers", "com.apple.iwork.keynote.key","public.image", "com.apple.application", "public.item", "public.content","public.text", "public.data","public.composite-content","public.png","public.jpeg"], in: .import)
+
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+    func isAllFilesUpdated() -> Bool {
+        debugPrint("selectedFiles",self.selectedFiles)
+        let keys = self.selectedFiles.keys
+        debugPrint("selectedFiles.keys",keys)
+        if keys.contains(0) && keys.contains(1) && keys.contains(2) {
+            return true
+        }
+        return false
+    }
+    func getKeyName(tag:Int) -> String {
+        switch tag{
+        case 0:
+            return "incorp_doc"
+        case 1:
+            return "tax_id_doc"
+        case 2:
+            return "good_standing_doc"
+        case 3:
+            return "oth_doc"
+        default:
+            return ""
+        }
+    }
     @IBAction func registerAction(_ sender: UIButton){
         self.view .endEditing(true)
         
@@ -271,7 +349,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
            
-            else if(nameText.text == "") || (emailText.text == "") || (passwordText1.text == "") {
+        else if (businessBtn.isSelected == false && (nameText.text == "") || (emailText.text == "") || (passwordText1.text == "" || (TKDataValidator.password(text: passwordText1.text) != nil)))  {
                 let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
                 let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
                 let messageAttrString = NSMutableAttributedString(string:"Fill the all required field", attributes: messageFont)
@@ -284,8 +362,9 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
                 
             }
        else if(businessBtn.isSelected == true ){
-            
-            if(nameText.text == "") || (emailText.text == "") || (passwordText1.text == "") || (businessName.text == "") {
+           
+           
+           if (businessName.text!.isBlankOrEmpty()) || (emailText.text!.isBlankOrEmpty()) || (passwordText1.text!.isBlankOrEmpty()) || (businessName.text!.isBlankOrEmpty()) || self.isAllFilesUpdated() == false {
                 let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
                 let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
                 let messageAttrString = NSMutableAttributedString(string:"Fill the all required field", attributes: messageFont)
@@ -297,7 +376,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             }
            else{
                
-               let postDict: Parameters = ["name":nameText.text ?? "",
+               var postDict: Parameters = ["name":nameText.text ?? "",
                                            "email":emailText.text ?? "" ,
                                            "password":passwordText1.text ?? "",
                                            "phone":mobileText.text ?? "",
@@ -305,8 +384,18 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
                                            "gender":genterText ?? "",
                                            "type": businessBtn.isSelected ? "business" : "individual",
                                            "business_name": businessName.text ?? "",
-                                           "terms":"Yes"]
+                                           "terms":"Yes",
+                                           "city":"",
+                                           "zip":"",
+                                           "state":"",
+                                           "address1":"",
+                                           "address2":""]
                
+               for (key,val) in self.selectedFiles {
+                   let keyName = self.getKeyName(tag:key)
+                   postDict[keyName] = val
+               }
+               debugPrint("postDict",postDict)
                let registerUrl = String(format: URLHelper.iDonateRegister)
                let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
                loadingNotification.mode = MBProgressHUDMode.indeterminate
@@ -342,7 +431,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
                 loadingNotification.mode = MBProgressHUDMode.indeterminate
                 loadingNotification.label.text = "Loading"
                 
-                WebserviceClass.sharedAPI.performRequest(type:  RegisterModel.self, urlString: registerUrl, methodType: .post, parameters: postDict, success: { (response)
+                WebserviceClass.sharedAPI.performRequest(isFileAdded:businessBtn.isSelected ? true : false,type:  RegisterModel.self, urlString: registerUrl, methodType: .post, parameters: postDict, success: { (response)
                     in
                     self.RegisterModelResponse = response
                     self.RegisterArray  = self.RegisterModelResponse?.registerArray
@@ -779,3 +868,38 @@ extension RegisterVC:UITextFieldDelegate {
 //        return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
 //    }
 //}
+
+extension RegisterVC:UIDocumentPickerDelegate {
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        debugPrint("docs.url",urls)
+        let firstDoc = urls.first
+        debugPrint("docs.url",firstDoc?.lastPathComponent)
+        do {
+            self.fileMetaData[self.selectedFileTag] = firstDoc?.lastPathComponent
+            self.selectedFiles[self.selectedFileTag] = try Data(contentsOf: firstDoc!).base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
+            
+           
+        }
+        catch {
+            debugPrint("file.picker.error",error.localizedDescription)
+        }
+        self.updateFileSelection()
+        debugPrint("selected files",self.selectedFiles)
+        
+    }
+    
+}
+
+
+extension String {
+    func isBlankOrEmpty() -> Bool {
+
+      // Check empty string
+      if self.isEmpty {
+          return true
+      }
+      // Trim and check empty string
+      return (self.trimmingCharacters(in: .whitespaces) == "")
+   }
+}

@@ -37,6 +37,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     @IBOutlet var continuePaymentBTn : UIButton!
     
     @IBOutlet var titlelbl: UILabel!
+    
 
 
     var processingCharges = ProcessingChargesView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
@@ -73,7 +74,8 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     var previousPageCount = 1
     var comingFromType = false
-
+    var filterType = ""
+    var previousNameKeyWord = ""
 //    var payPalConfig = PayPalConfiguration()
 //    let items:NSMutableArray = NSMutableArray()
 //    //Set environment connection.
@@ -398,10 +400,11 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         self.searchScrollBar.text = ""
         searchBar.placeholder = "Enter City/Sate"
         searchScrollBar.placeholder = "Enter City/Sate"
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "GooglePlaceSearchViewController") as? GooglePlaceSearchViewController
+        
+       /* let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "GooglePlaceSearchViewController") as? GooglePlaceSearchViewController
         vc?.boundaryForPlaces = "US"
         vc?.placesDelegate = self
-        self.navigationController?.pushViewController(vc!, animated: true)
+        self.navigationController?.pushViewController(vc!, animated: true) */
 
 //        if(sender.isSelected) {
 //            sender.isSelected = false
@@ -430,7 +433,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         self.searchBar.text = ""
         self.searchScrollBar.text = ""
         
-        self.view.endEditing(true)
+        //self.view.endEditing(true)
         
 //        if(sender.isSelected) {
 //            sender.isSelected = false
@@ -447,16 +450,20 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
 //            nameFlg = false
 //        }
         
-        searchBar .resignFirstResponder()
+       // searchBar .resignFirstResponder()
         searchedName = ""
         self.searchBar.text = ""
         self.searchScrollBar.text = ""
         searchBar.placeholder = "Enter City/Sate"
         searchScrollBar.placeholder = "Enter City/Sate"
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "GooglePlaceSearchViewController") as? GooglePlaceSearchViewController
-        vc?.boundaryForPlaces = "US"
-        vc?.placesDelegate = self
-        self.navigationController?.pushViewController(vc!, animated: true)
+        
+        self.filterType = "location"
+        
+        
+//        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "GooglePlaceSearchViewController") as? GooglePlaceSearchViewController
+//        vc?.boundaryForPlaces = "US"
+//        vc?.placesDelegate = self
+//        self.navigationController?.pushViewController(vc!, animated: true)
         
     }
     
@@ -946,10 +953,10 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             self.searchScrollBar.text = ""
             searchBar.placeholder = "Enter City/Sate"
             searchScrollBar.placeholder = "Enter City/Sate"
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "GooglePlaceSearchViewController") as? GooglePlaceSearchViewController
+           /* let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "GooglePlaceSearchViewController") as? GooglePlaceSearchViewController
             vc?.boundaryForPlaces = "US"
             vc?.placesDelegate = self
-            self.navigationController?.pushViewController(vc!, animated: true)
+            self.navigationController?.pushViewController(vc!, animated: true) */
         } else{
             searchBar.placeholder = ""
         }
@@ -991,7 +998,10 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             searchedName = searchText
             self.searchBar.text = searchText
             self.searchScrollBar.text = searchText
-            self.charityWebSerice()
+            if self.filterType != "location" {
+                self.previousNameKeyWord = searchText
+            }
+            self.charityWebSerice(searchKeyWord: searchText)
         } else {
             self.searchBar.text = searchText
             self.searchScrollBar.text = searchText
@@ -999,13 +1009,18 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         }
         
         if searchText.count == 0{
+            setFilterForName()
             self.charityWebSerice()
         }
 
     }
     
-    
-    
+    func setFilterForName() {
+        self.filterType = ""
+        self.previousNameKeyWord = ""
+        searchScrollBar.placeholder = "Enter nonprofit/charity name"
+        searchBar.placeholder = "Enter nonprofit/charity name"
+    }
     
     // MARK:Webservicemethod
     
@@ -1068,9 +1083,9 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         }
     }
     
-    func charityWebSerice() {
+    func charityWebSerice(searchKeyWord:String = "") {
         
-        let postDict: Parameters = ["name":searchedName,
+        var postDict: Parameters = ["name":searchedName,
                                     "latitude":lattitude,
                                     "longitude":longitute,
                                     "page":pageCount,
@@ -1079,18 +1094,23 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
                                     "deductible":deductible,
                                     "income_from":incomeFrom,
                                     "income_to":incomeTo,
-                                    "country_code":"",
+                                    "country_code":"US",
                                     "sub_category_code":subCategoryCode ,
                                     "child_category_code":childCategory ,
                                     "user_id":userID]
+        if (self.filterType == "location") {
+            postDict["city"] = searchKeyWord
+            postDict["name"] = self.previousNameKeyWord
+        }
         
+        debugPrint("Name:Search:postDict",postDict)
         let charityListUrl = String(format: URLHelper.iDonateCharityList)
         let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         loadingNotification.mode = MBProgressHUDMode.indeterminate
         loadingNotification.label.text = "Loading"
         
         WebserviceClass.sharedAPI.performRequest(type: CharityModel.self, urlString: charityListUrl, methodType:  HTTPMethod.post, parameters: postDict, success: { (response) in
-            
+            debugPrint("response.count",response.data.count)
             if self.pageCount == self.previousPageCount && self.pageCount != 1{
                 
             } else {
@@ -1105,6 +1125,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
                     self.charityListArray?.append(contentsOf: response.data)
                 }
             }
+            
             
             self.responsemethod()
             

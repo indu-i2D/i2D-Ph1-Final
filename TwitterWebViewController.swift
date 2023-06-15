@@ -216,9 +216,7 @@ extension TwitterWebViewController:WKUIDelegate {
         }
       
     }
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        webView.scrollView.bounces = false
-    }
+  
     /**
      - Sent before a web view begins loading a frame.
      - Parameters:

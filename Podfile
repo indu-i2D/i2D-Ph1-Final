@@ -10,9 +10,9 @@ target 'i2-Donate' do
     pod 'MBProgressHUD'
    # pod 'GoogleSignIn'
     pod 'GoogleSignIn', '~> 5.0.2'
-    pod 'FBSDKLoginKit'
-    pod 'FBSDKCoreKit'
-    pod 'FBSDKShareKit'
+#    pod 'FBSDKLoginKit'
+#    pod 'FBSDKCoreKit'
+#    pod 'FBSDKShareKit'
     pod 'Alamofire', '~> 5.0'
     pod 'AlamofireImage', '~> 4.1'
     pod 'AlamofireNetworkActivityIndicator', '~> 3.1'
@@ -21,7 +21,7 @@ target 'i2-Donate' do
     pod 'BraintreeDropIn'
     pod "BraintreeDropIn/UIKit"
     pod 'SwiftyJSON'
-    pod 'TwitterKit'
+    pod 'TwitterKit5'
     pod 'TwitterCore'
     
 #    pod 'PayPal-iOS-SDK'

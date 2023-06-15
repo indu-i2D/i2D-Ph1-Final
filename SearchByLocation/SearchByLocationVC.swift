@@ -166,8 +166,10 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
         searchTableView.reloadData()
         locationNameText.textColor = ivoryColor
 //        self.tableTopConstraint.constant = 40
+        if !locationSearch.isEmpty {
+            locationNameText.text = locationSearch + " & charities near you"
+        }
         
-        locationNameText.text = locationSearch + " & charities near you"
         
         if((UserDefaults.standard.value(forKey:"SelectedType")) != nil){
             if country == "US"{
@@ -274,7 +276,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
     @IBAction func nameAction(_ sender:UIButton)  {
         
         typebtn.isSelected = false
-        locationNameText.text = ""
+//        locationNameText.text = ""
         
         if(sender.isSelected){
             if country == "US"{
@@ -287,7 +289,10 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
             sender.isSelected = false
             nameScrollbtn.isSelected = false
             nameFlg = false
-            locationNameText.text = locationSearch + " & charities near you"
+            if !locationSearch.isEmpty {
+                locationNameText.text = locationSearch + " & charities near you"
+            }
+           
         } else{
             searchScrollBar.placeholder = "Enter nonprofit/charity name"
             searchBar.placeholder = "Enter nonprofit/charity name"
@@ -302,7 +307,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     @IBAction func nameSCrollAction(_ sender:UIButton)  {
         typebtn.isSelected = false
-        locationNameText.text = ""
+      //  locationNameText.text = ""
         //tableTopConstraint.constant = 0
         
         self.searchBar.text = ""
@@ -320,7 +325,10 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
             sender.isSelected = false
             nameScrollbtn.isSelected = false
             nameFlg = false
-            locationNameText.text = locationSearch + " & charities near you"
+            if !locationSearch.isEmpty {
+                locationNameText.text = locationSearch + " & charities near you"
+            }
+            //locationNameText.text = locationSearch + " & charities near you"
             
         } else {
             searchScrollBar.placeholder = "Enter nonprofit/charity name"
@@ -853,8 +861,9 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
             self.tabBarController?.selectedIndex = 0
             self.navigationController?.popViewController(animated: true)
         }
-        
-        locationNameText.text = locationSearch + " & charities near you"
+        if !locationSearch.isEmpty {
+            locationNameText.text = locationSearch + " & charities near you"
+        }
 
     }
     
@@ -987,20 +996,17 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
     // MARK: - Searchbar delegate
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if(nameFlg == false) {
-            self.view.endEditing(true)
+            
+         /*   self.view.endEditing(true)
             searchBar.resignFirstResponder()
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocation") as? SearchByLocation
-//            vc?.boundaryForPlaces = country
-//            vc?.placesDelegate = self
-            
-            self.navigationController?.pushViewController(vc!, animated: true)
+            self.navigationController?.pushViewController(vc!, animated: true) */
         } else {
             searchBar.placeholder = ""
             searchBar.becomeFirstResponder()
         }
     }
-    
-    
+   
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if(nameFlg == false){
             if country == "US"{
@@ -1054,7 +1060,8 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
             searchName = searchText
             self.searchBar.text = searchText
             self.searchScrollBar.text = searchText
-            self.charityWebSerice()
+           
+            self.charityWebSerice(searchKeyWord:searchText)
         } else {
             self.searchBar.text = searchText
             self.searchScrollBar.text = searchText
@@ -1126,9 +1133,9 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
         }
     }
     
-    @objc func charityWebSerice() {
+    @objc func charityWebSerice(searchKeyWord:String = "") {
                 
-        let postDict: Parameters = ["name":searchName,
+        var postDict: Parameters = ["name":searchName,
                                     "latitude":lattitude,
                                     "longitude":longitute,
                                     "page":pageCount,
@@ -1141,8 +1148,12 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
                                     "sub_category_code":subCategoryCode ?? [String](),
                                     "child_category_code":childCategory ?? [String](),
                                     "user_id":userID]
+        if (!searchKeyWord.isEmpty && (nameFlg == false)){
+            postDict["city"] = searchKeyWord
+            postDict["name"] = ""
+        }
         
-        print(postDict)
+        print("postDict",postDict)
         print(searchName)
         print(lattitude)
         print(longitute)
