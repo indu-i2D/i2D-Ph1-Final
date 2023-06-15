@@ -92,11 +92,11 @@
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string></string>
+	<string>Allow application to access media files</string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>Allow application to access camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Allow application to access location</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string></string>
