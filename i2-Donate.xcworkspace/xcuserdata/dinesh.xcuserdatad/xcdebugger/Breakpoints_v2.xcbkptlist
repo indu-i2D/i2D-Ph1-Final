@@ -36,5 +36,221 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3578085D-809B-42BA-9AD0-E02599963964"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UpdateProfile/UpdateProfileVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
+            landmarkName = "updateAction(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3578085D-809B-42BA-9AD0-E02599963964 - eec8504dfd9c4ada"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "433"
+                  endingLineNumber = "433"
+                  offsetFromSymbolStart = "256">
+               </Location>
+               <Location
+                  uuid = "3578085D-809B-42BA-9AD0-E02599963964 - eec8504dfd9c4ada"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "433"
+                  endingLineNumber = "433"
+                  offsetFromSymbolStart = "468">
+               </Location>
+               <Location
+                  uuid = "3578085D-809B-42BA-9AD0-E02599963964 - eec8504dfd9c4af9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "434"
+                  endingLineNumber = "434"
+                  offsetFromSymbolStart = "256">
+               </Location>
+               <Location
+                  uuid = "3578085D-809B-42BA-9AD0-E02599963964 - eec8504dfd9c4af9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "434"
+                  endingLineNumber = "434"
+                  offsetFromSymbolStart = "468">
+               </Location>
+               <Location
+                  uuid = "3578085D-809B-42BA-9AD0-E02599963964 - eec8504dfd9c4af9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "434"
+                  endingLineNumber = "434"
+                  offsetFromSymbolStart = "382">
+               </Location>
+               <Location
+                  uuid = "3578085D-809B-42BA-9AD0-E02599963964 - eec8504dfd9c4af9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "434"
+                  endingLineNumber = "434"
+                  offsetFromSymbolStart = "598">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D3B487BE-2ACF-4AF0-B84C-590941022486"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UpdateProfile/UpdateProfileVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "534"
+            endingLineNumber = "534"
+            landmarkName = "updateAction(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D3B487BE-2ACF-4AF0-B84C-590941022486 - eec8504dfd9c57dd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "534"
+                  endingLineNumber = "534"
+                  offsetFromSymbolStart = "5668">
+               </Location>
+               <Location
+                  uuid = "D3B487BE-2ACF-4AF0-B84C-590941022486 - c2bf99663d48c0e1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (i2_Donate.UpdateModel) -&gt; () in i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "536"
+                  endingLineNumber = "536"
+                  offsetFromSymbolStart = "580">
+               </Location>
+               <Location
+                  uuid = "D3B487BE-2ACF-4AF0-B84C-590941022486 - eec8504dfd9c57fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "535"
+                  endingLineNumber = "535"
+                  offsetFromSymbolStart = "5668">
+               </Location>
+               <Location
+                  uuid = "D3B487BE-2ACF-4AF0-B84C-590941022486 - c2bf99663d48c080"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (i2_Donate.UpdateModel) -&gt; () in i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "537"
+                  endingLineNumber = "537"
+                  offsetFromSymbolStart = "580">
+               </Location>
+               <Location
+                  uuid = "D3B487BE-2ACF-4AF0-B84C-590941022486 - eec8504dfd9c57fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "535"
+                  endingLineNumber = "535"
+                  offsetFromSymbolStart = "6935">
+               </Location>
+               <Location
+                  uuid = "D3B487BE-2ACF-4AF0-B84C-590941022486 - c2bf99663d48c080"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (i2_Donate.UpdateModel) -&gt; () in i2_Donate.UpdateProfileVC.updateAction(__C.UIButton) -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/works/FREELANCING/i2D-2023-May-iOS/UpdateProfile/UpdateProfileVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "537"
+                  endingLineNumber = "537"
+                  offsetFromSymbolStart = "930">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

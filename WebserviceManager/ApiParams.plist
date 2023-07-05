@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>DocsBaseUrl</key>
-	<string>https://prod.i2-donate.com/</string>
+	<string>https://dev.i2-donate.com/</string>
 	<key>Base-url</key>
-	<string>https://prod.i2-donate.com/webservice/</string>
+	<string>https://dev.i2-donate.com/i2d_mob/webservice/</string>
 	<key>Register</key>
 	<string>register</string>
 	<key>Login</key>

@@ -379,7 +379,7 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
     
     func soacialLogin(socialType:String) {
         
-        let postDict = ["name": userName,"email":email ,"login_type":socialType,"photo":profileUrl] as [String : Any]
+        let postDict = ["name": userName,"email":email ,"login_type":socialType,"photo":profileUrl,"type":"individual"] as [String : Any]
         let socialLoginUrl = String(format: URLHelper.iDonateSocialLogin)
         let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         loadingNotification.mode = MBProgressHUDMode.indeterminate

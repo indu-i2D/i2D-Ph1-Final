@@ -14,6 +14,19 @@ import GoogleSignIn
 import FBSDKLoginKit
 import UniformTypeIdentifiers
 
+
+extension RegisterVC:UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.view.frame.size.height
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessRegCell", for: indexPath) as! BusinessRegCell
+        return cell
+    }
+}
 class RegisterVC: BaseViewController,GIDSignInDelegate {
     @IBOutlet var maleBtn: UIButton!
     @IBOutlet var femaleBtn: UIButton!
@@ -31,7 +44,30 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     @IBOutlet var countryText: TKFormTextField!
     @IBOutlet var businessName: TKFormTextField!
     @IBOutlet var showhidebtn: UIButton!
+    @IBOutlet var passwordHint: UILabel!
+    @IBOutlet var genderLabel: UILabel!
+    @IBOutlet var countryLabel: UILabel!
+    @IBOutlet var countrydropdown: UIView!
+    @IBOutlet var countryLine: UILabel!
+    
+    @IBOutlet var businessView: UIView!
+    @IBOutlet var firstName: TKFormTextField!
+    @IBOutlet var lastName: TKFormTextField!
+    @IBOutlet var businessAddress: TKFormTextField!
+    @IBOutlet var businessemail:TKFormTextField!
+    @IBOutlet var street: TKFormTextField!
+    @IBOutlet var optionalStreet: TKFormTextField!
+    @IBOutlet var state: TKFormTextField!
+    @IBOutlet var city: TKFormTextField!
+    @IBOutlet var zipCode: TKFormTextField!
+    @IBOutlet var taxField: TKFormTextField!
+    @IBOutlet var businessPhone: TKFormTextField!
+    @IBOutlet var businessPassword: TKFormTextField!
+    @IBOutlet var businessVisibilityBtn: TKFormTextField!
+    @IBOutlet var street1: TKFormTextField!
 
+
+    
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
     @IBOutlet weak var nameTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var fileOptionsHeight: NSLayoutConstraint!
@@ -40,6 +76,9 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     @IBOutlet var taxIDName: UIButton!
     @IBOutlet var businessCertifi: UIButton!
     @IBOutlet var otherDocName: UIButton!
+    @IBOutlet var tableview: UITableView!
+    
+    @IBOutlet weak var agreeBtnYPos: NSLayoutConstraint!
     
     var activeField: UITextField?
     var lastOffset: CGPoint?
@@ -56,11 +95,45 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     var loginArray : loginModelArray?
     var loginModelResponse :  loginModel?
     var selectedFiles = [Int:Any]()
+    var selectedFilesTypes = [String:String]()
     var selectedFileTag = 0
     var fileMetaData = [Int:String]()
+    
+    @IBAction func showCityAction(sender:UIButton){
+        debugPrint("showCityAction")
+    }
+    @IBAction func showStateAction(sender:UIButton){
+        debugPrint("showStateAction")
+    }
+    @IBAction func showBUVisibilityAction(sender:UIButton){
+        debugPrint("showBUVisibilityAction")
+        if sender.isSelected {
+            self.businessPassword.isSecureTextEntry = false
+            sender.isSelected = false
+            
+        }else{
+            self.businessPassword.isSecureTextEntry = true
+            sender.isSelected = true
+        }
+      
+    }
+    
+    override func viewDidLayoutSubviews() {
+//        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 2500)
+    }
     override func viewDidLoad() {
+        self.businessPassword.isSecureTextEntry = true
+        self.businessPassword.enablePasswordToggle()
+        self.showhidebtn.isHidden = true
+//        self.showhidebtn.setImage(UIImage(named: "passwordhide"), for: .selected)
+//        self.showhidebtn.setImage(UIImage(named: "passwordshow"), for: .normal)
+       // self.businessPassword.isSecureTextEntry = true
+       // self.businessPassword.isSelected = true
         super.viewDidLoad()
-        
+        self.registerBusinessView()
+        self.showBusinessView(show: false)
+        self.scrollView.delaysContentTouches = false
+
         if(iDonateClass.hasSafeArea){
             menuBtn.frame = CGRect(x: 0, y: 40, width: 50, height: 50)
         }
@@ -77,6 +150,10 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         
         self.navigationController?.isNavigationBarHidden = true
         
+    }
+    
+    func registerBusinessView(){
+        self.tableview.register(UINib(nibName: "BusinessRegCell", bundle: nil), forCellReuseIdentifier: "BusinessRegCell")
     }
     @IBAction func showORHideAction(_ sender: UIButton) {
         if(sender.isSelected == true){
@@ -250,15 +327,41 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     @IBAction func businessAction(_ sender: UIButton){
         businessBtn.isSelected = true
         individualBtn.isSelected = false
-       
+        self.showBusinessView(show: true)
       //  nameTopConstraint.constant = 70
-        self.businessName.isHidden = false
         
-        self.nameText.isHidden = true
-        
-      /*  self.fileOptionsHeight.constant = 370
-        self.fileViews.isHidden = false */
        
+    }
+    
+    func showBusinessView(show:Bool){
+        self.businessView.isHidden = show ? false : true
+        self.businessName.isHidden = show ? false : true
+        
+        // individual
+        self.nameText.isHidden = show ? true : false
+        self.emailText.isHidden = show ? true : false
+        self.mobileText.isHidden = show ? true : false
+        self.passwordText1.isHidden = show ? true : false
+        self.showhidebtn.isHidden = show ? true : false
+        self.passwordHint.isHidden = show ? true : false
+        self.maleBtn.isHidden = show ? true : false
+        self.femaleBtn.isHidden = show ? true : false
+        self.otherBtn.isHidden = show ? true : false
+        self.countryBtn.isHidden = show ? true : false
+       // self.countryText.isHidden = show ? true : false
+        self.genderLabel.isHidden = show ? true : false
+        self.countryLabel.isHidden = show ? true : false
+        self.countryLine.isHidden = show ? true : false
+        self.countrydropdown.isHidden = show ? true : false
+        self.agreeBtnYPos.constant = show ? 880 : 16
+        
+//        self.scrollView.isHidden = show ? true:false
+//        self.tableview.isHidden = show ? false : true
+//        self.fileOptionsHeight.constant = show ? 370 : 0
+//        self.fileViews.isHidden = show ? false : true
+//        self.businessName.isHidden = false
+//        self.nameText.isHidden = false
+    
     }
     
     @IBAction func individualAction(_ sender: UIButton){
@@ -269,6 +372,8 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         self.fileViews.isHidden = true
         self.businessName.isHidden = true
         self.nameText.isHidden = false
+        
+        self.showBusinessView(show: false)
 
     }
     
@@ -316,15 +421,15 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         present(documentPicker, animated: true, completion: nil)
     }
     func isAllFilesUpdated() -> Bool {
-       /* debugPrint("selectedFiles",self.selectedFiles)
+       // debugPrint("selectedFiles",self.selectedFiles)
         let keys = self.selectedFiles.keys
-        debugPrint("selectedFiles.keys",keys)
+        //debugPrint("selectedFiles.keys",keys)
         if keys.contains(0) && keys.contains(1) && keys.contains(2) {
             return true
         }
-        return false */
+        return false
         
-        return true
+//        return true
     }
     func getKeyName(tag:Int) -> String {
         switch tag{
@@ -340,10 +445,136 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             return ""
         }
     }
+    
+    func isAllFieldsValid() -> Bool {
+        if self.businessBtn.isSelected {
+            if self.businessName.text!.isBlankOrEmpty() || self.firstName.text!.isBlankOrEmpty()
+                || self.lastName.text!.isBlankOrEmpty() || self.businessemail.text!.isBlankOrEmpty()
+                || self.businessPhone.text!.isBlankOrEmpty()
+                || self.businessPassword.text!.isBlankOrEmpty()
+                || self.street1.text!.isBlankOrEmpty()
+                || self.optionalStreet.text!.isBlankOrEmpty()
+                || self.state.text!.isBlankOrEmpty()
+                || self.city.text!.isBlankOrEmpty()
+                || self.zipCode.text!.isBlankOrEmpty() || self.taxField.text!.isBlankOrEmpty()
+                || self.isAllFilesUpdated() == false {
+                return false
+            }
+                
+        }
+        else {
+            
+            if ((nameText.text == "") || (emailText.text == "") || (passwordText1.text == "" || (TKDataValidator.password(text: passwordText1.text) != nil))) {
+                return false
+            }
+            
+        }
+        
+        return true
+    }
+    
     @IBAction func registerAction(_ sender: UIButton){
         self.view .endEditing(true)
         
         if(termcondition == false) {
+            let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+            let messageAttrString = NSMutableAttributedString(string:"Please select term and condition", attributes: messageFont)
+            alertController.setValue(messageAttrString, forKey: "attributedMessage")
+            let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            }
+            alertController.addAction(contact)
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        if !self.isAllFieldsValid() {
+            let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+            let messageAttrString = NSMutableAttributedString(string:"Fill the all required field", attributes: messageFont)
+            alertController.setValue(messageAttrString, forKey: "attributedMessage")
+            let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            }
+            alertController.addAction(contact)
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        if self.businessBtn.isSelected {
+            let pswdValid = TKDataValidator.password(text: self.businessPassword.text)
+            if pswdValid != nil {
+                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                let messageAttrString = NSMutableAttributedString(string:pswdValid!, attributes: messageFont)
+                alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(contact)
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+        }
+        
+        var postDict: Parameters = ["name":nameText.text ?? "",
+                                                   "email":emailText.text ?? "" ,
+                                                   "password":passwordText1.text ?? "",
+                                                   "phone":mobileText.text ?? "",
+                                                   "country":UserDefaults.standard.value(forKey: "selectedcountry") ?? "US",
+                                                   "gender":genterText ?? "",
+                                                   "type": businessBtn.isSelected ? "business" : "individual",
+                                                   "business_name": businessName.text ?? "",
+                                                   "terms":"Yes"]
+        
+        if self.businessBtn.isSelected {
+            postDict["ein"] = self.taxField.text!
+            postDict["email"] = self.businessemail.text!
+            postDict["type"] = "business"
+            postDict["business_name"] = self.businessName.text!
+            postDict["name"] = self.firstName.text! + " " + self.lastName.text!
+            postDict["phone"] = self.businessPhone.text!
+            postDict["address1"] = self.street1.text!
+            postDict["address2"] = self.optionalStreet.text!
+            postDict["city"] = self.city.text!
+            postDict["state"] = self.state.text!
+            postDict["zip"] = self.zipCode.text!
+            postDict["country"] = "US"
+            postDict["terms"] = "Yes"
+            postDict["password"] = self.businessPassword.text!
+            
+            for (key,val) in self.selectedFiles {
+                let keyName = self.getKeyName(tag:key)
+                postDict[keyName] = val
+                
+            }
+            for (key,val) in self.selectedFilesTypes {
+                postDict[key] = val
+                
+            }
+        }
+        
+        debugPrint("PostDict",postDict)
+        
+        let registerUrl = String(format: URLHelper.iDonateRegister)
+        let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+        loadingNotification.mode = MBProgressHUDMode.indeterminate
+        loadingNotification.label.text = "Loading"
+        
+        WebserviceClass.sharedAPI.performRequest(isFileAdded:businessBtn.isSelected ? true : false,type:  RegisterModel.self, urlString: registerUrl, methodType: .post, parameters: postDict, success: { (response)
+            in
+            self.RegisterModelResponse = response
+            self.RegisterArray  = self.RegisterModelResponse?.registerArray
+            self.registerResponse()
+            print("Result: \(String(describing: self.RegisterModelResponse))")                     // response serialization result
+            MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+            
+        }) { (response) in
+            MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+        }
+        
+        
+        
+        
+   /*     if(termcondition == false) {
             let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
             let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
             let messageAttrString = NSMutableAttributedString(string:"Please select term and condition", attributes: messageFont)
@@ -401,7 +632,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
                    postDict[keyName] = val
                } */
                
-               let postDict: Parameters = ["name":nameText.text ?? "",
+               var postDict: Parameters = ["name":nameText.text ?? "",
                                                           "email":emailText.text ?? "" ,
                                                           "password":passwordText1.text ?? "",
                                                           "phone":mobileText.text ?? "",
@@ -410,8 +641,71 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
                                                           "type": businessBtn.isSelected ? "business" : "individual",
                                                           "business_name": businessName.text ?? "",
                                                           "terms":"Yes"]
+               if self.businessBtn.isSelected {
+                   
+                 /*  ein
+                   email
+                   type
+                   business_name
+                   name
+                   phone
+                   address1
+                   address2
+                   city
+                   state
+                   zip
+                   country
+                   terms
+                   incorp_doc
+                   incorp_doc_type
+                   tax_id_doc
+                   tax_id_doc_type
+                   good_standing_doc
+                   good_standing_doc_type
+                   oth_doc
+                   oth_doc_type
+                   password */
+
+                   postDict["ein"] = self.taxField.text!
+                   postDict["email"] = self.businessemail.text!
+                   postDict["type"] = "business"
+                   postDict["business_name"] = self.businessName.text!
+                   postDict["name"] = self.firstName.text! + " " + self.lastName.text!
+                   postDict["phone"] = self.businessPhone.text!
+                   postDict["address1"] = self.street.text!
+                   postDict["address2"] = self.optionalStreet.text!
+                   postDict["city"] = self.city.text!
+                   postDict["state"] = self.state.text!
+                   postDict["zip"] = self.zipCode.text!
+                   postDict["country"] = "US"
+                   postDict["terms"] = "Yes"
+                   postDict["password"] = self.businessPassword.text!
+                   
+                   for (key,val) in self.selectedFiles {
+                       let keyName = self.getKeyName(tag:key)
+                       postDict[keyName] = val
+                       
+                   }
+                   for (key,val) in self.selectedFilesTypes {
+                       postDict[key] = val
+                       
+                   }
+                   
+                  /* postDict["incorp_doc"] = ""
+                   postDict["incorp_doc_type"] = ""
+                   postDict["tax_id_doc"] = ""
+                   postDict["tax_id_doc_type"] = ""
+                   postDict["good_standing_doc"] = ""
+                   postDict["good_standing_doc_type"] = ""
+                   postDict["oth_doc"] = ""
+                   postDict["oth_doc_type"] = "" */
+               }
                
                debugPrint("postDict",postDict)
+               
+               if true {
+                   
+               }
                let registerUrl = String(format: URLHelper.iDonateRegister)
                let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
                loadingNotification.mode = MBProgressHUDMode.indeterminate
@@ -458,7 +752,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
                 }) { (response) in
                     MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
                 }
-            }
+            } */
         
     }
     
@@ -662,7 +956,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     }
     
     func socialLogin(socialType:String) {
-        let postDict: Parameters = ["name": userName,"email":email ,"login_type":socialType,"photo":profileUrl]
+        let postDict: Parameters = ["name": userName,"email":email ,"login_type":socialType,"photo":profileUrl,"type":self.businessBtn.isSelected ? "business" : "individual"]
         let socialLoginUrl = String(format: URLHelper.iDonateSocialLogin)
         let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         loadingNotification.mode = MBProgressHUDMode.indeterminate
@@ -833,6 +1127,27 @@ extension RegisterVC:UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //       // activeField?.resignFirstResponder()
         //        activeField = nil
+        
+        
+    
+        if(textField == self.businessPhone) {
+            
+            if let char = string.cString(using: String.Encoding.utf8) {
+                let isBackSpace = strcmp(char, "\\b")
+                if (isBackSpace == -92) {
+                    print("Backspace was pressed")
+                    return true
+                }
+            }
+            
+            if((businessPhone.text?.count)! < 10) {
+                return true
+            } else{
+                return false
+            }
+            
+            
+        }
         if(textField == mobileText) {
             
             if let char = string.cString(using: String.Encoding.utf8) {
@@ -848,6 +1163,7 @@ extension RegisterVC:UITextFieldDelegate {
             } else{
                 return false
             }
+            
             
         } else{
             return true
@@ -893,8 +1209,9 @@ extension RegisterVC:UIDocumentPickerDelegate {
         debugPrint("docs.url",firstDoc?.lastPathComponent)
         do {
             self.fileMetaData[self.selectedFileTag] = firstDoc?.lastPathComponent
+            let contenType = firstDoc?.pathExtension
             self.selectedFiles[self.selectedFileTag] = try Data(contentsOf: firstDoc!).base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
-            
+            self.selectedFilesTypes[self.getKeyName(tag: self.selectedFileTag)] = contenType
            
         }
         catch {

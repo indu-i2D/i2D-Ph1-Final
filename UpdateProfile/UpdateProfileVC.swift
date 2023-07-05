@@ -311,6 +311,7 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
         
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
+            print("Printing user info....")
             print(myPeopleList.name)
             print(myPeopleList.type)
             print(myPeopleList.businessName)
