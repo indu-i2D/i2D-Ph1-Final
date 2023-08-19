@@ -19,6 +19,7 @@ class NewViewfromadvancedSearchViewController: BaseViewController {
     var latitude = ""
     var longitude = ""
     var address = ""
+    var searchNameKey = ""
     override func viewWillAppear(_ animated: Bool) {
         if "\(UserDefaults.standard.value(forKey: "TaxDetectable") ?? "")" == ""{
             self.bottomView.isHidden = true
@@ -83,6 +84,7 @@ class NewViewfromadvancedSearchViewController: BaseViewController {
              vc?.locationSearch = address
              vc?.lattitude = latitude
              vc?.longitute = longitude
+             vc?.searchedName = self.searchNameKey
              self.navigationController?.pushViewController(vc!, animated: true)
             break
         }
@@ -139,6 +141,7 @@ class NewViewfromadvancedSearchViewController: BaseViewController {
         vc?.longitude = longitude
         vc?.countryCode = countryCode
         vc?.taxDeductible = deductible
+        vc?.searchNameKey = self.searchNameKey
         self.navigationController?.pushViewController(vc!, animated: true)
         
     }

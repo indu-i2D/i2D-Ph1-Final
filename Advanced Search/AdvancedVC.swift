@@ -34,7 +34,7 @@ class AdvancedVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
     var address = ""
     var taxDeductible = ""
     var comingFromType = false
-        
+    var searchNameKey = ""
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -130,6 +130,7 @@ class AdvancedVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
              vc?.lattitude = latitude
              vc?.longitute = longitude
              vc?.comingFromType = comingFromType
+             vc?.searchedName = self.searchNameKey
              self.navigationController?.pushViewController(vc!, animated: true)
             break
         }
@@ -254,6 +255,7 @@ class AdvancedVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
             vc?.latitude = latitude
             vc?.longitude = longitude
             vc?.comingFromType = true
+            vc?.searchNameKey = self.searchNameKey
             self.navigationController?.pushViewController(vc!, animated: true)
         }
         else{

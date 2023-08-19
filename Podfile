@@ -23,6 +23,8 @@ target 'i2-Donate' do
     pod 'SwiftyJSON'
     pod 'TwitterKit5'
     pod 'TwitterCore'
+    pod 'IQKeyboardManagerSwift'
+
     
 #    pod 'PayPal-iOS-SDK'
 

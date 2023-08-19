@@ -1048,7 +1048,7 @@ your donation have been forwarded to</string>
                                                     <constraint firstAttribute="height" constant="50" id="lxe-eh-a9N"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="D4v-bR-LrJ" id="nhg-4a-zhT"/>
                                                 </connections>
@@ -1840,17 +1840,17 @@ U0VORAM
             <objects>
                 <viewController storyboardIdentifier="MySpaceVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m3h-nA-5td" customClass="MySpaceVC" customModule="i2_Donate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OQh-8S-8Zy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY SPACE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhp-EK-7Vu">
-                                <rect key="frame" x="20" y="60" width="102" height="24"/>
+                                <rect key="frame" x="20" y="80" width="102" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                 <color key="textColor" red="0.95618824300000005" green="0.9535043138" blue="0.91254791719999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Bp-ws-pKs">
-                                <rect key="frame" x="20" y="104" width="335" height="474"/>
+                                <rect key="frame" x="20" y="124" width="335" height="474"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="mySpaceCell" rowHeight="100" id="pc0-0j-ADo" customClass="mySpaceCell" customModule="i2_Donate" customModuleProvider="target">
@@ -2642,7 +2642,7 @@ U0VORAM
                                                     <constraint firstAttribute="height" constant="50" id="inV-P9-LH7"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="oVd-Lp-r0c" id="gvY-UU-7pz"/>
                                                 </connections>
@@ -2894,7 +2894,7 @@ U0VORAM
                                                     <constraint firstAttribute="width" constant="150" id="8Pf-rs-Z1F"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="oVd-Lp-r0c" id="CqH-ZV-5Rx"/>
                                                 </connections>
@@ -3289,7 +3289,7 @@ U0VORAM
                                                     <constraint firstAttribute="width" constant="150" id="fPh-aQ-en7"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="VZK-zx-mmq" id="k5D-tZ-aR3"/>
                                                 </connections>
@@ -4113,7 +4113,7 @@ U0VORAM
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your United States address*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3D8-5e-VOp" userLabel="BuAddress" customClass="TKFormTextField" customModule="TKFormTextField">
+                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter your United States address*" placeholder="Enter your United States address*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3D8-5e-VOp" userLabel="BuAddress" customClass="TKFormTextField" customModule="TKFormTextField">
                                                         <rect key="frame" x="0.0" y="462.5" width="374" height="65"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="7WB-ag-Uoe"/>
@@ -4125,7 +4125,7 @@ U0VORAM
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street 1*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qk9-rF-jY4" userLabel="BuStreet1" customClass="TKFormTextField" customModule="TKFormTextField">
-                                                        <rect key="frame" x="0.0" y="543.5" width="374" height="65"/>
+                                                        <rect key="frame" x="0.0" y="535.5" width="374" height="65"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="NOK-Ve-gpV"/>
                                                         </constraints>
@@ -4135,8 +4135,8 @@ U0VORAM
                                                             <outlet property="delegate" destination="5KO-Kq-kXf" id="PaH-dl-Nho"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street 2(optional)*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rHF-bB-kmn" userLabel="street2" customClass="TKFormTextField" customModule="TKFormTextField">
-                                                        <rect key="frame" x="0.0" y="624.5" width="374" height="65"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street 2(optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rHF-bB-kmn" userLabel="street2" customClass="TKFormTextField" customModule="TKFormTextField">
+                                                        <rect key="frame" x="0.0" y="616.5" width="374" height="65"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="LLf-Ca-Oql"/>
                                                         </constraints>
@@ -4147,7 +4147,7 @@ U0VORAM
                                                         </connections>
                                                     </textField>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="k5k-jd-3Lz">
-                                                        <rect key="frame" x="0.0" y="705.5" width="374" height="65"/>
+                                                        <rect key="frame" x="0.0" y="697.5" width="374" height="65"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PkS-up-ynU" userLabel="BuState" customClass="TKFormTextField" customModule="TKFormTextField">
                                                                 <rect key="frame" x="0.0" y="0.0" width="183" height="65"/>
@@ -4177,7 +4177,7 @@ U0VORAM
                                                         </constraints>
                                                     </stackView>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tm3-I9-2ld">
-                                                        <rect key="frame" x="0.0" y="771.5" width="374" height="1"/>
+                                                        <rect key="frame" x="0.0" y="763.5" width="374" height="1"/>
                                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="5oD-oN-B9c"/>
@@ -4187,7 +4187,7 @@ U0VORAM
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zipcode*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dyk-4m-9rI" userLabel="zipcode" customClass="TKFormTextField" customModule="TKFormTextField">
-                                                        <rect key="frame" x="0.0" y="786.5" width="374" height="65"/>
+                                                        <rect key="frame" x="0.0" y="778.5" width="374" height="65"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="XlG-PK-pd2"/>
                                                         </constraints>
@@ -4198,18 +4198,18 @@ U0VORAM
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Tax-Id (EIN/TIN - no spaces or hyphens)*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w2g-bV-aiP" userLabel="taxid" customClass="TKFormTextField" customModule="TKFormTextField">
-                                                        <rect key="frame" x="0.0" y="867.5" width="374" height="65"/>
+                                                        <rect key="frame" x="0.0" y="859.5" width="374" height="65"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="65" id="31W-Sw-BKn"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="5KO-Kq-kXf" id="1Cc-nE-s7q"/>
                                                         </connections>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b0O-OX-j4x">
-                                                        <rect key="frame" x="0.0" y="948.5" width="374" height="300"/>
+                                                        <rect key="frame" x="0.0" y="940.5" width="374" height="300"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incorporation documents*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DV6-rk-Mo1">
                                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="25"/>
@@ -4437,7 +4437,7 @@ U0VORAM
                                                     <constraint firstAttribute="trailing" secondItem="8Kx-Eu-LmP" secondAttribute="trailing" id="aHe-Az-nyO"/>
                                                     <constraint firstItem="8Kx-Eu-LmP" firstAttribute="top" secondItem="6IR-Bq-mGh" secondAttribute="bottom" constant="16" id="dPx-bg-IbZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="qk9-rF-jY4" secondAttribute="trailing" id="ddb-Rc-R0R"/>
-                                                    <constraint firstItem="qk9-rF-jY4" firstAttribute="top" secondItem="3D8-5e-VOp" secondAttribute="bottom" constant="16" id="diT-71-mZk"/>
+                                                    <constraint firstItem="qk9-rF-jY4" firstAttribute="top" secondItem="3D8-5e-VOp" secondAttribute="bottom" constant="8" id="diT-71-mZk"/>
                                                     <constraint firstAttribute="trailing" secondItem="z92-YX-pnV" secondAttribute="trailing" id="es7-wB-bRR"/>
                                                     <constraint firstItem="w2g-bV-aiP" firstAttribute="top" secondItem="dyk-4m-9rI" secondAttribute="bottom" constant="16" id="gga-AV-GEd"/>
                                                     <constraint firstAttribute="trailing" secondItem="6IR-Bq-mGh" secondAttribute="trailing" id="gnQ-Sn-oZm"/>
@@ -4773,6 +4773,7 @@ U0VORAM
                         <outlet property="businessView" destination="nsv-93-rQv" id="QGg-Q9-Oza"/>
                         <outlet property="businessemail" destination="bUY-d4-hwB" id="7fu-du-16u"/>
                         <outlet property="city" destination="B5B-N0-Tft" id="yNS-89-qwW"/>
+                        <outlet property="connectWithLabel" destination="rtU-Rk-BGs" id="WYx-Lx-iio"/>
                         <outlet property="constraintContentHeight" destination="Vsx-TI-Val" id="MBa-L6-DT3"/>
                         <outlet property="containerView" destination="ePB-AY-kn9" id="CA2-Je-XkD"/>
                         <outlet property="countryBtn" destination="cFZ-7F-0h7" id="Pr3-9i-Sec"/>
@@ -4788,6 +4789,8 @@ U0VORAM
                         <outlet property="inCorporationDocName" destination="pET-S8-xaL" id="Vxa-FJ-Cuw"/>
                         <outlet property="individualBtn" destination="Y6i-ZY-fN5" id="Wes-YV-fvi"/>
                         <outlet property="lastName" destination="vq7-cF-dYq" id="05y-ss-Zlo"/>
+                        <outlet property="lineOne" destination="LBg-oG-xEl" id="ghI-hD-LXm"/>
+                        <outlet property="lineTwo" destination="hhC-Sc-hYs" id="Ezb-xN-mWs"/>
                         <outlet property="maleBtn" destination="h0i-dK-HJZ" id="U5Q-Di-CgF"/>
                         <outlet property="mobileText" destination="gcD-qk-btI" id="L3d-CV-dpz"/>
                         <outlet property="nameText" destination="R0A-ao-bA3" id="foB-VY-jiE"/>
@@ -4799,6 +4802,7 @@ U0VORAM
                         <outlet property="passwordText1" destination="kIo-HI-8kF" id="F2M-K2-kzb"/>
                         <outlet property="scrollView" destination="C6M-DQ-xsi" id="oaI-gp-rYb"/>
                         <outlet property="showhidebtn" destination="nx6-YM-sHy" id="qHX-fI-OIO"/>
+                        <outlet property="socialLoginView" destination="AMu-3h-cSk" id="HqN-az-FRF"/>
                         <outlet property="state" destination="PkS-up-ynU" id="NZX-y1-MBo"/>
                         <outlet property="street1" destination="qk9-rF-jY4" id="6el-8f-G6R"/>
                         <outlet property="tableview" destination="8LX-Vf-TaF" id="cHN-xK-YZ7"/>
@@ -4841,11 +4845,11 @@ U0VORAM
             <objects>
                 <viewController storyboardIdentifier="HomeVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IEr-1n-xy8" userLabel="HomeVC" customClass="HomeVC" customModule="i2_Donate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vGa-r8-W7p">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHT-RL-Qqk">
-                                <rect key="frame" x="0.0" y="60" width="375" height="538"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erH-ey-snc">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="585"/>
@@ -5922,7 +5926,7 @@ U0VORAM
                                                     <constraint firstAttribute="height" constant="50" id="NxL-B6-eiP"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="PfD-yt-Cio" id="kcF-qj-572"/>
                                                 </connections>
@@ -6278,7 +6282,6 @@ U0VORAM
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="skipAction:" destination="AFd-8a-dpZ" eventType="touchUpInside" id="jv2-wn-D5u"/>
-                                                    <segue destination="h7D-ji-i7F" kind="show" id="S0U-9H-lxK"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcy-uL-rPy">
@@ -7448,7 +7451,7 @@ U0VORAM
                                                     <constraint firstAttribute="height" constant="50" id="fiz-Ru-GAi"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="ddM-RB-Kch" id="ugE-db-kEJ"/>
                                                 </connections>
@@ -7554,7 +7557,7 @@ U0VORAM
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SBp-ri-Amg"/>
-        <segue reference="Ci8-Fo-QIZ"/>
+        <segue reference="R66-m0-4Ky"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="LaunchImage" width="417" height="597"/>

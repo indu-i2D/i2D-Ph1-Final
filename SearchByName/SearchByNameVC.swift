@@ -96,6 +96,26 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         searchBarCustom.setClearButton(color: .white)
     }
     
+    let digitBeforeDecimal = 4
+    let digitAfterDecimal = 2
+    func textField(_ textField: UITextField, shouldChangeCharactersIn   range: NSRange, replacementString string: String) -> Bool {
+        if textField != self.amountText {
+            return true
+        }
+        let computationString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        if computationString.contains("..") {
+            return false
+        }
+        let arrayOfSubStrings = computationString.components(separatedBy: ".")
+        if arrayOfSubStrings.count == 1 && computationString.count > digitBeforeDecimal {//
+            return false
+        } else if arrayOfSubStrings.count == 2 {
+            let stringPostDecimal = arrayOfSubStrings[1]
+            return stringPostDecimal.count <= digitAfterDecimal
+        }
+        return true
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -226,6 +246,8 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         
         self.charityWebSerice()
 
+    
+        
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -281,6 +303,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             if scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height) {
                        //you reached end of the table
                        pageCount = pageCount + 1
+                debugPrint("scrollViewDidEndDecelerating")
                        self.charityWebSerice()
                    }
         }
@@ -658,6 +681,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
                                                                 "status":"approved",
                                                                 "merchant_charges":merchantChargesValue,
                                                                 "processing_fee":processingValue]
+                                    print("payment request",postDict)
 
                                     let paymentUrl = String(format: URLHelper.iDonatePayment)
 
@@ -668,10 +692,12 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
                                         MBProgressHUD.hide(for: self.view, animated: true)
 
                                         print("payment response", response)
+                                        
 
                                         let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
                                         let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
                                         let messageAttrString = NSMutableAttributedString(string:"Payment Done Successfully", attributes: messageFont)
+                                        
                                         alertController.setValue(messageAttrString, forKey: "attributedMessage")
                                         let contact = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
                                             self.blurView.removeFromSuperview()
@@ -826,6 +852,8 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             vc?.latitude = lattitude
             vc?.longitude = longitute
             vc?.countryCode = ""
+            vc?.searchNameKey = self.searchedName
+            self.searchedName = ""
             self.navigationController?.pushViewController(vc!, animated: true)
         } else {
             let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
@@ -994,6 +1022,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.pageCount = 1
         if searchText.count >= 3 {
             searchedName = searchText
             self.searchBar.text = searchText
@@ -1090,13 +1119,13 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
                                     "longitude":longitute,
                                     "page":pageCount,
                                     "address":locationSearch,
-                                    "category_code":categoryCode ,
+                                    "category_code":categoryCode.joined(separator:",") ,
                                     "deductible":deductible,
                                     "income_from":incomeFrom,
                                     "income_to":incomeTo,
                                     "country_code":"US",
-                                    "sub_category_code":subCategoryCode ,
-                                    "child_category_code":childCategory ,
+                                    "sub_category_code":subCategoryCode.joined(separator:",") ,
+                                    "child_category_code":childCategory.joined(separator:",") ,
                                     "user_id":userID]
         if (self.filterType == "location") {
             postDict["city"] = searchKeyWord

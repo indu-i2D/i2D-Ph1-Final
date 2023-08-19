@@ -32,7 +32,7 @@ class SubTypesViewController: BaseViewController {
     var longitude = ""
     var address = ""
     var comingFromType = false
-    
+    var searchNameKey = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -264,6 +264,7 @@ extension SubTypesViewController: UITableViewDataSource, UITableViewDelegate {
              vc?.categoryCode = [selectedCategoryCode]
              vc?.locationSearch = address
              vc?.comingFromType = comingFromType
+             vc?.searchedName = self.searchNameKey
              self.navigationController?.pushViewController(vc!, animated: true)
             break
         }

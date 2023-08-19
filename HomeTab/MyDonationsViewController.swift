@@ -40,7 +40,7 @@ class MyDonationsViewController: BaseViewController {
 
         // Do any additional setup after loading the view.
         
-       // getDonationList()
+        getDonationList()
         self.tableView.reloadData()
 
     }
@@ -65,7 +65,7 @@ class MyDonationsViewController: BaseViewController {
                         self.noresultsview.isHidden = true
                     }
                 }
-                
+                print("getDonationList")
                 print(response)
                 
             }) { (response) in

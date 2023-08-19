@@ -48,7 +48,7 @@ extension UIViewController {
     //Calucate percentage based on given values
     public func calculatePercentage(value:Double,percentageVal:Double)->Double{
         let val = value * percentageVal
-        return val / 100.0
+        return (val / 100.0).round(to: 2)
     }
     
 }

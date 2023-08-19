@@ -37,6 +37,7 @@
 		1BD556B224B840D2001D616F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD556B124B840D2001D616F /* CoreGraphics.framework */; };
 		1BD556B424B840DD001D616F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD556B324B840DD001D616F /* CoreVideo.framework */; };
 		1BD556B624B840E7001D616F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD556B524B840E7001D616F /* Foundation.framework */; };
+		1BF6CB232A89F8C400DD8321 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF6CB222A89F8C400DD8321 /* Double+Extension.swift */; };
 		3F016E0D228A8F1400F91FAC /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F016E0C228A8F1400F91FAC /* NotificationVC.swift */; };
 		3F05ADB4233DEA3B0088734C /* ParentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F05ADAF233DEA3B0088734C /* ParentModel.swift */; };
 		3F05ADB5233DEA3B0088734C /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F05ADB0233DEA3B0088734C /* ChildModel.swift */; };
@@ -146,6 +147,7 @@
 		1BD556B324B840DD001D616F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		1BD556B524B840E7001D616F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1BD556B724B84105001D616F /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		1BF6CB222A89F8C400DD8321 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		2057627D8E6035F93005CC08 /* Pods-i2-Donate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.debug.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.debug.xcconfig"; sourceTree = "<group>"; };
 		3F016E0C228A8F1400F91FAC /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		3F05ADAF233DEA3B0088734C /* ParentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParentModel.swift; path = StaticModel/ParentModel.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				1B7AEA072495E3CA0033C92C /* UIViewcontroller+Extensions.swift */,
 				1B7AEA082495E3CA0033C92C /* UIColor+Extensions.swift */,
 				1B73D3272A4C94700053AA65 /* UITextField+Extension.swift */,
+				1BF6CB222A89F8C400DD8321 /* Double+Extension.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -866,6 +869,7 @@
 				1B73D3232A4AB4E80053AA65 /* BusinessRegCell.swift in Sources */,
 				3FBB96592296A458006291A1 /* MainTableViewCell.swift in Sources */,
 				3FFAD65022EACF8F00D6F197 /* VerifyOTP.swift in Sources */,
+				1BF6CB232A89F8C400DD8321 /* Double+Extension.swift in Sources */,
 				18F485B5295DFF1F00731ED3 /* Search.swift in Sources */,
 				3F05ADB4233DEA3B0088734C /* ParentModel.swift in Sources */,
 				1B41CA5C249E084400839F65 /* TwitterWebViewController.swift in Sources */,
@@ -1078,7 +1082,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 72;
 				DEVELOPMENT_TEAM = A3C8934K5J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1110,7 +1114,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 72;
 				DEVELOPMENT_TEAM = A3C8934K5J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

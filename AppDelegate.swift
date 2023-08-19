@@ -10,6 +10,7 @@ import GoogleSignIn
 import FBSDKCoreKit
 import Braintree
 import GooglePlaces
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var paymentBTURLScheme = ""
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        IQKeyboardManager.shared.enable = true
         UserDefaults.standard.set(0, forKey: "tab")
         if let appDomain = Bundle.main.bundleIdentifier {
         UserDefaults.standard.removePersistentDomain(forName: appDomain)

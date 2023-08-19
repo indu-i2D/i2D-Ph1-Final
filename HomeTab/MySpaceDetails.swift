@@ -56,6 +56,27 @@ class MySpaceDetails: BaseViewController ,UITableViewDelegate,UITableViewDataSou
 //        }
 //    }
 
+    
+    let digitBeforeDecimal = 4
+    let digitAfterDecimal = 2
+    func textField(_ textField: UITextField, shouldChangeCharactersIn   range: NSRange, replacementString string: String) -> Bool {
+        if textField != self.amountText {
+            return true
+        }
+        let computationString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        if computationString.contains("..") {
+            return false
+        }
+        let arrayOfSubStrings = computationString.components(separatedBy: ".")
+        if arrayOfSubStrings.count == 1 && computationString.count > digitBeforeDecimal {//
+            return false
+        } else if arrayOfSubStrings.count == 2 {
+            let stringPostDecimal = arrayOfSubStrings[1]
+            return stringPostDecimal.count <= digitAfterDecimal
+        }
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

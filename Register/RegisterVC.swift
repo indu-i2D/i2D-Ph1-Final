@@ -80,6 +80,12 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     
     @IBOutlet weak var agreeBtnYPos: NSLayoutConstraint!
     
+    @IBOutlet weak var connectWithLabel: UILabel!
+    @IBOutlet weak var socialLoginView: UIView!
+    @IBOutlet weak var lineOne: UIView!
+    @IBOutlet weak var lineTwo: UIView!
+     
+    
     var activeField: UITextField?
     var lastOffset: CGPoint?
     var keyboardHeight: CGFloat!
@@ -122,6 +128,10 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
 //        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 2500)
     }
     override func viewDidLoad() {
+        self.businessPhone.enablesReturnKeyAutomatically = true
+        self.businessPhone.keyboardType = .phonePad
+        self.zipCode.keyboardType = .numberPad
+        self.businessAddress.lineView.isHidden = true
         self.businessPassword.isSecureTextEntry = true
         self.businessPassword.enablePasswordToggle()
         self.showhidebtn.isHidden = true
@@ -198,6 +208,15 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         self.addTargetForErrorUpdating(self.nameText)
         self.addTargetForErrorUpdating(self.mobileText)
         self.addTargetForErrorUpdating(self.businessName)
+        self.addTargetForErrorUpdating(self.businessPhone)
+        self.addTargetForErrorUpdating(self.businessPassword)
+        self.addTargetForErrorUpdating(self.street1)
+        self.addTargetForErrorUpdating(self.state)
+        self.addTargetForErrorUpdating(self.city)
+        self.addTargetForErrorUpdating(self.zipCode)
+        self.addTargetForErrorUpdating(self.taxField)
+        self.addTargetForErrorUpdating(self.firstName)
+        self.addTargetForErrorUpdating(self.lastName)
         
         // Customize labels
         self.businessName.titleLabel.font = UIFont.systemFont(ofSize: 18)
@@ -281,11 +300,38 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         {
             return TKDataValidator.name(text: textField.text)
         }
-        if textField == mobileText{
+        if textField == mobileText {
             return TKDataValidator.mobileNumber(text: textField.text)
         }
         if textField == businessName{
             return TKDataValidator.businessName(text: textField.text)
+        }
+        if textField == self.businessPhone {
+            return TKDataValidator.mobileNumber(text: textField.text)
+        }
+        if textField == self.businessPassword {
+            return TKDataValidator.password(text: textField.text)
+        }
+        if textField == self.street1 {
+            return TKDataValidator.isValidText(textfield: textField)
+        }
+        if textField == self.city {
+            return TKDataValidator.isValidText(textfield: textField)
+        }
+        if textField == self.state {
+            return TKDataValidator.isValidText(textfield: textField)
+        }
+        if textField == self.zipCode {
+            return TKDataValidator.isValidText(textfield: textField)
+        }
+        if textField == self.firstName {
+            return TKDataValidator.isValidText(textfield: textField)
+        }
+        if textField == self.lastName {
+            return TKDataValidator.isValidText(textfield: textField)
+        }
+        if textField == self.taxField {
+            return TKDataValidator.isValidTaxIDText(textfield: textField)
         }
         return nil
     }
@@ -334,10 +380,15 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     }
     
     func showBusinessView(show:Bool){
+       
         self.businessView.isHidden = show ? false : true
         self.businessName.isHidden = show ? false : true
         
         // individual
+        self.lineOne.isHidden = show ? true : false
+        self.lineTwo.isHidden = show ? true : false
+        self.connectWithLabel.isHidden = show ? true : false
+        self.socialLoginView.isHidden = show ? true : false
         self.nameText.isHidden = show ? true : false
         self.emailText.isHidden = show ? true : false
         self.mobileText.isHidden = show ? true : false
@@ -386,21 +437,21 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             self.inCorporationDocName.setTitleColor(.black, for: .normal)
         }
         if self.fileMetaData[1] != nil {
-            self.taxIDName.setTitle(self.fileMetaData[0], for: .normal)
+            self.taxIDName.setTitle(self.fileMetaData[1], for: .normal)
             self.taxIDName.setTitleColor(.blue, for: .normal)
         }else{
             self.taxIDName.setTitle("No file choosen", for: .normal)
             self.taxIDName.setTitleColor(.black, for: .normal)
         }
         if self.fileMetaData[2] != nil {
-            self.businessCertifi.setTitle(self.fileMetaData[0], for: .normal)
+            self.businessCertifi.setTitle(self.fileMetaData[2], for: .normal)
             self.businessCertifi.setTitleColor(.blue, for: .normal)
         }else{
             self.businessCertifi.setTitle("No file choosen", for: .normal)
             self.businessCertifi.setTitleColor(.black, for: .normal)
         }
         if self.fileMetaData[3] != nil {
-            self.otherDocName.setTitle(self.fileMetaData[0], for: .normal)
+            self.otherDocName.setTitle(self.fileMetaData[3], for: .normal)
             self.otherDocName.setTitleColor(.blue, for: .normal)
         }else{
             self.otherDocName.setTitle("No file choosen", for: .normal)
@@ -447,13 +498,14 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     }
     
     func isAllFieldsValid() -> Bool {
+        //|| self.optionalStreet.text!.isBlankOrEmpty()
         if self.businessBtn.isSelected {
             if self.businessName.text!.isBlankOrEmpty() || self.firstName.text!.isBlankOrEmpty()
                 || self.lastName.text!.isBlankOrEmpty() || self.businessemail.text!.isBlankOrEmpty()
                 || self.businessPhone.text!.isBlankOrEmpty()
                 || self.businessPassword.text!.isBlankOrEmpty()
                 || self.street1.text!.isBlankOrEmpty()
-                || self.optionalStreet.text!.isBlankOrEmpty()
+                
                 || self.state.text!.isBlankOrEmpty()
                 || self.city.text!.isBlankOrEmpty()
                 || self.zipCode.text!.isBlankOrEmpty() || self.taxField.text!.isBlankOrEmpty()
@@ -1087,6 +1139,8 @@ extension RegisterVC:UITextFieldDelegate {
         }
         else if(textField == mobileText)
         {
+            
+            debugPrint("mobile validation")
             if(mobileText.text?.count == 0)
             {
                 
@@ -1132,6 +1186,7 @@ extension RegisterVC:UITextFieldDelegate {
     
         if(textField == self.businessPhone) {
             
+            
             if let char = string.cString(using: String.Encoding.utf8) {
                 let isBackSpace = strcmp(char, "\\b")
                 if (isBackSpace == -92) {
@@ -1139,12 +1194,14 @@ extension RegisterVC:UITextFieldDelegate {
                     return true
                 }
             }
-            
             if((businessPhone.text?.count)! < 10) {
                 return true
             } else{
                 return false
             }
+            
+            
+            
             
             
         }
@@ -1218,7 +1275,7 @@ extension RegisterVC:UIDocumentPickerDelegate {
             debugPrint("file.picker.error",error.localizedDescription)
         }
         self.updateFileSelection()
-        debugPrint("selected files",self.selectedFiles)
+        debugPrint("selected files",self.selectedFiles.keys)
         
     }
     

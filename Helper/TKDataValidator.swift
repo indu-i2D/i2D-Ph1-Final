@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TKFormTextField
 
 // Stores functions that validates input text.
 // Each function takes a text.
@@ -43,9 +44,28 @@ class TKDataValidator {
         guard text.tk_isValidText() else{
             return "Numbers And Special Char not allowed"
         }
-//        guard text.containsOnlyLettersAndWhitespace() else {
-//            return "Name invalid"
-//        }
+        return nil
+        
+    }
+    class func isValidText(textfield: TKFormTextField?) -> String? {
+        guard let text = textfield!.text, !textfield!.text!.isEmpty  else {
+            return String(format: " Required %@",(textfield?.placeholder)!)
+           
+        }
+        
+      
+        return nil
+        
+    }
+    class func isValidTaxIDText(textfield: TKFormTextField?) -> String? {
+        guard let text = textfield!.text, !textfield!.text!.isEmpty  else {
+            return String(format: " Required %@",(textfield?.placeholder)!)
+           
+        }
+        if text.contains("-") || text.contains(" ") {
+            return "Enter valid Tax-Id"
+        }
+        
         return nil
         
     }

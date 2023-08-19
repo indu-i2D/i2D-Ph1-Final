@@ -98,6 +98,10 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
 
         self.updateBtn.isHidden = false
         
+        self.addTargetForErrorUpdating(self.emailText)
+        self.addTargetForErrorUpdating(self.mobileText)
+        self.addTargetForErrorUpdating(self.nameText)
+        
         // Do any additional setup after loading the view.
     }
     
@@ -119,12 +123,17 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
         }
         
     }
+
     private func validationError(_ textField: TKFormTextField) -> String? {
-        
-//        if textField == mobileText {
-//            return TKDataValidator.mobileNumber(text: textField.text)
-//        }
-        
+        if textField == emailText {
+            return TKDataValidator.email(text: textField.text)
+        }
+        if textField == mobileText {
+            return TKDataValidator.mobileNumber(text: mobileText.text)
+        }
+        if textField == nameText {
+            return TKDataValidator.isValidText(textfield: textField)
+        }
         return nil
     }
     
@@ -133,6 +142,9 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
         if((UserDefaults.standard.value(forKey: "selectedname")) != nil){
             let object = UserDefaults.standard.value(forKey: "selectedname") as! String
             countryBtn.setTitle(object, for: .normal)
+        }
+        if self.loginType == "Social" {
+            self.businessBtn.isHidden = true
         }
     }
     
@@ -429,8 +441,28 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
         self.emailText.isUserInteractionEnabled = true
     }
     
+    func showErrorAlert(message:String){
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+         
+        let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+         
+        let messageAttrString = NSMutableAttributedString(string:message, attributes: messageFont)
+         
+        alertController.setValue(messageAttrString, forKey: "attributedMessage")
+         
+        let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+         
+        }
+         
+        alertController.addAction(contact)
+         
+        self.present(alertController, animated: true, completion: nil)
+    }
     @IBAction func updateAction(_ sender: UIButton) {
+        var alertMessage = ""
         
+       
+
         guard let name = nameText.text, name != "" else {
          
          
@@ -455,15 +487,15 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
          
         }
          
-         
-         
-        guard let email = emailText.text, email != "" else {
-         
-        return
-         
+        if TKDataValidator.email(text: self.emailText.text) != nil {
+            self.showErrorAlert(message: "Please enter the email")
+            return
         }
-         
-         
+        if TKDataValidator.mobileNumber(text: mobileText.text) != nil {
+            self.showErrorAlert(message: "Please enter the mobile number")
+            return
+        }
+       
          
         guard termcondition != false else {
          
@@ -602,7 +634,7 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
     }
     
     @IBAction func skipAction(_ sender: UIButton) {
-        
+        self.updateAction(sender)
     }
     
     @objc func backAction(_sender:UIButton)  {
