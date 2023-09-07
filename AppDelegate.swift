@@ -11,6 +11,10 @@ import FBSDKCoreKit
 import Braintree
 import GooglePlaces
 import IQKeyboardManagerSwift
+import Alamofire
+import MBProgressHUD
+import SwiftyJSON
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,25 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         UserDefaults.standard .set("", forKey: "latitude")
         UserDefaults.standard .set("", forKey: "longitude")
-        
-        if((UserDefaults.standard.value(forKey:"Intro")) == nil) || (UserDefaults.standard.value(forKey: "Intro") as! Bool ==  false) {
-            let rootViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "IntroVC") as? IntroVC
-            constantFile.changepasswordBack = true
-            let navigationController = UINavigationController(rootViewController: rootViewController!)
-            navigationController.isNavigationBarHidden = true
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = navigationController
-            self.window?.makeKeyAndVisible()
-        }
-        else {
-            let rootViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController
-            constantFile.changepasswordBack = true
-            let navigationController = UINavigationController(rootViewController: rootViewController!)
-            navigationController.isNavigationBarHidden = true
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = navigationController
-            self.window?.makeKeyAndVisible()
-        }
+      
         
         GIDSignIn.sharedInstance().clientID = "720548689360-bff3jv2pbrrks74tear733584kcraf93.apps.googleusercontent.com"
     
@@ -69,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set("United States", forKey: "selectedname")
         UserDefaults.standard.set("US", forKey: "selectedcountry")
        
-        
+        self.fetchServerDto()
         
         return true
         
@@ -117,6 +103,93 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         UserDefaults.standard .set("", forKey: "latitude")
         UserDefaults.standard .set("", forKey: "longitude")
+    }
+    func redirectHome(){
+        
+        if((UserDefaults.standard.value(forKey:"Intro")) == nil) || (UserDefaults.standard.value(forKey: "Intro") as! Bool ==  false) {
+            let rootViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "IntroVC") as? IntroVC
+            constantFile.changepasswordBack = true
+            let navigationController = UINavigationController(rootViewController: rootViewController!)
+            navigationController.isNavigationBarHidden = true
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = navigationController
+            self.window?.makeKeyAndVisible()
+        }
+        else {
+            let rootViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController
+            constantFile.changepasswordBack = true
+            let navigationController = UINavigationController(rootViewController: rootViewController!)
+            navigationController.isNavigationBarHidden = true
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = navigationController
+            self.window?.makeKeyAndVisible()
+        }
+    }
+    func fetchServerDto(){
+//        MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+        let sheetApiKey = "AIzaSyDQzTsnTRgYvCDfEUm1ac0rQgHZbiiB_ew"
+        let sheetID = "1O-8LD2wcWDqBiKw9I3QDI0JuwWCVrenyN_IzVHVMd4E"
+        let sheetTabName = "i2D-Dev"  // i2D-Prod
+        let url = "https://sheets.googleapis.com/v4/spreadsheets/" + sheetID + "/values/" + sheetTabName + "?key=" + sheetApiKey
+        //debugPrint("Sheet Url",url)
+        
+        var request = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "GET"
+//        request.httpMethod = .
+        
+        AF.request(request).responseString { response in
+
+           // MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+
+            switch response.result {
+            case .success(_):
+                if let data = response.data {
+                    print(response.result)
+                    // Convert This in JSON
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data) as! [String:Any]
+                        print(JSON(json))
+                        let utf8Data = String(decoding: data, as: UTF8.self).data(using: .utf8)
+                        let responseDecoded = try JSONDecoder().decode(JSON.self, from: utf8Data!)
+                        debugPrint("responseDecoded",responseDecoded)
+                        let jsonObj = responseDecoded
+                        let jsonArray = jsonObj["values"].arrayValue
+                        for item in jsonArray {
+                            debugPrint("item ?? ",item)
+                            let array = item.arrayValue
+                            debugPrint("array",array)
+                            if array[0] == "Server_URL" {
+                                SERVER_URL = array[1].stringValue + "/"
+                            }
+                            if array[0] == "About_URL" {
+                                ABOUT_URL = array[1].stringValue
+                            }
+                            if  array[0] == "Help_URL" {
+                                HELP_URL = array[1].stringValue
+                            }
+                            if array[0] == "Privacy_URL" {
+                                PRIVACY_URL = array[1].stringValue
+                            }
+                            if array[0] == "TC_URL" {
+                                TERM_COND_URL = array[1].stringValue
+                            }
+                        }
+                  
+                        self.redirectHome()
+                        
+//                        let utf8Data = String(decoding: data, as: UTF8.self).data(using: .utf8)
+//                        let responseDecoded = try JSONDecoder().decode(T.self, from: utf8Data!)
+//
+                    }catch let error as NSError{
+                        print(error)
+                    }
+
+                }
+            case .failure(let error):
+                print("Error:", error)
+            }
+
+        }
     }
 
 

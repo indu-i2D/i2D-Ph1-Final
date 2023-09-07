@@ -50,3 +50,9 @@ let titleTextColor = hexStringToUIColor(hex: "#532B05")
 let fontBlackColor = hexStringToUIColor(hex: "#4A4A4A")
 let termsFontColor = hexStringToUIColor(hex: "#424ef5")
 let ivoryColor = hexStringToUIColor(hex: "#FCFCEF")
+
+var SERVER_URL = ""
+var TERM_COND_URL = ""
+var PRIVACY_URL = ""
+var HELP_URL = ""
+var ABOUT_URL = ""

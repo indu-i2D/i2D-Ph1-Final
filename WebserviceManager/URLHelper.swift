@@ -37,6 +37,8 @@ enum URLName : String {
     case iDonateHelpUrl = "HelpUrl"
     case iDonateAboutUrl = "AboutUrl"
     case docsBaseUrl = "DocsBaseUrl"
+    
+
 
 }
 
@@ -67,62 +69,63 @@ final fileprivate class URLFetcher : NSObject {
 final class URLHelper : NSObject {
     
     static var baseURL : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]!
+        return SERVER_URL
+       // return SERVER_URL
     }()
     
     static var iDonateLogin : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateLogin.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateLogin.rawValue]!
     }()
     static var iDonateRegister : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateRegister.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateRegister.rawValue]!
     }()
     static var iDonateCountryList : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCOuntryLIst.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCOuntryLIst.rawValue]!
     }()
     static var iDonateSocialLogin : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateSocialLogin.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateSocialLogin.rawValue]!
     }()
     static var iDonateUpdateProfile : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateUpdateProfile.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateUpdateProfile.rawValue]!
     }()
     static var iDonateCategories : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCategories.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCategories.rawValue]!
     }()
     static var iDonateCharityList : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCharityList.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCharityList.rawValue]!
     }()
     static var iDonateCharityLike : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCharityLike.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCharityLike.rawValue]!
     }()
     
     static var iDonateCharityFollow : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCharityFollow.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCharityFollow.rawValue]!
     }()
     
     static var iDonatePayment : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonatePayment.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonatePayment.rawValue]!
     }()
     
     static var iDonateCharityFollowLikeCount : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCharityFollowLikeCount.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateCharityFollowLikeCount.rawValue]!
     }()
     static var iDonateChangePassword : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateChangePassword.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateChangePassword.rawValue]!
     }()
     static var iDonateForgotPassword : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateForgotPassword.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateForgotPassword.rawValue]!
     }()
     static var iDonateVerifyOtp : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateVerifyOtp.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateVerifyOtp.rawValue]!
     }()
     static var iDonateUpdatePassword : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateUpdatePassword.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateUpdatePassword.rawValue]!
     }()
     static var iDonateNotification : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateNotification.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateNotification.rawValue]!
     }()
     static var iDonateTransactionList : String = {
-        return URLFetcher.sharedFetcher.urlDictionary[URLName.MDServerURL.rawValue]! +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTransactionList.rawValue]!
+        return SERVER_URL +  URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTransactionList.rawValue]!
     }()
     static var getDocsBaseurl : String = {
         let baseUrl = URL(string: URLFetcher.sharedFetcher.urlDictionary[URLName.docsBaseUrl.rawValue]!)
@@ -130,20 +133,33 @@ final class URLHelper : NSObject {
         return url
     }()
     static var getTermsAndConditionUrl : String = {
-        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTermsUrl.rawValue]!)
-        return terms
+//        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTermsUrl.rawValue]!)
+//        return terms
+        let escapedString = TERM_COND_URL.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
+
+        return escapedString!
     }()
     static var getPrivacyUrl : String = {
-        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonatePrivacyUrl.rawValue]!)
-        return terms
+        let escapedString = PRIVACY_URL.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
+
+        return escapedString!
+//        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonatePrivacyUrl.rawValue]!)
+//        return terms
     }()
     static var getAboutUrl : String = {
-        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateAboutUrl.rawValue]!)
-        return terms
+        let escapedString = ABOUT_URL.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
+
+        return escapedString!
+       
+//        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateAboutUrl.rawValue]!)
+//        return terms
     }()
     static var getHelpUrl : String = {
-        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateHelpUrl.rawValue]!)
-        return terms
+        let escapedString = HELP_URL.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
+
+        return escapedString!
+//        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateHelpUrl.rawValue]!)
+//        return terms
     }()
 }
 
