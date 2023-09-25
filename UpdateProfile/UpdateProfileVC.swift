@@ -329,7 +329,7 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
             print(myPeopleList.businessName)
             if myPeopleList.type == "individual"{
             self.nameText.text = myPeopleList.name
-                        
+                email = myPeopleList.email
             self.emailText.text = myPeopleList.email
             self.mobileText.text = myPeopleList.mobileNUmber
             }
@@ -401,7 +401,10 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
                 self.profileImage.image = UIImage(named: "profile")
             } else {
                 _ = myPeopleList.profileUrl.replacingOccurrences(of: " ", with: "")
-                let profileImage = URL(string: myPeopleList.profileUrl)!
+                let imgUrl = String(format: "%@%@", UPLOAD_URL,myPeopleList.profileUrl)
+                let profileImage = URL(string: imgUrl)!
+                debugPrint("fully url",profileImage)
+                self.profileImage.contentMode = .scaleAspectFill
                 self.profileImage.af.setImage(withURL: profileImage, placeholderImage: #imageLiteral(resourceName: "defaultImageCharity"))
             }
             
@@ -563,6 +566,8 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
         "business_name":businessName.text ?? "",
          
         "terms":termcondition == false ? "No" : "Yes"] as [String : Any]
+            
+        debugPrint("postDict => ",postDict)
    
         WebserviceClass.sharedAPI.performRequest(type: UpdateModel.self, urlString: updateProfileUrl, methodType: HTTPMethod.post, parameters: postDict as Parameters, success: { (response) in
          
@@ -614,8 +619,19 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
                 }
             }
             else{
-                let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController)!
-                self.navigationController?.pushViewController(vc, animated: true)
+                
+                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                let messageAttrString = NSMutableAttributedString(string:(self.UpdateModelResponse?.message)!, attributes: messageFont)
+                alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(contact)
+                self.present(alertController, animated: true, completion: nil)
+                
+                
+//                let vc = (UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController)!
+//                self.navigationController?.pushViewController(vc, animated: true)
 //                self.present(vc, animated: true, completion: nil)
             }
             

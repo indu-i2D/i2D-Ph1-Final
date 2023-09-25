@@ -81,12 +81,34 @@ class SettingsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,U
         return 120
     }
     
+    func showLoginAlert(){
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+        let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+        let messageAttrString = NSMutableAttributedString(string: "For Advance Features Please Log-in/Register", attributes: messageFont)
+        alertController.setValue(messageAttrString, forKey: "attributedMessage")
+        let ok = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
+            
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            
+        }
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+        self.present(alertController, animated: true, completion: nil)
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          if(indexPath.row == 2)
          {
-             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ChangePasswordVC") as? ChangePasswordVC
-            vc?.changeOrForgot = "Change"
-             self.navigationController?.pushViewController(vc!, animated: false)
+             if UserDefaults.standard.data(forKey: "people") != nil{
+                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ChangePasswordVC") as? ChangePasswordVC
+                vc?.changeOrForgot = "Change"
+                 self.navigationController?.pushViewController(vc!, animated: false)
+             }else{
+                 self.showLoginAlert()
+             }
+             
         }
     }
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

@@ -61,6 +61,23 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
         dismiss(animated: true, completion: nil)
     }
     
+    func showLoginAlert(){
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+        let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+        let messageAttrString = NSMutableAttributedString(string: "For Advance Features Please Log-in/Register", attributes: messageFont)
+        alertController.setValue(messageAttrString, forKey: "attributedMessage")
+        let ok = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
+            
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            
+        }
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+        self.present(alertController, animated: true, completion: nil)
+    }
     @IBAction func updatection(_ sender:UIButton) {
         if UserDefaults.standard.data(forKey: "people") != nil{
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UpdateProfileVC") as! UpdateProfileVC
@@ -69,21 +86,7 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
             self.navigationController?.present(vc, animated: true, completion: nil)
         }
         else{
-            let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
-            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-            let messageAttrString = NSMutableAttributedString(string: "For Advance Features Please Log-in/Register", attributes: messageFont)
-            alertController.setValue(messageAttrString, forKey: "attributedMessage")
-            let ok = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
-                
-                self.navigationController?.pushViewController(vc!, animated: true)
-            }
-            let cancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
-                
-            }
-            alertController.addAction(ok)
-            alertController.addAction(cancel)
-            self.present(alertController, animated: true, completion: nil)
+            self.showLoginAlert()
         }
     }
     
@@ -99,7 +102,10 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
             if(myPeopleList.profileUrl == "") {
                 self.profileImage.image = UIImage(named: "defaultImageCharity")
             } else {
-                let profileImage = URL(string: myPeopleList.profileUrl)!
+//                let profileImage = URL(string: myPeopleList.profileUrl)!
+                let imgUrl = String(format: "%@%@", UPLOAD_URL,myPeopleList.profileUrl)
+                let profileImage = URL(string: imgUrl)!
+                self.profileImage.contentMode = .scaleAspectFill
                 self.profileImage.af.setImage(withURL: profileImage, placeholderImage: #imageLiteral(resourceName: "defaultImageCharity"))
             }
             // Joe 10
@@ -122,14 +128,27 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
+ 
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         switch indexPath.row {
         case 0:
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "NotificationVC") as? NotificationVC
-            self.navigationController?.pushViewController(vc!, animated: true)
+            if UserDefaults.standard.data(forKey: "people") != nil{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "NotificationVC") as? NotificationVC
+                self.navigationController?.pushViewController(vc!, animated: true)
+            }else{
+                self.showLoginAlert()
+            }
+            
         case 1:
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsVC") as? SettingsVC
-            self.navigationController?.pushViewController(vc!, animated: true)
+            if UserDefaults.standard.data(forKey: "people") != nil{
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsVC") as? SettingsVC
+                self.navigationController?.pushViewController(vc!, animated: true)
+            }else{
+                self.showLoginAlert()
+            }
+            
         case 2:
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AboutVC") as? AboutVC
             vc?.headerString = "About i2~Donate"

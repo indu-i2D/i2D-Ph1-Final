@@ -160,6 +160,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             debugPrint("array",array)
                             if array[0] == "Server_URL" {
                                 SERVER_URL = array[1].stringValue + "/"
+                                let imgUrl = SERVER_URL.replacingOccurrences(of: "i2d_mob/webservice", with: "")
+                                UPLOAD_URL = imgUrl
                             }
                             if array[0] == "About_URL" {
                                 ABOUT_URL = array[1].stringValue

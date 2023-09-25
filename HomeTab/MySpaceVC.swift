@@ -60,13 +60,13 @@ class MySpaceVC: BaseViewController,UITableViewDelegate,UITableViewDataSource {
         loadingNotification.label.text = "Loading"
         
         WebserviceClass.sharedAPI.performRequest(type: CharityCount.self, urlString: likeCountUrl, methodType: .post, parameters: postDict, success: { (response) in
-            
+                debugPrint("likeCountUrl response",response)
             self.charityCountMOdel = response
             self.charityLikeFollowDonations = self.charityCountMOdel?.CharityLikeFollowCount
             self.likeCountList = self.charityLikeFollowDonations?.likeArray
             self.followCountList = self.charityLikeFollowDonations?.followArray
             self.donationCountList = self.charityLikeFollowDonations?.paymentArray
-
+           
             UIView.performWithoutAnimation {
                 self.mySpaceList .reloadData()
             }

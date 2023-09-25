@@ -1266,9 +1266,21 @@ extension SearchByLocationVC {
     
 }
   
+var decimalAdded = false
 extension SearchByLocationVC: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if self.amountText.text!.isEmpty {
+            decimalAdded = false
+        }
+        if self.amountText.text!.contains(".") {
+            decimalAdded = true
+        }else{
+            decimalAdded = false
+        }
+        if decimalAdded && string == "." {
+            return false
+        }
         if textField != self.amountText {
             if range.length>0  && range.location == 0 {
                 return false
@@ -1276,6 +1288,7 @@ extension SearchByLocationVC: UITextFieldDelegate {
             return true
         }
         let computationString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        debugPrint("string ?? ",string)
         if computationString.contains("..") {
             return false
         }
@@ -1286,7 +1299,6 @@ extension SearchByLocationVC: UITextFieldDelegate {
             let stringPostDecimal = arrayOfSubStrings[1]
             return stringPostDecimal.count <= digitAfterDecimal
         }
-        
        
         return true
     }

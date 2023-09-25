@@ -12,6 +12,8 @@ import Alamofire
 class MyDonationsViewController: BaseViewController {
 
     var donationModelArray: [DonationArrayModel]?
+    
+    var dataSource =  [DonationArrayModel]()
 
     var donationModelList: [DonationModel]?
 
@@ -37,9 +39,14 @@ class MyDonationsViewController: BaseViewController {
             self.noresultMEssage.text = "You have made no donations so far"
         }
         tableView.tableFooterView = UIView(frame: .zero)
-
+        for item in self.donationModelArray! {
+            for history in item.history! {
+                self.dataSource.append(item)
+            }
+            
+        }
         // Do any additional setup after loading the view.
-        
+        print("donationModelArray",self.dataSource.count)
         getDonationList()
         self.tableView.reloadData()
 
@@ -51,6 +58,8 @@ class MyDonationsViewController: BaseViewController {
     }
     
     func getDonationList() {
+        
+        
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
             print(myPeopleList.name)
@@ -105,17 +114,23 @@ class MyDonationsViewController: BaseViewController {
 extension MyDonationsViewController: UITableViewDataSource, UITableViewDelegate {
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return donationModelArray?.count ?? 0
+//        var totalCount = 0
+//        for item in donationModelArray! {
+//            totalCount += item.history_count!
+//        }
+        return self.dataSource.count
+        
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionHistoryTableViewCell") as! TransactionHistoryTableViewCell
-        let charity = donationModelArray![indexPath.row]
+        let charity = self.dataSource[indexPath.row]
 
         cell.titleLabel.text = charity.name//donationModelList?[indexPath.row].charity_name ?? ""
-        cell.dateLabel.text = charity.history![0].donate_date//donationModelList?[indexPath.row].date ?? ""
-        cell.amountLabel.text = charity.history![0].amount ?? ""
+        cell.dateLabel.text = charity.history![indexPath.row].donate_date//donationModelList?[indexPath.row].date ?? ""
+        cell.amountLabel.text = charity.history![indexPath.row].amount ?? ""
      //   cell.paymentModeLabel.text = "Payment Mode: " + "\(donationModelList?[indexPath.row].payment_type ?? "")"//"Payment Mode: " + "\(donationModelList?[indexPath.row].payment_type ?? "")"
         cell.backgroundColor = .clear
         

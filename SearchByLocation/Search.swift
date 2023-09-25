@@ -96,7 +96,21 @@ class SearchByLocation: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     let digitBeforeDecimal = 4
     let digitAfterDecimal = 2
+    var decimalAdded = false
     func textField(_ textField: UITextField, shouldChangeCharactersIn   range: NSRange, replacementString string: String) -> Bool {
+        
+        if self.amountText.text!.isEmpty {
+            decimalAdded = false
+        }
+        if self.amountText.text!.contains(".") {
+            decimalAdded = true
+        }else{
+            decimalAdded = false
+        }
+        if decimalAdded && string == "." {
+            return false
+        }
+        
         if textField != self.amountText {
             return true
         }
