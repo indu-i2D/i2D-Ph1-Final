@@ -33,7 +33,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     @IBOutlet var noresultsview: UIView!
     @IBOutlet var selectedlbl: UILabel!
     @IBOutlet var blurView: UIVisualEffectView!
-    @IBOutlet var amountText: TKFormTextField!
+    @IBOutlet var amountText: UITextField!
     @IBOutlet var continuePaymentBTn : UIButton!
     
     @IBOutlet var titlelbl: UILabel!
@@ -96,7 +96,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         searchBarCustom.setClearButton(color: .white)
     }
     
-    let digitBeforeDecimal = 4
+    let digitBeforeDecimal = 5
     let digitAfterDecimal = 2
     var decimalAdded = false
     func textField(_ textField: UITextField, shouldChangeCharactersIn   range: NSRange, replacementString string: String) -> Bool {
@@ -186,17 +186,27 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             userID = myPeopleList.userID
         }
         
+        self.amountText.addBottomBorder()
         self.amountText.placeholder = ""
-        self.amountText.text = "$ 10"
+       // self.amountText.text = "$ 10"
         self.amountText.enablesReturnKeyAutomatically = true
         self.amountText.returnKeyType = .done
         self.amountText.delegate = self
-        self.amountText.titleLabel.font = UIFont.systemFont(ofSize: 14)
+        self.amountText.textColor = .black
+       // self.amountText.titleLabel.font = UIFont.systemFont(ofSize: 14)
         self.amountText.font = UIFont.systemFont(ofSize: 34)
-        self.amountText.selectedTitleColor = UIColor.darkGray
-        self.amountText.titleColor = UIColor.darkGray
-        self.amountText.placeholderColor = UIColor.darkGray
-        self.amountText.errorLabel.font = UIFont.systemFont(ofSize: 18)
+       // self.amountText.selectedTitleColor = UIColor.darkGray
+        //self.amountText.titleColor = UIColor.darkGray
+      //  self.amountText.placeholderColor = UIColor.darkGray
+       // self.amountText.errorLabel.font = UIFont.systemFont(ofSize: 18)
+        
+        let dollarView = UILabel(frame: CGRect(x: 0, y: 0, width: 12, height: self.amountText.frame.height))
+        dollarView.text = "$"
+        dollarView.font = self.amountText.font
+        dollarView.textColor = UIColor.darkGray
+        self.amountText.leftView = dollarView
+        self.amountText.leftViewMode = .always
+        
                 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -257,6 +267,10 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         
         searchBar.text = locationSearch
         searchScrollBar.text = locationSearch
+        
+        if !self.searchedName.isEmpty {
+            self.searchBar.text = self.searchedName
+        }
         
         self.charityWebSerice()
 
@@ -420,10 +434,12 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     @IBAction func typeAction(_ sender:UIButton) {
         sender.isSelected = true
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AdvancedVC") as? AdvancedVC
+        debugPrint("searchedName",searchedName)
         vc?.address = locationSearch
         vc?.latitude = lattitude
         vc?.longitude = longitute
         vc?.countryCode = ""
+        vc?.searchNameKey = searchedName
         vc?.comingFromType = comingFromType
         self.navigationController?.pushViewController(vc!, animated: true)
     }
@@ -584,7 +600,9 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     @IBAction func donateAction(_ sender:UIButton)  {
         
-        self.amountText.text = "$10"
+        self.amountText.text = "10"
+        
+        
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
             print(myPeopleList.name)
@@ -916,8 +934,10 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         let placeholderImage = UIImage(named: "defaultImageCharity")!
         
         if charity.logo != nil {
-            let url = URL(string: charity.logo!)!
-            cell.logoImage.af.setImage(withURL: url, placeholderImage: placeholderImage)
+            if let url = URL(string: charity.logo!) {
+                cell.logoImage.af.setImage(withURL: url, placeholderImage: placeholderImage)
+            }
+            
         } else {
             cell.logoImage.image = placeholderImage
         }
@@ -988,6 +1008,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     // MARK: - searchbar delegate
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if(nameFlg == false){
+            //self.clearAllTypes()
             self.view.endEditing(true)
             searchBar .resignFirstResponder()
             searchedName = ""
@@ -1035,8 +1056,20 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         self.view.endEditing(true)
     }
     
+    func clearAllTypes(){
+        self.categoryCode.removeAll()
+        self.subCategoryCode.removeAll()
+        self.childCategory.removeAll()
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.pageCount = 1
+        debugPrint("comingFromType",comingFromType)
+        if comingFromType == false {
+            self.clearAllTypes()
+        }
+        
+        //
         if searchText.count >= 3 {
             searchedName = searchText
             self.searchBar.text = searchText
@@ -1127,7 +1160,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     func charityWebSerice(searchKeyWord:String = "") {
-        
+        debugPrint("categoryCode",categoryCode)
         var postDict: Parameters = ["name":searchedName,
                                     "latitude":lattitude,
                                     "longitude":longitute,

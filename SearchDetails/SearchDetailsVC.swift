@@ -52,7 +52,7 @@ class SearchDetailsVC: BaseViewController,UICollectionViewDelegate,UICollectionV
 //        }
 //    }
 
-    let digitBeforeDecimal = 4
+    let digitBeforeDecimal = 5
     let digitAfterDecimal = 2
     var decimalAdded = false
     func textField(_ textField: UITextField, shouldChangeCharactersIn   range: NSRange, replacementString string: String) -> Bool {

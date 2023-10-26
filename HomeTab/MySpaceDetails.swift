@@ -57,7 +57,7 @@ class MySpaceDetails: BaseViewController ,UITableViewDelegate,UITableViewDataSou
 //    }
 
     
-    let digitBeforeDecimal = 4
+    let digitBeforeDecimal = 5
     let digitAfterDecimal = 2
     var decimalAdded = false
     func textField(_ textField: UITextField, shouldChangeCharactersIn   range: NSRange, replacementString string: String) -> Bool {
@@ -206,8 +206,10 @@ class MySpaceDetails: BaseViewController ,UITableViewDelegate,UITableViewDataSou
             let placeholderImage = UIImage(named: "defaultImageCharity")!
             
             if charity.logo != nil && charity.logo != "" {
-                let url = URL(string: charity.logo!)!
-                cell.logoImage.af.setImage(withURL: url, placeholderImage: placeholderImage)
+                if let url = URL(string: charity.logo!) {
+                    cell.logoImage.af.setImage(withURL: url, placeholderImage: placeholderImage)
+                }
+                
             } else {
                 cell.logoImage.image = placeholderImage
             }

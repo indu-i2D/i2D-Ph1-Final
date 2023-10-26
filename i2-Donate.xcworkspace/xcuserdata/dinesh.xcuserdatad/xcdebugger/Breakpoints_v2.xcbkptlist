@@ -7,54 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D9A010FB-7DF3-46C1-B445-0757776C4E85"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SearchByName/SearchByNameVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "434"
-            endingLineNumber = "434"
-            landmarkName = "nameAction(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D9A010FB-7DF3-46C1-B445-0757776C4E85 - 24f5ae46697ab7d6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "i2_Donate.SearchByNameVC.nameAction(__C.UIButton) -&gt; ()"
-                  moduleName = "i2-Donate"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emile/Downloads/backup/i2D-2023-May-iOS/SearchByName/SearchByNameVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "452"
-                  endingLineNumber = "452"
-                  offsetFromSymbolStart = "1504">
-               </Location>
-               <Location
-                  uuid = "D9A010FB-7DF3-46C1-B445-0757776C4E85 - 24f5ae46697aa984"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "i2_Donate.SearchByNameVC.nameAction(__C.UIButton) -&gt; ()"
-                  moduleName = "i2-Donate"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/emile/Downloads/backup/i2D-2023-May-iOS/SearchByName/SearchByNameVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "434"
-                  endingLineNumber = "434"
-                  offsetFromSymbolStart = "308">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "BC50CCAF-79BC-4A50-BCFD-D676C7B6A62F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -156,6 +108,36 @@
                   startingLineNumber = "17"
                   endingLineNumber = "17"
                   offsetFromSymbolStart = "300">
+               </Location>
+               <Location
+                  uuid = "BC50CCAF-79BC-4A50-BCFD-D676C7B6A62F - d2fe33948320cc01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.CardPaymentVC.viewDidLoad() -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/Downloads/backup/i2D-2023-May-iOS/Payment/CardPaymentVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  uuid = "BC50CCAF-79BC-4A50-BCFD-D676C7B6A62F - d2fe33948320cc01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "i2_Donate.CardPaymentVC.viewDidLoad() -&gt; ()"
+                  moduleName = "i2-Donate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emile/Downloads/backup/i2D-2023-May-iOS/Payment/CardPaymentVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "265">
                </Location>
             </Locations>
          </BreakpointContent>

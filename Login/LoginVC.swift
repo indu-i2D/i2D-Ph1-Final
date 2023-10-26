@@ -181,7 +181,10 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
     }
     
     @IBAction func loginAction(_ sender:UIButton) {
-        
+        /*emailText.text = "indiv02@i2-donate.com"
+        passwordText.text = "Indiv!02test" */
+//        emailText.text = "share2dinesh93@gmail.com"
+//        passwordText.text = "Abcd@123"
         if(emailText.text == "") && (passwordText.text == "") {
             showAlert(message: "please enter username and password")
         }

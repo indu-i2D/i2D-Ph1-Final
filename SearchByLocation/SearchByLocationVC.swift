@@ -41,7 +41,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
     @IBOutlet var blurView: UIVisualEffectView!
     @IBOutlet var cancelBtn : UIButton!
     @IBOutlet var continuePaymentBTn : UIButton!
-    @IBOutlet var amountText: TKFormTextField!
+    @IBOutlet var amountText: UITextField!
     
     //MARK: Variables
     var selectedCharity:charityListArray? = nil
@@ -89,7 +89,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
 //        }
 //    }
     
-    let digitBeforeDecimal = 4
+    let digitBeforeDecimal = 5
     let digitAfterDecimal = 2
    
     
@@ -140,7 +140,28 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
         
         headerTitle.text = headertitle
         
+        self.amountText.addBottomBorder()
         self.amountText.placeholder = ""
+       // self.amountText.text = "$ 10"
+        self.amountText.enablesReturnKeyAutomatically = true
+        self.amountText.returnKeyType = .done
+        self.amountText.delegate = self
+        self.amountText.textColor = .black
+       // self.amountText.titleLabel.font = UIFont.systemFont(ofSize: 14)
+        self.amountText.font = UIFont.systemFont(ofSize: 34)
+       // self.amountText.selectedTitleColor = UIColor.darkGray
+        //self.amountText.titleColor = UIColor.darkGray
+      //  self.amountText.placeholderColor = UIColor.darkGray
+       // self.amountText.errorLabel.font = UIFont.systemFont(ofSize: 18)
+        
+        let dollarView = UILabel(frame: CGRect(x: 0, y: 0, width: 12, height: self.amountText.frame.height))
+        dollarView.text = "$"
+        dollarView.font = self.amountText.font
+        dollarView.textColor = UIColor.darkGray
+        self.amountText.leftView = dollarView
+        self.amountText.leftViewMode = .always
+        
+       /* self.amountText.placeholder = ""
         self.amountText.text = "$10"
         self.amountText.enablesReturnKeyAutomatically = true
         self.amountText.returnKeyType = .done
@@ -150,7 +171,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
         self.amountText.selectedTitleColor = UIColor.darkGray
         self.amountText.titleColor = UIColor.darkGray
         self.amountText.placeholderColor = UIColor.darkGray
-        self.amountText.errorLabel.font = UIFont.systemFont(ofSize: 18)
+        self.amountText.errorLabel.font = UIFont.systemFont(ofSize: 18) */
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -200,6 +221,10 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
         
         print( self.searchEnabled)
         self.pageCount = 1
+        if !self.searchName.isEmpty {
+            self.searchBar.text = self.searchName
+            self.makeNameSearchClicked()
+        }
         self.charityWebSerice()
 
     }
@@ -274,10 +299,18 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
             vc?.latitude = lattitude
             vc?.longitude = longitute
             vc?.countryCode = country
+            vc?.searchNameKey = self.searchName
             self.navigationController?.pushViewController(vc!, animated: true)
         }
     }
     
+    func makeNameSearchClicked(){
+        searchScrollBar.placeholder = "Enter nonprofit/charity name"
+        searchBar.placeholder = "Enter nonprofit/charity name"
+        nameScrollbtn.isSelected = true
+        typebtn.isSelected = false
+        nameFlg = true
+    }
     @IBAction func nameAction(_ sender:UIButton)  {
         
         typebtn.isSelected = false
@@ -299,13 +332,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
             }
            
         } else{
-            searchScrollBar.placeholder = "Enter nonprofit/charity name"
-            searchBar.placeholder = "Enter nonprofit/charity name"
-            sender.isSelected = true
-            typebtn.isSelected = false
-            Scrolltypebtn.isSelected = false
-            nameScrollbtn.isSelected = true
-            nameFlg = true
+            self.makeNameSearchClicked()
         }
         
     }
@@ -336,12 +363,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
             //locationNameText.text = locationSearch + " & charities near you"
             
         } else {
-            searchScrollBar.placeholder = "Enter nonprofit/charity name"
-            searchBar.placeholder = "Enter nonprofit/charity name"
-            sender.isSelected = true
-            typebtn.isSelected = false
-            nameScrollbtn.isSelected = true
-            nameFlg = true
+            self.makeNameSearchClicked()
         }
     }
     
@@ -455,7 +477,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     @IBAction func donateAction(_ sender:UIButton)  {
         
-        self.amountText.text = "$10"
+        self.amountText.text = "10"
 
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
@@ -939,8 +961,10 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
         print(charity.like_count)
         print(charity.liked)
         if charity.logo != nil && charity.logo != "" {
-            let url = URL(string: charity.logo ?? "")!
-            cell.logoImage.af.setImage(withURL: url, placeholderImage: placeholderImage)
+            if let url = URL(string: charity.logo!) {
+                cell.logoImage.af.setImage(withURL: url, placeholderImage: placeholderImage)
+
+            }
         } else {
             cell.logoImage.image = placeholderImage
         }
@@ -1058,10 +1082,16 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
         }
         self.view.endEditing(true)
     }
-    
+    func clearAllTypes(){
+        self.categoryCode?.removeAll()
+        self.subCategoryCode?.removeAll()
+        self.childCategory?.removeAll()
+    }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        self.pageCount = 1
+        self.clearAllTypes()
         if searchText.count >= 3 {
+            
             searchName = searchText
             self.searchBar.text = searchText
             self.searchScrollBar.text = searchText
@@ -1206,7 +1236,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
     
     
     func responsemethod() {
-        
+        debugPrint("pageCount",pageCount)
         DispatchQueue.main.async {
             self.searchTableView.reloadData()
         }

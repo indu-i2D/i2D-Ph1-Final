@@ -39,6 +39,7 @@ class MyDonationsViewController: BaseViewController {
             self.noresultMEssage.text = "You have made no donations so far"
         }
         tableView.tableFooterView = UIView(frame: .zero)
+        print("donationModelArray",self.donationModelArray)
         for item in self.donationModelArray! {
             for history in item.history! {
                 self.dataSource.append(item)
@@ -118,6 +119,7 @@ extension MyDonationsViewController: UITableViewDataSource, UITableViewDelegate 
 //        for item in donationModelArray! {
 //            totalCount += item.history_count!
 //        }
+        
         return self.dataSource.count
         
         
@@ -127,10 +129,12 @@ extension MyDonationsViewController: UITableViewDataSource, UITableViewDelegate 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionHistoryTableViewCell") as! TransactionHistoryTableViewCell
         let charity = self.dataSource[indexPath.row]
-
+        debugPrint("charity",charity)
+        
         cell.titleLabel.text = charity.name//donationModelList?[indexPath.row].charity_name ?? ""
-        cell.dateLabel.text = charity.history![indexPath.row].donate_date//donationModelList?[indexPath.row].date ?? ""
-        cell.amountLabel.text = charity.history![indexPath.row].amount ?? ""
+        cell.dateLabel.text = charity.history!.first?.donate_date//donationModelList?[indexPath.row].date ?? ""
+        cell.amountLabel.text = charity.history!.first?.amount ?? ""
+        
      //   cell.paymentModeLabel.text = "Payment Mode: " + "\(donationModelList?[indexPath.row].payment_type ?? "")"//"Payment Mode: " + "\(donationModelList?[indexPath.row].payment_type ?? "")"
         cell.backgroundColor = .clear
         
