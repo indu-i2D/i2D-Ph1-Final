@@ -12,6 +12,9 @@ import FBSDKLoginKit
 import Alamofire
 import MBProgressHUD
 import TKFormTextField
+import AuthenticationServices
+import KeychainSwift
+
 
 class LoginVC: BaseViewController,GIDSignInDelegate {
     
@@ -35,6 +38,7 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
     @IBOutlet var scrollView: UIScrollView!
     
+    @IBOutlet var appleLoginBtn:UIButton!
     var comingFromTypes = false
     
     override func viewDidLoad() {
@@ -56,9 +60,68 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
             // User is logged in, use 'accessToken' here.
         }
         setUpTextfield()
-        
+        self.appleLoginBtn.layer.cornerRadius = appleLoginBtn.frame.size.width/2
+        self.appleLoginBtn.clipsToBounds = true
     }
     
+    @IBAction func handleAuthorizationAppleIDButtonPress(sender:Any){
+        
+       
+        if #available(iOS 13.0, *) {
+            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            let keychain = KeychainSwift()
+            if let userID = keychain.get("Apple_user") {
+                appleIDProvider.getCredentialState(forUserID: userID) {  (credentialState, error) in
+                     switch credentialState {
+                        case .authorized:
+                            // The Apple ID credential is valid.
+                          debugPrint("AppleLoginDetails authorized")
+                         DispatchQueue.main.async {
+                             let email = keychain.get("Apple_email")
+                             let name = keychain.get("Apple_name")
+                            
+                             self.userName = keychain.get("Apple_name") ?? ""
+                             self.email = keychain.get("Apple_email") ?? ""
+                             self.profileUrl = ""
+                             self.soacialLogin(socialType: "Apple")
+                         }
+                         
+                         
+                          break
+                        case .revoked:
+                            // The Apple ID credential is revoked.
+                         self.appleLogin()
+                            break
+                        case .notFound:
+                            // No credential was found, so show the sign-in UI.
+                         self.appleLogin()
+                            break
+                        default:
+                            break
+                     }
+                }
+            }else{
+                
+                self.appleLogin()
+            }
+        
+           
+          
+        } else {
+            // Fallback on earlier versions
+        }
+            
+    }
+    
+    func appleLogin(){
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
     func setUpTextfield() {
         
         self.emailText.placeholder = "Email"
@@ -239,6 +302,8 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
                     let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController
                     vc?.selectedIndex = 0
                     self.navigationController?.pushViewController(vc!, animated: true)
+                    
+                   
                 }
                 
             }
@@ -387,7 +452,7 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
         let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         loadingNotification.mode = MBProgressHUDMode.indeterminate
         loadingNotification.label.text = "Loading"
-        
+        debugPrint("Social.Request",postDict)
         WebserviceClass.sharedAPI.performRequest(type: loginModel.self ,urlString: socialLoginUrl, methodType: .post, parameters: postDict, success: { (response) in
             self.loginModelResponse = response
             self.loginArray  = self.loginModelResponse?.data
@@ -510,3 +575,74 @@ extension LoginVC:UITextFieldDelegate
 //        return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
 //    }
 //}
+@available(iOS 13.0, *)
+extension LoginVC: ASAuthorizationControllerDelegate {
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        debugPrint("authorizationController:didCompleteWithError",error.localizedDescription)
+        
+        var alert = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            
+            // Create an account in your system.
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            debugPrint("Apple fullName",fullName?.givenName)
+            debugPrint("Apple email",email)
+            debugPrint("Apple userIdentifier",userIdentifier)
+            let keychain = KeychainSwift()
+            
+            if userIdentifier != nil {
+                keychain.set(email ?? "", forKey: "Apple_email")
+                keychain.set(userIdentifier, forKey: "Apple_user")
+                keychain.set(fullName?.givenName ?? "", forKey: "Apple_name")
+            }
+            
+            
+            self.doAppleLogin(email:email ?? "",name: fullName?.givenName)
+           
+            
+           
+        
+        case let passwordCredential as ASPasswordCredential:
+        
+            // Sign in using an existing iCloud Keychain credential.
+           
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+            debugPrint("Apple username",username)
+            let keychain = KeychainSwift()
+            keychain.set("", forKey: "Apple_email")
+            keychain.set(username, forKey: "Apple_user")
+            keychain.set("", forKey: "Apple_name")
+            self.doAppleLogin(email: "",name: "")
+           
+        default:
+            break
+        }
+    }
+    
+    func doAppleLogin(email:String? = "",name:String? = "") {
+        self.userName = name ?? ""
+        self.email = email ?? ""
+        self.profileUrl = ""
+        
+       
+        self.soacialLogin(socialType: "Apple")
+
+    }
+}
+
+@available(iOS 13.0, *)
+extension LoginVC: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+   
+}

@@ -94,13 +94,20 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
             comingFromTypes = true
         }
         
+        
         updateProfileDetails()
+        
 
         self.updateBtn.isHidden = false
         
         self.addTargetForErrorUpdating(self.emailText)
         self.addTargetForErrorUpdating(self.mobileText)
         self.addTargetForErrorUpdating(self.nameText)
+        
+        if (loginType == "Social") {
+            self.businessBtn.isHidden = true
+            self.skipBtn.isHidden = true
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -330,7 +337,9 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
             if myPeopleList.type == "individual"{
             self.nameText.text = myPeopleList.name
                 email = myPeopleList.email
-            self.emailText.text = myPeopleList.email
+                if !myPeopleList.email.isEmpty {
+                    self.emailText.text = myPeopleList.email
+                }
             self.mobileText.text = myPeopleList.mobileNUmber
             }
             if myPeopleList.type == "business"{
@@ -544,6 +553,7 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
          
         let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
          
+            email = self.emailText.text!
          
         let postDict = ["name": name, //myPeopleList.name,
          

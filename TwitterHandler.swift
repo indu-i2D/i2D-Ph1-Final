@@ -233,6 +233,7 @@ extension TwitterHandler {
         urlRequest.signOAuth1(method: "POST", urlFormParameters: params, consumerCredentials: cc, userCredentials: uc)
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, _, _ in
+            debugPrint("Twitter:Data",data)
             guard let data = data else { return }
             guard let dataString = String(data: data, encoding: .utf8) else { return }
             

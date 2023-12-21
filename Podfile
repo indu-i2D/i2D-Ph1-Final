@@ -24,7 +24,7 @@ target 'i2-Donate' do
     pod 'TwitterKit5'
     pod 'TwitterCore'
     pod 'IQKeyboardManagerSwift'
-
+    pod 'KeychainSwift', '~> 20.0'
     
 #    pod 'PayPal-iOS-SDK'
 

@@ -64,6 +64,7 @@ class NewViewfromadvancedSearchViewController: BaseViewController {
             vc?.locationSearch = address
             vc?.lattitude = latitude
             vc?.longitute = longitude
+            vc?.isFromAdvanceSearch = true
             vc?.hidesBottomBarWhenPushed = false
             self.navigationController?.pushViewController(vc!, animated: true)
             break
@@ -75,6 +76,7 @@ class NewViewfromadvancedSearchViewController: BaseViewController {
             vc?.locationSearch = address
             vc?.lattitude = latitude
             vc?.longitute = longitude
+            vc?.isFromAdvanceSearch = true
             vc?.hidesBottomBarWhenPushed = false
             self.navigationController?.pushViewController(vc!, animated: true)
             break
@@ -84,6 +86,7 @@ class NewViewfromadvancedSearchViewController: BaseViewController {
              vc?.locationSearch = address
              vc?.lattitude = latitude
              vc?.longitute = longitude
+             vc?.isFromAdvanceSearch = true
              vc?.searchedName = self.searchNameKey
              self.navigationController?.pushViewController(vc!, animated: true)
             break

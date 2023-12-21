@@ -42,6 +42,7 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
     @IBOutlet var cancelBtn : UIButton!
     @IBOutlet var continuePaymentBTn : UIButton!
     @IBOutlet var amountText: UITextField!
+    var isFromAdvanceSearch = false
     
     //MARK: Variables
     var selectedCharity:charityListArray? = nil
@@ -139,6 +140,18 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
         self.blurView.addGestureRecognizer(mytapGestureRecognizer1)
         
         headerTitle.text = headertitle
+        debugPrint("headertitle",headertitle)
+        
+        if self.isFromAdvanceSearch {
+            if headertitle ==  "INTERNATIONAL CHARITIES REGISTERED IN USA" {
+                headerTitle.text = "ADVANCE SEARCH INTERNATIONAL"
+            }
+            if headertitle == "UNITED STATES" {
+                headerTitle.text = "ADVANCE SEARCH USA"
+            }
+            
+        }
+        
         
         self.amountText.addBottomBorder()
         self.amountText.placeholder = ""
@@ -521,6 +534,24 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
             alertController.addAction(contact)
             self.present(alertController, animated: true, completion: nil)
         } else {
+            
+            let amount = self.amountText.text?.replacingOccurrences(of: "$", with: "")
+            
+            let amountWithoutDollar = amount!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            let price = Double(amountWithoutDollar)
+            
+            if (price! < 1) {
+                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                let messageAttrString = NSMutableAttributedString(string:"Amount should be minimum of 1$", attributes: messageFont)
+                alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(contact)
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
             
             MBProgressHUD.showAdded(to: self.view, animated: true)
             
@@ -986,14 +1017,15 @@ class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewData
         else{
             cell.likeBtn.isSelected = true
         }
-        
+        let count = charity.followed_count
         if(charity.followed == "0"){
             cell.followingBtn.isSelected = false
-            cell.followingBtn.setTitle("Follow", for: .normal)
+            cell.followingBtn.setTitle((count ?? "0") + " Follow", for: .normal)
         }
         else {
             cell.followingBtn.isSelected = true
-            cell.followingBtn.setTitle("Following", for: .normal)
+            cell.followingBtn.setTitle((count ?? "0") + " Following", for: .normal)
+            
         }
        
         return cell

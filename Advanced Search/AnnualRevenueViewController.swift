@@ -300,6 +300,7 @@ class AnnualRevenueViewController: BaseViewController {
             vc?.incomeTo = incomeTo
             vc?.locationSearch = address
             vc?.hidesBottomBarWhenPushed = false
+            vc?.isFromAdvanceSearch = true
             self.navigationController?.pushViewController(vc!, animated: true)
             break
         case "INT":
@@ -310,6 +311,7 @@ class AnnualRevenueViewController: BaseViewController {
             vc?.incomeFrom = incomeFrom
             vc?.incomeTo = incomeTo
             vc?.locationSearch = address
+            vc?.isFromAdvanceSearch = true
             vc?.hidesBottomBarWhenPushed = false
             self.navigationController?.pushViewController(vc!, animated: true)
             break
@@ -319,6 +321,7 @@ class AnnualRevenueViewController: BaseViewController {
              vc?.incomeFrom = incomeFrom
              vc?.incomeTo = incomeTo
              vc?.locationSearch = address
+             vc?.isFromAdvanceSearch = true
              self.navigationController?.pushViewController(vc!, animated: true)
             break
         }

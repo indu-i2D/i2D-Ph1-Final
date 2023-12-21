@@ -25,6 +25,7 @@ struct charityListArray: Codable {
     var like_count : String? = ""
     var liked : String? = ""
     var followed: String? = ""
+    var followed_count: String? = "0"
     var logo : String? = ""
     var taxdeductible: String? = ""
     var amt : String? = ""

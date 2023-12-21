@@ -76,6 +76,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     var comingFromType = false
     var filterType = ""
     var previousNameKeyWord = ""
+    var isFromAdvanceSearch = false
 //    var payPalConfig = PayPalConfiguration()
 //    let items:NSMutableArray = NSMutableArray()
 //    //Set environment connection.
@@ -222,7 +223,13 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         } else {
             self.titlelbl.text = "SEARCH BY TYPE"
         }
-        
+        if self.isFromAdvanceSearch {
+            if comingFromType == false{
+                self.titlelbl.text = "ADVANCE SEARCH BY NAME"
+            } else {
+                self.titlelbl.text = "ADVANCE SEARCH BY TYPE"
+            }
+        }
         self.hideKeyboardWhenTappedAround()
         
         // Do any additional setup after loading the view.
@@ -641,6 +648,24 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             alertController.addAction(contact)
             self.present(alertController, animated: true, completion: nil)
         } else {
+            
+            let amount = self.amountText.text?.replacingOccurrences(of: "$", with: "")
+            
+            let amountWithoutDollar = amount!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            let price = Double(amountWithoutDollar)
+            
+            if (price! < 1) {
+                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                let messageAttrString = NSMutableAttributedString(string:"Amount should be minimum of 1$", attributes: messageFont)
+                alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(contact)
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
         
             MBProgressHUD.showAdded(to: self.view, animated: true)
             
@@ -959,14 +984,15 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             cell.likeBtn.isSelected = true
         }
         
+        let count = charity.followed_count
         if(charity.followed == "0"){
             cell.followingBtn.isSelected = false
-            cell.followingBtn.setTitle("Follow", for: .normal)
-        } else{
-            cell.followingBtn.isSelected = true
-            cell.followingBtn.setTitle("Following", for: .normal)
+            cell.followingBtn.setTitle((count ?? "0") + " Follow", for: .normal)
         }
-        
+        else {
+            cell.followingBtn.isSelected = true
+            cell.followingBtn.setTitle((count ?? "0") + " Following", for: .normal)
+        }
         return cell
         
     }

@@ -142,6 +142,7 @@
 		1B73D3272A4C94700053AA65 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		1B7AEA072495E3CA0033C92C /* UIViewcontroller+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewcontroller+Extensions.swift"; sourceTree = "<group>"; };
 		1B7AEA082495E3CA0033C92C /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		1B9E269A2B29F15F008DFAF6 /* i2-Donate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "i2-Donate.entitlements"; sourceTree = "<group>"; };
 		1BD556AD24B5F85F001D616F /* ProcessingChargesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingChargesView.swift; sourceTree = "<group>"; };
 		1BD556B124B840D2001D616F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1BD556B324B840DD001D616F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -502,6 +503,7 @@
 		3FC72DD822706C40004B2FB3 = {
 			isa = PBXGroup;
 			children = (
+				1B9E269A2B29F15F008DFAF6 /* i2-Donate.entitlements */,
 				3FC72DEB22706C62004B2FB3 /* Assets.xcassets */,
 				3FC72DE322706C40004B2FB3 /* iDonate */,
 				1B5C6CB024A0C8E2008A3D1F /* TermsAndConditionsViewController.swift */,
@@ -1079,17 +1081,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = "i2-Donate.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 84;
+				CURRENT_PROJECT_VERSION = 89;
 				DEVELOPMENT_TEAM = A3C8934K5J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iDonate/Helper",
 				);
 				INFOPLIST_FILE = iDonate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1111,17 +1113,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = "i2-Donate.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 84;
+				CURRENT_PROJECT_VERSION = 89;
 				DEVELOPMENT_TEAM = A3C8934K5J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iDonate/Helper",
 				);
 				INFOPLIST_FILE = iDonate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

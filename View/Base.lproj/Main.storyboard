@@ -3207,7 +3207,7 @@ U0VORAM
                                     <tabBarItem tag="1" title="My Space" image="myspace" id="AU0-2S-Xot"/>
                                 </items>
                                 <color key="tintColor" red="0.82130354640000003" green="0.59332811829999998" blue="0.76706427340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="barTintColor" red="0.82130354640000003" green="0.59332811829999998" blue="0.76706427340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.81960784313725488" green="0.59215686274509804" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="delegate" destination="VZK-zx-mmq" id="yuJ-2n-bXd"/>
@@ -3778,7 +3778,7 @@ U0VORAM
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AMu-3h-cSk">
-                                                <rect key="frame" x="82" y="1524" width="250" height="80"/>
+                                                <rect key="frame" x="32" y="1524" width="350" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tgm-7O-ioF">
                                                         <rect key="frame" x="25" y="15" width="50" height="50"/>
@@ -3813,16 +3813,30 @@ U0VORAM
                                                             <action selector="twitterLogin:" destination="5KO-Kq-kXf" eventType="touchUpInside" id="ec6-CO-ZuJ"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ily-Se-oSc">
+                                                        <rect key="frame" x="250" y="15" width="50" height="50"/>
+                                                        <color key="backgroundColor" red="0.81960784310000001" green="0.59215686270000001" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="kBc-eh-fLd"/>
+                                                            <constraint firstAttribute="width" constant="50" id="nbO-b0-oNw"/>
+                                                        </constraints>
+                                                        <state key="normal" image="apple_login_logo"/>
+                                                        <connections>
+                                                            <action selector="handleAuthorizationAppleIDButtonPressWithSender:" destination="5KO-Kq-kXf" eventType="touchUpInside" id="JTF-Yl-uGG"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstItem="Ily-Se-oSc" firstAttribute="centerY" secondItem="AMu-3h-cSk" secondAttribute="centerY" id="6Lh-aT-9hz"/>
                                                     <constraint firstItem="ZwJ-Be-XN1" firstAttribute="top" secondItem="Tgm-7O-ioF" secondAttribute="top" id="Awe-rb-KHn"/>
                                                     <constraint firstItem="ZwJ-Be-XN1" firstAttribute="leading" secondItem="Tgm-7O-ioF" secondAttribute="trailing" constant="25" id="C9Y-wa-5Cc"/>
-                                                    <constraint firstAttribute="width" constant="250" id="W2V-pR-nsj"/>
+                                                    <constraint firstAttribute="width" constant="350" id="W2V-pR-nsj"/>
                                                     <constraint firstItem="qiX-LP-gQT" firstAttribute="leading" secondItem="ZwJ-Be-XN1" secondAttribute="trailing" constant="25" id="YOY-ga-tve"/>
                                                     <constraint firstItem="qiX-LP-gQT" firstAttribute="centerY" secondItem="AMu-3h-cSk" secondAttribute="centerY" id="bLg-Dd-9IM"/>
                                                     <constraint firstAttribute="height" constant="80" id="ctZ-ad-2c1"/>
                                                     <constraint firstItem="Tgm-7O-ioF" firstAttribute="centerY" secondItem="AMu-3h-cSk" secondAttribute="centerY" id="fHS-XD-oD2"/>
+                                                    <constraint firstItem="Ily-Se-oSc" firstAttribute="leading" secondItem="qiX-LP-gQT" secondAttribute="trailing" constant="25" id="oCy-VG-24x"/>
                                                     <constraint firstItem="Tgm-7O-ioF" firstAttribute="leading" secondItem="AMu-3h-cSk" secondAttribute="leading" constant="25" id="ufz-dx-Jnl"/>
                                                 </constraints>
                                             </view>
@@ -4764,6 +4778,7 @@ U0VORAM
                     <connections>
                         <outlet property="agreeBtn" destination="7yf-AT-rtX" id="sRb-Sd-qSl"/>
                         <outlet property="agreeBtnYPos" destination="i96-9n-dwL" id="OAL-5b-6EQ"/>
+                        <outlet property="appleLoginBtn" destination="Ily-Se-oSc" id="ZPX-jD-EbM"/>
                         <outlet property="businessAddress" destination="3D8-5e-VOp" id="5Xn-dc-qAi"/>
                         <outlet property="businessBtn" destination="ZaS-Z7-m5z" id="UOB-RB-Duk"/>
                         <outlet property="businessCertifi" destination="6pa-0A-kAe" id="zOM-xR-KMo"/>
@@ -5204,7 +5219,7 @@ U0VORAM
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOY-Ax-qYJ">
-                                                <rect key="frame" x="62.5" y="406.5" width="250" height="80"/>
+                                                <rect key="frame" x="12.5" y="406.5" width="350" height="80"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Mf-Ny-G5D">
                                                         <rect key="frame" x="27" y="15" width="50" height="50"/>
@@ -5239,13 +5254,27 @@ U0VORAM
                                                             <action selector="twitterLogin:" destination="vGE-e3-tOQ" eventType="touchUpInside" id="EJs-pX-6M1"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2F-Q5-VlT">
+                                                        <rect key="frame" x="252" y="15" width="50" height="50"/>
+                                                        <color key="backgroundColor" red="0.81960784313725488" green="0.59215686274509804" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="pTN-i1-ckf"/>
+                                                            <constraint firstAttribute="height" constant="50" id="z8B-ni-qOX"/>
+                                                        </constraints>
+                                                        <state key="normal" image="apple_login_logo"/>
+                                                        <connections>
+                                                            <action selector="handleAuthorizationAppleIDButtonPressWithSender:" destination="vGE-e3-tOQ" eventType="touchUpInside" id="ZNh-Pp-Mk3"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="HwQ-l4-Qxy"/>
+                                                    <constraint firstItem="G2F-Q5-VlT" firstAttribute="centerY" secondItem="jOY-Ax-qYJ" secondAttribute="centerY" id="LmC-io-XKy"/>
                                                     <constraint firstItem="NEd-BB-rFX" firstAttribute="centerY" secondItem="jOY-Ax-qYJ" secondAttribute="centerY" id="LvG-9I-Oyj"/>
+                                                    <constraint firstItem="G2F-Q5-VlT" firstAttribute="leading" secondItem="NEd-BB-rFX" secondAttribute="trailing" constant="25" id="WUv-oN-ETM"/>
                                                     <constraint firstItem="NEd-BB-rFX" firstAttribute="leading" secondItem="TLV-iq-mm0" secondAttribute="trailing" constant="25" id="Ytf-wB-iKK"/>
-                                                    <constraint firstAttribute="width" constant="250" id="ao6-6W-wX6"/>
+                                                    <constraint firstAttribute="width" constant="350" id="ao6-6W-wX6"/>
                                                     <constraint firstItem="2Mf-Ny-G5D" firstAttribute="centerY" secondItem="jOY-Ax-qYJ" secondAttribute="centerY" id="dbp-nS-2ht"/>
                                                     <constraint firstItem="TLV-iq-mm0" firstAttribute="leading" secondItem="2Mf-Ny-G5D" secondAttribute="trailing" constant="25" id="iOS-u9-BnQ"/>
                                                     <constraint firstItem="TLV-iq-mm0" firstAttribute="top" secondItem="2Mf-Ny-G5D" secondAttribute="top" id="le3-Gr-bRA"/>
@@ -5354,6 +5383,7 @@ U0VORAM
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="appleLoginBtn" destination="G2F-Q5-VlT" id="7Tf-E3-fJ0"/>
                         <outlet property="constraintContentHeight" destination="31A-58-weq" id="Jof-9N-FTK"/>
                         <outlet property="containerView" destination="8dQ-ob-NOB" id="bGq-X9-QRT"/>
                         <outlet property="emailText" destination="yCy-6g-0Cd" id="qo9-Oq-zhs"/>
@@ -7557,10 +7587,11 @@ U0VORAM
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SBp-ri-Amg"/>
-        <segue reference="R66-m0-4Ky"/>
+        <segue reference="Ci8-Fo-QIZ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="LaunchImage" width="417" height="597"/>
+        <image name="apple_login_logo" width="30" height="30"/>
         <image name="back" width="16" height="16"/>
         <image name="browse" width="24" height="25"/>
         <image name="browseselected" width="24" height="25"/>

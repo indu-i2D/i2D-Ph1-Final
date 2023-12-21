@@ -13,7 +13,8 @@ import Alamofire
 import GoogleSignIn
 import FBSDKLoginKit
 import UniformTypeIdentifiers
-
+import AuthenticationServices
+import KeychainSwift
 
 extension RegisterVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,6 +50,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     @IBOutlet var countryLabel: UILabel!
     @IBOutlet var countrydropdown: UIView!
     @IBOutlet var countryLine: UILabel!
+    @IBOutlet var appleLoginBtn:UIButton!
     
     @IBOutlet var businessView: UIView!
     @IBOutlet var firstName: TKFormTextField!
@@ -159,9 +161,68 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         self.individualBtn.isSelected = true
         
         self.navigationController?.isNavigationBarHidden = true
-        
+        self.appleLoginBtn.layer.cornerRadius = appleLoginBtn.frame.size.width/2
+        self.appleLoginBtn.clipsToBounds = true
     }
     
+    
+    @IBAction func handleAuthorizationAppleIDButtonPress(sender:Any){
+        
+        if #available(iOS 13.0, *) {
+            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            let keychain = KeychainSwift()
+            if let userID = keychain.get("Apple_user") {
+                appleIDProvider.getCredentialState(forUserID: userID) {  (credentialState, error) in
+                     switch credentialState {
+                        case .authorized:
+                            // The Apple ID credential is valid.
+                          debugPrint("AppleLoginDetails authorized")
+                         DispatchQueue.main.async {
+                             let email = keychain.get("Apple_email")
+                             let name = keychain.get("Apple_name")
+                            
+                             self.userName = keychain.get("Apple_name") ?? ""
+                             self.email = keychain.get("Apple_email") ?? ""
+                             self.profileUrl = ""
+                             self.socialLogin(socialType: "Apple")
+                         }
+                         
+                         
+                          break
+                        case .revoked:
+                            // The Apple ID credential is revoked.
+                         self.appleLogin()
+                            break
+                        case .notFound:
+                            // No credential was found, so show the sign-in UI.
+                         self.appleLogin()
+                            break
+                        default:
+                            break
+                     }
+                }
+            }else{
+                
+                self.appleLogin()
+            }
+        
+           
+          
+        } else {
+            // Fallback on earlier versions
+        }
+            
+    }
+    
+    func appleLogin(){
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
     func registerBusinessView(){
         self.tableview.register(UINib(nibName: "BusinessRegCell", bundle: nil), forCellReuseIdentifier: "BusinessRegCell")
     }
@@ -605,6 +666,8 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         }
         
         debugPrint("PostDict",postDict)
+        
+        // ["terms": "Yes", "country": US, "password": "Abcd@123", "name": "Sample user", "gender": "M", "type": "individual", "business_name": "", "phone": "7200798409", "email": "share2dinesh93+10@gmail.com"]
         
         let registerUrl = String(format: URLHelper.iDonateRegister)
         let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
@@ -1292,4 +1355,74 @@ extension String {
       // Trim and check empty string
       return (self.trimmingCharacters(in: .whitespaces) == "")
    }
+}
+@available(iOS 13.0, *)
+extension RegisterVC: ASAuthorizationControllerDelegate {
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        debugPrint("authorizationController:didCompleteWithError",error.localizedDescription)
+        
+        var alert = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            
+            // Create an account in your system.
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            debugPrint("Apple fullName",fullName?.givenName)
+            debugPrint("Apple email",email)
+            debugPrint("Apple userIdentifier",userIdentifier)
+            let keychain = KeychainSwift()
+            
+            if userIdentifier != nil {
+                keychain.set(email ?? "", forKey: "Apple_email")
+                keychain.set(userIdentifier, forKey: "Apple_user")
+                keychain.set(fullName?.givenName ?? "", forKey: "Apple_name")
+            }
+            
+            
+            self.doAppleLogin(email:email ?? "",name: fullName?.givenName)
+           
+            
+           
+        
+        case let passwordCredential as ASPasswordCredential:
+        
+            // Sign in using an existing iCloud Keychain credential.
+           
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+            debugPrint("Apple username",username)
+            let keychain = KeychainSwift()
+            keychain.set("", forKey: "Apple_email")
+            keychain.set(username, forKey: "Apple_user")
+            keychain.set("", forKey: "Apple_name")
+            self.doAppleLogin(email: "",name: "")
+           
+        default:
+            break
+        }
+    }
+    
+    func doAppleLogin(email:String? = "",name:String? = "") {
+        self.userName = name ?? ""
+        self.email = email ?? ""
+        self.profileUrl = ""
+        
+        self.socialLogin(socialType: "Apple")
+
+    }
+}
+
+@available(iOS 13.0, *)
+extension RegisterVC: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+   
 }

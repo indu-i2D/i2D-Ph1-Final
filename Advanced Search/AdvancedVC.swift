@@ -108,6 +108,7 @@ class AdvancedVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
             vc?.lattitude = latitude
             vc?.longitute = longitude
             vc?.searchName = self.searchNameKey
+            vc?.isFromAdvanceSearch = true
             vc?.hidesBottomBarWhenPushed = false
             self.navigationController?.pushViewController(vc!, animated: true)
             break
@@ -121,6 +122,7 @@ class AdvancedVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
             vc?.lattitude = latitude
             vc?.longitute = longitude
             vc?.searchName = self.searchNameKey
+            vc?.isFromAdvanceSearch = true
 //            vc?.comingFromType = comingFromType
 //            vc?.searchedName = self.searchNameKey
             vc?.hidesBottomBarWhenPushed = false
@@ -135,6 +137,7 @@ class AdvancedVC: BaseViewController,UITableViewDataSource,UITableViewDelegate {
              vc?.longitute = longitude
              vc?.comingFromType = comingFromType
              vc?.searchedName = self.searchNameKey
+             vc?.isFromAdvanceSearch = true
              self.navigationController?.pushViewController(vc!, animated: true)
             break
         }

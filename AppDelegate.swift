@@ -157,6 +157,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         for item in jsonArray {
                             debugPrint("item ?? ",item)
                             let array = item.arrayValue
+                            if array.count == 0 {
+                                continue
+                            }
                             debugPrint("array",array)
                             if array[0] == "Server_URL" {
                                 SERVER_URL = array[1].stringValue + "/"

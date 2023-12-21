@@ -303,6 +303,24 @@ class SearchDetailsVC: BaseViewController,UICollectionViewDelegate,UICollectionV
             self.present(alertController, animated: true, completion: nil)
         } else {
             
+            let amount = self.amountText.text?.replacingOccurrences(of: "$", with: "")
+            
+            let amountWithoutDollar = amount!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            let price = Double(amountWithoutDollar)
+            
+            if (price! < 1) {
+                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                let messageAttrString = NSMutableAttributedString(string:"Amount should be minimum of 1$", attributes: messageFont)
+                alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(contact)
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
             MBProgressHUD.showAdded(to: self.view, animated: true)
             
             let urlString = "\(URLHelper.baseURL)braintree_client_token"

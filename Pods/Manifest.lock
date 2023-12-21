@@ -53,6 +53,7 @@ PODS:
     - GTMSessionFetcher/Core (< 3.0, >= 1.5)
   - GTMSessionFetcher/Core (1.7.2)
   - IQKeyboardManagerSwift (6.5.11)
+  - KeychainSwift (20.0.0)
   - MBProgressHUD (1.2.0)
   - SideMenu (6.5.0)
   - SwiftyJSON (5.0.1)
@@ -71,6 +72,7 @@ DEPENDENCIES:
   - GooglePlaces
   - GoogleSignIn (~> 5.0.2)
   - IQKeyboardManagerSwift
+  - KeychainSwift (~> 20.0)
   - MBProgressHUD
   - SideMenu
   - SwiftyJSON
@@ -92,6 +94,7 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - IQKeyboardManagerSwift
+    - KeychainSwift
     - MBProgressHUD
     - SideMenu
     - SwiftyJSON
@@ -112,6 +115,7 @@ SPEC CHECKSUMS:
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
@@ -119,6 +123,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit5: 64095dfefcf39be2355711ef27112d55e340d90e
 
-PODFILE CHECKSUM: 1426ce0a2ca871ee79174e6869338397caa72651
+PODFILE CHECKSUM: 11315e7f3e429f96c15c8bf6c3dc3c3a2f260223
 
 COCOAPODS: 1.11.2
