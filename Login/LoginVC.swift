@@ -40,7 +40,7 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
     
     @IBOutlet var appleLoginBtn:UIButton!
     var comingFromTypes = false
-    
+    var isSKipUpdateProfile = false
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -62,6 +62,7 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
         setUpTextfield()
         self.appleLoginBtn.layer.cornerRadius = appleLoginBtn.frame.size.width/2
         self.appleLoginBtn.clipsToBounds = true
+        self.appleLoginBtn.backgroundColor = .black
     }
     
     @IBAction func handleAuthorizationAppleIDButtonPress(sender:Any){
@@ -83,6 +84,7 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
                              self.userName = keychain.get("Apple_name") ?? ""
                              self.email = keychain.get("Apple_email") ?? ""
                              self.profileUrl = ""
+                             self.isSKipUpdateProfile = true
                              self.soacialLogin(socialType: "Apple")
                          }
                          
@@ -288,7 +290,7 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
             UserDefaults.standard.set( self.loginArray!.name, forKey: "username")
             UserDefaults.standard.synchronize()
         
-            if(loginType == "Social") {
+            if(loginType == "Social" && isSKipUpdateProfile == false) {
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileVC
                 vc?.loginType = "Social"
                 self.navigationController?.pushViewController(vc!, animated: true)
@@ -629,6 +631,7 @@ extension LoginVC: ASAuthorizationControllerDelegate {
     }
     
     func doAppleLogin(email:String? = "",name:String? = "") {
+        self.isSKipUpdateProfile = true
         self.userName = name ?? ""
         self.email = email ?? ""
         self.profileUrl = ""

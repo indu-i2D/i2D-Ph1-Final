@@ -106,6 +106,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     var selectedFilesTypes = [String:String]()
     var selectedFileTag = 0
     var fileMetaData = [Int:String]()
+    var isSKipUpdateProfile = false
     
     @IBAction func showCityAction(sender:UIButton){
         debugPrint("showCityAction")
@@ -163,6 +164,8 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         self.navigationController?.isNavigationBarHidden = true
         self.appleLoginBtn.layer.cornerRadius = appleLoginBtn.frame.size.width/2
         self.appleLoginBtn.clipsToBounds = true
+        self.appleLoginBtn.backgroundColor = .black
+
     }
     
     
@@ -184,6 +187,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
                              self.userName = keychain.get("Apple_name") ?? ""
                              self.email = keychain.get("Apple_email") ?? ""
                              self.profileUrl = ""
+                             self.isSKipUpdateProfile = true
                              self.socialLogin(socialType: "Apple")
                          }
                          
@@ -1101,7 +1105,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             UserDefaults.standard.set(encodedData, forKey: "people")
             UserDefaults.standard.set( self.loginArray!.name, forKey: "username")
             
-            if(loginType == "Social"){
+            if(loginType == "Social") &&  (self.isSKipUpdateProfile == false){
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileVC
                 vc?.userName = self.userName
                 vc?.email = self.email
@@ -1410,6 +1414,7 @@ extension RegisterVC: ASAuthorizationControllerDelegate {
     }
     
     func doAppleLogin(email:String? = "",name:String? = "") {
+        self.isSKipUpdateProfile = true
         self.userName = name ?? ""
         self.email = email ?? ""
         self.profileUrl = ""
