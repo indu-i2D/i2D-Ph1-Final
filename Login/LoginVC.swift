@@ -290,25 +290,27 @@ class LoginVC: BaseViewController,GIDSignInDelegate {
             UserDefaults.standard.set( self.loginArray!.name, forKey: "username")
             UserDefaults.standard.synchronize()
         
-            if(loginType == "Social" && isSKipUpdateProfile == false) {
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileVC
-                vc?.loginType = "Social"
-                self.navigationController?.pushViewController(vc!, animated: true)
+            if comingFromTypes == true {
+                self.navigationController?.popViewController(animated: true)
             } else {
+                constantFile.changepasswordBack = true
+                UserDefaults.standard.set("Login", forKey: "loginType")
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController
+                vc?.selectedIndex = 0
+                self.navigationController?.pushViewController(vc!, animated: true)
                 
-                if comingFromTypes == true {
-                    self.navigationController?.popViewController(animated: true)
-                } else {
-                    constantFile.changepasswordBack = true
-                    UserDefaults.standard.set("Login", forKey: "loginType")
-                    let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController
-                    vc?.selectedIndex = 0
-                    self.navigationController?.pushViewController(vc!, animated: true)
-                    
-                   
-                }
-                
+               
             }
+            
+            
+//            if(loginType == "Social" && isSKipUpdateProfile == false) {
+//                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileVC
+//                vc?.loginType = "Social"
+//                self.navigationController?.pushViewController(vc!, animated: true)
+//            } else {
+//
+//
+//            }
             
         } else {
             let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
