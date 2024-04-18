@@ -8,7 +8,7 @@
 import UIKit
 import GoogleSignIn
 import FBSDKCoreKit
-import Braintree
+//import Braintree
 import GooglePlaces
 import IQKeyboardManagerSwift
 import Alamofire
@@ -42,12 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         paymentBTURLScheme = (Bundle.main.bundleIdentifier ?? "") + ".payments"
         
-        BTAppSwitch.setReturnURLScheme(paymentBTURLScheme)
-        print(paymentBTURLScheme)
-            FBSDKCoreKit.ApplicationDelegate.shared.application(
-            application,
-            didFinishLaunchingWithOptions: launchOptions
-        )
+//        BTAppSwitch.setReturnURLScheme(paymentBTURLScheme)
+//        print(paymentBTURLScheme)
+//            FBSDKCoreKit.ApplicationDelegate.shared.application(
+//            application,
+//            didFinishLaunchingWithOptions: launchOptions
+//        )
 //        TWTRTwitter.sharedInstance().start(withConsumerKey:"xxxxxxxxxxxxxxxxxxxxx", consumerSecret:"ssabdavhjdafvdhjavdhjavdahjdvahdvahdvahjd")
         
         GMSPlacesClient.provideAPIKey("AIzaSyALvk4X-MXl0E7fOg2dELuOQfXfVwEmxhM")
@@ -70,9 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             annotation: options[UIApplication.OpenURLOptionsKey.annotation]
         )
         
-        if url.scheme?.localizedCaseInsensitiveCompare(paymentBTURLScheme) == ComparisonResult.orderedSame {
-            return BTAppSwitch.handleOpen(url, options: options)
-        }
+//        if url.scheme?.localizedCaseInsensitiveCompare(paymentBTURLScheme) == ComparisonResult.orderedSame {
+//            return BTAppSwitch.handleOpen(url, options: options)
+//        }
                 
         return GIDSignIn.sharedInstance().handle(url)
         
@@ -129,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         let sheetApiKey = "AIzaSyDQzTsnTRgYvCDfEUm1ac0rQgHZbiiB_ew"
         let sheetID = "1O-8LD2wcWDqBiKw9I3QDI0JuwWCVrenyN_IzVHVMd4E"
-        let sheetTabName = "i2D-Prod"  // i2D-Prod  i2D-Dev
+        let sheetTabName = "i2D-Prod"  // i2D-Dev
         let url = "https://sheets.googleapis.com/v4/spreadsheets/" + sheetID + "/values/" + sheetTabName + "?key=" + sheetApiKey
         //debugPrint("Sheet Url",url)
         

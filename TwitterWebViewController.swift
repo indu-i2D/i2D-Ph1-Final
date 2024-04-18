@@ -108,7 +108,7 @@ class TwitterWebViewController: UIViewController,UIScrollViewDelegate,WKNavigati
     
     func loadWebView() {
         if let loadUrl = loadUrl {
-            MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+                MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
             let requestObj = URLRequest(url: loadUrl)
             self.webView?.load(requestObj)
         }
@@ -142,7 +142,7 @@ class TwitterWebViewController: UIViewController,UIScrollViewDelegate,WKNavigati
         // exitTermConditionID
         self.webView?.navigationDelegate = nil
         self.webView?.scrollView.delegate = nil
-        
+
         //  PLProgressHUD.sharedInstance.hideProgressHUD()
         self.navigationController?.popViewController(animated: true)
         

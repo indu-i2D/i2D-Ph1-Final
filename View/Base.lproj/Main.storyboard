@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hZZ-ys-6Q9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hZZ-ys-6Q9">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1019,10 +1019,10 @@ your donation have been forwarded to</string>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yCJ-wX-9PY">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="219.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donate Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQQ-SJ-CfQ">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are being directed to an external payment site" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQQ-SJ-CfQ">
                                                 <rect key="frame" x="10" y="10" width="105.5" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="0XY-18-7mf"/>
+                                                    <constraint firstAttribute="height" constant="42" id="0XY-18-7mf"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" red="0.31764705879999999" green="0.17254901959999999" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1032,6 +1032,7 @@ your donation have been forwarded to</string>
                                                 <rect key="frame" x="181" y="10" width="49" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="A0u-cj-cLH"/>
+                                                    <constraint firstAttribute="width" constant="100" id="t1u-f6-a9P"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                 <state key="normal" title="Cancel">
@@ -1104,7 +1105,7 @@ your donation have been forwarded to</string>
                                             <constraint firstItem="Bz8-dj-FUD" firstAttribute="leading" secondItem="aJh-vS-dly" secondAttribute="trailing" constant="14" id="DCK-y2-pNU"/>
                                             <constraint firstItem="6HN-76-DcO" firstAttribute="top" secondItem="yCJ-wX-9PY" secondAttribute="top" constant="10" id="H7l-KC-ITQ"/>
                                             <constraint firstItem="OQQ-SJ-CfQ" firstAttribute="leading" secondItem="yCJ-wX-9PY" secondAttribute="leading" constant="10" id="Vcs-in-7Yn"/>
-                                            <constraint firstItem="OQQ-SJ-CfQ" firstAttribute="top" secondItem="yCJ-wX-9PY" secondAttribute="top" constant="10" id="Vxz-8L-FwX"/>
+                                            <constraint firstItem="OQQ-SJ-CfQ" firstAttribute="top" secondItem="yCJ-wX-9PY" secondAttribute="top" constant="80" id="Vxz-8L-FwX"/>
                                             <constraint firstItem="hlS-Ti-WwE" firstAttribute="top" secondItem="aJh-vS-dly" secondAttribute="bottom" constant="-1" id="bza-w7-tyJ"/>
                                             <constraint firstItem="5Hb-mc-zxU" firstAttribute="centerX" secondItem="yCJ-wX-9PY" secondAttribute="centerX" id="dRu-YJ-WRg"/>
                                             <constraint firstItem="Bz8-dj-FUD" firstAttribute="top" secondItem="aJh-vS-dly" secondAttribute="bottom" constant="6" id="fZP-gF-pbC"/>
@@ -1458,6 +1459,40 @@ U0VORAM
                                                 <constraint firstItem="xP6-dM-KXv" firstAttribute="top" secondItem="DSI-cu-HYr" secondAttribute="bottom" constant="10" id="QdJ-z6-zrc"/>
                                                 <constraint firstItem="xP6-dM-KXv" firstAttribute="leading" secondItem="qzh-kr-OV8" secondAttribute="leadingMargin" id="Xbu-xf-oFQ"/>
                                                 <constraint firstItem="DSI-cu-HYr" firstAttribute="leading" secondItem="qzh-kr-OV8" secondAttribute="leadingMargin" id="ucW-Ge-dVY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell4" rowHeight="120" id="mzh-cj-zfA">
+                                        <rect key="frame" x="0.0" y="410" width="355" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mzh-cj-zfA" id="tHj-je-U70">
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Deletion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pp-Na-Dwc">
+                                                    <rect key="frame" x="16" y="31" width="145" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <color key="textColor" red="0.31764705879999999" green="0.17254901959999999" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel My Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8X-qp-Bzj">
+                                                    <rect key="frame" x="16" y="64" width="250" height="23"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="5Oe-56-XGE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="A8X-qp-Bzj" firstAttribute="leading" secondItem="tHj-je-U70" secondAttribute="leadingMargin" id="2CX-gX-o7e"/>
+                                                <constraint firstItem="A8X-qp-Bzj" firstAttribute="top" secondItem="1pp-Na-Dwc" secondAttribute="bottom" constant="10" id="MOa-wI-TJF"/>
+                                                <constraint firstItem="A8X-qp-Bzj" firstAttribute="leading" secondItem="tHj-je-U70" secondAttribute="leadingMargin" id="OVu-1D-7Sb"/>
+                                                <constraint firstItem="1pp-Na-Dwc" firstAttribute="leading" secondItem="tHj-je-U70" secondAttribute="leadingMargin" id="Sd4-cd-TCE"/>
+                                                <constraint firstItem="1pp-Na-Dwc" firstAttribute="top" secondItem="tHj-je-U70" secondAttribute="topMargin" constant="20" id="pwg-fK-gB2"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2577,7 +2612,6 @@ U0VORAM
                     </view>
                     <connections>
                         <outlet property="Scrolltypebtn" destination="Xkr-iA-D0X" id="J5s-XS-z7b"/>
-                        <outlet property="amountText" destination="Eby-OD-xTn" id="CQU-eD-uYG"/>
                         <outlet property="blurView" destination="ubq-YG-iMa" id="qVC-40-bE5"/>
                         <outlet property="cancelBtn" destination="Tb6-Jp-yUw" id="hgc-6y-4jE"/>
                         <outlet property="containerView" destination="is0-pP-WeO" id="vwH-Qz-j7z"/>
@@ -2613,10 +2647,10 @@ U0VORAM
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dch-wd-xP7">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="219.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donate Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zi6-cx-pJA">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are being directed to an external payment site" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zi6-cx-pJA">
                                                 <rect key="frame" x="10" y="10" width="105.5" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="OGe-VU-av0"/>
+                                                    <constraint firstAttribute="height" constant="42" id="OGe-VU-av0"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" red="0.31764705879999999" green="0.17254901959999999" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2626,6 +2660,7 @@ U0VORAM
                                                 <rect key="frame" x="181" y="10" width="49" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="KUu-xI-fNs"/>
+                                                    <constraint firstAttribute="width" constant="100" id="hdy-2S-3N8"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                 <state key="normal" title="Cancel">
@@ -2635,18 +2670,6 @@ U0VORAM
                                                     <action selector="cancelAction:" destination="oVd-Lp-r0c" eventType="touchUpInside" id="0VG-q4-lBO"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eby-OD-xTn">
-                                                <rect key="frame" x="45" y="70" width="150" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="M7M-Fc-XGq"/>
-                                                    <constraint firstAttribute="height" constant="50" id="inV-P9-LH7"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="oVd-Lp-r0c" id="gvY-UU-7pz"/>
-                                                </connections>
-                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjs-A6-FDE">
                                                 <rect key="frame" x="20" y="172" width="200" height="40"/>
                                                 <color key="backgroundColor" red="0.27450980392156865" green="0.078431372549019607" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2667,43 +2690,15 @@ U0VORAM
                                                     <action selector="paymentAction:" destination="oVd-Lp-r0c" eventType="touchUpInside" id="LYn-fs-Hs5"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owR-Vx-RF9">
-                                                <rect key="frame" x="24" y="119" width="192" height="49"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="49" id="BUw-xp-AFk"/>
-                                                    <constraint firstAttribute="width" constant="192" id="lHq-Wq-35L"/>
-                                                </constraints>
-                                                <string key="text">Merchant Charges and processing fee will be added to whatever donation amount is entered.                                        Donations are not refundable.</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                                <color key="textColor" red="0.33610409499999999" green="0.18219742180000001" blue="0.035234760490000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GmL-gS-3zl">
-                                                <rect key="frame" x="209" y="126" width="31" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="31" id="17G-PM-alc"/>
-                                                    <constraint firstAttribute="height" constant="36" id="KoZ-e9-LQ7"/>
-                                                </constraints>
-                                                <state key="normal" image="info"/>
-                                                <connections>
-                                                    <action selector="showProcessingCharges:" destination="oVd-Lp-r0c" eventType="touchUpInside" id="PO2-d6-OZv"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96862745098039216" green="0.92549019607843142" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="owR-Vx-RF9" firstAttribute="top" secondItem="Eby-OD-xTn" secondAttribute="bottom" constant="-1" id="AiN-Lt-wMg"/>
-                                            <constraint firstItem="zi6-cx-pJA" firstAttribute="top" secondItem="dch-wd-xP7" secondAttribute="top" constant="10" id="Bmi-96-8Dl"/>
-                                            <constraint firstItem="Eby-OD-xTn" firstAttribute="centerX" secondItem="tjs-A6-FDE" secondAttribute="centerX" id="Fjj-BJ-8qo"/>
+                                            <constraint firstItem="tjs-A6-FDE" firstAttribute="top" secondItem="zi6-cx-pJA" secondAttribute="top" constant="80" id="57k-35-3K4"/>
+                                            <constraint firstItem="zi6-cx-pJA" firstAttribute="top" secondItem="dch-wd-xP7" secondAttribute="top" constant="40" id="Bmi-96-8Dl"/>
                                             <constraint firstItem="Tb6-Jp-yUw" firstAttribute="top" secondItem="dch-wd-xP7" secondAttribute="top" constant="10" id="G2p-aR-PI3"/>
-                                            <constraint firstItem="Eby-OD-xTn" firstAttribute="top" secondItem="zi6-cx-pJA" secondAttribute="bottom" constant="30" id="GqB-Gz-H38"/>
-                                            <constraint firstItem="tjs-A6-FDE" firstAttribute="top" secondItem="Eby-OD-xTn" secondAttribute="bottom" constant="52" id="OrP-R8-gTK"/>
                                             <constraint firstItem="tjs-A6-FDE" firstAttribute="centerX" secondItem="dch-wd-xP7" secondAttribute="centerX" id="UCG-eQ-wTO"/>
-                                            <constraint firstItem="owR-Vx-RF9" firstAttribute="centerX" secondItem="dch-wd-xP7" secondAttribute="centerX" id="XUt-8S-ThC"/>
                                             <constraint firstAttribute="trailing" secondItem="Tb6-Jp-yUw" secondAttribute="trailing" constant="10" id="Zkg-s7-0Pe"/>
-                                            <constraint firstItem="GmL-gS-3zl" firstAttribute="top" secondItem="Eby-OD-xTn" secondAttribute="bottom" constant="6" id="bA7-J7-4sd"/>
                                             <constraint firstItem="zi6-cx-pJA" firstAttribute="leading" secondItem="dch-wd-xP7" secondAttribute="leading" constant="10" id="ebO-pY-Tkw"/>
-                                            <constraint firstItem="GmL-gS-3zl" firstAttribute="leading" secondItem="Eby-OD-xTn" secondAttribute="trailing" constant="14" id="w4W-Ao-qlg"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -2841,7 +2836,6 @@ U0VORAM
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="amountText" destination="Nzu-dw-MHb" id="HbX-OE-ZGU"/>
                         <outlet property="blurView" destination="H8z-2U-Gh8" id="Ul5-eY-3f9"/>
                         <outlet property="continuePaymentBTn" destination="ebn-Ea-Rae" id="ybP-o8-xhU"/>
                         <outlet property="img" destination="HDp-A3-prW" id="qgZ-TY-VJD"/>
@@ -2865,10 +2859,10 @@ U0VORAM
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEx-bl-vu4">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="219.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donate Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8t-Sk-gBL">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are being directed to an external payment site" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8t-Sk-gBL">
                                                 <rect key="frame" x="10" y="10" width="105.5" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="V80-an-4Rc"/>
+                                                    <constraint firstAttribute="height" constant="42" id="V80-an-4Rc"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" red="0.31764705879999999" green="0.17254901959999999" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2887,18 +2881,6 @@ U0VORAM
                                                     <action selector="cancelAction:" destination="GuF-hA-mDy" eventType="touchUpInside" id="GEc-gc-giR"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nzu-dw-MHb" customClass="TKFormTextField" customModule="TKFormTextField">
-                                                <rect key="frame" x="45" y="70" width="150" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="4Tg-Yt-L0Q"/>
-                                                    <constraint firstAttribute="width" constant="150" id="8Pf-rs-Z1F"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="oVd-Lp-r0c" id="CqH-ZV-5Rx"/>
-                                                </connections>
-                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebn-Ea-Rae">
                                                 <rect key="frame" x="20" y="172" width="200" height="40"/>
                                                 <color key="backgroundColor" red="0.27450980390000002" green="0.078431372550000003" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2919,17 +2901,6 @@ U0VORAM
                                                     <action selector="paymentAction:" destination="GuF-hA-mDy" eventType="touchUpInside" id="N3e-yC-lgv"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sN-Vx-G3I">
-                                                <rect key="frame" x="24" y="119" width="192" height="49"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="49" id="6Zb-xo-TEs"/>
-                                                    <constraint firstAttribute="width" constant="192" id="BaU-m8-4te"/>
-                                                </constraints>
-                                                <string key="text">Merchant Charges and processing fee will be added to whatever donation amount is entered.                                        Donations are not refundable.</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                                <color key="textColor" red="0.33610409499999999" green="0.18219742180000001" blue="0.035234760490000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CK4-kZ-r9s">
                                                 <rect key="frame" x="209" y="126" width="31" height="36"/>
                                                 <constraints>
@@ -2944,18 +2915,13 @@ U0VORAM
                                         </subviews>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.92549019610000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="8sN-Vx-G3I" firstAttribute="centerX" secondItem="mEx-bl-vu4" secondAttribute="centerX" id="0fc-zZ-lvf"/>
-                                            <constraint firstItem="b8t-Sk-gBL" firstAttribute="top" secondItem="mEx-bl-vu4" secondAttribute="top" constant="10" id="F0Q-2a-CNR"/>
-                                            <constraint firstItem="Nzu-dw-MHb" firstAttribute="top" secondItem="b8t-Sk-gBL" secondAttribute="bottom" constant="30" id="Kif-BU-Tfn"/>
+                                            <constraint firstItem="qW5-j7-S8j" firstAttribute="leading" secondItem="b8t-Sk-gBL" secondAttribute="trailing" constant="10" id="2X6-VL-6Lj"/>
+                                            <constraint firstItem="b8t-Sk-gBL" firstAttribute="top" secondItem="mEx-bl-vu4" secondAttribute="top" constant="80" id="F0Q-2a-CNR"/>
                                             <constraint firstAttribute="trailing" secondItem="qW5-j7-S8j" secondAttribute="trailing" constant="10" id="LUE-TJ-50l"/>
-                                            <constraint firstItem="CK4-kZ-r9s" firstAttribute="leading" secondItem="Nzu-dw-MHb" secondAttribute="trailing" constant="14" id="N8n-XZ-ket"/>
                                             <constraint firstItem="ebn-Ea-Rae" firstAttribute="centerX" secondItem="mEx-bl-vu4" secondAttribute="centerX" id="Qma-cn-iK2"/>
                                             <constraint firstItem="b8t-Sk-gBL" firstAttribute="leading" secondItem="mEx-bl-vu4" secondAttribute="leading" constant="10" id="Szq-Pa-KfC"/>
-                                            <constraint firstItem="8sN-Vx-G3I" firstAttribute="top" secondItem="Nzu-dw-MHb" secondAttribute="bottom" constant="-1" id="VYx-OX-CLg"/>
-                                            <constraint firstItem="Nzu-dw-MHb" firstAttribute="centerX" secondItem="ebn-Ea-Rae" secondAttribute="centerX" id="WgK-3T-wkE"/>
-                                            <constraint firstItem="ebn-Ea-Rae" firstAttribute="top" secondItem="Nzu-dw-MHb" secondAttribute="bottom" constant="52" id="n9H-HF-ioP"/>
+                                            <constraint firstItem="ebn-Ea-Rae" firstAttribute="top" secondItem="b8t-Sk-gBL" secondAttribute="top" constant="40" id="j5w-gH-yxA"/>
                                             <constraint firstItem="qW5-j7-S8j" firstAttribute="top" secondItem="mEx-bl-vu4" secondAttribute="top" constant="10" id="qdR-Nq-mka"/>
-                                            <constraint firstItem="CK4-kZ-r9s" firstAttribute="top" secondItem="Nzu-dw-MHb" secondAttribute="bottom" constant="6" id="qn4-zq-2mS"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -3234,7 +3200,6 @@ U0VORAM
                     </view>
                     <connections>
                         <outlet property="adderssLbl" destination="Kz6-43-ft2" id="57q-3u-uaC"/>
-                        <outlet property="amountText" destination="SOS-RQ-KP6" id="cA4-tc-Il3"/>
                         <outlet property="blurView" destination="UPe-Pl-Zwb" id="oSv-Zx-959"/>
                         <outlet property="browseCollectionList" destination="ugy-mI-Uc8" id="QSi-gY-3Od"/>
                         <outlet property="continuePaymentBTn" destination="udG-VZ-V1y" id="2Fi-LF-dFm"/>
@@ -3260,10 +3225,10 @@ U0VORAM
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mo-X6-gJa">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="219.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donate Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUh-Vp-hNO">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are being directed to an external payment site" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUh-Vp-hNO">
                                                 <rect key="frame" x="10" y="10" width="105.5" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="n2x-DT-Rn6"/>
+                                                    <constraint firstAttribute="height" constant="42" id="n2x-DT-Rn6"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <color key="textColor" red="0.31764705879999999" green="0.17254901959999999" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3273,6 +3238,7 @@ U0VORAM
                                                 <rect key="frame" x="181" y="10" width="49" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="NXn-BM-8uC"/>
+                                                    <constraint firstAttribute="width" constant="100" id="Vc8-FR-0qX"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                 <state key="normal" title="Cancel">
@@ -3282,20 +3248,8 @@ U0VORAM
                                                     <action selector="cancelAction:" destination="VZK-zx-mmq" eventType="touchUpInside" id="Vva-SB-Tcb"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOS-RQ-KP6" customClass="TKFormTextField" customModule="TKFormTextField">
-                                                <rect key="frame" x="45" y="70" width="150" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="ZKW-H5-V8R"/>
-                                                    <constraint firstAttribute="width" constant="150" id="fPh-aQ-en7"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="VZK-zx-mmq" id="k5D-tZ-aR3"/>
-                                                </connections>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udG-VZ-V1y">
-                                                <rect key="frame" x="20" y="172" width="200" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udG-VZ-V1y">
+                                                <rect key="frame" x="20" y="278" width="200" height="40"/>
                                                 <color key="backgroundColor" red="0.27450980390000002" green="0.078431372550000003" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="RGR-ur-OZ2"/>
@@ -3314,43 +3268,16 @@ U0VORAM
                                                     <action selector="paymentAction:" destination="VZK-zx-mmq" eventType="touchUpInside" id="O4R-Ii-8fQ"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Sx-M4-UQf">
-                                                <rect key="frame" x="24" y="119" width="192" height="49"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="192" id="FdU-qJ-oui"/>
-                                                    <constraint firstAttribute="height" constant="49" id="GvW-8M-lVY"/>
-                                                </constraints>
-                                                <string key="text">Merchant Charges and processing fee will be added to whatever donation amount is entered.                                        Donations are not refundable.</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                                <color key="textColor" red="0.33610409499999999" green="0.18219742180000001" blue="0.035234760490000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UyA-XP-zAN">
-                                                <rect key="frame" x="209" y="126" width="31" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="5QL-OM-kWC"/>
-                                                    <constraint firstAttribute="width" constant="31" id="HeJ-iF-xBP"/>
-                                                </constraints>
-                                                <state key="normal" image="info"/>
-                                                <connections>
-                                                    <action selector="showProcessingCharges:" destination="VZK-zx-mmq" eventType="touchUpInside" id="tSH-p7-Cbs"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.92549019610000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="udG-VZ-V1y" firstAttribute="centerX" secondItem="7mo-X6-gJa" secondAttribute="centerX" id="4vR-0Y-n8z"/>
-                                            <constraint firstItem="SOS-RQ-KP6" firstAttribute="centerX" secondItem="udG-VZ-V1y" secondAttribute="centerX" id="9Yc-t2-93z"/>
                                             <constraint firstAttribute="trailing" secondItem="u0D-99-Rxy" secondAttribute="trailing" constant="10" id="AS0-76-hfn"/>
-                                            <constraint firstItem="5Sx-M4-UQf" firstAttribute="top" secondItem="SOS-RQ-KP6" secondAttribute="bottom" constant="-1" id="Rsw-5v-Z1M"/>
-                                            <constraint firstItem="5Sx-M4-UQf" firstAttribute="centerX" secondItem="7mo-X6-gJa" secondAttribute="centerX" id="XWG-Fk-HdV"/>
-                                            <constraint firstItem="udG-VZ-V1y" firstAttribute="top" secondItem="SOS-RQ-KP6" secondAttribute="bottom" constant="52" id="Xgj-h5-HjP"/>
+                                            <constraint firstAttribute="trailing" secondItem="TUh-Vp-hNO" secondAttribute="trailing" constant="10" id="IcW-iG-Scd"/>
+                                            <constraint firstItem="udG-VZ-V1y" firstAttribute="top" secondItem="TUh-Vp-hNO" secondAttribute="top" constant="40" id="YA0-Hs-SqF"/>
                                             <constraint firstItem="u0D-99-Rxy" firstAttribute="top" secondItem="7mo-X6-gJa" secondAttribute="top" constant="10" id="YSt-pQ-wWk"/>
-                                            <constraint firstItem="UyA-XP-zAN" firstAttribute="top" secondItem="SOS-RQ-KP6" secondAttribute="bottom" constant="6" id="gwt-gY-Jv4"/>
                                             <constraint firstItem="TUh-Vp-hNO" firstAttribute="leading" secondItem="7mo-X6-gJa" secondAttribute="leading" constant="10" id="keJ-tV-8RL"/>
-                                            <constraint firstItem="UyA-XP-zAN" firstAttribute="leading" secondItem="SOS-RQ-KP6" secondAttribute="trailing" constant="14" id="kmB-nj-KIE"/>
-                                            <constraint firstItem="TUh-Vp-hNO" firstAttribute="top" secondItem="7mo-X6-gJa" secondAttribute="top" constant="10" id="oQx-Go-8EV"/>
-                                            <constraint firstItem="SOS-RQ-KP6" firstAttribute="top" secondItem="TUh-Vp-hNO" secondAttribute="bottom" constant="30" id="qhg-5S-Hki"/>
+                                            <constraint firstItem="TUh-Vp-hNO" firstAttribute="top" secondItem="7mo-X6-gJa" secondAttribute="top" constant="80" id="oQx-Go-8EV"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -3544,7 +3471,7 @@ U0VORAM
             <objects>
                 <viewController storyboardIdentifier="RegisterVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5KO-Kq-kXf" customClass="RegisterVC" customModule="i2_Donate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Qa-1A-GBA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1980"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8LX-Vf-TaF">
@@ -4967,8 +4894,8 @@ U0VORAM
                                                 </cells>
                                                 <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
-                                                        <exclude reference="hHd-W0-0fV"/>
                                                         <exclude reference="tbL-3a-Cvg"/>
+                                                        <exclude reference="hHd-W0-0fV"/>
                                                     </mask>
                                                 </variation>
                                                 <connections>
@@ -5023,17 +4950,17 @@ U0VORAM
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="67I-5N-5Nx"/>
-                                                <exclude reference="6A1-2h-2JS"/>
                                                 <exclude reference="aOk-ai-f9D"/>
+                                                <exclude reference="6A1-2h-2JS"/>
+                                                <exclude reference="67I-5N-5Nx"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="67I-5N-5Nx"/>
-                                                <include reference="6A1-2h-2JS"/>
                                                 <exclude reference="UPe-TW-hlG"/>
                                                 <include reference="aOk-ai-f9D"/>
+                                                <include reference="6A1-2h-2JS"/>
+                                                <include reference="67I-5N-5Nx"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -5077,7 +5004,7 @@ U0VORAM
             <objects>
                 <viewController storyboardIdentifier="LoginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vGE-e3-tOQ" customClass="LoginVC" customModule="i2_Donate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8dQ-ob-NOB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5m8-yY-Zkh">
@@ -5892,7 +5819,6 @@ U0VORAM
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="amountText" destination="Xud-g9-v1O" id="CLg-Tz-PX3"/>
                         <outlet property="blurView" destination="XMh-xb-VH4" id="Oad-uD-BWO"/>
                         <outlet property="containerView" destination="GrC-Rd-B2F" id="nyj-7g-U9q"/>
                         <outlet property="continuePaymentBTn" destination="cgL-hk-0Rt" id="URy-2U-SzQ"/>
@@ -5927,7 +5853,7 @@ U0VORAM
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3OT-Eb-i2e">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="219.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donate Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V34-TE-7sj">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are being directed to an external payment site" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V34-TE-7sj">
                                                 <rect key="frame" x="10" y="10" width="105.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="nf7-07-xsu"/>
@@ -5940,6 +5866,7 @@ U0VORAM
                                                 <rect key="frame" x="181" y="10" width="49" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="aYj-Yu-rCZ"/>
+                                                    <constraint firstAttribute="width" constant="100" id="qJQ-Rf-Psz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                 <state key="normal" title="Cancel">
@@ -5949,18 +5876,6 @@ U0VORAM
                                                     <action selector="cancelAction:" destination="PfD-yt-Cio" eventType="touchUpInside" id="A1R-5V-lzO"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xud-g9-v1O">
-                                                <rect key="frame" x="45" y="70" width="150" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="HuG-8Y-d83"/>
-                                                    <constraint firstAttribute="height" constant="50" id="NxL-B6-eiP"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="PfD-yt-Cio" id="kcF-qj-572"/>
-                                                </connections>
-                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgL-hk-0Rt">
                                                 <rect key="frame" x="20" y="172" width="200" height="40"/>
                                                 <color key="backgroundColor" red="0.27450980390000002" green="0.078431372550000003" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5981,44 +5896,15 @@ U0VORAM
                                                     <action selector="paymentAction:" destination="PfD-yt-Cio" eventType="touchUpInside" id="iZ9-d2-4CC"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Oo-Yh-fNW">
-                                                <rect key="frame" x="24" y="119" width="192" height="49"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="49" id="2iR-o2-yfV"/>
-                                                    <constraint firstAttribute="width" constant="192" id="cJ2-aB-bj9"/>
-                                                </constraints>
-                                                <string key="text">Merchant Charges and processing fee will be added to whatever donation amount is entered.                                        Donations are not refundable.</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                                <color key="textColor" red="0.33610409499999999" green="0.18219742180000001" blue="0.035234760490000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wx2-ZC-uQh">
-                                                <rect key="frame" x="209" y="126" width="31" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="31" id="GED-7K-aSq"/>
-                                                    <constraint firstAttribute="height" constant="36" id="pki-iS-dvi"/>
-                                                </constraints>
-                                                <state key="normal" image="info"/>
-                                                <connections>
-                                                    <action selector="showProcessingCharges:" destination="PfD-yt-Cio" eventType="touchUpInside" id="0ij-dS-W6C"/>
-                                                    <action selector="showProcessingCharges:" destination="VZK-zx-mmq" eventType="touchUpInside" id="BVh-4H-upc"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.92549019610000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="1Oo-Yh-fNW" firstAttribute="top" secondItem="Xud-g9-v1O" secondAttribute="bottom" constant="-1" id="75d-0x-LbU"/>
                                             <constraint firstItem="V34-TE-7sj" firstAttribute="leading" secondItem="3OT-Eb-i2e" secondAttribute="leading" constant="10" id="FRZ-lU-YFn"/>
                                             <constraint firstAttribute="trailing" secondItem="w8i-iT-quJ" secondAttribute="trailing" constant="10" id="Gl8-Pb-Ghj"/>
-                                            <constraint firstItem="Xud-g9-v1O" firstAttribute="top" secondItem="V34-TE-7sj" secondAttribute="bottom" constant="30" id="H7Y-GJ-cPc"/>
                                             <constraint firstItem="w8i-iT-quJ" firstAttribute="top" secondItem="3OT-Eb-i2e" secondAttribute="top" constant="10" id="LFP-vF-feM"/>
-                                            <constraint firstItem="cgL-hk-0Rt" firstAttribute="top" secondItem="Xud-g9-v1O" secondAttribute="bottom" constant="52" id="P1T-D1-lqx"/>
-                                            <constraint firstItem="Wx2-ZC-uQh" firstAttribute="leading" secondItem="Xud-g9-v1O" secondAttribute="trailing" constant="14" id="Utu-eI-myx"/>
-                                            <constraint firstItem="1Oo-Yh-fNW" firstAttribute="centerX" secondItem="3OT-Eb-i2e" secondAttribute="centerX" id="g6b-vb-Y1x"/>
-                                            <constraint firstItem="V34-TE-7sj" firstAttribute="top" secondItem="3OT-Eb-i2e" secondAttribute="top" constant="10" id="nC4-TQ-8eh"/>
+                                            <constraint firstItem="V34-TE-7sj" firstAttribute="top" secondItem="3OT-Eb-i2e" secondAttribute="top" constant="80" id="nC4-TQ-8eh"/>
+                                            <constraint firstItem="cgL-hk-0Rt" firstAttribute="top" secondItem="V34-TE-7sj" secondAttribute="top" constant="40" id="nah-1W-ILB"/>
                                             <constraint firstItem="cgL-hk-0Rt" firstAttribute="centerX" secondItem="3OT-Eb-i2e" secondAttribute="centerX" id="oEE-Iq-av3"/>
-                                            <constraint firstItem="Xud-g9-v1O" firstAttribute="centerX" secondItem="cgL-hk-0Rt" secondAttribute="centerX" id="qni-a1-2s9"/>
-                                            <constraint firstItem="Wx2-ZC-uQh" firstAttribute="top" secondItem="Xud-g9-v1O" secondAttribute="bottom" constant="6" id="yR4-4T-vTY"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -6576,7 +6462,7 @@ U0VORAM
             <objects>
                 <viewController storyboardIdentifier="newcontrollerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OPS-5T-HIR" customClass="NewViewfromadvancedSearchViewController" customModule="i2_Donate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bz8-Qd-ywg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="770"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCd-YJ-k7J">
@@ -6804,7 +6690,7 @@ U0VORAM
             <objects>
                 <viewController storyboardIdentifier="AnnualRevenueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Nyb-D9-cHu" customClass="AnnualRevenueViewController" customModule="i2_Donate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xEz-CN-gJp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="770"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lkW-lQ-xcW">
@@ -7047,7 +6933,7 @@ U0VORAM
             <objects>
                 <viewController storyboardIdentifier="CountryListVC" id="jbW-cm-Ffq" customClass="CountryListVC" customModule="i2_Donate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o2v-yN-gkB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Wk-Qi-c4p">
@@ -7452,7 +7338,7 @@ U0VORAM
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6s-p9-c6n">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="219.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donate Money" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKZ-xM-Vlb">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are being directed to an external payment site" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKZ-xM-Vlb">
                                                 <rect key="frame" x="10" y="10" width="105.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Uop-hV-VOU"/>

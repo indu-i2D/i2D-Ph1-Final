@@ -3,15 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		18F485B3295DFF0F00731ED3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F485B2295DFF0F00731ED3 /* SceneDelegate.swift */; };
 		18F485B5295DFF1F00731ED3 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F485B4295DFF1F00731ED3 /* Search.swift */; };
-		1B07CFB92A18BCD400F619EE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1B07CFB82A18BCD400F619EE /* FacebookCore */; };
-		1B07CFBB2A18BCD400F619EE /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 1B07CFBA2A18BCD400F619EE /* FacebookLogin */; };
-		1B07CFBD2A18BCD400F619EE /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 1B07CFBC2A18BCD400F619EE /* FacebookShare */; };
 		1B41CA56249E06CB00839F65 /* TwitterHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B41CA55249E06CB00839F65 /* TwitterHandler.swift */; };
 		1B41CA58249E06DB00839F65 /* OAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B41CA57249E06DB00839F65 /* OAuthHandler.swift */; };
 		1B41CA5A249E06EC00839F65 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B41CA59249E06EC00839F65 /* Extensions.swift */; };
@@ -116,6 +113,13 @@
 		932A2DD1227E20F4005BBBDB /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932A2DD0227E20F4005BBBDB /* LoginVC.swift */; };
 		932A2DD3227E278E005BBBDB /* iDonateClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932A2DD2227E278E005BBBDB /* iDonateClass.swift */; };
 		937069DE227CC87500E30220 /* customview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937069DD227CC87500E30220 /* customview.swift */; };
+		CC6DDF9B2BC97B08007ECAD5 /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = CC6DDF9A2BC97B08007ECAD5 /* FacebookBasics */; };
+		CC6DDF9D2BC97B08007ECAD5 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = CC6DDF9C2BC97B08007ECAD5 /* FacebookCore */; };
+		CC6DDF9F2BC97B08007ECAD5 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC6DDF9E2BC97B08007ECAD5 /* FacebookLogin */; };
+		CC74F1242BBBD2DF004E525B /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = CC74F1232BBBD2DF004E525B /* FacebookBasics */; };
+		CC74F1262BBBD2DF004E525B /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = CC74F1252BBBD2DF004E525B /* FacebookCore */; };
+		CC74F1282BBBD2DF004E525B /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC74F1272BBBD2DF004E525B /* FacebookLogin */; };
+		CC74F12A2BBD3C87004E525B /* DeleteAccModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74F1292BBD3C87004E525B /* DeleteAccModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -231,6 +235,7 @@
 		932A2DD2227E278E005BBBDB /* iDonateClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iDonateClass.swift; sourceTree = "<group>"; };
 		937069DD227CC87500E30220 /* customview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customview.swift; sourceTree = "<group>"; };
 		C5DA6DA2025C80535C49EF92 /* Pods-i2-Donate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.release.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.release.xcconfig"; sourceTree = "<group>"; };
+		CC74F1292BBD3C87004E525B /* DeleteAccModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccModel.swift; sourceTree = "<group>"; };
 		F1BBB735BC703992C765F3E2 /* Pods_i2_Donate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_i2_Donate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -239,18 +244,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC74F1282BBBD2DF004E525B /* FacebookLogin in Frameworks */,
 				1B533677249C73F900D9C622 /* SystemConfiguration.framework in Frameworks */,
+				CC74F1262BBBD2DF004E525B /* FacebookCore in Frameworks */,
 				1B533675249C73EE00D9C622 /* SafariServices.framework in Frameworks */,
 				1B533673249C73E400D9C622 /* MobileCoreServices.framework in Frameworks */,
 				1B533671249C73D800D9C622 /* MessageUI.framework in Frameworks */,
+				CC6DDF9B2BC97B08007ECAD5 /* FacebookBasics in Frameworks */,
+				CC6DDF9D2BC97B08007ECAD5 /* FacebookCore in Frameworks */,
 				1B53366F249C73CB00D9C622 /* CoreMedia.framework in Frameworks */,
-				1B07CFBB2A18BCD400F619EE /* FacebookLogin in Frameworks */,
 				1B53366D249C73BF00D9C622 /* CoreLocation.framework in Frameworks */,
 				1B53366B249C73B300D9C622 /* AVFoundation.framework in Frameworks */,
+				CC74F1242BBBD2DF004E525B /* FacebookBasics in Frameworks */,
+				CC6DDF9F2BC97B08007ECAD5 /* FacebookLogin in Frameworks */,
 				1B533669249C73A900D9C622 /* AudioToolbox.framework in Frameworks */,
 				1BD556B624B840E7001D616F /* Foundation.framework in Frameworks */,
-				1B07CFBD2A18BCD400F619EE /* FacebookShare in Frameworks */,
-				1B07CFB92A18BCD400F619EE /* FacebookCore in Frameworks */,
 				1B533667249C739E00D9C622 /* Accelerate.framework in Frameworks */,
 				1BD556B224B840D2001D616F /* CoreGraphics.framework in Frameworks */,
 				1BD556B424B840DD001D616F /* CoreVideo.framework in Frameworks */,
@@ -607,6 +615,7 @@
 			isa = PBXGroup;
 			children = (
 				3FD9439422A9418800951294 /* SettingsVC.swift */,
+				CC74F1292BBD3C87004E525B /* DeleteAccModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -715,9 +724,12 @@
 			);
 			name = "i2-Donate";
 			packageProductDependencies = (
-				1B07CFB82A18BCD400F619EE /* FacebookCore */,
-				1B07CFBA2A18BCD400F619EE /* FacebookLogin */,
-				1B07CFBC2A18BCD400F619EE /* FacebookShare */,
+				CC74F1232BBBD2DF004E525B /* FacebookBasics */,
+				CC74F1252BBBD2DF004E525B /* FacebookCore */,
+				CC74F1272BBBD2DF004E525B /* FacebookLogin */,
+				CC6DDF9A2BC97B08007ECAD5 /* FacebookBasics */,
+				CC6DDF9C2BC97B08007ECAD5 /* FacebookCore */,
+				CC6DDF9E2BC97B08007ECAD5 /* FacebookLogin */,
 			);
 			productName = iDonate;
 			productReference = 3FC72DE122706C40004B2FB3 /* i2-Donate.app */;
@@ -754,7 +766,7 @@
 			);
 			mainGroup = 3FC72DD822706C40004B2FB3;
 			packageReferences = (
-				1B07CFB72A18BCD400F619EE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				CC74F1222BBBD2DF004E525B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 3FC72DE222706C40004B2FB3 /* Products */;
 			projectDirPath = "";
@@ -895,6 +907,7 @@
 				1BD556AE24B5F85F001D616F /* ProcessingChargesView.swift in Sources */,
 				1B41CA58249E06DB00839F65 /* OAuthHandler.swift in Sources */,
 				93267744227F08BB00FE65F0 /* MenuVC.swift in Sources */,
+				CC74F12A2BBD3C87004E525B /* DeleteAccModel.swift in Sources */,
 				3F05ADB8233DEA3B0088734C /* GrandParentModel.swift in Sources */,
 				1B6E7ABC24A369FD00DA0949 /* GooglePlaceSearchViewController.swift in Sources */,
 				3FDB2F0322EC508A006ECB76 /* ResultVC.swift in Sources */,
@@ -1083,15 +1096,18 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "i2-Donate.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 91;
-				DEVELOPMENT_TEAM = A3C8934K5J;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 108;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A3C8934K5J;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iDonate/Helper",
 				);
 				INFOPLIST_FILE = iDonate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1100,6 +1116,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.i2-donate.i2-donate";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "i2D-iOS-Distrib-Prov-Nov2023";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -1115,15 +1132,17 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "i2-Donate.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 91;
-				DEVELOPMENT_TEAM = A3C8934K5J;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 108;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A3C8934K5J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iDonate/Helper",
 				);
 				INFOPLIST_FILE = iDonate/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1132,6 +1151,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.i2-donate.i2-donate";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "i2D-iOS-Distrib-Prov-Nov2023";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1162,7 +1182,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B07CFB72A18BCD400F619EE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		CC74F1222BBBD2DF004E525B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -1173,20 +1193,32 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1B07CFB82A18BCD400F619EE /* FacebookCore */ = {
+		CC6DDF9A2BC97B08007ECAD5 /* FacebookBasics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B07CFB72A18BCD400F619EE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		CC6DDF9C2BC97B08007ECAD5 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = FacebookCore;
 		};
-		1B07CFBA2A18BCD400F619EE /* FacebookLogin */ = {
+		CC6DDF9E2BC97B08007ECAD5 /* FacebookLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B07CFB72A18BCD400F619EE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
 		};
-		1B07CFBC2A18BCD400F619EE /* FacebookShare */ = {
+		CC74F1232BBBD2DF004E525B /* FacebookBasics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B07CFB72A18BCD400F619EE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookShare;
+			package = CC74F1222BBBD2DF004E525B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		CC74F1252BBBD2DF004E525B /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC74F1222BBBD2DF004E525B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		CC74F1272BBBD2DF004E525B /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC74F1222BBBD2DF004E525B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

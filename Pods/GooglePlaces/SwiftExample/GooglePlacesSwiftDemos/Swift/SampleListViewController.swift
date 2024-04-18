@@ -11,6 +11,7 @@
 // ANY KIND, either express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 
+import GooglePlaces
 import UIKit
 
 /// The class which displays the list of demos.
@@ -20,6 +21,28 @@ class SampleListViewController: UITableViewController {
 
   let sampleSections = Samples.allSamples()
 
+  let configuration: AutocompleteConfiguration = {
+    var fields: [GMSPlaceField] = [
+      .name, .placeID, .plusCode, .coordinate, .openingHours, .phoneNumber, .formattedAddress,
+      .rating, .userRatingsTotal, .priceLevel, .types, .website, .viewport, .addressComponents,
+      .photos, .utcOffsetMinutes, .businessStatus, .iconImageURL, .iconBackgroundColor,
+    ]
+    #if BuildFlag_Places_EnableBooleanPlacesAttributes
+      fields += [
+        .takeout, .delivery, .dineIn, .curbsidePickup, .reservable, .servesBreakfast,
+        .servesLunch, .servesDinner, .servesBeer, .servesWine, .servesBrunch, .servesVegetarianFood,
+        .wheelchairAccessibleEntrance,
+      ]
+    #endif  // BuildFlag_Places_EnableBooleanPlacesAttributes
+    return AutocompleteConfiguration(
+      autocompleteFilter: GMSAutocompleteFilter(),
+      placeFields: GMSPlaceField(rawValue: fields.reduce(0) { $0 | $1.rawValue }))
+  }()
+  private lazy var editButton: UIBarButtonItem = {
+    UIBarButtonItem(
+      title: "Edit", style: .plain, target: self, action: #selector(showConfiguration))
+  }()
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -28,6 +51,18 @@ class SampleListViewController: UITableViewController {
 
     tableView.dataSource = self
     tableView.delegate = self
+
+    navigationItem.rightBarButtonItem = editButton
+
+    let navBar = navigationController?.navigationBar
+
+    let navBarAppearance = UINavigationBarAppearance()
+    navBarAppearance.configureWithOpaqueBackground()
+    navBarAppearance.backgroundColor = .systemBackground
+    navBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+
+    navBar?.standardAppearance = navBarAppearance
+    navBar?.scrollEdgeAppearance = navBarAppearance
   }
 
   func sample(at indexPath: IndexPath) -> Sample? {
@@ -35,6 +70,11 @@ class SampleListViewController: UITableViewController {
     let section = sampleSections[indexPath.section]
     guard indexPath.row >= 0 && indexPath.row < section.samples.count else { return nil }
     return section.samples[indexPath.row]
+  }
+
+  @objc private func showConfiguration(_sender: UIButton) {
+    navigationController?.present(
+      ConfigurationViewController(configuration: configuration), animated: true)
   }
 
   // MARK: - Override UITableView
@@ -72,6 +112,9 @@ class SampleListViewController: UITableViewController {
     tableView.deselectRow(at: indexPath, animated: true)
     if let sample = sample(at: indexPath) {
       let viewController = sample.viewControllerClass.init()
+      if let controller = viewController as? AutocompleteBaseViewController {
+        controller.autocompleteConfiguration = configuration
+      }
       navigationController?.pushViewController(viewController, animated: true)
     }
   }

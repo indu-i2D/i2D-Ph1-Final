@@ -48,5 +48,9 @@
 	<string>i2D-Publish-Docs/i2-Donate%20Help%20and%20Support.html</string>
 	<key>AboutUrl</key>
 	<string>i2D-Publish-Docs/i2-Donate%20About%20App.html</string>
+	<key>RevokeUser</key>
+	<string>revokeuser</string>
+	<key>DonateTrans</key>
+	<string>donate_trans</string>
 </dict>
 </plist>

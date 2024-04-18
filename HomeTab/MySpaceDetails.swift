@@ -10,8 +10,8 @@ import UIKit
 import MBProgressHUD
 import Alamofire
 import TKFormTextField
-import Braintree
-import BraintreeDropIn
+//import Braintree
+//import BraintreeDropIn
 
 class MySpaceDetails: BaseViewController ,UITableViewDelegate,UITableViewDataSource,UITabBarDelegate,UITextFieldDelegate{
     @IBOutlet var searchTableView: UITableView!
@@ -132,17 +132,7 @@ class MySpaceDetails: BaseViewController ,UITableViewDelegate,UITableViewDataSou
         mytapGestureRecognizer1.numberOfTapsRequired = 1
         mytapGestureRecognizer1.cancelsTouchesInView = false
         self.blurView.addGestureRecognizer(mytapGestureRecognizer1)
-        self.amountText.placeholder = ""
-        self.amountText.text = "$ 10"
-        self.amountText.enablesReturnKeyAutomatically = true
-        self.amountText.returnKeyType = .done
-        self.amountText.delegate = self
-        self.amountText.titleLabel.font = UIFont.systemFont(ofSize: 14)
-        self.amountText.font = UIFont.systemFont(ofSize: 34)
-        self.amountText.selectedTitleColor = UIColor.darkGray
-        self.amountText.titleColor = UIColor.darkGray
-        self.amountText.placeholderColor = UIColor.darkGray
-        self.amountText.errorLabel.font = UIFont.systemFont(ofSize: 18)
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -441,112 +431,112 @@ class MySpaceDetails: BaseViewController ,UITableViewDelegate,UITableViewDataSou
                 
                 MBProgressHUD.hide(for: self.view, animated: true)
 
-                switch response.result {
-                    case .success(let value) :
-                        let drop =  BTDropInRequest()
-                        drop.vaultManager = true
-                        drop.paypalDisabled = false
-                        drop.cardDisabled = false
-                        print(drop)
-                        let dropIn = BTDropInController(authorization: "\(value)", request: drop)
-                        { (controller, result, error) in
-                            if (error != nil) {
-                                print("ERROR")
-                            } else if (result?.isCancelled == true) {
-                                print("CANCELLED")
-                            } else if let result = result {
-                                
-                                guard let amount = self.amountText.text else {
-                                    return
-                                }
-                                
-                                let amountWithoutDollar = amount.replacingOccurrences(of: "$", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
-                                
-                                guard Double(amountWithoutDollar) != 0 else {
-                                    return
-                                }
-                                
-                                let processingValue = self.calculatePercentage(value: Double(amountWithoutDollar) ?? 0,percentageVal: 1)
-                                
-                                let amountWithProcessingValue = (Double(amountWithoutDollar) ?? 0) + processingValue
-                                
-                                let merchantChargesValue = self.calculatePercentage(value: amountWithProcessingValue ,percentageVal: 2.9) + 0.30
-                                
-                                let totalAmount = amountWithProcessingValue + merchantChargesValue
-                                
-                                if let data = UserDefaults.standard.data(forKey: "people"),
-                                    let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
-                                    print(myPeopleList.name)
-                                    // Joe 10
-                                    
-                                    MBProgressHUD.showAdded(to: self.view, animated: true)
-                                    
-                                    var charityId = ""
-                                    var charityName = ""
-                                                            
-                                    self.blurView.removeFromSuperview()
-                                    
-                                    if self.LikeOrFollow == "Like" {
-                                        charityId = (self.charityLikeArray![sender.tag].id)!
-                                        charityName = (self.charityLikeArray![sender.tag].name)!
-                                        
-                                    } else if self.LikeOrFollow == "Donation" {
-                                        charityId = (self.charityDonationArray![sender.tag].id)!
-                                        charityName = (self.charityDonationArray![sender.tag].name)!
-                                        
-                                    } else {
-                                        charityId = (self.charityFollowArray![sender.tag].id)!
-                                        charityName = (self.charityFollowArray![sender.tag].name)!
-                                    }
-                                    
-                                    let postDict: Parameters = ["user_id":myPeopleList.userID,
-                                                                "token":myPeopleList.token,
-                                                                "charity_id": charityId,
-                                                                "charity_name": charityName,
-                                                                "transaction_id":result.paymentMethod?.nonce ?? "",
-                                                                "amount":amount,
-                                                                "payment_type": result.paymentMethod?.type ?? "",
-                                                                "status":"approved",
-                                                                "merchant_charges":merchantChargesValue,
-                                                                "processing_fee":processingValue]
-                                    
-                                   
-                                    
-                                    let paymentUrl = String(format: URLHelper.iDonatePayment)
-                                    
-                                    WebserviceClass.sharedAPI.performRequest(type: paymentModel.self, urlString: paymentUrl, methodType: HTTPMethod.post, parameters: postDict as Parameters, success: { (response) in
-                                        
-                                        MBProgressHUD.hide(for: self.view, animated: true)
-                                        
-                                        print("payment response", response)
-                                        
-                                        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
-                                        let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-                                        let messageAttrString = NSMutableAttributedString(string:"Payment Done Successfully", attributes: messageFont)
-                                        alertController.setValue(messageAttrString, forKey: "attributedMessage")
-                                        let contact = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
-                                            self.blurView.removeFromSuperview()
-                                        }
-                                        alertController.addAction(contact)
-                                        self.present(alertController, animated: true, completion: nil)
-                                        
-                                        print("Result: \(String(describing: response))") // response serialization result
-                                        
-                                        
-                                    }) { (response) in
-                                        MBProgressHUD.hide(for: self.view, animated: true)
-                                    }
-                                }
-                                
-                            }
-                            controller.dismiss(animated: true, completion: nil)
-                        }
-                        self.present(dropIn!, animated: true, completion: nil)
-
-                    case .failure(let error) :
-                        print(error)
-
-                }
+//                switch response.result {
+//                    case .success(let value) :
+//                        let drop =  BTDropInRequest()
+//                        drop.vaultManager = true
+//                        drop.paypalDisabled = false
+//                        drop.cardDisabled = false
+//                        print(drop)
+//                        let dropIn = BTDropInController(authorization: "\(value)", request: drop)
+//                        { (controller, result, error) in
+//                            if (error != nil) {
+//                                print("ERROR")
+//                            } else if (result?.isCancelled == true) {
+//                                print("CANCELLED")
+//                            } else if let result = result {
+//                                
+//                                guard let amount = self.amountText.text else {
+//                                    return
+//                                }
+//                                
+//                                let amountWithoutDollar = amount.replacingOccurrences(of: "$", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+//                                
+//                                guard Double(amountWithoutDollar) != 0 else {
+//                                    return
+//                                }
+//                                
+//                                let processingValue = self.calculatePercentage(value: Double(amountWithoutDollar) ?? 0,percentageVal: 1)
+//                                
+//                                let amountWithProcessingValue = (Double(amountWithoutDollar) ?? 0) + processingValue
+//                                
+//                                let merchantChargesValue = self.calculatePercentage(value: amountWithProcessingValue ,percentageVal: 2.9) + 0.30
+//                                
+//                                let totalAmount = amountWithProcessingValue + merchantChargesValue
+//                                
+//                                if let data = UserDefaults.standard.data(forKey: "people"),
+//                                    let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
+//                                    print(myPeopleList.name)
+//                                    // Joe 10
+//                                    
+//                                    MBProgressHUD.showAdded(to: self.view, animated: true)
+//                                    
+//                                    var charityId = ""
+//                                    var charityName = ""
+//                                                            
+//                                    self.blurView.removeFromSuperview()
+//                                    
+//                                    if self.LikeOrFollow == "Like" {
+//                                        charityId = (self.charityLikeArray![sender.tag].id)!
+//                                        charityName = (self.charityLikeArray![sender.tag].name)!
+//                                        
+//                                    } else if self.LikeOrFollow == "Donation" {
+//                                        charityId = (self.charityDonationArray![sender.tag].id)!
+//                                        charityName = (self.charityDonationArray![sender.tag].name)!
+//                                        
+//                                    } else {
+//                                        charityId = (self.charityFollowArray![sender.tag].id)!
+//                                        charityName = (self.charityFollowArray![sender.tag].name)!
+//                                    }
+//                                    
+//                                    let postDict: Parameters = ["user_id":myPeopleList.userID,
+//                                                                "token":myPeopleList.token,
+//                                                                "charity_id": charityId,
+//                                                                "charity_name": charityName,
+//                                                                "transaction_id":result.paymentMethod?.nonce ?? "",
+//                                                                "amount":amount,
+//                                                                "payment_type": result.paymentMethod?.type ?? "",
+//                                                                "status":"approved",
+//                                                                "merchant_charges":merchantChargesValue,
+//                                                                "processing_fee":processingValue]
+//                                    
+//                                   
+//                                    
+//                                    let paymentUrl = String(format: URLHelper.iDonatePayment)
+//                                    
+//                                    WebserviceClass.sharedAPI.performRequest(type: paymentModel.self, urlString: paymentUrl, methodType: HTTPMethod.post, parameters: postDict as Parameters, success: { (response) in
+//                                        
+//                                        MBProgressHUD.hide(for: self.view, animated: true)
+//                                        
+//                                        print("payment response", response)
+//                                        
+//                                        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+//                                        let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+//                                        let messageAttrString = NSMutableAttributedString(string:"Payment Done Successfully", attributes: messageFont)
+//                                        alertController.setValue(messageAttrString, forKey: "attributedMessage")
+//                                        let contact = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+//                                            self.blurView.removeFromSuperview()
+//                                        }
+//                                        alertController.addAction(contact)
+//                                        self.present(alertController, animated: true, completion: nil)
+//                                        
+//                                        print("Result: \(String(describing: response))") // response serialization result
+//                                        
+//                                        
+//                                    }) { (response) in
+//                                        MBProgressHUD.hide(for: self.view, animated: true)
+//                                    }
+//                                }
+//                                
+//                            }
+//                            controller.dismiss(animated: true, completion: nil)
+//                        }
+//                        self.present(dropIn!, animated: true, completion: nil)
+//
+//                    case .failure(let error) :
+//                        print(error)
+//
+//                }
             }
                         
           
@@ -825,168 +815,4 @@ extension MySpaceDetails {
     
 }
 
-//extension MySpaceDetails: PayPalPaymentDelegate {
-//    
-//    func payPalPaymentDidCancel(_ paymentViewController: PayPalPaymentViewController) {
-//        paymentViewController.dismiss(animated: true) { () -> Void in
-//            print("and Dismissed")
-//        }
-//        print("Payment cancel")
-//    }
-//    
-//    func payPalPaymentViewController(_ paymentViewController: PayPalPaymentViewController, didComplete completedPayment: PayPalPayment) {
-//        paymentViewController.dismiss(animated: true) { () -> Void in
-//            print("and done")
-//        }
-//        print("Paymane is going on")
-//    }
-//    
-//    
-//    func acceptCreditCards() -> Bool {
-//        return self.payPalConfig.acceptCreditCards
-//    }
-//  
-//    func setAcceptCreditCards(acceptCreditCards: Bool) {
-//        self.payPalConfig.acceptCreditCards = self.acceptCreditCards()
-//    }
-//
-//    
-//    func configurePaypal(strMarchantName:String) {
-//        
-//        // Set up payPalConfig
-//        payPalConfig.acceptCreditCards = true
-//        
-//        payPalConfig.merchantName = strMarchantName
-//        
-//        payPalConfig.merchantPrivacyPolicyURL = URL(string: "https://www.paypal.com/webapps/mpp/ua/privacy-full") //NSURL(string: "https://www.paypal.com/webapps/mpp/ua/privacy-full")
-//        
-//        payPalConfig.merchantUserAgreementURL = URL(string: "https://www.paypal.com/webapps/mpp/ua/useragreement-full")
-//        
-//        payPalConfig.languageOrLocale = NSLocale.preferredLanguages[0]
-//        
-//        payPalConfig.payPalShippingAddressOption = .payPal;
-//        
-//        print("PayPal iOS SDK Version: \(PayPalMobile.libraryVersion())")
-//        
-//        PayPalMobile.preconnect(withEnvironment: environment)
-//        
-//    }
-//    
-//    //Start Payment for selected shopping items
-//
-//    func goforPayNow(merchantCharge:String?, processingCharge:String?, totalAmount:String?, strShortDesc:String?, strCurrency:String?) {
-//
-//        var subtotal : NSDecimalNumber = 0
-//
-//        var merchant : NSDecimalNumber = 0
-//
-//        var processing : NSDecimalNumber = 0
-//
-//        subtotal = NSDecimalNumber(string: totalAmount)
-//
-//        // Optional: include payment details
-//        if (merchantCharge != nil) {
-//            merchant = NSDecimalNumber(string: merchantCharge)
-//        }
-//
-//        if (processingCharge != nil) {
-//            processing = NSDecimalNumber(string: processingCharge)
-//        }
-//
-//        var description = strShortDesc
-//
-//        if (description == nil) {
-//            description = ""
-//        }
-//        
-//        let paymentDetails = PayPalPaymentDetails(subtotal: subtotal, withShipping: merchant, withTax: processing)
-//        
-//        let total = subtotal.adding(merchant).adding(processing)
-//
-//        let payment = PayPalPayment(amount: total, currencyCode: strCurrency!, shortDescription: selectedCharity?.name ?? description!, intent: .sale)
-//            
-//        payment.items = [PayPalItem(name: selectedCharity?.name ?? "", withQuantity: 1, withPrice: NSDecimalNumber(string: totalAmount), withCurrency: "USD", withSku: "")]
-//
-//        payment.paymentDetails = paymentDetails
-//        self.payPalConfig.acceptCreditCards = self.acceptCreditCards();
-//
-//        if self.payPalConfig.acceptCreditCards == true {
-//            print("We are able to do the card payment")
-//        }
-//        
-//        if (payment.processable) {
-//            let objVC = PayPalPaymentViewController(payment: payment, configuration: payPalConfig, delegate: self)
-//            self.present(objVC!, animated: true, completion: { () -> Void in
-//                print("Paypal Presented")
-//            })
-//        }
-//        else {
-//            print("Payment not processalbe: \(payment)")
-//        }
-//
-//    }
-//    
-//}
-// MARK: - BTAppSwitch Delegate Method
-extension MySpaceDetails: BTAppSwitchDelegate {
-    
-    func appSwitcherWillPerformAppSwitch(_ appSwitcher: Any) {
-        showLoadingUI()
-        NotificationCenter.default.addObserver(self, selector: #selector(hideLoadingUI), name: UIApplication.didBecomeActiveNotification, object: nil)
-    }
-
-    func appSwitcherWillProcessPaymentInfo(_ appSwitcher: Any) {
-        hideLoadingUI()
-    }
-
-    func appSwitcher(_ appSwitcher: Any, didPerformSwitchTo target: BTAppSwitchTarget) {
-
-    }
-
-    // MARK: - Private methods
-
-    func showLoadingUI() {
-        // ...
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-    }
-    
-    //    MARK: - Private Methods
-    @objc func hideLoadingUI() {
-        MBProgressHUD.hide(for: self.view, animated: true)
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
-        
-    }
-}
-
-// MARK: - BT View Controller Presenting Delegate Method
-extension MySpaceDetails: BTViewControllerPresentingDelegate {
-    /*!
-     @brief The payment driver requires dismissal of a view controller.
-     
-     @discussion Your implementation should dismiss the viewController, e.g. via
-     `dismissViewControllerAnimated:completion:`
-     
-     @param driver         The payment driver
-     @param viewController The view controller to be dismissed
-     */
-    @available(iOS 2.0, *)
-    public func paymentDriver(_ driver: Any, requestsDismissalOf viewController: UIViewController) {
-            viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    /*!
-     @brief The payment driver requires presentation of a view controller in order to proceed.
-     
-     @discussion Your implementation should present the viewController modally, e.g. via
-     `presentViewController:animated:completion:`
-     
-     @param driver         The payment driver
-     @param viewController The view controller to present
-     */
-    @available(iOS 2.0, *)
-    public func paymentDriver(_ driver: Any, requestsPresentationOf viewController: UIViewController) {
-        present(viewController, animated: true, completion: nil)
-    }
-    
-}
 

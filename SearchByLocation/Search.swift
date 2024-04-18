@@ -11,8 +11,8 @@ import MBProgressHUD
 import Alamofire
 import AlamofireImage
 import TKFormTextField
-import Braintree
-import BraintreeDropIn
+//import Braintree
+//import BraintreeDropIn
 //MARK: Protocols
 var searchName = false
 class SearchByLocation: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITabBarDelegate,UISearchBarDelegate {
@@ -400,105 +400,105 @@ class SearchByLocation: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 print(response.response)
                 print(response.error)
                 
-                switch response.result {
-                  
-                case .success(let value):
-                    print("value**: \(value)")
-                    
-                    if(self.isFiltering) {
-                        self.selectedCharity = self.filterdCharityListArray?[sender.tag]
-                    } else {
-                        self.selectedCharity = self.filterdCharityListArray?[sender.tag]
-                    }
-//                    self.selectedCharity = self.filterdCharityListArray?[sender.tag]
-                    let drop =  BTDropInRequest()
-                    drop.vaultManager = true
-                    drop.paypalDisabled = false
-                    drop.cardDisabled = false
-                    drop.payPalRequest?.currencyCode = "$"
-                    print(drop)
-                    let amount = self.amountText.text?.replacingOccurrences(of: "$", with: "")
-                    
-                    let amountWithoutDollar = amount!.trimmingCharacters(in: .whitespacesAndNewlines)
-                    
-                    guard Double(amountWithoutDollar) != 0 else {
-                        return
-                    }
-                    
-                    let processingValue = self.calculatePercentage(value: Double(amountWithoutDollar) ?? 0,percentageVal: 1)
-                    
-                    let amountWithProcessingValue = (Double(amountWithoutDollar) ?? 0) + processingValue
-                    
-                    let merchantChargesValue = self.calculatePercentage(value: amountWithProcessingValue ,percentageVal: 2.9) + 0.30
-                    
-                    let totalAmount = amountWithProcessingValue + merchantChargesValue
-                    
-                    let dropIn = BTDropInController(authorization: "\(value)", request: drop)
-                    { (controller, result, error) in
-                        
-                        print("result",result!)
-                        
-                        if (error != nil) {
-                            print("ERROR")
-                        } else if (result?.isCancelled == true) {
-                            print("CANCELLED")
-                        } else if let result = result {
-                            
-                            if let data = UserDefaults.standard.data(forKey: "people"),
-                               let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
-                                print(myPeopleList.name)
-                                // Joe 10
-                                
-                                MBProgressHUD.showAdded(to: self.view, animated: true)
-                                
-                                let postDict: Parameters = ["user_id":myPeopleList.userID,
-                                                            "token":myPeopleList.token,
-                                                            "charity_id":self.selectedCharity?.id ?? "",
-                                                            "charity_name": self.selectedCharity?.name ?? "",
-                                                            "transaction_id":result.paymentMethod?.nonce ?? "",
-                                                            "amount":amount,
-                                                            "payment_type": result.paymentMethod?.type ?? "",
-                                                            "status":"approved",
-                                                            "merchant_charges":merchantChargesValue,
-                                                            "processing_fee":processingValue]
-                                
-                                let paymentUrl = String(format: URLHelper.iDonatePayment)
-                                
-                                self.blurView.removeFromSuperview()
-                                
-                                WebserviceClass.sharedAPI.performRequest(type: paymentModel.self, urlString: paymentUrl, methodType: HTTPMethod.post, parameters: postDict as Parameters, success: { (response) in
-                                    
-                                    MBProgressHUD.hide(for: self.view, animated: true)
-                                    
-                                    print("payment response", response)
-                                    
-                                    let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
-                                    let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-                                    let messageAttrString = NSMutableAttributedString(string:"Payment Done Successfully", attributes: messageFont)
-                                    alertController.setValue(messageAttrString, forKey: "attributedMessage")
-                                    let contact = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
-                                        self.blurView.removeFromSuperview()
-                                    }
-                                    alertController.addAction(contact)
-                                    self.present(alertController, animated: true, completion: nil)
-                                    
-                                    print("Result: \(String(describing: response))") // response serialization result
-                                    
-                                }) { (response) in
-                                    
-                                }
-                            }
-                            
-                        }
-                        controller.dismiss(animated: true, completion: nil)
-                    }
-                    self.present(dropIn!, animated: true, completion: nil)
-                    
-                    
-                    
-                case .failure(let error):
-                    print(error)
-                }
+//                switch response.result {
+//                  
+//                case .success(let value):
+//                    print("value**: \(value)")
+//                    
+//                    if(self.isFiltering) {
+//                        self.selectedCharity = self.filterdCharityListArray?[sender.tag]
+//                    } else {
+//                        self.selectedCharity = self.filterdCharityListArray?[sender.tag]
+//                    }
+////                    self.selectedCharity = self.filterdCharityListArray?[sender.tag]
+//                    let drop =  BTDropInRequest()
+//                    drop.vaultManager = true
+//                    drop.paypalDisabled = false
+//                    drop.cardDisabled = false
+//                    drop.payPalRequest?.currencyCode = "$"
+//                    print(drop)
+//                    let amount = self.amountText.text?.replacingOccurrences(of: "$", with: "")
+//                    
+//                    let amountWithoutDollar = amount!.trimmingCharacters(in: .whitespacesAndNewlines)
+//                    
+//                    guard Double(amountWithoutDollar) != 0 else {
+//                        return
+//                    }
+//                    
+//                    let processingValue = self.calculatePercentage(value: Double(amountWithoutDollar) ?? 0,percentageVal: 1)
+//                    
+//                    let amountWithProcessingValue = (Double(amountWithoutDollar) ?? 0) + processingValue
+//                    
+//                    let merchantChargesValue = self.calculatePercentage(value: amountWithProcessingValue ,percentageVal: 2.9) + 0.30
+//                    
+//                    let totalAmount = amountWithProcessingValue + merchantChargesValue
+//                    
+//                    let dropIn = BTDropInController(authorization: "\(value)", request: drop)
+//                    { (controller, result, error) in
+//                        
+//                        print("result",result!)
+//                        
+//                        if (error != nil) {
+//                            print("ERROR")
+//                        } else if (result?.isCancelled == true) {
+//                            print("CANCELLED")
+//                        } else if let result = result {
+//                            
+//                            if let data = UserDefaults.standard.data(forKey: "people"),
+//                               let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
+//                                print(myPeopleList.name)
+//                                // Joe 10
+//                                
+//                                MBProgressHUD.showAdded(to: self.view, animated: true)
+//                                
+//                                let postDict: Parameters = ["user_id":myPeopleList.userID,
+//                                                            "token":myPeopleList.token,
+//                                                            "charity_id":self.selectedCharity?.id ?? "",
+//                                                            "charity_name": self.selectedCharity?.name ?? "",
+//                                                            "transaction_id":result.paymentMethod?.nonce ?? "",
+//                                                            "amount":amount,
+//                                                            "payment_type": result.paymentMethod?.type ?? "",
+//                                                            "status":"approved",
+//                                                            "merchant_charges":merchantChargesValue,
+//                                                            "processing_fee":processingValue]
+//                                
+//                                let paymentUrl = String(format: URLHelper.iDonatePayment)
+//                                
+//                                self.blurView.removeFromSuperview()
+//                                
+//                                WebserviceClass.sharedAPI.performRequest(type: paymentModel.self, urlString: paymentUrl, methodType: HTTPMethod.post, parameters: postDict as Parameters, success: { (response) in
+//                                    
+//                                    MBProgressHUD.hide(for: self.view, animated: true)
+//                                    
+//                                    print("payment response", response)
+//                                    
+//                                    let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+//                                    let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+//                                    let messageAttrString = NSMutableAttributedString(string:"Payment Done Successfully", attributes: messageFont)
+//                                    alertController.setValue(messageAttrString, forKey: "attributedMessage")
+//                                    let contact = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+//                                        self.blurView.removeFromSuperview()
+//                                    }
+//                                    alertController.addAction(contact)
+//                                    self.present(alertController, animated: true, completion: nil)
+//                                    
+//                                    print("Result: \(String(describing: response))") // response serialization result
+//                                    
+//                                }) { (response) in
+//                                    
+//                                }
+//                            }
+//                            
+//                        }
+//                        controller.dismiss(animated: true, completion: nil)
+//                    }
+//                    self.present(dropIn!, animated: true, completion: nil)
+//                    
+//                    
+//                    
+//                case .failure(let error):
+//                    print(error)
+//                }
             }
         }
     }

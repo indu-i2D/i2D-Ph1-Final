@@ -1,49 +1,19 @@
 PODS:
-  - Alamofire (5.6.4)
-  - AlamofireImage (4.2.0):
-    - Alamofire (~> 5.4)
+  - Alamofire (5.9.1)
+  - AlamofireImage (4.3.0):
+    - Alamofire (~> 5.8)
   - AlamofireNetworkActivityIndicator (3.1.0):
     - Alamofire (~> 5.1)
-  - AppAuth (1.6.0):
-    - AppAuth/Core (= 1.6.0)
-    - AppAuth/ExternalUserAgent (= 1.6.0)
-  - AppAuth/Core (1.6.0)
-  - AppAuth/ExternalUserAgent (1.6.0):
+  - AppAuth (1.7.3):
+    - AppAuth/Core (= 1.7.3)
+    - AppAuth/ExternalUserAgent (= 1.7.3)
+  - AppAuth/Core (1.7.3)
+  - AppAuth/ExternalUserAgent (1.7.3):
     - AppAuth/Core
-  - Braintree/Card (4.38.0):
-    - Braintree/Core
-  - Braintree/Core (4.38.0)
-  - Braintree/PaymentFlow (4.38.0):
-    - Braintree/Card
-    - Braintree/Core
-    - Braintree/PayPalOneTouch
-  - Braintree/PayPal (4.38.0):
-    - Braintree/Core
-    - Braintree/PayPalOneTouch
-  - Braintree/PayPalDataCollector (4.38.0):
-    - Braintree/Core
-    - Braintree/PayPalUtils
-  - Braintree/PayPalOneTouch (4.38.0):
-    - Braintree/Core
-    - Braintree/PayPalDataCollector
-    - Braintree/PayPalUtils
-  - Braintree/PayPalUtils (4.38.0)
-  - Braintree/UnionPay (4.38.0):
-    - Braintree/Card
-    - Braintree/Core
-  - BraintreeDropIn (8.2.0):
-    - BraintreeDropIn/DropIn (= 8.2.0)
-  - BraintreeDropIn/DropIn (8.2.0):
-    - Braintree/Card (~> 4.32)
-    - Braintree/Core (~> 4.32)
-    - Braintree/PaymentFlow (~> 4.32)
-    - Braintree/PayPal (~> 4.32)
-    - Braintree/UnionPay (~> 4.32)
-    - BraintreeDropIn/UIKit
-  - BraintreeDropIn/UIKit (8.2.0)
-  - GoogleMaps/Base (4.2.0)
-  - GooglePlaces (4.2.0):
-    - GoogleMaps/Base (= 4.2.0)
+  - GoogleMaps/Base (7.4.0)
+  - GoogleMaps/Maps (7.4.0):
+    - GoogleMaps/Base
+  - GooglePlaces (7.4.0)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -52,7 +22,7 @@ PODS:
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 3.0, >= 1.5)
   - GTMSessionFetcher/Core (1.7.2)
-  - IQKeyboardManagerSwift (6.5.11)
+  - IQKeyboardManagerSwift (7.0.2)
   - KeychainSwift (20.0.0)
   - MBProgressHUD (1.2.0)
   - SideMenu (6.5.0)
@@ -66,9 +36,7 @@ DEPENDENCIES:
   - Alamofire (~> 5.0)
   - AlamofireImage (~> 4.1)
   - AlamofireNetworkActivityIndicator (~> 3.1)
-  - Braintree/PayPal
-  - BraintreeDropIn
-  - BraintreeDropIn/UIKit
+  - GoogleMaps/Maps
   - GooglePlaces
   - GoogleSignIn (~> 5.0.2)
   - IQKeyboardManagerSwift
@@ -86,8 +54,6 @@ SPEC REPOS:
     - AlamofireImage
     - AlamofireNetworkActivityIndicator
     - AppAuth
-    - Braintree
-    - BraintreeDropIn
     - GoogleMaps
     - GooglePlaces
     - GoogleSignIn
@@ -103,18 +69,16 @@ SPEC REPOS:
     - TwitterKit5
 
 SPEC CHECKSUMS:
-  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
-  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
+  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
+  AlamofireImage: 843953fa97bee5f561cf05d83abd759e590b068d
   AlamofireNetworkActivityIndicator: 6564782bd7b9e6c430ae67d9277af01907b01ca4
-  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
-  Braintree: 78a33deb6f6ec617c2c4891fbe352854358b3a8d
-  BraintreeDropIn: b57b653d130981aad7ad9bc97a69d3d7ef86f7a1
-  GoogleMaps: eb03e327edfd70b06de1e6e321653f73712df7ad
-  GooglePlaces: 196a9dd88580dcb3f3df46f415057703d0d2a310
+  AppAuth: a13994980c1ec792f7e2e665acd4d4aa6be43240
+  GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
+  GooglePlaces: 544e908d94860bf6f8fc1865b80d2c7eb6b5f937
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
-  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  IQKeyboardManagerSwift: d338c11a896e9f29603443700c4567e32f830c22
   KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
@@ -123,6 +87,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit5: 64095dfefcf39be2355711ef27112d55e340d90e
 
-PODFILE CHECKSUM: 11315e7f3e429f96c15c8bf6c3dc3c3a2f260223
+PODFILE CHECKSUM: 4c1ac8ca1dda1b319d69f625775d48f032d253cd
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.15.2

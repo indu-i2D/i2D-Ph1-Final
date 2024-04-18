@@ -8,9 +8,12 @@
 
 import UIKit
 import SideMenu
+import MBProgressHUD
 class SettingsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,UITabBarDelegate {
      @IBOutlet var notificationTabBar: UITabBar!
      @IBOutlet weak var settingsTableview: UITableView!
+     var userId: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +43,57 @@ class SettingsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,U
 
         present(menu, animated: true, completion: nil)
     }
-   
+    func deleteAccount() {
+        // Display an alert with confirmation message
+        let deleteAlert = UIAlertController(title: "Delete Account", message: "Are you sure you wish to delete your account?", preferredStyle: .alert)
+        
+        // Add cancel option
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            // Take user back to Menu if cancel is selected
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        // Add continue option
+        deleteAlert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { action in
+            if let data = UserDefaults.standard.data(forKey: "people"),
+               let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails{
+                let postDict = ["User ID": myPeopleList.userID] as [String : Any]
+                let revokeUserString = String(format: URLHelper.iDonateRevokeUser)
+                let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+                loadingNotification.mode = MBProgressHUDMode.indeterminate
+                loadingNotification.label.text = "Loading"
+                
+                WebserviceClass.sharedAPI.performRequest(type: DeleteAcc.self, urlString: revokeUserString, methodType: .post, parameters: postDict, success: { (response) in
+                    // Hide loading indicator
+                    MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                    print("RESPONSE",response)
+                    // Show confirmation alert if API call is successful
+                    let confirmationAlert = UIAlertController(title: "Confirmation", message: "You will receive an email with status of your account deletion request within 7 working days. If your profile does not have an email, please update your profile and resubmit your account cancellation request.", preferredStyle: .alert)
+                    
+                    // Add OK button to dismiss the pop-up
+                
+                    confirmationAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        UserDefaults.standard.removeObject(forKey: "people")
+
+                        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
+                        self.navigationController?.pushViewController(vc!, animated: true)
+                    }))
+
+                    self.present(confirmationAlert, animated: true, completion: nil)
+                }) { (error) in
+                    // Hide loading indicator
+                    MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                    
+                    // Handle error if API call fails
+                    print("Error: \(error)")
+                    // You may display an error message to the user if needed
+                }}
+            }))
+
+        // Present the delete alert
+        self.present(deleteAlert, animated: true, completion: nil)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let data = UserDefaults.standard.data(forKey: "people"),
@@ -49,7 +102,7 @@ class SettingsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,U
                 return 2
             }
             else{
-             return 3
+             return 4
             }// Joe 10
         } else {
                 return 2
@@ -69,10 +122,14 @@ class SettingsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,U
             return cell
         }
             
-        else
+        else if(indexPath.row == 2)
             
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath)
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell4", for: indexPath)
             return cell
         }
     }
@@ -100,17 +157,24 @@ class SettingsVC: BaseViewController,UITableViewDataSource,UITableViewDelegate,U
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          if(indexPath.row == 2)
-         {
+        {
              if UserDefaults.standard.data(forKey: "people") != nil{
                  let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ChangePasswordVC") as? ChangePasswordVC
-                vc?.changeOrForgot = "Change"
+                 vc?.changeOrForgot = "Change"
                  self.navigationController?.pushViewController(vc!, animated: false)
-             }else{
+             }
+             else{
                  self.showLoginAlert()
              }
              
+         }
+             else if(indexPath.row == 3)
+             {
+                 deleteAccount()
+             }
+             
         }
-    }
+    
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController
         if(item.tag == 0)

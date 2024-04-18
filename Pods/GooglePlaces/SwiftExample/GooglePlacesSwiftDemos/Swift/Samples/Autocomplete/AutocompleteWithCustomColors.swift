@@ -226,12 +226,34 @@ class AutocompleteWithCustomColors: AutocompleteBaseViewController {
     // setupSearchBarCustomIcons method contains example code to do this.
     let controller = GMSStyledAutocompleteViewController()
     controller.delegate = self
+    if let config = autocompleteConfiguration {
+      controller.autocompleteFilter = config.autocompleteFilter
+      controller.placeFields = config.placeFields
+    }
     controller.tableCellBackgroundColor = colorTheme.backgroundColor
     controller.tableCellSeparatorColor = colorTheme.separatorColor
     controller.primaryTextColor = colorTheme.primaryTextColor
     controller.primaryTextHighlightColor = colorTheme.highlightColor
     controller.secondaryTextColor = colorTheme.secondaryColor
     controller.tintColor = colorTheme.tintColor
+
+    // Customize the navigation bar appearance.
+    let navBar = UINavigationBar.appearance(whenContainedInInstancesOf: [
+      GMSStyledAutocompleteViewController.self
+    ])
+    navBar.barTintColor = colorTheme.darkBackgroundColor
+    navBar.tintColor = colorTheme.searchBarTintColor
+
+    let consistentAppearance = UINavigationBarAppearance()
+    consistentAppearance.backgroundColor = colorTheme.darkBackgroundColor
+    navBar.standardAppearance = consistentAppearance
+    navBar.scrollEdgeAppearance = consistentAppearance
+    navBar.compactAppearance = consistentAppearance
+
+    if #available(iOS 15.0, *) {
+      navBar.compactScrollEdgeAppearance = consistentAppearance
+    }
+
     present(controller, animated: true)
 
     view.subviews.forEach { subview in

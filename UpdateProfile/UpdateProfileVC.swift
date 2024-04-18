@@ -132,12 +132,12 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
     }
 
     private func validationError(_ textField: TKFormTextField) -> String? {
-        if textField == emailText {
-            return TKDataValidator.email(text: textField.text)
-        }
-        if textField == mobileText {
-            return TKDataValidator.mobileNumber(text: mobileText.text)
-        }
+//        if textField == emailText {
+//            return TKDataValidator.email(text: textField.text)
+//        }
+//        if textField == mobileText {
+//            return TKDataValidator.mobileNumber(text: mobileText.text)
+//        }
         if textField == nameText {
             return TKDataValidator.isValidText(textfield: textField)
         }
@@ -473,134 +473,175 @@ class UpdateProfileVC: BaseViewController,UIImagePickerControllerDelegate,UINavi
     @IBAction func updateAction(_ sender: UIButton) {
         var alertMessage = ""
         
-       
-
-        guard let name = nameText.text, name != "" else {
-         
-         
-         
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
-         
-        let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-         
-        let messageAttrString = NSMutableAttributedString(string:"Please enter the name", attributes: messageFont)
-         
-        alertController.setValue(messageAttrString, forKey: "attributedMessage")
-         
-        let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
-         
-        }
-         
-        alertController.addAction(contact)
-         
-        self.present(alertController, animated: true, completion: nil)
-         
-        return
-         
-        }
-         
-        if TKDataValidator.email(text: self.emailText.text) != nil {
-            self.showErrorAlert(message: "Please enter the email")
-            return
-        }
-        if TKDataValidator.mobileNumber(text: mobileText.text) != nil {
-            self.showErrorAlert(message: "Please enter the mobile number")
-            return
-        }
-       
-         
-        guard termcondition != false else {
-         
-         
-         
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
-         
-        let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-         
-        let messageAttrString = NSMutableAttributedString(string:"Please check the terms and conditions", attributes: messageFont)
-         
-        alertController.setValue(messageAttrString, forKey: "attributedMessage")
-         
-        let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
-         
-        }
-         
-        alertController.addAction(contact)
-         
-        self.present(alertController, animated: true, completion: nil)
-         
-         
-         
-        return
-         
-        }
-         
-         
-         
-        let updateProfileUrl = String(format: URLHelper.iDonateUpdateProfile)
-         
-        let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
-         
-        loadingNotification.mode = MBProgressHUDMode.indeterminate
-         
-        loadingNotification.label.text = "Loading"
-         
-        let imageData = profileImage.image?.jpegData(compressionQuality: 0.25)
-         
-        let photoString = imageData!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
-         
         if let data = UserDefaults.standard.data(forKey: "people"),
-         
-        let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
-         
-            email = self.emailText.text!
-         
-        let postDict = ["name": name, //myPeopleList.name,
-         
-        "email": email,
-         
-        "user_id": myPeopleList.userID,
-         
-        "token": myPeopleList.token,
-         
-        "type": myPeopleList.type,
-         
-        "phone":mobileText.text ?? "",
-         
-        "country":UserDefaults.standard.value(forKey: "selectedcountry") as? String ?? "US",
-         
-        "gender":genterText,
-         
-        "photo":photoString,
-         
-        "business_name":businessName.text ?? "",
-         
-        "terms":termcondition == false ? "No" : "Yes"] as [String : Any]
+           let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
+            let imageData = profileImage.image?.jpegData(compressionQuality: 0.25)
             
-        debugPrint("postDict => ",postDict)
-   
-        WebserviceClass.sharedAPI.performRequest(type: UpdateModel.self, urlString: updateProfileUrl, methodType: HTTPMethod.post, parameters: postDict as Parameters, success: { (response) in
-         
-        self.UpdateModelResponse = response
-         
-        self.updateArray = self.UpdateModelResponse?.data
-         
-        self.responsemMethod()
-         
-        print("Result: \(String(describing: response))") // response serialization result
-         
-        MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
-         
-         
-         
-        }) { (response) in
-         
-        MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
-         
-        }
-         
-        }
-        
+            let photoString = imageData!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
+            let updatedName = nameText.text ?? ""
+            let originalName = myPeopleList.name
+            
+            let updatedEmail = emailText.text ?? ""
+            let originalEmail = myPeopleList.email
+            let updatedPhone = mobileText.text ?? ""
+            let originalPhone = myPeopleList.mobileNUmber
+            let updatedGender = genterText ?? ""
+            let originalGender = myPeopleList.gender
+            let updatedPhoto =  photoString ?? ""
+            let originalPhoto = myPeopleList.profileUrl
+            let updatedBuisness =  businessName.text ?? ""
+            let originalBuisness = myPeopleList.businessName
+            let updatedTerms =  termcondition == false ? "No" : "Yes"
+            let originalTerms = myPeopleList.terms
+            let updatedCountry =  UserDefaults.standard.value(forKey: "selectedcountry") as? String ?? "US"
+            let originalCountry = myPeopleList.country
+            // Check if values have changed
+            if updatedName != originalName || updatedEmail != originalEmail || updatedPhone != originalPhone || updatedGender != originalGender || updatedPhoto != originalPhoto || updatedBuisness != originalBuisness || updatedCountry != originalCountry || updatedTerms != originalTerms{
+                // Only include changed fields in the request payload
+                var updateData: [String: Any] = [:]
+                if updatedName != originalName {
+                    updateData["name"] = updatedName
+                }
+                if updatedEmail != originalEmail || updatedEmail != "" {
+                    updateData["email"] = updatedEmail
+                }
+                if updatedPhone != originalPhone || updatedPhone != ""{
+                    updateData["phone"] = updatedPhone
+                }
+                if updatedGender != originalGender {
+                    updateData["gender"] = updatedGender
+                }
+                if updatedPhoto != originalPhoto {
+                    updateData["photo"] = updatedPhoto
+                }
+                if updatedCountry != originalCountry {
+                    updateData["country"] = updatedCountry
+                }
+                if updatedBuisness != originalBuisness {
+                    updateData["business_name"] = updatedBuisness
+                }
+                if updatedTerms != originalTerms {
+                    updateData["terms"] = updatedTerms
+                }
+                updateData["user_id"] = myPeopleList.userID
+                
+                updateData["token"] = myPeopleList.token
+                
+                guard let name = nameText.text, name != "" else {
+                    
+                    
+                    
+                    let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                    
+                    let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                    
+                    let messageAttrString = NSMutableAttributedString(string:"Please enter the name", attributes: messageFont)
+                    
+                    alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                    
+                    let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                        
+                    }
+                    
+                    alertController.addAction(contact)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    return
+                    
+                }
+                
+                
+                
+                
+                
+                guard termcondition != false else {
+                    
+                    
+                    let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                    
+                    let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                    
+                    let messageAttrString = NSMutableAttributedString(string:"Please check the terms and conditions", attributes: messageFont)
+                    
+                    alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                    
+                    let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                        
+                    }
+                    
+                    alertController.addAction(contact)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    
+                    
+                    return
+                    
+                }
+                
+                let updateProfileUrl = String(format: URLHelper.iDonateUpdateProfile)
+                
+                let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+                
+                loadingNotification.mode = MBProgressHUDMode.indeterminate
+                
+                loadingNotification.label.text = "Loading"
+                
+              
+                
+                if let data = UserDefaults.standard.data(forKey: "people"),
+                   
+                    let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
+                    
+                    email = self.emailText.text ?? ""
+                    
+                    var postDict = ["name": name, //myPeopleList.name,
+                                    
+                                    "email": email,
+                                    
+                                    "user_id": myPeopleList.userID,
+                                    
+                                    "token": myPeopleList.token,
+                                    
+                                    "type": myPeopleList.type,
+                                    
+                                    "phone":mobileText.text ?? "",
+                                    
+                                    "country":UserDefaults.standard.value(forKey: "selectedcountry") as? String ?? "US",
+                                    
+                                    "gender":genterText,
+                                    
+                                    "photo":photoString,
+                                    
+                                    "business_name":businessName.text ?? "",
+                                    
+                                    "terms":termcondition == false ? "No" : "Yes"] as [String : Any]
+                    postDict = updateData
+
+                    debugPrint("postDict => ",postDict)
+                    WebserviceClass.sharedAPI.performRequest(type: UpdateModel.self, urlString: updateProfileUrl, methodType: HTTPMethod.post, parameters: postDict as Parameters, success: { (response) in
+                        
+                        self.UpdateModelResponse = response
+                        
+                        self.updateArray = self.UpdateModelResponse?.data
+                        
+                        self.responsemMethod()
+                        
+                        print("Result: \(String(describing: response))") // response serialization result
+                        
+                        MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                        
+                        
+                        
+                    }) { (response) in
+                        
+                        MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                        
+                    }
+                    
+                }
+            }}
     }
     
     

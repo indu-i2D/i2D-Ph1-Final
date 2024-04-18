@@ -7,22 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		12551882AE7452A63E00872E /* AutocompleteModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8E968A1C74354A3486DF3 /* AutocompleteModalViewController.swift */; };
+		0CA9CAC7FE832EB51BF73D22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDABCB9B8514E5F2A4DE281B /* SceneDelegate.swift */; };
+		0F65E1F07F5F97B73E790974 /* AutocompleteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADC3E2B685EB704BFB0A427 /* AutocompleteConfiguration.swift */; };
+		13085C0C4F94BD7B7C4576A5 /* FindPlaceLikelihoodListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3132BF7D4FF950035CCF22B /* FindPlaceLikelihoodListViewController.swift */; };
 		1FDACB7AA1C4DB5417897A8D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A92A7858DB2177E7A91F30B5 /* LaunchScreen.storyboard */; };
-		33B31046FE1726120C708B1C /* AutocompleteWithTextFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD305E3260332F5AAB435A2 /* AutocompleteWithTextFieldController.swift */; };
-		4C0069B8C8216DCE7E50B3E6 /* AutocompleteWithSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768476D0A38D7A7670CCD1B /* AutocompleteWithSearchViewController.swift */; };
-		5A82C05D78C9D5E6256ECE87 /* SampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAA7239884CB4157BC2C5FF /* SampleListViewController.swift */; };
-		5D84B4919EF41C015EDE7490 /* FindPlaceLikelihoodListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3132BF7D4FF950035CCF22B /* FindPlaceLikelihoodListViewController.swift */; };
+		33A7D7CCBF7F6ED9CAF16332 /* AutocompleteWithCustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C12FAF36EF6DF671EE77872 /* AutocompleteWithCustomColors.swift */; };
+		3B9C352B6D5D1EFC26634090 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1508D3D314E8989F6A8B1386 /* ConfigurationViewController.swift */; };
+		4049499CCDEF9E212D79D732 /* PagingPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C092A8A676304070F968409 /* PagingPhotoView.swift */; };
+		4F5A706C3EA996535B2D1984 /* SDKDemoAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B665D719F951D76696D33BC /* SDKDemoAPIKey.swift */; };
+		5CB1F895DD9C8B1ADC8DE20A /* SampleDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0F1EF7458BEAB01DE68663 /* SampleDatas.swift */; };
+		682AFB396B2B86F4CE39BCDC /* AutocompleteBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0288ED3B967A57B6410B96F8 /* AutocompleteBaseViewController.swift */; };
+		6B674CAF48552E8B4EDEE8A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E58F93255E608F3E70DF9E /* AppDelegate.swift */; };
 		84B2F5C9539E9F7D3D330A98 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B4FDDB3ADB0D6C58B163F /* Localizable.strings */; };
-		8F36AF5212D677C53A821830 /* AutocompleteBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0288ED3B967A57B6410B96F8 /* AutocompleteBaseViewController.swift */; };
-		A73EE4533349AEF0A4C34C0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B59B2299866076C468ED7 /* UIKit.framework */; };
-		B6246D8167D0188DA43CE4CB /* AutocompletePushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497012428CC54B7C4F56083 /* AutocompletePushViewController.swift */; };
-		CE5829EA0ACC016148AE87CA /* SDKDemoAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B665D719F951D76696D33BC /* SDKDemoAPIKey.swift */; };
-		D09B24C363FF41C043D0F3D6 /* SampleDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0F1EF7458BEAB01DE68663 /* SampleDatas.swift */; };
-		D7062C643520223BDCFCB20A /* AutocompleteWithCustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C12FAF36EF6DF671EE77872 /* AutocompleteWithCustomColors.swift */; };
-		DAD5C1562B74719D0E2BC3E8 /* PagingPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C092A8A676304070F968409 /* PagingPhotoView.swift */; };
+		8678A2142349BDB9BFD679AA /* AutocompleteWithSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768476D0A38D7A7670CCD1B /* AutocompleteWithSearchViewController.swift */; };
+		95AA44B5BAFAF9B505315182 /* SampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAA7239884CB4157BC2C5FF /* SampleListViewController.swift */; };
+		AB321C77B04C6866B5EA7F8E /* AutocompleteModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8E968A1C74354A3486DF3 /* AutocompleteModalViewController.swift */; };
+		BA576744D32A7DE182CE33B1 /* AutocompleteWithTextFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD305E3260332F5AAB435A2 /* AutocompleteWithTextFieldController.swift */; };
+		D248A9237F51145B3A03A71F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909B59B2299866076C468ED7 /* UIKit.framework */; };
+		D9ACCD7795CF2F5BC448175A /* AutocompletePushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497012428CC54B7C4F56083 /* AutocompletePushViewController.swift */; };
 		E0F36B0E72285A3AB896E53A /* PlacesDemoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EA6980061CFCF840AFCEDC2 /* PlacesDemoAssets.xcassets */; };
-		E1A25B65AA4058BE01EBE11B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E58F93255E608F3E70DF9E /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +36,11 @@
 		0D74D64B9CD42B2FDF7EE015 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0D889387B0B1BD3F73F8E146 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E2A6EA83A2B6BE60F8631EA /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1508D3D314E8989F6A8B1386 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		1B25F0846D9BEA0ACB3F71D2 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1E734E67258D377F8B1D5CE5 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		276DCC46CD2ED5E1134AB1A4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2ADC3E2B685EB704BFB0A427 /* AutocompleteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteConfiguration.swift; sourceTree = "<group>"; };
 		2CD305E3260332F5AAB435A2 /* AutocompleteWithTextFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteWithTextFieldController.swift; sourceTree = "<group>"; };
 		2D40CD2D32AC5354B8D8C544 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		322EDC4BDDF0F416B3887BB7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -81,6 +86,7 @@
 		D82B33F8B8C88D6EBC668159 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DBAE2CDA32A2056BB1E9DB81 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DD9A5A13A9D24DE454CE9CE6 /* en_IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en_IN; path = en_IN.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DDABCB9B8514E5F2A4DE281B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F1286D2602562EFE56DF7C74 /* pt_PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_PT; path = pt_PT.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F497012428CC54B7C4F56083 /* AutocompletePushViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompletePushViewController.swift; sourceTree = "<group>"; };
 		F6C83E585F96D948E93AF704 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -91,14 +97,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A73EE4533349AEF0A4C34C0D /* UIKit.framework in Frameworks */,
+				D248A9237F51145B3A03A71F /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E7696E867CA96612E6688BA /* Frameworks */ = {
+		580DB9DE9E71BFE1BBA76132 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				9039998DD3BBE0A36049B8EB /* Samples */,
+				D1E58F93255E608F3E70DF9E /* AppDelegate.swift */,
+				2ADC3E2B685EB704BFB0A427 /* AutocompleteConfiguration.swift */,
+				1508D3D314E8989F6A8B1386 /* ConfigurationViewController.swift */,
+				4B665D719F951D76696D33BC /* SDKDemoAPIKey.swift */,
+				7F0F1EF7458BEAB01DE68663 /* SampleDatas.swift */,
+				3FAA7239884CB4157BC2C5FF /* SampleListViewController.swift */,
+				DDABCB9B8514E5F2A4DE281B /* SceneDelegate.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		64686740F39E131CEB63787F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				909B59B2299866076C468ED7 /* UIKit.framework */,
@@ -127,7 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				ACC70AABB425F4696F805F27 /* Resources */,
-				D4867680840169F3979C5C18 /* Swift */,
+				580DB9DE9E71BFE1BBA76132 /* Swift */,
 			);
 			path = GooglePlacesSwiftDemos;
 			sourceTree = "<group>";
@@ -146,21 +167,9 @@
 			isa = PBXGroup;
 			children = (
 				A7DC475C5DF48F75B36886C4 /* Source */,
-				0E7696E867CA96612E6688BA /* Frameworks */,
+				64686740F39E131CEB63787F /* Frameworks */,
 				FFA58D2498A93FE9768A06C4 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		D4867680840169F3979C5C18 /* Swift */ = {
-			isa = PBXGroup;
-			children = (
-				9039998DD3BBE0A36049B8EB /* Samples */,
-				D1E58F93255E608F3E70DF9E /* AppDelegate.swift */,
-				4B665D719F951D76696D33BC /* SDKDemoAPIKey.swift */,
-				7F0F1EF7458BEAB01DE68663 /* SampleDatas.swift */,
-				3FAA7239884CB4157BC2C5FF /* SampleListViewController.swift */,
-			);
-			path = Swift;
 			sourceTree = "<group>";
 		};
 		D7CCD2BF8ED9F3E2238CC18F /* Autocomplete */ = {
@@ -288,18 +297,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D09B24C363FF41C043D0F3D6 /* SampleDatas.swift in Sources */,
-				DAD5C1562B74719D0E2BC3E8 /* PagingPhotoView.swift in Sources */,
-				8F36AF5212D677C53A821830 /* AutocompleteBaseViewController.swift in Sources */,
-				D7062C643520223BDCFCB20A /* AutocompleteWithCustomColors.swift in Sources */,
-				4C0069B8C8216DCE7E50B3E6 /* AutocompleteWithSearchViewController.swift in Sources */,
-				33B31046FE1726120C708B1C /* AutocompleteWithTextFieldController.swift in Sources */,
-				12551882AE7452A63E00872E /* AutocompleteModalViewController.swift in Sources */,
-				B6246D8167D0188DA43CE4CB /* AutocompletePushViewController.swift in Sources */,
-				5D84B4919EF41C015EDE7490 /* FindPlaceLikelihoodListViewController.swift in Sources */,
-				5A82C05D78C9D5E6256ECE87 /* SampleListViewController.swift in Sources */,
-				E1A25B65AA4058BE01EBE11B /* AppDelegate.swift in Sources */,
-				CE5829EA0ACC016148AE87CA /* SDKDemoAPIKey.swift in Sources */,
+				5CB1F895DD9C8B1ADC8DE20A /* SampleDatas.swift in Sources */,
+				3B9C352B6D5D1EFC26634090 /* ConfigurationViewController.swift in Sources */,
+				4049499CCDEF9E212D79D732 /* PagingPhotoView.swift in Sources */,
+				682AFB396B2B86F4CE39BCDC /* AutocompleteBaseViewController.swift in Sources */,
+				33A7D7CCBF7F6ED9CAF16332 /* AutocompleteWithCustomColors.swift in Sources */,
+				8678A2142349BDB9BFD679AA /* AutocompleteWithSearchViewController.swift in Sources */,
+				BA576744D32A7DE182CE33B1 /* AutocompleteWithTextFieldController.swift in Sources */,
+				AB321C77B04C6866B5EA7F8E /* AutocompleteModalViewController.swift in Sources */,
+				D9ACCD7795CF2F5BC448175A /* AutocompletePushViewController.swift in Sources */,
+				13085C0C4F94BD7B7C4576A5 /* FindPlaceLikelihoodListViewController.swift in Sources */,
+				95AA44B5BAFAF9B505315182 /* SampleListViewController.swift in Sources */,
+				6B674CAF48552E8B4EDEE8A8 /* AppDelegate.swift in Sources */,
+				4F5A706C3EA996535B2D1984 /* SDKDemoAPIKey.swift in Sources */,
+				0CA9CAC7FE832EB51BF73D22 /* SceneDelegate.swift in Sources */,
+				0F65E1F07F5F97B73E790974 /* AutocompleteConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,15 +390,13 @@
 		8BE6213F076EE7282AFFB455 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"ARCHS[sdk=iphonesimulator*]" = (
-					i386,
-					x86_64,
-				);
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ./GooglePlacesSwiftDemos/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					.,
 					"$(SDKROOT)/System/Library/Frameworks",

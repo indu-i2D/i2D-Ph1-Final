@@ -37,7 +37,8 @@ enum URLName : String {
     case iDonateHelpUrl = "HelpUrl"
     case iDonateAboutUrl = "AboutUrl"
     case docsBaseUrl = "DocsBaseUrl"
-    
+    case iDonateRevokeUser = "RevokeUser"
+    case iDonateTrans = "DonateTrans"
 
 
 }
@@ -161,5 +162,18 @@ final class URLHelper : NSObject {
 //        let terms = String(format: "%@%@", getDocsBaseurl,URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateHelpUrl.rawValue]!)
 //        return terms
     }()
+    static var iDonateRevokeUser : String = {
+        guard let url = URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateRevokeUser.rawValue] else {
+            fatalError("URL for iDonateRevokeUser is nil")
+        }
+        return SERVER_URL + url
+    }()
+    static var iDonateTrans : String = {
+        guard let url = URLFetcher.sharedFetcher.urlDictionary[URLName.iDonateTrans.rawValue] else {
+            fatalError("URL for iDonate_Trans is nil")
+        }
+        return SERVER_URL + url
+    }()
+
 }
 

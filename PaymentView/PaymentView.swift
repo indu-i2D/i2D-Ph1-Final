@@ -30,7 +30,6 @@ class PaymentView: UIView,UITextFieldDelegate,UIGestureRecognizerDelegate {
     @IBOutlet var removeBtn : UIButton!
     @IBOutlet var doneBtn : UIButton!
     @IBOutlet var donateView : UIView!
-    @IBOutlet var amountText: TKFormTextField!
     
     
     
@@ -43,17 +42,6 @@ class PaymentView: UIView,UITextFieldDelegate,UIGestureRecognizerDelegate {
         nibView?.doneBlock = successBlock
         controller.addSubview(nibView!)
         nibView?.delegate = delegate
-        nibView!.amountText.placeholder = "Enter Amount"
-        nibView!.amountText.text = "$ 10"
-        nibView!.amountText.enablesReturnKeyAutomatically = true
-        nibView!.amountText.returnKeyType = .done
-        nibView!.amountText.delegate = nibView
-        nibView!.amountText.titleLabel.font = UIFont.systemFont(ofSize: 14)
-        nibView!.amountText.font = UIFont.systemFont(ofSize: 24)
-        nibView!.amountText.selectedTitleColor = UIColor.darkGray
-        nibView!.amountText.titleColor = UIColor.darkGray
-        nibView!.amountText.placeholderColor = UIColor.darkGray
-        nibView!.amountText.errorLabel.font = UIFont.systemFont(ofSize: 18)
         
         
     }
@@ -68,7 +56,7 @@ class PaymentView: UIView,UITextFieldDelegate,UIGestureRecognizerDelegate {
     }
     
     @IBAction func donateAction(_ sender:UIButton) {
-        UserDefaults.standard.set(amountText.text, forKey: "Amount")
+      
         self.doneBlock!(1,"\(1)")
     }
     
