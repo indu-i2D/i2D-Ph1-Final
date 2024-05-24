@@ -53,7 +53,7 @@ extension UIViewController {
     
 }
 
-
+///The PLAlertViewController class is designed to extend the functionality of UIAlertController by providing additional features and customization options
 class PLAlertViewController: UIAlertController {
     
   // Clear Alert Window
@@ -149,6 +149,8 @@ let kSecAttrServiceValue = NSString(format: kSecAttrService)
 let kSecMatchLimitValue = NSString(format: kSecMatchLimit)
 let kSecReturnDataValue = NSString(format: kSecReturnData)
 let kSecMatchLimitOneValue = NSString(format: kSecMatchLimitOne)
+
+/// Service for managing keychain operations.
 
 public class KeychainService: NSObject {
 

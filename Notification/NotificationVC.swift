@@ -1,44 +1,56 @@
 //
 //  NotificationVC.swift
-//  iDonate
-//
-//  Created by Im043 on 14/05/19.
-//  Copyright © 2019 Im043. All rights reserved.
-//
+//  i2-Donate
+
 
 import UIKit
 import SideMenu
 import MBProgressHUD
 import Alamofire
 
-class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITabBarDelegate{
+/// View controller for displaying user notifications.
+class NotificationVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
     
+    /// Table view displaying notifications.
     @IBOutlet var notificationTable: UITableView!
+    
+    /// Tab bar for switching between different views.
     @IBOutlet var notificationTabBar: UITabBar!
     
-    var notification : NotificationModel!
-    var notifications:[NotificationArray]? = nil
-
+    /// Model for storing notification data.
+    var notification: NotificationModel!
+    
+    /// Array containing notifications.
+    var notifications: [NotificationArray]? = nil
+    
+    /// View to display when no notifications are available.
     @IBOutlet var noresultsview: UIView!
+    
+    /// Label displaying a message when no notifications are available.
     @IBOutlet var noresultMEssage: UILabel!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-        if(iDonateClass.hasSafeArea) {
+        // Adjust menu button position for devices with safe area
+        if iDonateClass.hasSafeArea {
             menuBtn.frame = CGRect(x: 0, y: 40, width: 50, height: 50)
-        }else {
+        } else {
             menuBtn.frame = CGRect(x: 0, y: 20, width: 50, height: 50)
         }
         
-        menuBtn.addTarget(self, action: #selector(menuAction(_sender:)), for: .touchUpInside)
-        self.view .addSubview(menuBtn)
+        // Add menu button and set its action
+        menuBtn.addTarget(self, action: #selector(menuAction(_sender: )), for: .touchUpInside)
+        self.view.addSubview(menuBtn)
         menuBtn.setImage(UIImage(named: "menu"), for: .normal)
-        getNotificationWebServices()
         
+        // Fetch notification data
+        getNotificationWebServices()
     }
     
+    /// Action method for displaying the side menu.
+    ///
+    /// - Parameter _sender: The button triggering the action.
     @objc func menuAction(_sender:UIButton)  {
         let menuLeftNavigationController = storyboard!.instantiateViewController(withIdentifier: "MenuVC") as! MenuVC
         let menu = SideMenuNavigationController(rootViewController: menuLeftNavigationController)
@@ -74,17 +86,8 @@ class NotificationVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+// MARK: - Web Service Methods
 
 extension NotificationVC {
     
@@ -125,21 +128,27 @@ extension NotificationVC {
         }
     }
 }
+/// Custom UITableViewCell for displaying notifications.
 
 class notificationCell:UITableViewCell{
-    @IBOutlet var logoImage: UIImageView!
-    @IBOutlet var titleLbl: UILabel!
-}
+    /// ImageView displaying the notification icon.
+        @IBOutlet var logoImage: UIImageView!
+        
+        /// Label displaying the notification title.
+        @IBOutlet var titleLbl: UILabel!
+    }
 
-struct NotificationModel: Codable {
-    var status: Int?
-    var message: String?
-    var data: [NotificationArray]?
-}
+    /// Model representing the notification response.
+    struct NotificationModel: Codable {
+        var status: Int?
+        var message: String?
+        var data: [NotificationArray]?
+    }
 
-struct NotificationArray: Codable {
-    var user_id: String?
-    var title: String?
-    var message: String?
-    var date: String?
-}
+    /// Model representing an individual notification.
+    struct NotificationArray: Codable {
+        var user_id: String?
+        var title: String?
+        var message: String?
+        var date: String?
+    }

@@ -1,19 +1,18 @@
-//
-//  UITableView+Ext.swift
-//  UITableViewCellAnimation-Article
-//
-//  Created by Vadym Bulavin on 9/4/18.
-//  Copyright © 2018 Vadim Bulavin. All rights reserved.
-//
-
 import UIKit
 
 extension UITableView {
-	func isLastVisibleCell(at indexPath: IndexPath) -> Bool {
-		guard let lastIndexPath = indexPathsForVisibleRows?.last else {
-			return false
-		}
+    /// Checks if the cell at the given indexPath is the last visible cell in the table view.
+    ///
+    /// - Parameter indexPath: The indexPath of the cell to check.
+    /// - Returns: `true` if the cell at the specified indexPath is the last visible cell, `false` otherwise.
+    func isLastVisibleCell(at indexPath: IndexPath) -> Bool {
+        // Retrieve the last indexPath from the array of currently visible rows.
+        guard let lastIndexPath = indexPathsForVisibleRows?.last else {
+            // If there are no visible rows, return false.
+            return false
+        }
 
-		return lastIndexPath == indexPath
-	}
+        // Compare the provided indexPath with the last visible indexPath.
+        return lastIndexPath == indexPath
+    }
 }

@@ -1,28 +1,23 @@
-//
-//  customview.swift
-//  HIMT
-//
-//  Created by IM029 on 20/11/18.
-//  Copyright © 2018 IM029. All rights reserved.
-//
-
-import Foundation
 import UIKit
 
+/// A subclass of UIView that can be customized directly in Interface Builder.
 @IBDesignable
 class DesignableView: UIView {
 }
 
+/// A subclass of UIButton that can be customized directly in Interface Builder.
 @IBDesignable
 class DesignableButton: UIButton {
 }
 
+/// A subclass of UILabel that can be customized directly in Interface Builder.
 @IBDesignable
 class DesignableLabel: UILabel {
 }
 
 extension UIView {
     
+    /// The corner radius of the view's layer.
     @IBInspectable
     var cornerRadius: CGFloat {
         get {
@@ -33,6 +28,7 @@ extension UIView {
         }
     }
     
+    /// The width of the view's layer border.
     @IBInspectable
     var borderWidth: CGFloat {
         get {
@@ -43,6 +39,7 @@ extension UIView {
         }
     }
     
+    /// The color of the view's layer border.
     @IBInspectable
     var borderColor: UIColor? {
         get {
@@ -60,6 +57,7 @@ extension UIView {
         }
     }
     
+    /// The radius of the view's layer shadow.
     @IBInspectable
     var shadowRadius: CGFloat {
         get {
@@ -70,6 +68,7 @@ extension UIView {
         }
     }
     
+    /// The opacity of the view's layer shadow.
     @IBInspectable
     var shadowOpacity: Float {
         get {
@@ -80,6 +79,7 @@ extension UIView {
         }
     }
     
+    /// The offset of the view's layer shadow.
     @IBInspectable
     var shadowOffset: CGSize {
         get {
@@ -90,6 +90,7 @@ extension UIView {
         }
     }
     
+    /// The color of the view's layer shadow.
     @IBInspectable
     var shadowColor: UIColor? {
         get {

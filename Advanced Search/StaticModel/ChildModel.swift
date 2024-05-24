@@ -1,20 +1,31 @@
 //
-//  ViewController.swift
+//  ChildModel.swift
 //  YBMultiLevelTableView
-//
-//  Created by Yogendra Bagoriya on 13/05/17.
-//  Copyright © 2017 Yogendra Bagoriya. All rights reserved.
 //
 
 import Foundation
 
+/// Represents a model for a child node in a multi-level table view.
 class ChildModel: NSObject {
-
+    
+    /// The name of the child.
     var childName = ""
+    
+    /// The name of the toy associated with the child.
     var toyName = ""
-    var depthLevel = 2    
+    
+    /// The depth level of the child in the multi-level hierarchy.
+    var depthLevel = 2
+    
+    /// A Boolean value indicating whether the child is expanded or collapsed in the table view.
     var isExpanded = false
-    var isSelectef = false
+    
+    /// A Boolean value indicating whether the child is selected.
+    var isSelected = false
+    
+    /// Initializes a ChildModel instance with data from a dictionary.
+    ///
+    /// - Parameter dataDict: A dictionary containing child data, including the child's name.
     init(dataDict : Dictionary<String, Any>) {
         super.init()
         childName = dataDict["childName"] as! String

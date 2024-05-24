@@ -1,197 +1,117 @@
 //
 //  PlaceSearch.swift
-//  iDonate
-//
-//  Created by Im043 on 25/06/19.
-//  Copyright © 2019 Im043. All rights reserved.
+//  i2-Donate
 //
 
 import UIKit
 import MapKit
-
 import GooglePlaces
 
+/// A view controller for searching places.
 class PlaceSearch: BaseViewController, UISearchDisplayDelegate {
     
+    /// The Google Places client.
     var placesClient: GMSPlacesClient!
 
+    /// The table view displaying search results.
     @IBOutlet weak var searchResultsTableView: UITableView!
+    
+    /// The local search completer.
     var searchCompleter = MKLocalSearchCompleter()
+    
+    /// The array of search results.
     var searchResults = [MKLocalSearchCompletion]()
     
+    /// The search bar for inputting search queries.
     @IBOutlet var searchBar: UISearchBar!
     
+    /// The data source for autocomplete suggestions.
     var tableDataSource: GMSAutocompleteTableDataSource?
+    
+    /// The search controller for managing search results.
     var searchController: UISearchDisplayController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchCompleter.delegate = self
         
-        if(iDonateClass.hasSafeArea){
-            menuBtn.frame = CGRect(x: 0, y: 40, width: 50, height: 50)
-        } else{
-            menuBtn.frame = CGRect(x: 0, y: 20, width: 50, height: 50)
-        }
-        
-        menuBtn.addTarget(self, action: #selector(backAction(_sender:)), for: .touchUpInside)
-        
-        self.view .addSubview(menuBtn)
-        menuBtn.setImage(UIImage(named: "back"), for: .normal)
-        
+        // Set up the search bar
         iDonateClass.sharedClass.customSearchBar(searchBar: searchBar)
-        searchBar .becomeFirstResponder()
+        searchBar.becomeFirstResponder()
         
-        
+        // Set up the Google Places client
         placesClient = GMSPlacesClient.shared()
         
+        // Set up the autocomplete table data source
         tableDataSource = GMSAutocompleteTableDataSource()
         tableDataSource?.delegate = self
 
+        // Set up the search controller
         searchController = UISearchDisplayController(searchBar: searchBar!, contentsController: self)
         searchController?.searchResultsDataSource = tableDataSource
         searchController?.searchResultsDelegate = tableDataSource
         searchController?.delegate = self
-
-        // Do any additional setup after loading the view.
     }
     
+    /// Action method called when the back button is tapped.
+    ///
+    /// - Parameter _sender: The button initiating the action.
     @objc func backAction(_sender:UIButton)  {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    func didUpdateAutocompletePredictionsForTableDataSource(tableDataSource: GMSAutocompleteTableDataSource) {
-      // Turn the network activity indicator off.
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-      // Reload table data.
-      searchDisplayController?.searchResultsTableView.reloadData()
-    }
-
-    func didRequestAutocompletePredictionsForTableDataSource(tableDataSource: GMSAutocompleteTableDataSource) {
-      // Turn the network activity indicator on.
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-      // Reload table data.
-      searchDisplayController?.searchResultsTableView.reloadData()
-    }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
+
 extension PlaceSearch: GMSAutocompleteTableDataSourceDelegate {
     
-    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
-            print("Error: \(error)")
+    /// Notifies the delegate that autocomplete predictions have been updated.
+    ///
+    /// - Parameter tableDataSource: The table data source.
+    func didUpdateAutocompletePredictionsForTableDataSource(tableDataSource: GMSAutocompleteTableDataSource) {
+        // Turn off the network activity indicator.
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        // Reload table data.
+        searchDisplayController?.searchResultsTableView.reloadData()
+    }
 
+    /// Notifies the delegate that autocomplete predictions have been requested.
+    ///
+    /// - Parameter tableDataSource: The table data source.
+    func didRequestAutocompletePredictionsForTableDataSource(tableDataSource: GMSAutocompleteTableDataSource) {
+        // Turn on the network activity indicator.
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        // Reload table data.
+        searchDisplayController?.searchResultsTableView.reloadData()
     }
     
+    /// Tells the delegate that autocomplete predictions have failed with an error.
+    ///
+    /// - Parameters:
+    ///   - tableDataSource: The table data source.
+    ///   - error: The error that occurred.
+    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: Error) {
+        print("Error: \(error)")
+    }
     
+    /// Tells the delegate that a place has been selected from the autocomplete suggestions.
+    ///
+    /// - Parameters:
+    ///   - tableDataSource: The table data source.
+    ///   - place: The selected place.
     func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didAutocompleteWith place: GMSPlace) {
         searchDisplayController?.isActive = false
-    // Do something with the selected place.
-    print("Place name: \(place.name)")
-    print("Place address: \(place.formattedAddress)")
-    print("Place attributions: \(place.attributions)")
+        // Do something with the selected place.
+        print("Place name: \(place.name)")
+        print("Place address: \(place.formattedAddress)")
+        print("Place attributions: \(place.attributions)")
     }
     
-  func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
-    tableDataSource?.sourceTextHasChanged(searchString)
-    return false
-  }
-
-  func tableDataSource(tableDataSource: GMSAutocompleteTableDataSource, didFailAutocompleteWithError error: NSError) {
-    // TODO: Handle the error.
-    print("Error: \(error.description)")
-  }
-
-    func tableDataSource(_ tableDataSource: GMSAutocompleteTableDataSource, didSelect prediction: GMSAutocompletePrediction) -> Bool {
-    return true
-  }
+    /// Tells the delegate that the search display controller should reload the table for a search string.
+    ///
+    /// - Parameters:
+    ///   - controller: The search display controller.
+    ///   - searchString: The search string.
+    /// - Returns: A boolean value indicating whether the table should be reloaded.
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
+        tableDataSource?.sourceTextHasChanged(searchString)
+        return false
+    }
 }
-//extension PlaceSearch: UISearchBarDelegate {
-//
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//
-//        guard searchText.count >= 3 else {
-//            return
-//        }
-//
-//        searchCompleter.queryFragment = searchText
-//        let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
-//        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.0902, longitude: 95.7129), span: span)
-//        searchCompleter.region = region
-//        searchCompleter.filterType =  .locationsOnly
-//
-//    }
-//
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        searchCompleter.queryFragment = searchBar.text!
-//        searchBar .resignFirstResponder()
-//    }
-//
-//
-//}
-//
-//extension PlaceSearch: MKLocalSearchCompleterDelegate {
-//
-//    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-//        searchResults = completer.results
-//        searchResultsTableView.reloadData()
-//    }
-//
-//    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-//        // handle error
-//    }
-//}
-//
-//extension PlaceSearch: UITableViewDataSource {
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return searchResults.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let searchResult = searchResults[indexPath.row]
-//        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-//        cell.textLabel?.text = searchResult.title
-//        cell.detailTextLabel?.text = searchResult.subtitle
-//        cell.contentView.backgroundColor = UIColor.clear
-//        cell.backgroundColor = UIColor.clear
-//        cell.textLabel?.backgroundColor = UIColor.clear
-//        cell.detailTextLabel?.backgroundColor = UIColor.clear
-//
-//        return cell
-//    }
-//}
-//
-//extension PlaceSearch: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let completion = searchResults[indexPath.row]
-//        let searchRequest = MKLocalSearch.Request(completion: completion)
-//        let search = MKLocalSearch(request: searchRequest)
-//        search.start { (response, error) in
-//            let coordinate = response?.mapItems[0].placemark.coordinate
-//            print(String(describing: coordinate))
-//            let latitude = "\(coordinate?.latitude ?? 0)"
-//            let longitude = "\(coordinate?.longitude ?? 0)"
-
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Select City Notification"), object: nil)
-//            self.navigationController?.popViewController(animated: true)
-//        }
-//
-//
-//    }
-//
-//}

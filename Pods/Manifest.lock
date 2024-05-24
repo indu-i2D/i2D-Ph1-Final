@@ -4,16 +4,16 @@ PODS:
     - Alamofire (~> 5.8)
   - AlamofireNetworkActivityIndicator (3.1.0):
     - Alamofire (~> 5.1)
-  - AppAuth (1.7.3):
-    - AppAuth/Core (= 1.7.3)
-    - AppAuth/ExternalUserAgent (= 1.7.3)
-  - AppAuth/Core (1.7.3)
-  - AppAuth/ExternalUserAgent (1.7.3):
+  - AppAuth (1.7.5):
+    - AppAuth/Core (= 1.7.5)
+    - AppAuth/ExternalUserAgent (= 1.7.5)
+  - AppAuth/Core (1.7.5)
+  - AppAuth/ExternalUserAgent (1.7.5):
     - AppAuth/Core
-  - GoogleMaps/Base (7.4.0)
-  - GoogleMaps/Maps (7.4.0):
+  - GoogleMaps/Base (8.4.0)
+  - GoogleMaps/Maps (8.4.0):
     - GoogleMaps/Base
-  - GooglePlaces (7.4.0)
+  - GooglePlaces (8.5.0)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -22,11 +22,11 @@ PODS:
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 3.0, >= 1.5)
   - GTMSessionFetcher/Core (1.7.2)
-  - IQKeyboardManagerSwift (7.0.2)
+  - IQKeyboardManagerSwift (7.0.3)
   - KeychainSwift (20.0.0)
   - MBProgressHUD (1.2.0)
   - SideMenu (6.5.0)
-  - SwiftyJSON (5.0.1)
+  - SwiftyJSON (5.0.2)
   - TKFormTextField (0.3.1)
   - TwitterCore (3.2.0)
   - TwitterKit5 (5.2.0):
@@ -72,21 +72,21 @@ SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   AlamofireImage: 843953fa97bee5f561cf05d83abd759e590b068d
   AlamofireNetworkActivityIndicator: 6564782bd7b9e6c430ae67d9277af01907b01ca4
-  AppAuth: a13994980c1ec792f7e2e665acd4d4aa6be43240
-  GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
-  GooglePlaces: 544e908d94860bf6f8fc1865b80d2c7eb6b5f937
+  AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
+  GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
+  GooglePlaces: 426efb69051e7b460e16300ba63598687d10fa1a
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
-  IQKeyboardManagerSwift: d338c11a896e9f29603443700c4567e32f830c22
+  IQKeyboardManagerSwift: f9c5dc36cba16ddd2e51fa7d51c34a2e083029b5
   KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
-  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  SwiftyJSON: f5b1bf1cd8dd53cd25887ac0eabcfd92301c6a5a
   TKFormTextField: def6294d3d3bd944d864ee48d5cc6e36863d6ade
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit5: 64095dfefcf39be2355711ef27112d55e340d90e
 
-PODFILE CHECKSUM: 4c1ac8ca1dda1b319d69f625775d48f032d253cd
+PODFILE CHECKSUM: 0d25ba1bdde88a8db23ac3d6566e1698137a1bca
 
 COCOAPODS: 1.15.2

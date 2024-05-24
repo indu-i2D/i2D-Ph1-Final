@@ -1,19 +1,17 @@
 //
 //  ForgotModel.swift
-//  iDonate
+//  i2-Donate
 //
-//  Created by Im043 on 21/08/19.
-//  Copyright © 2019 Im043. All rights reserved.
-//
-
 import UIKit
 
+/// A structure representing the response model for the Forgot Password API.
 struct ForgotModel: Codable {
-    var status: Int?
-    var message: String?
-    var data: Forgotdata?
+    var status: Int? // The status code of the response.
+    var message: String? // A message accompanying the response status.
+    var data: Forgotdata? // Additional data related to the response.
 }
 
+/// A structure representing the data contained within the ForgotModel.
 struct Forgotdata: Codable {
-    var user_id: String?
+    var user_id: String? // The user ID associated with the forgot password request.
 }

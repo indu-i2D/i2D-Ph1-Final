@@ -1,21 +1,20 @@
 //
 //  ProcessingChargesView.swift
-//  iDonate
-//
-//  Created by Satheesh k on 08/07/20.
-//  Copyright © 2020 Im043. All rights reserved.
-//
+//  i2-Donate
 
 import UIKit
 
+/// A custom view for displaying processing charges related to a donation.
 class ProcessingChargesView: UIView {
     
+    /// The container view for holding all the UI elements.
     var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
+    /// The title label for the view.
     var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -24,6 +23,7 @@ class ProcessingChargesView: UIView {
         return label
     }()
     
+    /// The close button for dismissing the view.
     var closeBtn: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +31,7 @@ class ProcessingChargesView: UIView {
         return button
     }()
 
+    /// The label for displaying the donation amount title.
     var donationAmountTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +40,7 @@ class ProcessingChargesView: UIView {
         return label
     }()
     
+    /// The label for displaying the donation amount value.
     var donationAmountValue: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -49,106 +51,107 @@ class ProcessingChargesView: UIView {
     }()
 
 
-    var processingFeeTitle: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Processing Fee"
-        label.textColor = fontBlackColor
-        return label
-    }()
+    /// The label for displaying the processing fee title.
+        var processingFeeTitle: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "Processing Fee"
+            label.textColor = fontBlackColor
+            return label
+        }()
 
-    var processingFeeValue: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = fontBlackColor
-        label.text = "$ 2"
-        label.textAlignment = .right
+        /// The label for displaying the processing fee value.
+        var processingFeeValue: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = fontBlackColor
+            label.text = "$ 2"
+            label.textAlignment = .right
 
-        return label
-    }()
-
-
-    var merchantChargesTitle: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Merchant Charges\n(2.9% + $ 0.30)"
-        label.numberOfLines = 0
-        label.textColor = fontBlackColor
-        return label
-    }()
-
-    var merchantChargesValue: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = fontBlackColor
-        label.text = "$ 6.1"
-        label.textAlignment = .right
-
-        return label
-    }()
-
-    var seperatorLable: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = fontBlackColor
-        return label
-    }()
-    
-    var totalAmountTitle: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Total amount"
-        label.textColor = fontBlackColor
-        return label
-    }()
-
-    var totalAmountValue: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = fontBlackColor
-        label.text = "$ 208.1"
-        label.textAlignment = .right
-
-        return label
-    }()
+            return label
+        }()
 
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+        /// The label for displaying the merchant charges title.
+        var merchantChargesTitle: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "Merchant Charges\n(2.9% + $ 0.30)"
+            label.numberOfLines = 0
+            label.textColor = fontBlackColor
+            return label
+        }()
+
+        /// The label for displaying the merchant charges value.
+        var merchantChargesValue: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = fontBlackColor
+            label.text = "$ 6.1"
+            label.textAlignment = .right
+
+            return label
+        }()
+
+        /// The label for displaying the separator line.
+        var seperatorLable: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.backgroundColor = fontBlackColor
+            return label
+        }()
         
-        containerView.addSubview(titleLabel)
-        containerView.addSubview(closeBtn)
-        containerView.addSubview(donationAmountTitle)
-        containerView.addSubview(donationAmountValue)
-        containerView.addSubview(processingFeeTitle)
-        containerView.addSubview(processingFeeValue)
-        containerView.addSubview(merchantChargesTitle)
-        containerView.addSubview(merchantChargesValue)
-        containerView.addSubview(seperatorLable)
-        containerView.addSubview(totalAmountTitle)
-        containerView.addSubview(totalAmountValue)
-        
-        containerView.backgroundColor = ivoryColor
-        containerView.layer.cornerRadius = 10.0
-        self.addSubview(containerView)
-        
-        setUpView()
+        /// The label for displaying the total amount title.
+        var totalAmountTitle: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "Total amount"
+            label.textColor = fontBlackColor
+            return label
+        }()
 
-    }
+        /// The label for displaying the total amount value.
+        var totalAmountValue: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = fontBlackColor
+            label.text = "$ 208.1"
+            label.textAlignment = .right
+
+            return label
+        }()
+
+        /// Initializes and returns a newly allocated view object with the specified frame rectangle.
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            // Add subviews to the container view
+            containerView.addSubview(titleLabel)
+            containerView.addSubview(closeBtn)
+            containerView.addSubview(donationAmountTitle)
+            containerView.addSubview(donationAmountValue)
+            containerView.addSubview(processingFeeTitle)
+            containerView.addSubview(processingFeeValue)
+            containerView.addSubview(merchantChargesTitle)
+            containerView.addSubview(merchantChargesValue)
+            containerView.addSubview(seperatorLable)
+            containerView.addSubview(totalAmountTitle)
+            containerView.addSubview(totalAmountValue)
+            
+            // Customize container view
+            containerView.backgroundColor = ivoryColor
+            containerView.layer.cornerRadius = 10.0
+            self.addSubview(containerView)
+            
+            // Set up the view layout
+            setUpView()
+            
+        }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+    /// Sets up the layout constraints for the view's subviews.
     func setUpView() {
         
         NSLayoutConstraint.activate([containerView.heightAnchor.constraint(equalToConstant: 250),

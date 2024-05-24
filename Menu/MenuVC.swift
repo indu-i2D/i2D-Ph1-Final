@@ -1,10 +1,6 @@
 //
 //  MenuVC.swift
-//  iDonate
-//
-//  Created by sureshkumar on 05/05/19.
-//  Copyright © 2019 Im043. All rights reserved.
-//
+//  i2-Donate
 
 import UIKit
 import AlamofireImage
@@ -12,55 +8,66 @@ import Alamofire
 import SafariServices
 import MBProgressHUD
 
-class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
+/// ViewController for displaying the menu options and user profile.
+class MenuVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
+    /// TableView displaying the menu options.
     @IBOutlet var menuList: UITableView!
+    
+    /// ImageView displaying the user's profile picture.
     @IBOutlet var profileImage: UIImageView!
+    
+    /// Label displaying the user's name.
     @IBOutlet var namelbl: UILabel!
     
+    /// Array containing the menu options.
     var menuArrayList = [String]()
-    let imagesArray = ["notification","settings","about","helpsupport","logout"]
+    
+    /// Array containing the names of the menu icons.
+    let imagesArray = ["notification", "settings", "about", "helpsupport", "logout"]
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         updateProfile()
         
+        // Customize view appearance
         self.view.borderColor = iDonatecolor.menuBackColor
         
-        if((UserDefaults.standard.value(forKey: "people")) != nil){
-            menuArrayList = ["My Notifications","My Settings","About i2~Donate","Help/Support","Logout"]
-        }
-        else{
-            menuArrayList = ["My Notifications","My Settings","About i2~Donate","Help/Support","Login"]
+        // Set up menu options based on user authentication status
+        if UserDefaults.standard.data(forKey: "people") != nil {
+            menuArrayList = ["My Notifications", "My Settings", "About i2~Donate", "Help/Support", "Logout"]
+        } else {
+            menuArrayList = ["My Notifications", "My Settings", "About i2~Donate", "Help/Support", "Login"]
         }
         
-        
-        if(iDonateClass.hasSafeArea){
+        // Adjust menu button position for devices with safe area
+        if iDonateClass.hasSafeArea {
             menuBtn.frame = CGRect(x: 0, y: 40, width: 50, height: 50)
-        }
-        else{
+        } else {
             menuBtn.frame = CGRect(x: 0, y: 20, width: 50, height: 50)
         }
         
+        // Add menu button and set its action
         menuBtn.addTarget(self, action: #selector(menuAction), for: .touchUpInside)
-        self.view .addSubview(menuBtn)
+        self.view.addSubview(menuBtn)
         menuBtn.setImage(UIImage(named: "back"), for: .normal)
-
-        self.profileImage.layer.cornerRadius = 50//self.profileImage.frame.size.width / 2
+        
+        // Customize profile image view
+        self.profileImage.layer.cornerRadius = 50
         self.profileImage.clipsToBounds = true
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         updateProfile()
     }
     
+    /// Action method to dismiss the menu.
     @objc func menuAction() {
         dismiss(animated: true, completion: nil)
     }
     
+    // Function to show login alert if user attempts to access authenticated features without logging in
     func showLoginAlert(){
         let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
         let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
@@ -78,6 +85,9 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
         alertController.addAction(cancel)
         self.present(alertController, animated: true, completion: nil)
     }
+    /// Action method to navigate to the update profile screen.
+       ///
+       /// - Parameter sender: The button triggering the action.
     @IBAction func updatection(_ sender:UIButton) {
         if UserDefaults.standard.data(forKey: "people") != nil{
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UpdateProfileVC") as! UpdateProfileVC
@@ -89,7 +99,8 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
             self.showLoginAlert()
         }
     }
-    
+    // Function to update user profile information
+
     func updateProfile() {
 
         if let data = UserDefaults.standard.data(forKey: "people"),
@@ -113,7 +124,8 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
             print("There is an issue")
         }
     }
-    
+    // MARK: - UITableView Delegate and DataSource Methods
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuArrayList.count
     }
@@ -167,19 +179,14 @@ class MenuVC:BaseViewController,UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+   
     
 }
-
+/// Custom UITableViewCell for displaying menu options.
 class menuTableviewCell:UITableViewCell{
+    /// ImageView displaying the menu option icon.
     @IBOutlet var logoImage: UIImageView!
+    
+    /// Label displaying the menu option title.
     @IBOutlet var titleLbl: UILabel!
 }

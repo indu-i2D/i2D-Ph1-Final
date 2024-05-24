@@ -14,9 +14,10 @@ import TKFormTextField
 //import Braintree
 import MBProgressHUD
 import WebKit
+import SafariServices
 //import BraintreeDropIn
 
-class SearchDetailsVC: BaseViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITabBarDelegate,UITextFieldDelegate,WKNavigationDelegate,WKScriptMessageHandler, WKUIDelegate{
+class SearchDetailsVC: BaseViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITabBarDelegate,UITextFieldDelegate,WKNavigationDelegate,WKScriptMessageHandler, WKUIDelegate, SFSafariViewControllerDelegate{
     var charityList:charityListArray?
     let browseList = ["Leadership & Team","Values","Impact","Contact"]
     @IBOutlet var browseCollectionList: UICollectionView!
@@ -34,7 +35,7 @@ class SearchDetailsVC: BaseViewController,UICollectionViewDelegate,UICollectionV
     var followResponse :  FollowModel?
     var userID:String = ""
     var donateFlag:Bool = false
-    weak var payDelegate: paymentDelegate?
+    weak var payDelegate: PaymentDelegate?
     var webView: WKWebView!
     var webViewContainer: UIView!
     var backButton: UIButton!
@@ -316,13 +317,13 @@ class SearchDetailsVC: BaseViewController,UICollectionViewDelegate,UICollectionV
                         // Initialize the WKWebView if not already done
                        
 
-                        // Load the payment URL in the WKWebView
-                        self.webView.load(URLRequest(url: paymentURL))
-                        // Add the WKWebView to the view hierarchy
-                        self.view.addSubview(self.webView)
+                        let safariViewController = SFSafariViewController(url: paymentURL)
+                        safariViewController.delegate = self
+                        self.present(safariViewController, animated: true, completion: nil)
                     } else {
-                        // Handle error if URL is missing or invalid
+                        print("Error: Invalid payment URL")
                     }
+                    
                 }) { (error) in
                     // Hide loading indicator
                     MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)

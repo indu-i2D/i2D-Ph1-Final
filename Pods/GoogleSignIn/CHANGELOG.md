@@ -114,7 +114,7 @@
 - Bug fixes
 
 # 2015-05-21 -- v2.0.0
-- Supports sign-in via  rather than app switching to a browser,
+- Supports sign-in via UIWebView rather than app switching to a browser,
   configurable with the new `allowsSignInWithWebView` property.
 - Now apps which have disabled the app switch to a browser via the
   `allowsSignInWithBrowser` and in-app web view via `allowsSignInWithWebView`

@@ -1,95 +1,138 @@
 //
 //  SubTypesViewController.swift
-//  iDonate
-//
-//  Created by Satheesh k on 27/06/20.
-//  Copyright © 2020 Im043. All rights reserved.
-//
+//  i2-Donate
+
 
 import UIKit
 
+/// View controller to display subtypes of selected category.
 class SubTypesViewController: BaseViewController {
-
-    @IBOutlet weak var subTypesTableView : UITableView!
-    @IBOutlet weak var bottomView : UIView!
-    @IBOutlet weak var applyBtn : UIButton!
-    @IBOutlet weak var resetBtn : UIButton!
-    @IBOutlet weak var headerLbl : UILabel!
     
-    var selectedType : Types?
+    // MARK: - IBOutlets
     
-    var selectedSubTypesCodeArray = [String]()
-    var selectedChildTypesCodeArray = [String]()
-    var selectedSubTypesIndexArray = [Int]()
+    @IBOutlet weak var subTypesTableView: UITableView!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var applyBtn: UIButton!
+    @IBOutlet weak var resetBtn: UIButton!
+    @IBOutlet weak var headerLbl: UILabel!
     
-    var selectedCategoryCode = String()
-    var taxDeductible = String()
-
-    var selectedSubtypesandChildTypes = [String:[String]]()
+    // MARK: - Properties
     
-    var countryCode = ""
-    var latitude = ""
-    var longitude = ""
-    var address = ""
-    var comingFromType = false
-    var searchNameKey = ""
+    var selectedType: Types? // Selected category type
+    var selectedSubTypesCodeArray = [String]() // Array to store selected subtype codes
+    var selectedChildTypesCodeArray = [String]() // Array to store selected child type codes
+    var selectedSubTypesIndexArray = [Int]() // Array to store selected subtype indexes
+    var selectedCategoryCode = String() // Selected category code
+    var taxDeductible = String() // Tax deductible status
+    var selectedSubtypesandChildTypes = [String: [String]]() // Dictionary to store selected subtypes and child types
+    var countryCode = "" // Country code
+    var latitude = "" // Latitude
+    var longitude = "" // Longitude
+    var address = "" // Address
+    var comingFromType = false // Indicates if coming from type
+    var searchNameKey = "" // Search name key
+    
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if(iDonateClass.hasSafeArea){
+        
+        // Set menu button frame based on safe area
+        if iDonateClass.hasSafeArea {
             menuBtn.frame = CGRect(x: 0, y: 40, width: 50, height: 50)
-        } else{
+        } else {
             menuBtn.frame = CGRect(x: 0, y: 20, width: 50, height: 50)
         }
         
-        menuBtn.addTarget(self, action: #selector(backAction(_sender:)), for: .touchUpInside)
-        self.view .addSubview(menuBtn)
+        // Add action for menu button
+        menuBtn.addTarget(self, action: #selector(backAction(_:)), for: .touchUpInside)
+        self.view.addSubview(menuBtn)
         menuBtn.setImage(UIImage(named: "back"), for: .normal)
         
+        // Set header label text
         headerLbl.text = selectedType?.category_name?.capitalized
         
+        // Set table view delegate and data source
         subTypesTableView.delegate = self
         subTypesTableView.dataSource = self
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        // Set content inset for table view
         self.subTypesTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    @objc func backAction(_sender:UIButton)  {
-        
-        let alert = UIAlertController(title: "", message: "Returning To previous screen without making changes?", preferredStyle: .alert)
+    
+    // MARK: - Actions
+    
+    /// Action to handle navigation back to the previous screen.
+    @objc func backAction(_ sender: UIButton) {
+        let alert = UIAlertController(title: "", message: "Returning to the previous screen without making changes?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             self.navigationController?.popViewController(animated: true)
         }))
-        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
-        }))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    /// Performs necessary actions when the "Apply" button is tapped.
+    @IBAction func applyAction(_ sender: Any) {
+        // Retrieve selected subtype and child type codes
+        selectedSubTypesCodeArray = Array(selectedSubtypesandChildTypes.keys)
+        selectedChildTypesCodeArray = Array(selectedSubtypesandChildTypes.values).flatMap { $0 }
+        selectedCategoryCode = selectedType?.category_code ?? ""
         
+        // Navigate to different view controllers based on the country code
+        switch countryCode {
+        case "US":
+            // If the country code is "US", navigate to the SearchByLocationVC for United States.
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
+            vc?.headerTitleText = "UNITED STATES"
+            vc?.country = countryCode
+            vc?.deductible = taxDeductible
+            vc?.subCategoryCode = selectedSubTypesCodeArray
+            vc?.childCategory = selectedChildTypesCodeArray
+            vc?.categoryCode = [selectedCategoryCode]
+            vc?.locationSearch = address
+            vc?.hidesBottomBarWhenPushed = false
+            self.navigationController?.pushViewController(vc!, animated: true)
+        case "INT":
+            // If the country code is "INT", navigate to the SearchByLocationVC for international charities registered in the USA.
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
+            vc?.headerTitleText = "INTERNATIONAL CHARITIES REGISTERED IN USA"
+            vc?.country = countryCode
+            vc?.deductible = taxDeductible
+            vc?.subCategoryCode = selectedSubTypesCodeArray
+            vc?.childCategory = selectedChildTypesCodeArray
+            vc?.categoryCode = [selectedCategoryCode]
+            vc?.locationSearch = address
+            vc?.hidesBottomBarWhenPushed = false
+            self.navigationController?.pushViewController(vc!, animated: true)
+        default:
+            // For other countries, navigate to the SearchByNameVC to search by name.
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByNameVC") as? SearchByNameVC
+            vc?.deductible = taxDeductible
+            vc?.subCategoryCode = selectedSubTypesCodeArray
+            vc?.childCategory = selectedChildTypesCodeArray
+            vc?.categoryCode = [selectedCategoryCode]
+            vc?.locationSearch = address
+            vc?.comingFromType = comingFromType
+            vc?.searchedName = self.searchNameKey
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
     }
 }
+// MARK: - UITableViewDataSource
 
-extension SubTypesViewController: UITableViewDataSource, UITableViewDelegate {
+extension SubTypesViewController: UITableViewDataSource,UITableViewDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        // Return the number of sections based on the subcategories of the selected type
         return selectedType?.subcategory?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            
-        if selectedSubTypesIndexArray.contains(section){
+        // Return the number of rows in each section based on the child categories
+        if selectedSubTypesIndexArray.contains(section) {
             return selectedType?.subcategory?[section].child_category?.count ?? 0
         } else {
             return 0
@@ -97,20 +140,24 @@ extension SubTypesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Set the height of each row in the table view
         return 40
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        // Set the height of each section header
         return 50
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // Configure and return the view for each section header
         let headerCell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as! CustomCell
         headerCell.headertitle.text = selectedType?.subcategory?[section].sub_category_name
         headerCell.selectbtn.tag = section
         headerCell.selectbtn.addTarget(self, action: #selector(selectedSectionStoredButtonClicked(sender:)), for: .touchUpInside)
         headerCell.plusIMage.contentMode = .center
         
+        // Configure the appearance of the section header based on its expansion state
         if selectedType?.subcategory?[section].child_category?.count ?? 0 > 0 {
             headerCell.plusIMage.isHidden = false
             headerCell.headertitle.font = boldSystem17
@@ -118,29 +165,68 @@ extension SubTypesViewController: UITableViewDataSource, UITableViewDelegate {
             headerCell.plusIMage.isHidden = true
             headerCell.headertitle.font = systemFont18
         }
-    
-        if selectedSubTypesIndexArray.contains(section){
+        
+        if selectedSubTypesIndexArray.contains(section) {
             headerCell.selectbtn.isSelected = true
             headerCell.plusIMage.image = #imageLiteral(resourceName: "minus")
         } else {
             headerCell.selectbtn.isSelected = false
             headerCell.plusIMage.image = #imageLiteral(resourceName: "plus")
         }
-
+        
         return headerCell
     }
-    
+    @objc func selectedSectionStoredButtonClicked (sender : UIButton) {
+            
+            if selectedSubTypesIndexArray.contains(sender.tag){
+                
+                selectedSubTypesIndexArray = selectedSubTypesIndexArray.filter { $0 != sender.tag }
+                
+                selectedSubTypesCodeArray = selectedSubTypesCodeArray.filter { $0 != (selectedType?.subcategory?[sender.tag].sub_category_code)! }
+
+                selectedChildTypesCodeArray.removeAll()
+                
+                selectedSubtypesandChildTypes.removeValue(forKey: (selectedType?.subcategory?[sender.tag].sub_category_code)!)
+                
+            } else{
+                
+                selectedSubTypesIndexArray.append(sender.tag)
+                selectedSubTypesCodeArray.append((selectedType?.subcategory?[sender.tag].sub_category_code)!)
+                
+                selectedChildTypesCodeArray.removeAll()
+                
+                if selectedType?.subcategory?[sender.tag].child_category?.count ?? 0 > 0 {
+                    for child in (selectedType?.subcategory?[sender.tag].child_category!)!  {
+                        selectedChildTypesCodeArray.append(child.child_category_code!)
+                    }
+                }
+                
+                selectedSubtypesandChildTypes[(selectedType?.subcategory?[sender.tag].sub_category_code)!] = selectedChildTypesCodeArray
+                
+            }
+            
+            print(selectedSubtypesandChildTypes)
+            
+            if Array(selectedSubtypesandChildTypes.keys).count > 0{
+                self.bottomView.isHidden = false
+            } else {
+                self.bottomView.isHidden = true
+            }
+            
+            subTypesTableView.reloadData()
+            
+        }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        // Configure and return the cell for each row in the table view
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell2") as! CustomCell
         cell.headertitle.text = selectedType?.subcategory?[indexPath.section].child_category?[indexPath.row].child_category_name
         cell.selectbtn.tag = indexPath.row
         cell.selectbtn.isUserInteractionEnabled = false
         
+        // Configure the selection state of the cell based on the selected subtypes and child types
         let selectedChild = selectedType?.subcategory?[indexPath.section].child_category?[indexPath.row].child_category_code ?? ""
-
         let childTypesCode = selectedSubtypesandChildTypes[(selectedType?.subcategory?[indexPath.section].sub_category_code) ?? ""]
-
+        
         if (childTypesCode?.contains(selectedChild) ?? true) {
             cell.selectbtn.isSelected = true
         } else {
@@ -149,154 +235,8 @@ extension SubTypesViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
-    
-    @objc func selectedSectionStoredButtonClicked (sender : UIButton) {
-        
-        if selectedSubTypesIndexArray.contains(sender.tag){
-            
-            selectedSubTypesIndexArray = selectedSubTypesIndexArray.filter { $0 != sender.tag }
-            
-            selectedSubTypesCodeArray = selectedSubTypesCodeArray.filter { $0 != (selectedType?.subcategory?[sender.tag].sub_category_code)! }
-
-            selectedChildTypesCodeArray.removeAll()
-            
-            selectedSubtypesandChildTypes.removeValue(forKey: (selectedType?.subcategory?[sender.tag].sub_category_code)!)
-            
-        } else{
-            
-            selectedSubTypesIndexArray.append(sender.tag)
-            selectedSubTypesCodeArray.append((selectedType?.subcategory?[sender.tag].sub_category_code)!)
-            
-            selectedChildTypesCodeArray.removeAll()
-            
-            if selectedType?.subcategory?[sender.tag].child_category?.count ?? 0 > 0 {
-                for child in (selectedType?.subcategory?[sender.tag].child_category!)!  {
-                    selectedChildTypesCodeArray.append(child.child_category_code!)
-                }
-            }
-            
-            selectedSubtypesandChildTypes[(selectedType?.subcategory?[sender.tag].sub_category_code)!] = selectedChildTypesCodeArray
-            
-        }
-        
-        print(selectedSubtypesandChildTypes)
-        
-        if Array(selectedSubtypesandChildTypes.keys).count > 0{
-            self.bottomView.isHidden = false
-        } else {
-            self.bottomView.isHidden = true
-        }
-        
-        subTypesTableView.reloadData()
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: false)
-        
-        var childTypesCode = selectedSubtypesandChildTypes[(selectedType?.subcategory?[indexPath.section].sub_category_code)!]
-        
-        let selectedChild = selectedType?.subcategory?[indexPath.section].child_category?[indexPath.row].child_category_code ?? ""
-        
-        if (childTypesCode?.contains(selectedChild)) ?? true {
-            childTypesCode = childTypesCode?.filter {$0 != selectedChild}
-        } else {
-            childTypesCode?.append(selectedChild)
-        }
-       
-        selectedSubtypesandChildTypes[(selectedType?.subcategory?[indexPath.section].sub_category_code)!] = childTypesCode ?? [String]()
-        
-        if  childTypesCode?.count ?? 0 < selectedSubtypesandChildTypes[(selectedType?.subcategory?[indexPath.section].sub_category_code)!]?.count ?? 0 {
-
-            selectedSubTypesIndexArray = selectedSubTypesIndexArray.filter { $0 != indexPath.section }
-            
-            selectedSubTypesCodeArray = selectedSubTypesCodeArray.filter { $0 != (selectedType?.subcategory?[indexPath.section].sub_category_code)! }
-            
-        }
-        
-        print(selectedSubtypesandChildTypes)
-                
-        self.subTypesTableView.reloadData()
-        
-    }
-    
-    @IBAction func applyAction(_ sender: Any) {
-        
-        print("selectedSubTypesCodeArray", selectedSubTypesCodeArray)
-        print("selectedChildTypesCodeArray", selectedChildTypesCodeArray)
-        
-        selectedSubTypesCodeArray = Array(selectedSubtypesandChildTypes.keys)
-        selectedChildTypesCodeArray =  Array(selectedSubtypesandChildTypes.values).flatMap { $0 }
-        selectedCategoryCode = selectedType?.category_code ?? ""
-
-        
-        switch countryCode {
-        case "US":
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
-            vc?.headertitle = "UNITED STATES"
-            vc?.country = countryCode
-            vc?.deductible = taxDeductible
-            vc?.subCategoryCode = selectedSubTypesCodeArray
-            vc?.childCategory = selectedChildTypesCodeArray
-            vc?.categoryCode = [selectedCategoryCode]
-            vc?.locationSearch = address
-            vc?.hidesBottomBarWhenPushed = false
-            self.navigationController?.pushViewController(vc!, animated: true)
-            break
-        case "INT":
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
-            vc?.headertitle = "INTERNATIONAL CHARITIES REGISTERED IN USA"
-            vc?.country = countryCode
-            vc?.deductible = taxDeductible
-            vc?.subCategoryCode = selectedSubTypesCodeArray
-            vc?.childCategory = selectedChildTypesCodeArray
-            vc?.categoryCode = [selectedCategoryCode]
-            vc?.locationSearch = address
-            vc?.hidesBottomBarWhenPushed = false
-            self.navigationController?.pushViewController(vc!, animated: true)
-            break
-        default:
-             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByNameVC") as? SearchByNameVC
-             vc?.deductible = taxDeductible
-             vc?.subCategoryCode = selectedSubTypesCodeArray
-             vc?.childCategory = selectedChildTypesCodeArray
-             vc?.categoryCode = [selectedCategoryCode]
-             vc?.locationSearch = address
-             vc?.comingFromType = comingFromType
-             vc?.searchedName = self.searchNameKey
-             self.navigationController?.pushViewController(vc!, animated: true)
-            break
-        }
-                
-                
-    }
-    
-    @IBAction func resetAction(_ sender: Any) {
-        selectedSubtypesandChildTypes.removeAll()
-        selectedSubTypesIndexArray.removeAll()
-        selectedChildTypesCodeArray.removeAll()
-        selectedSubTypesCodeArray.removeAll()
-        self.subTypesTableView.reloadData()
-        self.bottomView.isHidden = true
-    }
-    
-    // MARK: - tabBar  delegate methods
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController
-        if(item.tag == 0){
-            UserDefaults.standard.set(0, forKey: "tab")
-            UserDefaults.standard.synchronize()
-            self.navigationController?.pushViewController(vc!, animated: false)
-        }
-        else{
-            UserDefaults.standard.set(1, forKey: "tab")
-            UserDefaults.standard.synchronize()
-            self.navigationController?.pushViewController(vc!, animated: false)
-        }
-    }
 }
-
+///The headercustomCell class is  subclass of UITableViewCell, indicating that it's used for displaying cells in a UITableView. This particular cell seems to be designed for displaying headers or sections within the table view.
 class headercustomCell:UITableViewCell{
     
     @IBOutlet weak var headertitle: UILabel!
@@ -308,7 +248,7 @@ class headercustomCell:UITableViewCell{
 
 }
 
-
+///The CustomCell class extends the functionality of UITableViewCell by adding specific outlets for UI elements that are used to customize the appearance of the cell. These outlets allow developers to access and manipulate the UI elements directly from code.
 class CustomCell:UITableViewCell {
     @IBOutlet weak var headertitle: UILabel!
     @IBOutlet weak var selectbtn: UIButton!

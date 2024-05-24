@@ -124,6 +124,7 @@ public extension URLRequest {
         self.addValue(sig, forHTTPHeaderField: "Authorization")
     }
 }
+////// ## Pure Swift implementation of the OAuth 1.0 protocol as an easy to use extension for the URLRequest type.
 
 class OAuthHandler {
     static var shared: OAuthHandler = OAuthHandler()
