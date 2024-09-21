@@ -74,12 +74,12 @@ class NewViewfromadvancedSearchViewController: BaseViewController {
             // Instantiate and configure view controller for the United States
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
             // Configure view controller properties
-            vc?.headerTitleText = "UNITED STATES"
+            vc?.headertitle = "UNITED STATES"
             vc?.country = countryCode
             vc?.deductible = deductible
             vc?.locationSearch = address
-            vc?.latitude = latitude
-            vc?.longitude = longitude
+            vc?.lattitude = latitude
+            vc?.longitute = longitude
             vc?.isFromAdvanceSearch = true
             vc?.hidesBottomBarWhenPushed = false
             // Push the view controller to the navigation stack
@@ -88,12 +88,12 @@ class NewViewfromadvancedSearchViewController: BaseViewController {
         case "INT":
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
             // Configure view controller properties
-            vc?.headerTitleText = "INTERNATIONAL CHARITIES REGISTERED IN USA"
+            vc?.headertitle = "INTERNATIONAL CHARITIES REGISTERED IN USA"
             vc?.country = countryCode
             vc?.deductible = deductible
             vc?.locationSearch = address
-            vc?.latitude = latitude
-            vc?.longitude = longitude
+            vc?.lattitude = latitude
+            vc?.longitute = longitude
             vc?.isFromAdvanceSearch = true
             vc?.hidesBottomBarWhenPushed = false
             // Push the view controller to the navigation stack

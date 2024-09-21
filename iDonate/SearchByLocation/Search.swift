@@ -825,11 +825,11 @@ class SearchByLocation: BaseViewController,UITableViewDelegate,UITableViewDataSo
         let cell = searchTableView.dequeueReusableCell(withIdentifier: "searchcell") as! SearchTableViewCell
         cell.title.text = charity.name
         cell.address.text = charity.street!+","+charity.city!
-        let likeString = charity.likeCount! + " Likes"
+        let likeString = charity.like_count! + " Likes"
         cell.likeBtn.setTitle(likeString, for: .normal)
         let placeholderImage = UIImage(named: "defaultImageCharity")!
         print(likeString)
-        print(charity.likeCount)
+        print(charity.like_count)
         print(charity.liked)
         if charity.logo != nil && charity.logo != "" {
             let url = URL(string: charity.logo ?? "")!

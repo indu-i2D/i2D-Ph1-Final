@@ -337,7 +337,7 @@ class AnnualRevenueViewController: BaseViewController {
             case "US":
                 // Instantiate the SearchByLocationVC for US
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
-                vc?.headerTitleText = "UNITED STATES" // Set the header title
+                vc?.headertitle = "UNITED STATES" // Set the header title
                 vc?.country = countryCode // Pass the country code
                 vc?.deductible = taxDeductible // Pass tax deductible status
                 vc?.incomeFrom = incomeFrom // Pass income from value
@@ -349,7 +349,7 @@ class AnnualRevenueViewController: BaseViewController {
             case "INT":
                 // Instantiate the SearchByLocationVC for international charities
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
-                vc?.headerTitleText = "INTERNATIONAL CHARITIES REGISTERED IN USA" // Set the header title
+                vc?.headertitle = "INTERNATIONAL CHARITIES REGISTERED IN USA" // Set the header title
                 vc?.country = countryCode // Pass the country code
                 vc?.deductible = taxDeductible // Pass tax deductible status
                 vc?.incomeFrom = incomeFrom // Pass income from value

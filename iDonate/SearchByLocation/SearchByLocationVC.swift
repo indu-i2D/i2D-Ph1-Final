@@ -1,7 +1,10 @@
 //
-//  i2-Donate
+//  SearchByNameVC.swift
+//  iDonate
 //
-
+//  Created by Im043 on 13/05/19.
+//  Copyright © 2019 Im043. All rights reserved.
+//
 
 import UIKit
 import MBProgressHUD
@@ -11,193 +14,170 @@ import TKFormTextField
 import WebKit
 import SafariServices
 
-
-/// `SearchByLocationVC`: This module handles the search functionality by location.
 //MARK: Protocols
-/**
- Protocol to communicate search results based on city.
- */
 protocol SearchByCityDelegate {
     func getCharityListFromPlaces(inputDetails: [String:String])
 }
-// Global variables
-var searchBool1 = false // Flag indicating search state
-var searchBool2 = false // Another flag indicating search state
-
-// `SearchByLocationVC`: This module handles the search functionality by location.
-///
-// This module includes the `SearchByLocationVC` class, which is responsible for managing the search functionality
-/// based on location. It conforms to various protocols and manages UI components and data variables related to
-/// searching for charities.
-// Main view controller class
-class SearchByLocationVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, UISearchBarDelegate, SearchByCityDelegate, WKNavigationDelegate, WKUIDelegate, SFSafariViewControllerDelegate {
-
+var searchBool1 = false
+var searchBool2 = false
+class SearchByLocationVC: BaseViewController,UITableViewDelegate,UITableViewDataSource,UITabBarDelegate,UISearchBarDelegate,SearchByCityDelegate ,WKNavigationDelegate,WKScriptMessageHandler, WKUIDelegate, SFSafariViewControllerDelegate{
     //MARK: Outlets
-    
-    // UI components outlets
-    @IBOutlet var notificationTabBar: UITabBar! // Tab bar for notifications
-    @IBOutlet var searchTableView: UITableView! // Table view for displaying search results
-    @IBOutlet var searchBar: UISearchBar! // Search bar for searching
-    @IBOutlet var searchScrollBar: UISearchBar! // Another search bar
-    @IBOutlet var containerView: UIView! // Container view
-    @IBOutlet var searchBarView: UIView! // Search bar view
-    @IBOutlet var innersearchBarView: UIView! // Inner search bar view
-    @IBOutlet var namebtn: UIButton! // Button for name
-    @IBOutlet var nameScrollbtn: UIButton! // Button for scrolling name
-    @IBOutlet var typebtn: UIButton! // Button for type
-    @IBOutlet var scrollTypebtn: UIButton! // Button for scrolling type
-    @IBOutlet var locationNameText: UILabel! // Label for location name
-    @IBOutlet weak var searchBarConstraint: NSLayoutConstraint! // Search bar constraint
-    @IBOutlet weak var scrollConstraint: NSLayoutConstraint! // Scroll constraint
-    @IBOutlet var noresultsview: UIView! // View for no results
-    @IBOutlet var noresultMessage: UILabel! // Message for no results
-    @IBOutlet var headerTitle: UILabel! // Header title
-    @IBOutlet var blurView: UIVisualEffectView! // Blur view
-    @IBOutlet var cancelBtn: UIButton! // Cancel button
-    @IBOutlet var continuePaymentBtn: UIButton! // Continue payment button
-    @IBOutlet var amountText: UITextField! // Text field for amount
-    var isFromAdvanceSearch = false // Flag indicating if from advance search
+    @IBOutlet var notificationTabBar: UITabBar!
+    @IBOutlet var searchTableView: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var searchScrollBar: UISearchBar!
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var searchBarView: UIView!
+    @IBOutlet var innersearchBarView: UIView!
+    @IBOutlet var namebtn: UIButton!
+    @IBOutlet var nameScrollbtn: UIButton!
+    @IBOutlet var  typebtn: UIButton!
+    @IBOutlet var  Scrolltypebtn: UIButton!
+    @IBOutlet var  locationNameText: UILabel!
+    @IBOutlet weak var searchBarConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollcontraint: NSLayoutConstraint!
+    @IBOutlet var noresultsview: UIView!
+    @IBOutlet var noresultMEssage: UILabel!
+    @IBOutlet var headerTitle: UILabel!
+    @IBOutlet var blurView: UIVisualEffectView!
+    @IBOutlet var cancelBtn : UIButton!
+    @IBOutlet var continuePaymentBTn : UIButton!
+    @IBOutlet var amountText: UITextField!
+    var isFromAdvanceSearch = false
     
     //MARK: Variables
+    var selectedCharity:CharityListArray? = nil
+    var placesDelegate:SearchByCityDelegate?
+    var processingCharges = ProcessingChargesView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
+
+    var webView: WKWebView!
+
+    var donateFlag:Bool = false
+    var nameFlg:Bool = false
+    var charityResponse :  CharityModel?
+    var charityLikeResponse :  CharityLikeModel?
+    var charityFollowResponse :  FollowModel?
+    var charityListArray : [CharityListArray]?
+    var filterdCharityListArray : [CharityListArray]?
+    var isFiltering:Bool = false
+    var longitute:String = ""
+    var lattitude:String = ""
+    var locationSearch:String = "Nonprofits"
+    var userID:String = ""
+    var selectedIndex:Int = -1
+    var headertitle:String = ""
+    var country: String = "US"
+    var categoryCode : [String]?
+    var subCategoryCode : [String]?
+    var childCategory : [String]?
+    var deductible = String()
+
+    var likeActionTriggered = false
     
-    // Data variables
-    var selectedCharity: CharityListArray? = nil // Selected charity
-    var placesDelegate: SearchByCityDelegate? // Delegate for search by city
-    var processingCharges = ProcessingChargesView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)) // Processing charges view
-    var webView: WKWebView! // Web view
-    var donateFlag: Bool = false // Flag for donation
-    var nameFlg: Bool = false // Flag for name
-    var charityResponse: CharityModel? // Charity response model
-    var charityLikeResponse: CharityLikeModel? // Charity like response model
-    var charityFollowResponse: FollowModel? // Charity follow response model
-    var charityListArray: [CharityListArray]? // Array of charity list
-    var filteredCharityListArray: [CharityListArray]? // Array of filtered charity list
-    var isFiltering: Bool = false // Flag indicating if filtering
-    var longitude: String = "" // Longitude
-    var latitude: String = "" // Latitude
-    var locationSearch: String = "Nonprofits" // Location search string
-    var userID: String = "" // User ID
-    var selectedIndex: Int = -1 // Selected index
-    var headerTitleText: String = "" // Header title text
-    var country: String = "US" // Country
-    var categoryCode: [String]? // Category code
-    var subCategoryCode: [String]? // Subcategory code
-    var childCategory: [String]? // Child category
-    var deductible = String() // Deductible
-    var likeActionTriggered = false // Flag indicating if like action triggered
-    var pageCount = 1 // Page count
-    var previousPageCount = 1 // Previous page count
-    var searchEnabled = "false" // Flag indicating if search enabled
-    var searchName = "" // Search name
-    var incomeFrom = "" // Income from
-    var incomeTo = "" // Income to
-    let digitBeforeDecimal = 5 // Number of digits before decimal
-    let digitAfterDecimal = 2 // Number of digits after decimal
+    var pageCount = 1
+    
+    var previousPageCount = 1
+    var searchEnabled = "false"
+    var searchName = ""
+    var incomeFrom = ""
+    var incomeTo = ""
+    
+    
+    let digitBeforeDecimal = 5
+    let digitAfterDecimal = 2
    
     
     //MARK: LifeCycle
     override func viewDidLoad() {
-        // Called after the controller's view is loaded into memory
-        super.viewDidLoad()
         
-        // Registering a custom table view cell from a nib file
+        super.viewDidLoad()
+        print(country)
+       
         searchTableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "searchcell")
         
-        // Setting up menu button
         if(iDonateClass.hasSafeArea){
             menuBtn.frame = CGRect(x: 0, y: 40, width: 50, height: 50)
-        } else {
-            self.scrollConstraint.constant = 80
+        }else {
+            self.scrollcontraint.constant = 80
             menuBtn.frame = CGRect(x: 0, y: 20, width: 50, height: 50)
         }
-        menuBtn.addTarget(self, action: #selector(backAction(_sender:)), for: .touchUpInside)
-        self.view.addSubview(menuBtn)
-        menuBtn.setImage(UIImage(named: "back"), for: .normal)
         
-        // Configuring a WKWebView
+        menuBtn.addTarget(self, action: #selector(backAction(_sender:)), for: .touchUpInside)
+        self.view .addSubview(menuBtn)
+        menuBtn.setImage(UIImage(named: "back"), for: .normal)
         webView = WKWebView(frame: self.view.frame)
         webView.navigationDelegate = self
         webView?.uiDelegate = self
-        
-        // Customizing search bars
         iDonateClass.sharedClass.customSearchBar(searchBar: searchBar)
         iDonateClass.sharedClass.customSearchBar(searchBar: searchScrollBar)
-        
-        // Adding tap gesture recognizer to containerView
         let mytapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(myTapAction))
         mytapGestureRecognizer.numberOfTapsRequired = 1
         mytapGestureRecognizer.cancelsTouchesInView = false
         self.containerView.addGestureRecognizer(mytapGestureRecognizer)
         
-        // Setting up constraints for containerView as tableHeaderView
+        // 1.
         containerView.translatesAutoresizingMaskIntoConstraints = false
+        // headerView is your actual content.
+
+        // 2.
         self.searchTableView.tableHeaderView = containerView
+        // 3.
         containerView.centerXAnchor.constraint(equalTo: self.searchTableView.centerXAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: self.searchTableView.widthAnchor).isActive = true
         containerView.topAnchor.constraint(equalTo: self.searchTableView.topAnchor).isActive = true
+        // 4.
         self.searchTableView.tableHeaderView?.layoutIfNeeded()
         self.searchTableView.tableHeaderView = self.searchTableView.tableHeaderView
-        
-        // Configuring blur view tap gesture recognizer
+        self.webView.uiDelegate = self
         let mytapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(cancelView))
         mytapGestureRecognizer.numberOfTapsRequired = 1
         mytapGestureRecognizer.cancelsTouchesInView = false
         self.blurView.addGestureRecognizer(mytapGestureRecognizer1)
         
-        // Setting up header title
-        headerTitle.text = headerTitleText
-        debugPrint("headertitle", headerTitleText)
+        headerTitle.text = headertitle
+        debugPrint("headertitle",headertitle)
         
-        // Modifying header title based on a condition
         if self.isFromAdvanceSearch {
-            if headerTitleText ==  "INTERNATIONAL CHARITIES REGISTERED IN USA" {
+            if headertitle ==  "INTERNATIONAL CHARITIES REGISTERED IN USA" {
                 headerTitle.text = "ADVANCE SEARCH INTERNATIONAL"
             }
-            if headerTitleText == "UNITED STATES" {
+            if headertitle == "UNITED STATES" {
                 headerTitle.text = "ADVANCE SEARCH USA"
             }
+            
         }
         
-        // Observing keyboard notifications
+        
+     
+        
+     
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        // Configuring table view
+    
         searchTableView.estimatedRowHeight = UITableView.automaticDimension
+                
         searchTableView.isScrollEnabled = true
         searchTableView.delegate = self
         searchTableView.dataSource = self
         
-        // Changing placeholder text
         self.changePlaceholderText(searchScrollBar)
         self.changePlaceholderText(searchBar)
         
-        // Fetching token
         getToken()
     }
-
-    
     override func viewWillAppear(_ animated: Bool) {
-        // Called when the view is about to appear on the screen
-        
-        // Print the current country
         print(country)
-        
-        // Reload the search table view data
         searchTableView.reloadData()
-        
-        // Set the text color of locationNameText to ivory
         locationNameText.textColor = ivoryColor
-        
-        // Set the locationNameText if locationSearch is not empty
+//        self.tableTopConstraint.constant = 40
         if !locationSearch.isEmpty {
             locationNameText.text = locationSearch + " & charities near you"
         }
         
-        // Check if the 'SelectedType' key exists in UserDefaults
-        if let selectedType = UserDefaults.standard.value(forKey: "SelectedType") as? String {
-            // Set the search placeholders based on the country
-            if country == "US" {
+        
+        if((UserDefaults.standard.value(forKey:"SelectedType")) != nil){
+            if country == "US"{
                 searchBar.placeholder = "Search by city/state"
                 searchScrollBar.placeholder = "Search by city/state"
             } else {
@@ -205,105 +185,79 @@ class SearchByLocationVC: BaseViewController, UITableViewDelegate, UITableViewDa
                 searchScrollBar.placeholder = "Search by country"
             }
             
-            // Update button selections based on 'SelectedType'
             nameScrollbtn.isSelected = false
-            scrollTypebtn.isSelected = true
+            Scrolltypebtn.isSelected = true
             typebtn.isSelected = true
-            namebtn.isSelected = false
-            
-            // Set the text of locationNameText to the value of 'SelectedType'
+            namebtn.isSelected =  false
             locationNameText.textColor = ivoryColor
-            locationNameText.text = selectedType
+            locationNameText.text = ((UserDefaults.standard.value(forKey:"SelectedType")) as! String)
         }
         
-        // Check if user data exists in UserDefaults and set the userID
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
             userID = myPeopleList.userID
         }
         
-        // Print the value of searchEnabled
-        print(self.searchEnabled)
-        
-        // Reset pageCount to 1 and perform search operations if searchName is not empty
+        print( self.searchEnabled)
         self.pageCount = 1
         if !self.searchName.isEmpty {
             self.searchBar.text = self.searchName
             self.makeNameSearchClicked()
         }
-        
-        // Call charityWebSerice to fetch charity data
         self.charityWebSerice()
-    }
 
+    }
     override func viewWillDisappear(_ animated: Bool) {
-        // Called when the view is about to disappear from the screen
-        
-        // Reset UserDefaults values related to location
-        UserDefaults.standard.set("", forKey: "latitude")
-        UserDefaults.standard.set("", forKey: "longitude")
-        UserDefaults.standard.set("Nonprofits", forKey: "locationname")
-        
-        // Reset latitude, longitude, and locationSearch
-        latitude = ""
-        longitude = ""
+        UserDefaults.standard .set("", forKey: "latitude")
+        UserDefaults.standard .set("", forKey: "longitude")
+        UserDefaults.standard .set("Nonprofits", forKey: "locationname")
+        lattitude  = ""
+        longitute = ""
         locationSearch = ""
-        
-        // Reset previousPageCount to pageCount
         previousPageCount = pageCount
     }
-
+    
+    
     
     // MARK: Button actions
-
-    // Action for the filter button
-    @IBAction func filterAction(_ sender: UIButton) {
-        // Toggle filter view visibility based on button tag
+    @IBAction func filterAction(_ sender:UIButton){
         
-        if(sender.tag == 0) {
-            // Expand filter view
+        if(sender.tag == 0){
             UIView.animate(withDuration: 1, animations: {
                 self.searchBarConstraint.constant = 100
                 
-                // Adjust scroll constraint based on safe area
-                if(iDonateClass.hasSafeArea) {
-                    self.scrollConstraint.constant = 100
-                } else {
-                    self.scrollConstraint.constant = 100
+                if(iDonateClass.hasSafeArea){
+                    self.scrollcontraint.constant = 100
+                }else{
+                    self.scrollcontraint.constant = 100
                 }
-                
-                // Show inner search bar view
                 self.innersearchBarView.isHidden = false
             })
-            // Update button tag
             sender.tag = 1
+            
         } else {
-            // Collapse filter view
             sender.tag = 0
             self.searchBarConstraint.constant = 60
             
-            // Adjust scroll constraint based on safe area
             if(iDonateClass.hasSafeArea) {
-                self.scrollConstraint.constant = 60
-            } else {
-                self.scrollConstraint.constant = 60
+                self.scrollcontraint.constant = 60
+            } else{
+                self.scrollcontraint.constant = 60
             }
             
-            // Hide inner search bar view
             self.innersearchBarView.isHidden = true
+            
         }
     }
-
-    // Action for the cancel button
-    @IBAction func cancelAction(_ sender: UIButton) {
-        // Remove blur view from superview
-        blurView.removeFromSuperview()
+    
+    
+    @IBAction func cancelAction(_ sender:UIButton){
+        blurView .removeFromSuperview()
     }
-
-    // Action for the location button
-    @IBAction func locationAction(_ sender: UIButton) {
-        // Toggle selection state of location button
-        
+    
+   
+    
+    @IBAction func locationAction(_ sender:UIButton) {
         typebtn.isSelected = false
         if(sender.isSelected) {
             sender.isSelected = false
@@ -311,51 +265,38 @@ class SearchByLocationVC: BaseViewController, UITableViewDelegate, UITableViewDa
             sender.isSelected = true
         }
     }
-
-    // Action for the type button
-    @IBAction func typeAction(_ sender: UIButton) {
-        // Toggle selection state of type button and navigate to advanced search
-        
-        if(sender.isSelected) {
+    
+    @IBAction func typeAction(_ sender:UIButton) {
+        if(sender.isSelected){
             sender.isSelected = false
-        } else {
+        } else{
             namebtn.isSelected = false
             nameScrollbtn.isSelected = false
             sender.isSelected = true
-            
-            // Initialize and push advanced search view controller
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AdvancedVC") as? AdvancedVC
             vc?.address = locationSearch
-            vc?.latitude = latitude
-            vc?.longitude = longitude
+            vc?.latitude = lattitude
+            vc?.longitude = longitute
             vc?.countryCode = country
             vc?.searchNameKey = self.searchName
             self.navigationController?.pushViewController(vc!, animated: true)
         }
     }
-
-    // Helper function to handle name search button click
-    func makeNameSearchClicked() {
-        // Configure search bar placeholders and update button states
-        
+    
+    func makeNameSearchClicked(){
         searchScrollBar.placeholder = "Enter nonprofit/charity name"
         searchBar.placeholder = "Enter nonprofit/charity name"
         nameScrollbtn.isSelected = true
         typebtn.isSelected = false
         nameFlg = true
     }
-
-    // Action for the name button
-    @IBAction func nameAction(_ sender: UIButton) {
-        // Handle name button action
+    @IBAction func nameAction(_ sender:UIButton)  {
         
         typebtn.isSelected = false
-    //    locationNameText.text = ""
+//        locationNameText.text = ""
         
-        if(sender.isSelected) {
-            // Deselect name button and update UI
-            
-            if country == "US" {
+        if(sender.isSelected){
+            if country == "US"{
                 searchBar.placeholder = "Search by city/state"
                 searchScrollBar.placeholder = "Search by city/state"
             } else {
@@ -369,30 +310,23 @@ class SearchByLocationVC: BaseViewController, UITableViewDelegate, UITableViewDa
                 locationNameText.text = locationSearch + " & charities near you"
             }
            
-        } else {
-            // Make name search clicked and update UI
-            
+        } else{
             self.makeNameSearchClicked()
         }
-    }
-
-    // Action for the name scroll button
-    @IBAction func nameScrollAction(_ sender: UIButton) {
-        // Handle name scroll button action
         
+    }
+    
+    @IBAction func nameSCrollAction(_ sender:UIButton)  {
         typebtn.isSelected = false
-        //  locationNameText.text = ""
+      //  locationNameText.text = ""
         //tableTopConstraint.constant = 0
         
-        // Clear search bar text and end editing
         self.searchBar.text = ""
         self.searchScrollBar.text = ""
         self.view.endEditing(true)
         
-        if(sender.isSelected) {
-            // Deselect name scroll button and update UI
-            
-            if country == "US" {
+        if(sender.isSelected){
+            if country == "US"{
                 searchBar.placeholder = "Search by city/state"
                 searchScrollBar.placeholder = "Search by city/state"
             } else {
@@ -405,37 +339,42 @@ class SearchByLocationVC: BaseViewController, UITableViewDelegate, UITableViewDa
             if !locationSearch.isEmpty {
                 locationNameText.text = locationSearch + " & charities near you"
             }
-        } else {
-            // Make name search clicked and update UI
+            //locationNameText.text = locationSearch + " & charities near you"
             
+        } else {
             self.makeNameSearchClicked()
         }
     }
-
-    // Action for the like button
-    @IBAction func likeAction(_ sender: UIButton) {
-        // Handle like button action
+    
+    @IBAction func likeAction(_ sender:UIButton)  {
         
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
             print(myPeopleList.name)
-            var likeCount: String = ""
+            var likeCount:String = ""
             userID = myPeopleList.userID
-            let charityObject = charityListArray![sender.tag]
+            var charityObject = charityListArray![sender.tag]
+            let currentLikeCount = Int(charityObject.like_count ?? "0") ?? 0
+
             if(sender.isSelected) {
                 sender.isSelected = false
                 likeCount = "0"
-            } else {
+                charityObject.like_count = "\(currentLikeCount - 1)"
+
+            }
+            else{
                 likeCount = "1"
                 sender.isSelected = true
+                charityObject.like_count = "\(currentLikeCount + 1)"
+
             }
             selectedIndex = sender.tag
             charityLikeAction(like: likeCount, charityId: charityObject.id!)
-        } else {
-            // Show alert for non-logged in users
+        }
+        else{
             let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
             let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-            let messageAttrString = NSMutableAttributedString(string: "For Advanced Features Please Log-in/Register", attributes: messageFont)
+            let messageAttrString = NSMutableAttributedString(string: "For Advance Features Please Log-in/Register", attributes: messageFont)
             alertController.setValue(messageAttrString, forKey: "attributedMessage")
             let ok = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
@@ -449,26 +388,24 @@ class SearchByLocationVC: BaseViewController, UITableViewDelegate, UITableViewDa
             alertController.addAction(cancel)
             self.present(alertController, animated: true, completion: nil)
         }
-    }
-
-    // Action for the advanced search button
-    @IBAction func advancedSearch(_ sender: UIButton) {
-        // Handle advanced search button action
         
+        
+    }
+    
+    @IBAction func advancedSearch(_ sender:UIButton) {
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
             print(myPeopleList.name)
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "newcontrollerID") as? NewViewfromadvancedSearchViewController
             vc?.address = locationSearch
-            vc?.latitude = latitude
-            vc?.longitude = longitude
+            vc?.latitude = lattitude
+            vc?.longitude = longitute
             vc?.countryCode = country
             self.navigationController?.pushViewController(vc!, animated: true)
         } else {
-            // Show alert for non-logged in users
             let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
             let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-            let messageAttrString = NSMutableAttributedString(string: "For Advanced Features Please Log-in/Register", attributes: messageFont)
+            let messageAttrString = NSMutableAttributedString(string: "For Advance Features Please Log-in/Register", attributes: messageFont)
             alertController.setValue(messageAttrString, forKey: "attributedMessage")
             let ok = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
@@ -483,35 +420,30 @@ class SearchByLocationVC: BaseViewController, UITableViewDelegate, UITableViewDa
             self.present(alertController, animated: true, completion: nil)
         }
     }
-
-    // Action for the follow button
-    @IBAction func followAction(_ sender: UIButton) {
-        // Handle follow button action
-        
+    
+    @IBAction func followAction(_ sender:UIButton)  {
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
             print(myPeopleList.name)
-            var followCount: String = ""
+            var followCount:String = ""
             userID = myPeopleList.userID
             let charityObject = charityListArray![sender.tag]
             
-            if(sender.isSelected) {
-                // If already selected, deselect and update count
+            if(sender.isSelected){
                 sender.isSelected = false
                 followCount = "0"
-            } else {
-                // If not selected, select and update count
+            } else{
                 followCount = "1"
                 sender.isSelected = true
             }
             
             selectedIndex = sender.tag
             followAction(follow: followCount, charityId: charityObject.id!)
-        } else {
-            // Show alert for non-logged in users
+        }
+        else{
             let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
             let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-            let messageAttrString = NSMutableAttributedString(string: "For Advanced Features Please Log-in/Register", attributes: messageFont)
+            let messageAttrString = NSMutableAttributedString(string: "For Advance Features Please Log-in/Register", attributes: messageFont)
             alertController.setValue(messageAttrString, forKey: "attributedMessage")
             let ok = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
@@ -525,8 +457,8 @@ class SearchByLocationVC: BaseViewController, UITableViewDelegate, UITableViewDa
             alertController.addAction(cancel)
             self.present(alertController, animated: true, completion: nil)
         }
+        
     }
-
     
     
 func getToken(){
@@ -537,7 +469,7 @@ func getToken(){
         if let data = UserDefaults.standard.data(forKey: "people"),
             let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
             print(myPeopleList.name)
-            let charityObject = charityListArray![self.continuePaymentBtn.tag]
+            let charityObject = charityListArray![self.continuePaymentBTn.tag]
 
             donateToCharity(charityID: charityObject.id!)
         }
@@ -576,12 +508,7 @@ func getToken(){
             // You may display an error message to the user if needed
         }
     }
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-            // This method is called when the user dismisses the Safari view controller
-            print("Safari view controller dismissed")
-        }
-        
-   
+
     fileprivate func changePlaceholderText(_ searchBarCustom: UISearchBar) {
         
         if country == "US"{
@@ -621,8 +548,8 @@ func getToken(){
         print(city)
 //        let newArr = charityListArray?.filter({ $0.contains(<#T##Bound#>)})
         self.searchEnabled = inputDetails["placesFlag"]!
-        self.latitude  = inputDetails["latitude"]! //UserDefaults.standard.value(forKey: "latitude") as! String
-        self.longitude = inputDetails["longitude"]! //UserDefaults.standard.value(forKey: "longitude") as! String
+        self.lattitude  = inputDetails["latitude"]! //UserDefaults.standard.value(forKey: "latitude") as! String
+        self.longitute = inputDetails["longitude"]! //UserDefaults.standard.value(forKey: "longitude") as! String
         self.locationSearch = inputDetails["locationname"]! //UserDefaults.standard.value(forKey: "locationname") as! String
         self.pageCount = 1
         self.charityWebSerice()
@@ -640,9 +567,9 @@ func getToken(){
             self.searchBarConstraint.constant = 60
             
             if(iDonateClass.hasSafeArea) {
-                self.scrollConstraint.constant = 60
+                self.scrollcontraint.constant = 60
             } else{
-                self.scrollConstraint.constant = 60
+                self.scrollcontraint.constant = 60
             }
             self.innersearchBarView.isHidden = true
             
@@ -690,10 +617,10 @@ func getToken(){
     
     @objc func backAction(_sender:UIButton)  {
         
-        if longitude != "", latitude != "", locationSearch != "Nonprofits"{
+        if longitute != "", lattitude != "", locationSearch != "Nonprofits"{
             
-            longitude = ""
-            latitude = ""
+            longitute = ""
+            lattitude = ""
             locationSearch = "Nonprofits"
             userID = ""
             selectedIndex = -1
@@ -758,37 +685,37 @@ func getToken(){
           webView.navigationDelegate = nil
           // Perform additional actions if needed after dismissing the web view
       }
-//    // MARK: - WKScriptMessageHandler
-//
-//    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-//        if let messageBody = message.body as? String, messageBody == "dismissWebView" {
-//            dismissWebView()
-//        }
-//    }
-//    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        // Extract the current URL of the web view
-//        if let currentURL = webView.url {
-//            // Analyze the URL to determine the payment status
-//            let payButtonScript = "document.getElementById('payButton').onclick = function() { window.webkit.messageHandlers.dismissWebView.postMessage('dismissWebView'); }"
-//            webView.evaluateJavaScript(payButtonScript, completionHandler: nil)
-//            print(webView.url)
-//            
-//            // Check if the URL contains the success message
-//            if currentURL.absoluteString.contains("donation_payment_show_successfull_msg") {
-//                // Dismiss the web view
-//                dismissWebView()
-//
-//            
-//            }
-//            if currentURL.absoluteString.contains("donation_payment_cancel_payment"){
-//                dismissWebView()
-//                let alertController = UIAlertController(title: "Payment Cancelled", message: "Your donation payment has been cancelled.", preferredStyle: .alert)
-//                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//                alertController.addAction(okAction)
-//                present(alertController, animated: true, completion: nil)
-//            }
-//        }
-//    }
+    // MARK: - WKScriptMessageHandler
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if let messageBody = message.body as? String, messageBody == "dismissWebView" {
+            dismissWebView()
+        }
+    }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // Extract the current URL of the web view
+        if let currentURL = webView.url {
+            // Analyze the URL to determine the payment status
+            let payButtonScript = "document.getElementById('payButton').onclick = function() { window.webkit.messageHandlers.dismissWebView.postMessage('dismissWebView'); }"
+            webView.evaluateJavaScript(payButtonScript, completionHandler: nil)
+            print(webView.url)
+            
+            // Check if the URL contains the success message
+            if currentURL.absoluteString.contains("donation_payment_show_successfull_msg") {
+                // Dismiss the web view
+                dismissWebView()
+
+            
+            }
+            if currentURL.absoluteString.contains("donation_payment_cancel_payment"){
+                dismissWebView()
+                let alertController = UIAlertController(title: "Payment Cancelled", message: "Your donation payment has been cancelled.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
     // MARK: - tabBar  delegate methods
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TapViewController") as? HomeTabViewController
@@ -807,7 +734,7 @@ func getToken(){
 // MARK: - Tableview delegate and datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (isFiltering){
-            return (filteredCharityListArray?.count)!
+            return (filterdCharityListArray?.count)!
         }else{
             return charityListArray?.count ?? 0
         }
@@ -816,10 +743,10 @@ func getToken(){
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let charity: CharityListArray
-        print(filteredCharityListArray?[indexPath.row])
+        print(filterdCharityListArray?[indexPath.row])
         print(charityListArray?[indexPath.row])
         if(isFiltering) {
-            charity = (filteredCharityListArray?[indexPath.row])!
+            charity = (filterdCharityListArray?[indexPath.row])!
         }else {
             charity = charityListArray![indexPath.row]
         }
@@ -827,20 +754,34 @@ func getToken(){
         let cell = searchTableView.dequeueReusableCell(withIdentifier: "searchcell") as! SearchTableViewCell
         cell.title.text = charity.name
         cell.address.text = charity.street!+","+charity.city!
-        let likeString = charity.likeCount! + " Likes"
-        cell.likeBtn.setTitle(likeString, for: .normal)
-        let placeholderImage = UIImage(named: "defaultImageCharity")!
-        print(likeString)
-        print(charity.likeCount)
-        print(charity.liked)
-        if charity.logo != nil && charity.logo != "" {
-            if let url = URL(string: charity.logo!) {
-                cell.logoImage.af.setImage(withURL: url, placeholderImage: placeholderImage)
+        if let likeCount = charity.like_count {
+            let likeString = "\(likeCount) Likes"
+            cell.likeBtn.setTitle(likeString, for: .normal)
+            print(likeString)
+        } else {
+            print("likeCount is nil")
+        }
 
+        if let liked = charity.liked {
+            print(liked)
+        } else {
+            print("liked is nil")
+        }
+
+        if let placeholderImage = UIImage(named: "defaultImageCharity") {
+            if charity.logo != nil && charity.logo != "" {
+                if let url = URL(string: charity.logo!) {
+                    cell.logoImage.af.setImage(withURL: url, placeholderImage: placeholderImage)
+
+                }
+            } else {
+                cell.logoImage.image = placeholderImage
             }
         } else {
-            cell.logoImage.image = placeholderImage
+            print("defaultImageCharity image not found")
         }
+
+        
         
         //        let animation = AnimationFactory.makeMoveUpWithFade(rowHeight: 150, duration: 0.5, delayFactor: 0.05)
         //        let animator = Animator(animation: animation)
@@ -859,7 +800,7 @@ func getToken(){
         else{
             cell.likeBtn.isSelected = true
         }
-        let count = charity.followedCount
+        let count = charity.followed_count
         if(charity.followed == "0"){
             cell.followingBtn.isSelected = false
             cell.followingBtn.setTitle((count ?? "0") + " Follow", for: .normal)
@@ -885,7 +826,7 @@ func getToken(){
         
         let charity: CharityListArray
         if(isFiltering) {
-            charity = (filteredCharityListArray?[indexPath.row])!
+            charity = (filterdCharityListArray?[indexPath.row])!
         }
         else {
             charity = charityListArray![indexPath.row]
@@ -929,7 +870,7 @@ func getToken(){
             searchScrollBar.placeholder = "Enter nonprofit/charity name"
             searchBar.placeholder = "Enter nonprofit/charity name"
             typebtn.isSelected = false
-            scrollTypebtn.isSelected = false
+            Scrolltypebtn.isSelected = false
             nameScrollbtn.isSelected = true
             nameFlg = true
         }
@@ -950,7 +891,7 @@ func getToken(){
             searchScrollBar.placeholder = "Enter nonprofit/charity name"
             searchBar.placeholder = "Enter nonprofit/charity name"
             typebtn.isSelected = false
-            scrollTypebtn.isSelected = false
+            Scrolltypebtn.isSelected = false
             nameScrollbtn.isSelected = true
             nameFlg = true
         }
@@ -963,7 +904,6 @@ func getToken(){
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.pageCount = 1
-        self.clearAllTypes()
         if searchText.count >= 3 {
             
             searchName = searchText
@@ -1009,7 +949,7 @@ func getToken(){
                    let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
                    print(myPeopleList.name)
                    blurView.frame =  self.view.frame
-                   self.continuePaymentBtn.tag = sender.tag
+                   self.continuePaymentBTn.tag = sender.tag
                    self.view.addSubview(blurView)
                } else {
                    let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
@@ -1070,8 +1010,8 @@ func getToken(){
     @objc func charityWebSerice(searchKeyWord:String = "") {
                 
         var postDict: Parameters = ["name":searchName,
-                                    "latitude":latitude,
-                                    "longitude":longitude,
+                                    "latitude":lattitude,
+                                    "longitude":longitute,
                                     "page":pageCount,
                                     "address":locationSearch,
                                     "category_code":categoryCode?.joined(separator:",") ?? [String](),
@@ -1091,8 +1031,8 @@ func getToken(){
         
         print("postDict",postDict)
         print(searchName)
-        print(latitude)
-        print(longitude)
+        print(lattitude)
+        print(longitute)
         print(pageCount)
         print(locationSearch)
         print(categoryCode ?? "")
@@ -1144,7 +1084,7 @@ func getToken(){
         }else {
             if pageCount <= 1{
                 self.noresultsview.isHidden = false
-                self.noresultMessage.text = charityResponse?.message
+                self.noresultMEssage.text = charityResponse?.message
             }
         }
     }
@@ -1240,4 +1180,3 @@ extension Double {
         return String(format: "%.2f", self)
     }
 }
-

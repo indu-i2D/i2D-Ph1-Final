@@ -80,7 +80,7 @@ class ChangePasswordVC: BaseViewController, UITextFieldDelegate {
     
     // MARK: - Keyboard Handling
     
-    // Method to adjust the view frame when the keyboard will show
+    /// Method to adjust the view frame when the keyboard will show
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
@@ -89,39 +89,39 @@ class ChangePasswordVC: BaseViewController, UITextFieldDelegate {
         }
     }
     
-    // Method to reset the view frame when the keyboard will hide
+    /// Method to reset the view frame when the keyboard will hide
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
     }
     
-    // Method to dismiss the keyboard when tapping outside of text fields
+    /// Method to dismiss the keyboard when tapping outside of text fields
     @objc func returnTextView(gesture: UIGestureRecognizer) {
         self.view.endEditing(true)
     }
     
     // MARK: - Error Handling
     
-    // Method to add target actions for error updating of text fields
+    /// Method to add target actions for error updating of text fields
     func addTargetForErrorUpdating(_ textField: TKFormTextField) {
         textField.addTarget(self, action: #selector(clearErrorIfNeeded), for: .editingChanged)
         textField.addTarget(self, action: #selector(updateError), for: .editingDidEnd)
     }
     
-    // Method to update error messages for text fields
+    /// Method to update error messages for text fields
     @objc func updateError(textField: TKFormTextField) {
         textField.error = validationError(textField)
     }
     
-    // Method to clear error messages if needed for text fields
+    /// Method to clear error messages if needed for text fields
     @objc func clearErrorIfNeeded(textField: TKFormTextField) {
         if validationError(textField) == nil {
             textField.error = nil
         }
     }
     
-    // Private method to validate text fields for errors
+    /// Private method to validate text fields for errors
     private func validationError(_ textField: TKFormTextField) -> String? {
         if textField == oldPassword || textField == newPassword {
             return TKDataValidator.password(text: textField.text)
@@ -131,7 +131,7 @@ class ChangePasswordVC: BaseViewController, UITextFieldDelegate {
     
     // MARK: - Button Actions
     
-    // Action method for toggling visibility of old password
+    /// Action method for toggling visibility of old password
     @IBAction func oldPassword(_ sender: UIButton) {
         sender.isSelected.toggle()
         oldPassword.isSecureTextEntry = !sender.isSelected
@@ -143,7 +143,7 @@ class ChangePasswordVC: BaseViewController, UITextFieldDelegate {
         newPassword.isSecureTextEntry = !sender.isSelected
     }
     
-    // Action method for handling back button action
+    /// Action method for handling back button action
     @objc func backAction(_sender:UIButton)  {
         let alertTitle = constantFile.changepasswordBack ? "Returning To settings Without Making Changes?" : "Returning To login Without Making Changes?"
         let alert = UIAlertController(title: "", message: alertTitle, preferredStyle: .alert)
@@ -155,7 +155,7 @@ class ChangePasswordVC: BaseViewController, UITextFieldDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    // Action method for handling change password button action
+    /// Action method for handling change password button action
     @IBAction func changePassword(_ sender: UIButton) {
         self.view.endEditing(true)
         if changeOrForgot == "Forgot" {

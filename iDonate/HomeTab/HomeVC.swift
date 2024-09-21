@@ -181,13 +181,13 @@ extension HomeVC: UICollectionViewDelegate {
         switch indexPath.row {
         case 0:
             let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
-            vc?.headerTitleText = "UNITED STATES"
+            vc?.headertitle = "UNITED STATES"
             vc?.country = "US"
             UserDefaults.standard.set(false, forKey: "country")
             self.navigationController?.pushViewController(vc!, animated: true)
         case 1:
             let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
-            vc?.headerTitleText = "INTERNATIONAL CHARITIES REGISTERED IN USA"
+            vc?.headertitle = "INTERNATIONAL CHARITIES REGISTERED IN USA"
             vc?.country = "INT"
             UserDefaults.standard.set(true, forKey: "country")
             self.navigationController?.pushViewController(vc!, animated: true)

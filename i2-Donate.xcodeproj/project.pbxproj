@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16911334D56496C67348F2D5 /* Pods_i2_Donate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F4328ADA5D7CE3ECFA9358 /* Pods_i2_Donate.framework */; };
 		18F485B3295DFF0F00731ED3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F485B2295DFF0F00731ED3 /* SceneDelegate.swift */; };
 		18F485B5295DFF1F00731ED3 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F485B4295DFF1F00731ED3 /* Search.swift */; };
 		1B41CA56249E06CB00839F65 /* TwitterHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B41CA55249E06CB00839F65 /* TwitterHandler.swift */; };
@@ -110,26 +111,13 @@
 		932A2DD1227E20F4005BBBDB /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932A2DD0227E20F4005BBBDB /* LoginVC.swift */; };
 		932A2DD3227E278E005BBBDB /* iDonateClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932A2DD2227E278E005BBBDB /* iDonateClass.swift */; };
 		937069DE227CC87500E30220 /* customview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937069DD227CC87500E30220 /* customview.swift */; };
-		C50FA69358C974833F5F6CC6 /* Pods_i2_Donate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BBE067396A1FB836FF3369 /* Pods_i2_Donate.framework */; };
+		CC13EACA2C1F75E60037F709 /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC13EAC92C1F75E60037F709 /* SideMenu.framework */; };
 		CC6DDF9B2BC97B08007ECAD5 /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = CC6DDF9A2BC97B08007ECAD5 /* FacebookBasics */; };
 		CC6DDF9D2BC97B08007ECAD5 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = CC6DDF9C2BC97B08007ECAD5 /* FacebookCore */; };
 		CC6DDF9F2BC97B08007ECAD5 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CC6DDF9E2BC97B08007ECAD5 /* FacebookLogin */; };
 		CC74F12A2BBD3C87004E525B /* DeleteAccModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74F1292BBD3C87004E525B /* DeleteAccModel.swift */; };
 		CC8C80A32BF635C300DABF15 /* iDonate.docc in Sources */ = {isa = PBXBuildFile; fileRef = CC8C80A22BF635C300DABF15 /* iDonate.docc */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		CCC930A22BFFDABF008D9129 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		18F485B2295DFF0F00731ED3 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -234,19 +222,26 @@
 		3FE8FAAA230D7D1B001FD38C /* ForgotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotModel.swift; sourceTree = "<group>"; };
 		3FFAD64D22EACB6A00D6F197 /* ForgotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
 		3FFAD64F22EACF8F00D6F197 /* VerifyOTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOTP.swift; sourceTree = "<group>"; };
-		532BCC501FFAE145F046CC3B /* Pods-i2-Donate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.release.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.release.xcconfig"; sourceTree = "<group>"; };
-		58BBE067396A1FB836FF3369 /* Pods_i2_Donate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_i2_Donate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D6A88325458D6300CAD41C /* MyDonationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDonationsViewController.swift; sourceTree = "<group>"; };
 		73D6A8862545925A00CAD41C /* TransactionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		88F4328ADA5D7CE3ECFA9358 /* Pods_i2_Donate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_i2_Donate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93267743227F08BB00FE65F0 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		932A2DD0227E20F4005BBBDB /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		932A2DD2227E278E005BBBDB /* iDonateClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iDonateClass.swift; sourceTree = "<group>"; };
 		937069DD227CC87500E30220 /* customview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customview.swift; sourceTree = "<group>"; };
-		941074B53EC068F2695F12A0 /* Pods-i2-Donate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.debug.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.debug.xcconfig"; sourceTree = "<group>"; };
+		C693FCB3DAA4655E985FFB0D /* Pods-i2-Donate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.release.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.release.xcconfig"; sourceTree = "<group>"; };
+		CC13EABB2C1F6B2A0037F709 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC13EABF2C1F6EB50037F709 /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC13EAC32C1F6F6F0037F709 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC13EAC72C1F71B90037F709 /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC13EAC92C1F75E60037F709 /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC6277242C1F576300506A4D /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC74F1292BBD3C87004E525B /* DeleteAccModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccModel.swift; sourceTree = "<group>"; };
 		CC8C80A22BF635C300DABF15 /* iDonate.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = iDonate.docc; sourceTree = "<group>"; };
+		CCBAB03A2C02764C00EF23D4 /* GooglePlaces.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GooglePlaces.xcframework; path = Pods/GooglePlaces/Frameworks/GooglePlaces.xcframework; sourceTree = "<group>"; };
 		CCC9309B2BFFDA09008D9129 /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCC9309F2BFFDABF008D9129 /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE29E90FB0013738AD485847 /* Pods-i2-Donate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i2-Donate.debug.xcconfig"; path = "Target Support Files/Pods-i2-Donate/Pods-i2-Donate.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC13EACA2C1F75E60037F709 /* SideMenu.framework in Frameworks */,
 				1B533677249C73F900D9C622 /* SystemConfiguration.framework in Frameworks */,
 				1B533675249C73EE00D9C622 /* SafariServices.framework in Frameworks */,
 				1B533673249C73E400D9C622 /* MobileCoreServices.framework in Frameworks */,
@@ -269,7 +265,7 @@
 				1B533667249C739E00D9C622 /* Accelerate.framework in Frameworks */,
 				1BD556B224B840D2001D616F /* CoreGraphics.framework in Frameworks */,
 				1BD556B424B840DD001D616F /* CoreVideo.framework in Frameworks */,
-				C50FA69358C974833F5F6CC6 /* Pods_i2_Donate.framework in Frameworks */,
+				16911334D56496C67348F2D5 /* Pods_i2_Donate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +281,20 @@
 				1BF6CB222A89F8C400DD8321 /* Double+Extension.swift */,
 			);
 			path = Extentions;
+			sourceTree = "<group>";
+		};
+		3A771D08E514283D7EEBD0B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CC13EAC92C1F75E60037F709 /* SideMenu.framework */,
+				CC13EAC72C1F71B90037F709 /* SideMenu.framework */,
+				CC13EAC32C1F6F6F0037F709 /* MBProgressHUD.framework */,
+				CC13EABF2C1F6EB50037F709 /* SideMenu.framework */,
+				CC13EABB2C1F6B2A0037F709 /* MBProgressHUD.framework */,
+				CC6277242C1F576300506A4D /* SideMenu.framework */,
+				88F4328ADA5D7CE3ECFA9358 /* Pods_i2_Donate.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		3F016E0B228A8ED800F91FAC /* Notification */ = {
@@ -309,8 +319,7 @@
 			isa = PBXGroup;
 			children = (
 			);
-			name = Model;
-			path = iDonate/Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		3F0D7C0322896E6600345E4B /* View */ = {
@@ -521,7 +530,24 @@
 				1B9E269A2B29F15F008DFAF6 /* i2-Donate.entitlements */,
 				3FC72DEB22706C62004B2FB3 /* Assets.xcassets */,
 				3FC72DE322706C40004B2FB3 /* iDonate */,
-				1B5C6CB024A0C8E2008A3D1F /* TermsAndConditionsViewController.swift */,
+				EBE65810C5026BC63325626A /* Pods */,
+				3A771D08E514283D7EEBD0B5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3FC72DE222706C40004B2FB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3FC72DE122706C40004B2FB3 /* i2-Donate.app */,
+			);
+			name = Products;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		3FC72DE322706C40004B2FB3 /* iDonate */ = {
+			isa = PBXGroup;
+			children = (
+				3FC72DF022706C62004B2FB3 /* Info.plist */,
 				1B41CA5B249E084400839F65 /* TwitterWebViewController.swift */,
 				1B41CA59249E06EC00839F65 /* Extensions.swift */,
 				1B41CA55249E06CB00839F65 /* TwitterHandler.swift */,
@@ -554,22 +580,7 @@
 				3F0D7C052289802400345E4B /* Menu */,
 				3FC72DE222706C40004B2FB3 /* Products */,
 				E975D09D9C36EB0D45823755 /* Frameworks */,
-				7DB6591AE4A352EF0FFEF370 /* Pods */,
-			);
-			sourceTree = "<group>";
-		};
-		3FC72DE222706C40004B2FB3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3FC72DE122706C40004B2FB3 /* i2-Donate.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		3FC72DE322706C40004B2FB3 /* iDonate */ = {
-			isa = PBXGroup;
-			children = (
-				3FC72DF022706C62004B2FB3 /* Info.plist */,
+				1B5C6CB024A0C8E2008A3D1F /* TermsAndConditionsViewController.swift */,
 				CC8C80A22BF635C300DABF15 /* iDonate.docc */,
 			);
 			path = iDonate;
@@ -662,15 +673,6 @@
 			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
-		7DB6591AE4A352EF0FFEF370 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				941074B53EC068F2695F12A0 /* Pods-i2-Donate.debug.xcconfig */,
-				532BCC501FFAE145F046CC3B /* Pods-i2-Donate.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		932A2DCF227E208B005BBBDB /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +685,7 @@
 		E975D09D9C36EB0D45823755 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CCBAB03A2C02764C00EF23D4 /* GooglePlaces.xcframework */,
 				CCC9309F2BFFDABF008D9129 /* SideMenu.framework */,
 				CCC9309B2BFFDA09008D9129 /* SideMenu.framework */,
 				1BD556B724B84105001D616F /* libxml2.tbd */,
@@ -699,9 +702,18 @@
 				1B533668249C73A900D9C622 /* AudioToolbox.framework */,
 				1B533666249C739E00D9C622 /* Accelerate.framework */,
 				3FBCBC2722C233B20010AED0 /* MapKit.framework */,
-				58BBE067396A1FB836FF3369 /* Pods_i2_Donate.framework */,
 			);
 			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		EBE65810C5026BC63325626A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FE29E90FB0013738AD485847 /* Pods-i2-Donate.debug.xcconfig */,
+				C693FCB3DAA4655E985FFB0D /* Pods-i2-Donate.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -711,13 +723,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FC72DF322706C62004B2FB3 /* Build configuration list for PBXNativeTarget "i2-Donate" */;
 			buildPhases = (
-				C9EBD8AA5D13F30A342D27B0 /* [CP] Check Pods Manifest.lock */,
+				3CFF9A810D2CFC43BECCCFC4 /* [CP] Check Pods Manifest.lock */,
 				3FC72DDD22706C40004B2FB3 /* Sources */,
 				3FC72DDE22706C40004B2FB3 /* Frameworks */,
 				3FC72DDF22706C40004B2FB3 /* Resources */,
-				4BD3D31516D0BEBFA88AB771 /* [CP] Embed Pods Frameworks */,
-				31D8F5D72B02BA651B978484 /* [CP] Copy Pods Resources */,
-				CCC930A22BFFDABF008D9129 /* Embed Frameworks */,
+				DEA69664B1DD9CBEF51B0D3E /* [CP] Embed Pods Frameworks */,
+				A0CC08D31AA5FDE0154250C3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -739,8 +750,9 @@
 		3FC72DD922706C40004B2FB3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = Im043;
 				TargetAttributes = {
 					3FC72DE022706C40004B2FB3 = {
@@ -755,7 +767,7 @@
 				};
 			};
 			buildConfigurationList = 3FC72DDC22706C40004B2FB3 /* Build configuration list for PBXProject "i2-Donate" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -802,41 +814,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		31D8F5D72B02BA651B978484 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4BD3D31516D0BEBFA88AB771 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C9EBD8AA5D13F30A342D27B0 /* [CP] Check Pods Manifest.lock */ = {
+		3CFF9A810D2CFC43BECCCFC4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -856,6 +834,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0CC08D31AA5FDE0154250C3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEA69664B1DD9CBEF51B0D3E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-i2-Donate/Pods-i2-Donate-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -969,6 +981,7 @@
 /* Begin XCBuildConfiguration section */
 		3FC72DF122706C62004B2FB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE29E90FB0013738AD485847 /* Pods-i2-Donate.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
@@ -994,6 +1007,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1005,6 +1019,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1022,7 +1038,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1057,6 +1073,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1068,6 +1085,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1079,7 +1098,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1090,7 +1109,7 @@
 		};
 		3FC72DF422706C62004B2FB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 941074B53EC068F2695F12A0 /* Pods-i2-Donate.debug.xcconfig */;
+			baseConfigurationReference = FE29E90FB0013738AD485847 /* Pods-i2-Donate.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD)";
@@ -1100,14 +1119,13 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 128;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A3C8934K5J;
-				EXCLUDED_ARCHS = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/iDonate/Helper",
-				);
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				INFOPLIST_FILE = iDonate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1224,7 +1242,7 @@
 		};
 		3FC72DF522706C62004B2FB3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 532BCC501FFAE145F046CC3B /* Pods-i2-Donate.release.xcconfig */;
+			baseConfigurationReference = C693FCB3DAA4655E985FFB0D /* Pods-i2-Donate.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1233,19 +1251,13 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 128;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = A3C8934K5J;
-				EXCLUDED_ARCHS = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/iDonate/Helper",
-				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/iDonate/Helper",
-					"/Users/savibhatia/Documents/i2D-iOS-Ph2-V3/Pods/SideMenu",
-				);
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				INFOPLIST_FILE = iDonate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

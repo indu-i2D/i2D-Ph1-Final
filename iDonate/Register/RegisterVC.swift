@@ -1,6 +1,10 @@
 //
 //  RegisterVC.swift
-//  i2-Donate
+//  iDonate
+//
+//  Created by Im043 on 07/05/19.
+//  Copyright © 2019 Im043. All rights reserved.
+//
 
 import UIKit
 import TKFormTextField
@@ -12,211 +16,209 @@ import UniformTypeIdentifiers
 import AuthenticationServices
 import KeychainSwift
 
-// MARK: - Extension for UITableViewDelegate and UITableViewDataSource
-extension RegisterVC: UITableViewDelegate, UITableViewDataSource {
-    
-    /// Determines the number of rows in the table view section.
-    ///
-    /// - Parameters:
-    ///   - tableView: The table view requesting this information.
-    ///   - section: The section index in the table view.
-    /// - Returns: The number of rows in the section.
+extension RegisterVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
-    /// Determines the height for the rows in the table view.
-    ///
-    /// - Parameters:
-    ///   - tableView: The table view requesting this information.
-    ///   - indexPath: The index path of the row.
-    /// - Returns: The height of the row at the specified index path.
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.view.frame.size.height
     }
-    
-    /// Provides a cell to insert in a particular location of the table view.
-    ///
-    /// - Parameters:
-    ///   - tableView: The table view requesting this cell.
-    ///   - indexPath: The index path that specifies the location of the cell.
-    /// - Returns: A configured cell object.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessRegCell", for: indexPath) as! BusinessRegCell
         return cell
     }
-    
 }
-/// This class manages the user registration process in the i2-Donate application.
-// MARK: - Register View Controller
 class RegisterVC: BaseViewController,GIDSignInDelegate {
-    @IBOutlet var maleBtn: UIButton! // UIButton for selecting male gender.
-    @IBOutlet var femaleBtn: UIButton! // UIButton for selecting female gender.
-    @IBOutlet var businessBtn: UIButton! // UIButton for selecting business type.
-    @IBOutlet var individualBtn: UIButton! // UIButton for selecting individual type.
-    @IBOutlet var otherBtn: UIButton! // UIButton for selecting other type.
-    @IBOutlet var countryBtn: UIButton! // UIButton for selecting country.
-    @IBOutlet var containerView: UIView! // UIView containing the registration form.
-    @IBOutlet var scrollView: UIScrollView! // UIScrollView for scrolling the registration form.
-    @IBOutlet var agreeBtn: UIView! // UIView for agreeing to terms and conditions.
-    @IBOutlet var nameText: TKFormTextField! // TKFormTextField for entering user's name.
-    @IBOutlet var emailText: TKFormTextField! // TKFormTextField for entering user's email.
-    @IBOutlet var mobileText: TKFormTextField! // TKFormTextField for entering user's mobile number.
-    @IBOutlet var passwordText1: TKFormTextField! // TKFormTextField for entering user's password.
-    @IBOutlet var countryText: TKFormTextField! // TKFormTextField for entering country name.
-    @IBOutlet var businessName: TKFormTextField! // TKFormTextField for entering business name.
-    @IBOutlet var showhidebtn: UIButton! // UIButton for showing/hiding password.
-    @IBOutlet var passwordHint: UILabel! // UILabel for displaying password hint.
-    @IBOutlet var genderLabel: UILabel! // UILabel for displaying gender.
-    @IBOutlet var countryLabel: UILabel! // UILabel for displaying country.
-    @IBOutlet var countrydropdown: UIView! // UIView for selecting country from dropdown.
-    @IBOutlet var countryLine: UILabel! // UILabel for displaying line below country dropdown.
-    @IBOutlet var appleLoginBtn:UIButton! // UIButton for logging in using Apple ID.
+    @IBOutlet var maleBtn: UIButton!
+    @IBOutlet var femaleBtn: UIButton!
+    @IBOutlet var businessBtn: UIButton!
+    @IBOutlet var individualBtn: UIButton!
+    @IBOutlet var otherBtn: UIButton!
+    @IBOutlet var countryBtn: UIButton!
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var agreeBtn: UIView!
+    @IBOutlet var nameText: TKFormTextField!
+    @IBOutlet var emailText: TKFormTextField!
+    @IBOutlet var mobileText: TKFormTextField!
+    @IBOutlet var passwordText1: TKFormTextField!
+    @IBOutlet var countryText: TKFormTextField!
+    @IBOutlet var businessName: TKFormTextField!
+    @IBOutlet var showhidebtn: UIButton!
+    @IBOutlet var passwordHint: UILabel!
+    @IBOutlet var genderLabel: UILabel!
+    @IBOutlet var countryLabel: UILabel!
+    @IBOutlet var countrydropdown: UIView!
+    @IBOutlet var countryLine: UILabel!
+    @IBOutlet var appleLoginBtn:UIButton!
+    
+    @IBOutlet var businessView: UIView!
+    @IBOutlet var firstName: TKFormTextField!
+    @IBOutlet var lastName: TKFormTextField!
+    @IBOutlet var businessAddress: TKFormTextField!
+    @IBOutlet var businessemail:TKFormTextField!
+    @IBOutlet var street: TKFormTextField!
+    @IBOutlet var optionalStreet: TKFormTextField!
+    @IBOutlet var state: TKFormTextField!
+    @IBOutlet var city: TKFormTextField!
+    @IBOutlet var zipCode: TKFormTextField!
+    @IBOutlet var taxField: TKFormTextField!
+    @IBOutlet var businessPhone: TKFormTextField!
+    @IBOutlet var businessPassword: TKFormTextField!
+    @IBOutlet var businessVisibilityBtn: TKFormTextField!
+    @IBOutlet var street1: TKFormTextField!
 
-    @IBOutlet var businessView: UIView! // UIView containing business registration fields.
-    @IBOutlet var firstName: TKFormTextField! // TKFormTextField for entering first name.
-    @IBOutlet var lastName: TKFormTextField! // TKFormTextField for entering last name.
-    @IBOutlet var businessAddress: TKFormTextField! // TKFormTextField for entering business address.
-    @IBOutlet var businessemail:TKFormTextField! // TKFormTextField for entering business email.
-    @IBOutlet var street: TKFormTextField! // TKFormTextField for entering street name.
-    @IBOutlet var optionalStreet: TKFormTextField! // TKFormTextField for entering optional street name.
-    @IBOutlet var state: TKFormTextField! // TKFormTextField for entering state.
-    @IBOutlet var city: TKFormTextField! // TKFormTextField for entering city.
-    @IBOutlet var zipCode: TKFormTextField! // TKFormTextField for entering zip code.
-    @IBOutlet var taxField: TKFormTextField! // TKFormTextField for entering tax information.
-    @IBOutlet var businessPhone: TKFormTextField! // TKFormTextField for entering business phone number.
-    @IBOutlet var businessPassword: TKFormTextField! // TKFormTextField for entering business password.
-    @IBOutlet var businessVisibilityBtn: TKFormTextField! // TKFormTextField for showing/hiding business password.
-    @IBOutlet var street1: TKFormTextField! // TKFormTextField for entering street1.
 
-    @IBOutlet weak var constraintContentHeight: NSLayoutConstraint! // NSLayoutConstraint for setting content height.
-    @IBOutlet weak var nameTopConstraint: NSLayoutConstraint! // NSLayoutConstraint for setting top constraint of name field.
-    @IBOutlet weak var fileOptionsHeight: NSLayoutConstraint! // NSLayoutConstraint for setting file options height.
-    @IBOutlet weak var fileViews: UIView! // UIView containing file options.
-    @IBOutlet var inCorporationDocName: UIButton! // UIButton for selecting incorporation document.
-    @IBOutlet var taxIDName: UIButton! // UIButton for selecting tax ID document.
-    @IBOutlet var businessCertifi: UIButton! // UIButton for selecting business certificate.
-    @IBOutlet var otherDocName: UIButton! // UIButton for selecting other document.
-    @IBOutlet var tableview: UITableView! // UITableView for displaying registration form.
-
-    @IBOutlet weak var agreeBtnYPos: NSLayoutConstraint! // NSLayoutConstraint for setting agree button position.
-
-    @IBOutlet weak var connectWithLabel: UILabel! // UILabel for displaying social login options.
-    @IBOutlet weak var socialLoginView: UIView! // UIView containing social login options.
-    @IBOutlet weak var lineOne: UIView! // UIView for separating UI elements.
-    @IBOutlet weak var lineTwo: UIView! // UIView for separating UI elements.
+    
+    @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
+    @IBOutlet weak var nameTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fileOptionsHeight: NSLayoutConstraint!
+    @IBOutlet weak var fileViews: UIView!
+    @IBOutlet var inCorporationDocName: UIButton!
+    @IBOutlet var taxIDName: UIButton!
+    @IBOutlet var businessCertifi: UIButton!
+    @IBOutlet var otherDocName: UIButton!
+    @IBOutlet var tableview: UITableView!
+    
+    @IBOutlet weak var agreeBtnYPos: NSLayoutConstraint!
+    
+    @IBOutlet weak var connectWithLabel: UILabel!
+    @IBOutlet weak var socialLoginView: UIView!
+    @IBOutlet weak var lineOne: UIView!
+    @IBOutlet weak var lineTwo: UIView!
      
     
-    var activeField: UITextField? // Keeps track of the active UITextField.
-    var lastOffset: CGPoint? // Stores the last content offset of the UIScrollView.
-    var keyboardHeight: CGFloat! // Height of the keyboard.
-    var genderText: String? // Stores the selected gender.
-    var RegisterArray: RegisterModelArray? // Array to store registration models.
-    var RegisterModelResponse: RegisterModel? // Stores the registration model response.
-    var faceBookDict: [String:Any] = [:] // Dictionary to store Facebook data.
-    var termcondition: Bool = false // Flag indicating whether terms and conditions are accepted.
-    var userName: String = "" // Stores the user's name.
-    var email: String = "" // Stores the user's email.
-    var profileUrl: String = "" // Stores the user's profile URL.
-    var loginType: String = "" // Stores the login type (e.g., Facebook, Apple).
-    var loginArray: loginModelArray? // Array to store login models.
-    var loginModelResponse: loginModel? // Stores the login model response.
-    var selectedFiles = [Int:Any]() // Dictionary to store selected files.
-    var selectedFilesTypes = [String:String]() // Dictionary to store types of selected files.
-    var selectedFileTag = 0 // Tag to identify selected file.
-    var fileMetaData = [Int:String]() // Dictionary to store file metadata.
-    var isSkipUpdateProfile = false // Flag indicating whether to skip updating the profile.
-    // MARK: - Actions
-
-    @IBAction func showCityAction(sender: UIButton) {
+    var activeField: UITextField?
+    var lastOffset: CGPoint?
+    var keyboardHeight: CGFloat!
+    var genterText:String?
+    var RegisterArray :  RegisterModelArray?
+    var RegisterModelResponse :  RegisterModel?
+    var faceBookDict : [String:Any] = [:]
+    var termcondition:Bool = false
+    var userName:String = ""
+    var email:String = ""
+    var profileUrl:String = ""
+    var loginType:String = ""
+    var loginArray : loginModelArray?
+    var loginModelResponse :  loginModel?
+    var selectedFiles = [Int:Any]()
+    var selectedFilesTypes = [String:String]()
+    var selectedFileTag = 0
+    var fileMetaData = [Int:String]()
+    var isSKipUpdateProfile = false
+    
+    @IBAction func showCityAction(sender:UIButton){
         debugPrint("showCityAction")
     }
-
-    @IBAction func showStateAction(sender: UIButton) {
+    @IBAction func showStateAction(sender:UIButton){
         debugPrint("showStateAction")
     }
-
-    @IBAction func showBUVisibilityAction(sender: UIButton) {
+    @IBAction func showBUVisibilityAction(sender:UIButton){
         debugPrint("showBUVisibilityAction")
         if sender.isSelected {
             self.businessPassword.isSecureTextEntry = false
             sender.isSelected = false
-        } else {
+            
+        }else{
             self.businessPassword.isSecureTextEntry = true
             sender.isSelected = true
         }
+      
     }
-
-    // MARK: - View Lifecycle
-
+    
     override func viewDidLayoutSubviews() {
-        // Set scroll view content size
-        // self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 2500)
+//        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: 2500)
     }
-
     override func viewDidLoad() {
+        self.businessPhone.enablesReturnKeyAutomatically = true
+        self.businessPhone.keyboardType = .phonePad
+        self.zipCode.keyboardType = .numberPad
+        self.businessAddress.lineView.isHidden = true
+        self.businessPassword.isSecureTextEntry = true
+        self.businessPassword.enablePasswordToggle()
+        self.showhidebtn.isHidden = true
+//        self.showhidebtn.setImage(UIImage(named: "passwordhide"), for: .selected)
+//        self.showhidebtn.setImage(UIImage(named: "passwordshow"), for: .normal)
+       // self.businessPassword.isSecureTextEntry = true
+       // self.businessPassword.isSelected = true
         super.viewDidLoad()
-        
-        // Configure text fields
+        self.registerBusinessView()
+        self.showBusinessView(show: false)
+        self.scrollView.delaysContentTouches = false
+
+        if(iDonateClass.hasSafeArea){
+            menuBtn.frame = CGRect(x: 0, y: 40, width: 50, height: 50)
+        }
+        else{
+            menuBtn.frame = CGRect(x: 0, y: 20, width: 50, height: 50)
+        }
+        menuBtn.addTarget(self, action: #selector(backAction(_sender:)), for: .touchUpInside)
+        self.view .addSubview(menuBtn)
+        menuBtn.setImage(UIImage(named: "back"), for: .normal)
+        self.containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnTextView(gesture:))))
+        // Do any additional setup after loading the view.
         setUpTextfield()
-        
-        // Set initial state
         self.individualBtn.isSelected = true
+        
         self.navigationController?.isNavigationBarHidden = true
-        self.appleLoginBtn.layer.cornerRadius = appleLoginBtn.frame.size.width / 2
+        self.appleLoginBtn.layer.cornerRadius = appleLoginBtn.frame.size.width/2
         self.appleLoginBtn.clipsToBounds = true
         self.appleLoginBtn.backgroundColor = .black
 
-        // Register business view
-        self.registerBusinessView()
-        
-        // Set up tap gesture to dismiss keyboard
-        self.containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnTextView(gesture:))))
     }
-
-    // MARK: - Apple ID Login
-
-    @IBAction func handleAuthorizationAppleIDButtonPress(sender: Any) {
+    
+    
+    @IBAction func handleAuthorizationAppleIDButtonPress(sender:Any){
+        
         if #available(iOS 13.0, *) {
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             let keychain = KeychainSwift()
             if let userID = keychain.get("Apple_user") {
                 appleIDProvider.getCredentialState(forUserID: userID) {  (credentialState, error) in
-                    switch credentialState {
-                    case .authorized:
-                        // The Apple ID credential is valid.
-                        debugPrint("AppleLoginDetails authorized")
-                        DispatchQueue.main.async {
-                            let email = keychain.get("Apple_email")
-                            let name = keychain.get("Apple_name")
-                            self.userName = keychain.get("Apple_name") ?? ""
-                            self.email = keychain.get("Apple_email") ?? ""
-                            self.profileUrl = ""
-                            self.isSkipUpdateProfile = true
-                            self.socialLogin(socialType: "Apple")
-                        }
-                    case .revoked:
-                        // The Apple ID credential is revoked.
-                        self.appleLogin()
-                    case .notFound:
-                        // No credential was found, so show the sign-in UI.
-                        self.appleLogin()
-                    default:
-                        break
-                    }
+                     switch credentialState {
+                        case .authorized:
+                            // The Apple ID credential is valid.
+                          debugPrint("AppleLoginDetails authorized")
+                         DispatchQueue.main.async {
+                             let email = keychain.get("Apple_email")
+                             let name = keychain.get("Apple_name")
+                            
+                             self.userName = keychain.get("Apple_name") ?? ""
+                             self.email = keychain.get("Apple_email") ?? ""
+                             self.profileUrl = ""
+                             self.isSKipUpdateProfile = true
+                             self.socialLogin(socialType: "Apple")
+                         }
+                         
+                         
+                          break
+                        case .revoked:
+                            // The Apple ID credential is revoked.
+                         self.appleLogin()
+                            break
+                        case .notFound:
+                            // No credential was found, so show the sign-in UI.
+                         self.appleLogin()
+                            break
+                        default:
+                            break
+                     }
                 }
-            } else {
+            }else{
+                
                 self.appleLogin()
             }
+        
+           
+          
         } else {
             // Fallback on earlier versions
         }
+            
     }
-    func registerBusinessView(){
-           self.tableview.register(UINib(nibName: "BusinessRegCell", bundle: nil), forCellReuseIdentifier: "BusinessRegCell")
-       }
-    func appleLogin() {
-        // Initiating Apple ID login
+    
+    func appleLogin(){
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -225,10 +227,20 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-
-
+    func registerBusinessView(){
+        self.tableview.register(UINib(nibName: "BusinessRegCell", bundle: nil), forCellReuseIdentifier: "BusinessRegCell")
+    }
+    @IBAction func showORHideAction(_ sender: UIButton) {
+        if(sender.isSelected == true){
+            sender.isSelected = false
+            passwordText1.isSecureTextEntry = true
+        }
+        else{
+            sender.isSelected = true
+            passwordText1.isSecureTextEntry = false
+        }
+    }
     func setUpTextfield() {
-        // Setting up text fields
         self.emailText.placeholder = "Email*"
         self.emailText.enablesReturnKeyAutomatically = true
         self.emailText.returnKeyType = .done
@@ -326,44 +338,23 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         self.businessName.selectedLineColor  = UIColor(red:0.61, green:0.44, blue:0.57, alpha:1.0)
         self.businessName.selectedLineHeight = 2
     }
-    /**
-     Adds targets for error updating to the given text field.
-
-     - Parameter textField: The text field to add targets to.
-     */
+    
     func addTargetForErrorUpdating(_ textField: TKFormTextField) {
         textField.addTarget(self, action: #selector(clearErrorIfNeeded), for: .editingChanged)
         textField.addTarget(self, action: #selector(updateError), for: .editingDidEnd)
     }
-    /**
-     Updates error message for the given text field.
-
-     - Parameter textField: The text field to update error message for.
-     */
     @objc func updateError(textField: TKFormTextField) {
         textField.error = validationError(textField)
         
     }
-    /**
-     Clears error message for the given text field if needed.
-
-     - Parameter textField: The text field to clear error message for.
-     */
+    
     @objc func clearErrorIfNeeded(textField: TKFormTextField) {
         if validationError(textField) == nil {
             textField.error = nil
         }
         
     }
-    /**
-     Validates the input text in the given text field.
-
-     - Parameter textField: The text field to validate.
-     - Returns: The error message if validation fails, otherwise nil.
-     */
     private func validationError(_ textField: TKFormTextField) -> String? {
-        // Validation logic for different text fields
-
         if textField == emailText {
             return TKDataValidator.email(text: textField.text)
         }
@@ -409,11 +400,6 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         }
         return nil
     }
-    /**
-     Dismisses the keyboard when tapping outside the active text field.
-
-     - Parameter gesture: The gesture recognizer.
-     */
     @objc func returnTextView(gesture: UIGestureRecognizer) {
         guard activeField != nil else {
             return
@@ -422,18 +408,14 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         activeField?.resignFirstResponder()
         activeField = nil
     }
-    /**
-     Handles the action when the user selects male, female, or other gender.
-
-     - Parameter sender: The button triggering the action.
-     */
+    
     @IBAction func maleOrFemaleAction(_ sender: UIButton) {
         if(sender.tag == 0)
         {
             femaleBtn.isSelected = false
             otherBtn.isSelected = false
             maleBtn.isSelected = true
-            genderText = "M"
+            genterText = "M"
         }
         else if(sender.tag == 1)
         {
@@ -441,36 +423,29 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             femaleBtn.isSelected = true
             maleBtn.isSelected = false
             otherBtn.isSelected = false
-            genderText = "F"
+            genterText = "F"
         }
         else
         {
             femaleBtn.isSelected = false
             maleBtn.isSelected = false
             otherBtn.isSelected = true
-            genderText = "O"
+            genterText = "O"
         }
         
     }
-    /**
-     Handles the action when the user selects business or individual registration.
-
-     - Parameter sender: The button triggering the action.
-     */
+    
     @IBAction func businessAction(_ sender: UIButton){
-        // Toggling visibility of business view
         businessBtn.isSelected = true
         individualBtn.isSelected = false
         self.showBusinessView(show: true)
+      //  nameTopConstraint.constant = 70
+        
        
     }
-    /**
-     Shows or hides the business view based on the input parameter.
-
-     - Parameter show: Boolean value indicating whether to show or hide the business view.
-     */
+    
     func showBusinessView(show:Bool){
-        // Toggling visibility of business-related UI elements based on the input parameter
+       
         self.businessView.isHidden = show ? false : true
         self.businessName.isHidden = show ? false : true
         
@@ -495,35 +470,30 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         self.countryLine.isHidden = show ? true : false
         self.countrydropdown.isHidden = show ? true : false
         self.agreeBtnYPos.constant = show ? 880 : 16
-
+        
+//        self.scrollView.isHidden = show ? true:false
+//        self.tableview.isHidden = show ? false : true
+//        self.fileOptionsHeight.constant = show ? 370 : 0
+//        self.fileViews.isHidden = show ? false : true
+//        self.businessName.isHidden = false
+//        self.nameText.isHidden = false
     
     }
     
-    /**
-     Handles the action when the user selects individual registration.
-
-     - Parameter sender: The button triggering the action.
-     */
     @IBAction func individualAction(_ sender: UIButton){
         businessBtn.isSelected = false
         individualBtn.isSelected = true
-        // Hiding business-related UI elements and adjusting constraints
+       // nameTopConstraint.constant = 0
         self.fileOptionsHeight.constant = 0
         self.fileViews.isHidden = true
         self.businessName.isHidden = true
         self.nameText.isHidden = false
         
-        // Hiding business view
         self.showBusinessView(show: false)
+
     }
-
-    /**
-     Updates the file selection UI based on the selected files.
-
-     */
     
     func updateFileSelection(){
-        // Updating file selection UI elements based on selected files
         if self.fileMetaData[0] != nil {
             self.inCorporationDocName.setTitle(self.fileMetaData[0], for: .normal)
             self.inCorporationDocName.setTitleColor(.blue, for: .normal)
@@ -553,51 +523,30 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             self.otherDocName.setTitleColor(.black, for: .normal)
         }
     }
-    
-    
-    /**
-     Handles the action when the user taps on the file upload button.
-
-     - Parameter sender: The button triggering the action.
-     */
     @IBAction func onFileUploadAction(sender:UIButton){
         debugPrint("onFileUploadAction",sender.tag)
         self.selectedFileTag = sender.tag
         self.openFilePicker(tag: sender.tag)
     }
     
-    /**
-     Opens the file picker for selecting documents.
-
-     - Parameter tag: The tag to identify the file upload button.
-     */
     func openFilePicker(tag:Int){
-        // Configuring document picker and presenting it
-
+        
         let documentPicker = UIDocumentPickerViewController(documentTypes: ["com.apple.iwork.pages.pages", "com.apple.iwork.numbers.numbers", "com.apple.iwork.keynote.key","public.image", "com.apple.application", "public.item", "public.content","public.text", "public.data","public.composite-content","public.png","public.jpeg"], in: .import)
 
         documentPicker.delegate = self
         present(documentPicker, animated: true, completion: nil)
     }
-    /**
-     Checks if all required files are uploaded.
-
-     - Returns: A boolean indicating whether all files are uploaded.
-     */
     func isAllFilesUpdated() -> Bool {
+       // debugPrint("selectedFiles",self.selectedFiles)
         let keys = self.selectedFiles.keys
+        //debugPrint("selectedFiles.keys",keys)
         if keys.contains(0) && keys.contains(1) && keys.contains(2) {
             return true
         }
         return false
+        
+//        return true
     }
-
-    /**
-     Returns the key name based on the file upload button tag.
-
-     - Parameter tag: The tag identifying the file upload button.
-     - Returns: The corresponding key name for the file.
-     */
     func getKeyName(tag:Int) -> String {
         switch tag{
         case 0:
@@ -612,7 +561,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             return ""
         }
     }
-
+    
     func isAllFieldsValid() -> Bool {
         //|| self.optionalStreet.text!.isBlankOrEmpty()
         if self.businessBtn.isSelected {
@@ -642,155 +591,335 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
     }
     
     @IBAction func registerAction(_ sender: UIButton){
-        self.view.endEditing(true)
+        self.view .endEditing(true)
         
-        // Check if the user has accepted the terms and conditions
-        if termcondition == false {
-            showAlertWithMessage("Please select term and condition")
+        if(termcondition == false) {
+            let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+            let messageAttrString = NSMutableAttributedString(string:"Please select term and condition", attributes: messageFont)
+            alertController.setValue(messageAttrString, forKey: "attributedMessage")
+            let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            }
+            alertController.addAction(contact)
+            self.present(alertController, animated: true, completion: nil)
             return
         }
         
-        // Check if all fields are valid
-        if !isAllFieldsValid() {
-            showAlertWithMessage("Fill all required fields")
+        if !self.isAllFieldsValid() {
+            let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+            let messageAttrString = NSMutableAttributedString(string:"Fill the all required field", attributes: messageFont)
+            alertController.setValue(messageAttrString, forKey: "attributedMessage")
+            let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            }
+            alertController.addAction(contact)
+            self.present(alertController, animated: true, completion: nil)
             return
         }
         
-        // If the registration is for a business, validate the business password
-        if businessBtn.isSelected {
-            if let passwordError = TKDataValidator.password(text: self.businessPassword.text) {
-                showAlertWithMessage(passwordError)
+        if self.businessBtn.isSelected {
+            let pswdValid = TKDataValidator.password(text: self.businessPassword.text)
+            if pswdValid != nil {
+                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                let messageAttrString = NSMutableAttributedString(string:pswdValid!, attributes: messageFont)
+                alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(contact)
+                self.present(alertController, animated: true, completion: nil)
                 return
             }
         }
         
-        // Construct parameters dictionary based on registration type
-        var postDict: Parameters = [
-            "name": nameText.text ?? "",
-            "email": emailText.text ?? "",
-            "password": passwordText1.text ?? "",
-            "phone": mobileText.text ?? "",
-            "country": UserDefaults.standard.value(forKey: "selectedcountry") ?? "US",
-            "gender": genderText ?? "",
-            "type": businessBtn.isSelected ? "business" : "individual",
-            "business_name": businessName.text ?? "",
-            "terms": "Yes"
-        ]
+        var postDict: Parameters = ["name":nameText.text ?? "",
+                                                   "email":emailText.text ?? "" ,
+                                                   "password":passwordText1.text ?? "",
+                                                   "phone":mobileText.text ?? "",
+                                                   "country":UserDefaults.standard.value(forKey: "selectedcountry") ?? "US",
+                                                   "gender":genterText ?? "",
+                                                   "type": businessBtn.isSelected ? "business" : "individual",
+                                                   "business_name": businessName.text ?? "",
+                                                   "terms":"Yes"]
         
-        // Additional parameters for business registration
-        if businessBtn.isSelected {
-            postDict["ein"] = taxField.text!
-            postDict["email"] = businessemail.text!
-            postDict["name"] = "\(firstName.text ?? "") \(lastName.text ?? "")"
-            postDict["phone"] = businessPhone.text!
-            postDict["address1"] = street1.text!
-            postDict["address2"] = optionalStreet.text!
-            postDict["city"] = city.text!
-            postDict["state"] = state.text!
-            postDict["zip"] = zipCode.text!
-            postDict["password"] = businessPassword.text!
+        if self.businessBtn.isSelected {
+            postDict["ein"] = self.taxField.text!
+            postDict["email"] = self.businessemail.text!
+            postDict["type"] = "business"
+            postDict["business_name"] = self.businessName.text!
+            postDict["name"] = self.firstName.text! + " " + self.lastName.text!
+            postDict["phone"] = self.businessPhone.text!
+            postDict["address1"] = self.street1.text!
+            postDict["address2"] = self.optionalStreet.text!
+            postDict["city"] = self.city.text!
+            postDict["state"] = self.state.text!
+            postDict["zip"] = self.zipCode.text!
+            postDict["country"] = "US"
+            postDict["terms"] = "Yes"
+            postDict["password"] = self.businessPassword.text!
             
-            // Add file parameters
-            for (key, val) in selectedFiles {
-                let keyName = getKeyName(tag: key)
+            for (key,val) in self.selectedFiles {
+                let keyName = self.getKeyName(tag:key)
                 postDict[keyName] = val
+                
             }
-            // Add file types parameters
-            for (key, val) in selectedFilesTypes {
+            for (key,val) in self.selectedFilesTypes {
                 postDict[key] = val
+                
             }
         }
         
-        // Perform API request
-        let registerUrl = URLHelper.iDonateRegister
-        showLoadingHUD()
-        WebserviceClass.sharedAPI.performRequest(isFileAdded: businessBtn.isSelected, type: RegisterModel.self, urlString: registerUrl, methodType: .post, parameters: postDict, success: { (response) in
-            self.RegisterModelResponse = response
-            self.RegisterArray = self.RegisterModelResponse?.registerArray
-            self.registerResponse()
-            self.hideLoadingHUD()
-        }) { (response) in
-            self.hideLoadingHUD()
-        }
-    }
-    /**
-     Handles the response received after attempting user registration.
-
-     This function displays an alert based on the registration status:
-     - If the registration is successful (status = 1), it presents an alert with a success message and navigates the user to the login view controller.
-     - If the registration fails (status ≠ 1), it presents an alert with a failure message.
-
-     - Note: This function assumes that `RegisterModelResponse` contains the response data from the registration attempt.**/
-    func registerResponse() {
-        if let status = RegisterModelResponse?.status {
-            if status == 1 {
-                let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
-                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-                let messageAttrString = NSMutableAttributedString(string: RegisterModelResponse?.message ?? "", attributes: messageFont)
-                alertController.setValue(messageAttrString, forKey: "attributedMessage")
-                let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
-                    let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC {
-                        self.navigationController?.pushViewController(loginVC, animated: true)
-                    }
-                }
-                alertController.addAction(okAction)
-                present(alertController, animated: true, completion: nil)
-            } else {
-                let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
-                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-                let messageAttrString = NSMutableAttributedString(string: RegisterModelResponse?.message ?? "", attributes: messageFont)
-                alertController.setValue(messageAttrString, forKey: "attributedMessage")
-                let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
-
-                }
-                alertController.addAction(okAction)
-                present(alertController, animated: true, completion: nil)
-            }
-        }
-    }
-
-
-    // Helper function to show alert with message
-    func showAlertWithMessage(_ message: String) {
-        let alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
-        let messageAttrString = NSMutableAttributedString(string: message, attributes: messageFont)
-        alertController.setValue(messageAttrString, forKey: "attributedMessage")
-        let contact = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alertController.addAction(contact)
-        self.present(alertController, animated: true, completion: nil)
-    }
-
-    // Helper function to show loading HUD
-    func showLoadingHUD() {
+        debugPrint("PostDict",postDict)
+        
+        // ["terms": "Yes", "country": US, "password": "Abcd@123", "name": "Sample user", "gender": "M", "type": "individual", "business_name": "", "phone": "7200798409", "email": "share2dinesh93+10@gmail.com"]
+        
+        let registerUrl = String(format: URLHelper.iDonateRegister)
         let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
-        loadingNotification.mode = .indeterminate
+        loadingNotification.mode = MBProgressHUDMode.indeterminate
         loadingNotification.label.text = "Loading"
-    }
+        
+        WebserviceClass.sharedAPI.performRequest(isFileAdded:businessBtn.isSelected ? true : false,type:  RegisterModel.self, urlString: registerUrl, methodType: .post, parameters: postDict, success: { (response)
+            in
+            self.RegisterModelResponse = response
+            self.RegisterArray  = self.RegisterModelResponse?.registerArray
+            self.registerResponse()
+            print("Result: \(String(describing: self.RegisterModelResponse))")                     // response serialization result
+            MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+            
+        }) { (response) in
+            MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+        }
+        
+        
+        
+        
+   /*     if(termcondition == false) {
+            let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+            let messageAttrString = NSMutableAttributedString(string:"Please select term and condition", attributes: messageFont)
+            alertController.setValue(messageAttrString, forKey: "attributedMessage")
+            let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            }
+            alertController.addAction(contact)
+            self.present(alertController, animated: true, completion: nil)
+        }
+           
+        else if (businessBtn.isSelected == false && (nameText.text == "") || (emailText.text == "") || (passwordText1.text == "" || (TKDataValidator.password(text: passwordText1.text) != nil)))  {
+                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                let messageAttrString = NSMutableAttributedString(string:"Fill the all required field", attributes: messageFont)
+                alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(contact)
+                self.present(alertController, animated: true, completion: nil)
+                
+                
+            }
+       else if(businessBtn.isSelected == true ){
+           
+           
+           if (businessName.text!.isBlankOrEmpty()) || (emailText.text!.isBlankOrEmpty()) || (passwordText1.text!.isBlankOrEmpty()) || (businessName.text!.isBlankOrEmpty()) || self.isAllFilesUpdated() == false {
+                let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+                let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+                let messageAttrString = NSMutableAttributedString(string:"Fill the all required field", attributes: messageFont)
+                alertController.setValue(messageAttrString, forKey: "attributedMessage")
+                let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                }
+                alertController.addAction(contact)
+                self.present(alertController, animated: true, completion: nil)
+            }
+           else{
+               
+            /*   var postDict: Parameters = ["name":nameText.text ?? "",
+                                           "email":emailText.text ?? "" ,
+                                           "password":passwordText1.text ?? "",
+                                           "phone":mobileText.text ?? "",
+                                           "country":UserDefaults.standard.value(forKey: "selectedcountry") ?? "US",
+                                           "gender":genterText ?? "",
+                                           "type": businessBtn.isSelected ? "business" : "individual",
+                                           "business_name": businessName.text ?? "",
+                                           "terms":"Yes",
+                                           "city":"",
+                                           "zip":"",
+                                           "state":"",
+                                           "address1":"",
+                                           "address2":""]
+               
+               for (key,val) in self.selectedFiles {
+                   let keyName = self.getKeyName(tag:key)
+                   postDict[keyName] = val
+               } */
+               
+               var postDict: Parameters = ["name":nameText.text ?? "",
+                                                          "email":emailText.text ?? "" ,
+                                                          "password":passwordText1.text ?? "",
+                                                          "phone":mobileText.text ?? "",
+                                                          "country":UserDefaults.standard.value(forKey: "selectedcountry") ?? "US",
+                                                          "gender":genterText ?? "",
+                                                          "type": businessBtn.isSelected ? "business" : "individual",
+                                                          "business_name": businessName.text ?? "",
+                                                          "terms":"Yes"]
+               if self.businessBtn.isSelected {
+                   
+                 /*  ein
+                   email
+                   type
+                   business_name
+                   name
+                   phone
+                   address1
+                   address2
+                   city
+                   state
+                   zip
+                   country
+                   terms
+                   incorp_doc
+                   incorp_doc_type
+                   tax_id_doc
+                   tax_id_doc_type
+                   good_standing_doc
+                   good_standing_doc_type
+                   oth_doc
+                   oth_doc_type
+                   password */
 
-    // Helper function to hide loading HUD
-    func hideLoadingHUD() {
-        MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                   postDict["ein"] = self.taxField.text!
+                   postDict["email"] = self.businessemail.text!
+                   postDict["type"] = "business"
+                   postDict["business_name"] = self.businessName.text!
+                   postDict["name"] = self.firstName.text! + " " + self.lastName.text!
+                   postDict["phone"] = self.businessPhone.text!
+                   postDict["address1"] = self.street.text!
+                   postDict["address2"] = self.optionalStreet.text!
+                   postDict["city"] = self.city.text!
+                   postDict["state"] = self.state.text!
+                   postDict["zip"] = self.zipCode.text!
+                   postDict["country"] = "US"
+                   postDict["terms"] = "Yes"
+                   postDict["password"] = self.businessPassword.text!
+                   
+                   for (key,val) in self.selectedFiles {
+                       let keyName = self.getKeyName(tag:key)
+                       postDict[keyName] = val
+                       
+                   }
+                   for (key,val) in self.selectedFilesTypes {
+                       postDict[key] = val
+                       
+                   }
+                   
+                  /* postDict["incorp_doc"] = ""
+                   postDict["incorp_doc_type"] = ""
+                   postDict["tax_id_doc"] = ""
+                   postDict["tax_id_doc_type"] = ""
+                   postDict["good_standing_doc"] = ""
+                   postDict["good_standing_doc_type"] = ""
+                   postDict["oth_doc"] = ""
+                   postDict["oth_doc_type"] = "" */
+               }
+               
+               debugPrint("postDict",postDict)
+               
+               if true {
+                   
+               }
+               let registerUrl = String(format: URLHelper.iDonateRegister)
+               let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+               loadingNotification.mode = MBProgressHUDMode.indeterminate
+               loadingNotification.label.text = "Loading"
+               
+               WebserviceClass.sharedAPI.performRequest(type:  RegisterModel.self, urlString: registerUrl, methodType: .post, parameters: postDict, success: { (response)
+                   in
+                   self.RegisterModelResponse = response
+                   self.RegisterArray  = self.RegisterModelResponse?.registerArray
+                   self.registerResponse()
+                   print("Result: \(String(describing: self.RegisterModelResponse))")                     // response serialization result
+                   MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                   
+               }) { (response) in
+                   MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+               }
+           }
+        }
+            else {
+                
+                let postDict: Parameters = ["name":nameText.text ?? "",
+                                            "email":emailText.text ?? "" ,
+                                            "password":passwordText1.text ?? "",
+                                            "phone":mobileText.text ?? "",
+                                            "country":UserDefaults.standard.value(forKey: "selectedcountry") ?? "US",
+                                            "gender":genterText ?? "",
+                                            "type": businessBtn.isSelected ? "business" : "individual",
+                                            "business_name": businessName.text ?? "",
+                                            "terms":"Yes"]
+                
+                let registerUrl = String(format: URLHelper.iDonateRegister)
+                let loadingNotification = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+                loadingNotification.mode = MBProgressHUDMode.indeterminate
+                loadingNotification.label.text = "Loading"
+                
+                WebserviceClass.sharedAPI.performRequest(isFileAdded:businessBtn.isSelected ? true : false,type:  RegisterModel.self, urlString: registerUrl, methodType: .post, parameters: postDict, success: { (response)
+                    in
+                    self.RegisterModelResponse = response
+                    self.RegisterArray  = self.RegisterModelResponse?.registerArray
+                    self.registerResponse()
+                    print("Result: \(String(describing: self.RegisterModelResponse))")                     // response serialization result
+                    MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                    
+                }) { (response) in
+                    MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                }
+            } */
+        
     }
-
     
-    // MARK: - Functions
-
-    /// Handles the action when the user taps a button to go back.
-    /// - Parameter _sender: The UIButton triggering the action.
-    @objc func backAction(_sender: UIButton) {
+    
+    func registerResponse() {
+        
+        if(self.RegisterModelResponse?.status == 1) {
+            let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+            let messageAttrString = NSMutableAttributedString(string:(self.RegisterModelResponse?.message)!, attributes: messageFont)
+            alertController.setValue(messageAttrString, forKey: "attributedMessage")
+            let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
+                self.navigationController?.pushViewController(vc!, animated: true)
+            }
+            alertController.addAction(contact)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        else {
+            let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+            let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
+            let messageAttrString = NSMutableAttributedString(string:(self.RegisterModelResponse?.message)!, attributes: messageFont)
+            alertController.setValue(messageAttrString, forKey: "attributedMessage")
+            let contact = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+//                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "HomeVC") as? HomeVC
+//                self.navigationController?.pushViewController(vc!, animated: true)
+            }
+            alertController.addAction(contact)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
+    
+    @objc func backAction(_sender:UIButton)  {
         let alert = UIAlertController(title: "", message: "Returning To Login Without Making Changes?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            self.view.endEditing(true)
+            self.view .endEditing(true)
             self.navigationController?.popViewController(animated: true)
+            
         }))
-        alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+            
+        }))
         self.present(alert, animated: true, completion: nil)
     }
+    
 
-    /// Adjusts the content inset of a scroll view when the keyboard is about to be shown.
-    /// - Parameter notification: The NSNotification object containing information about the keyboard.
     @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
@@ -800,57 +929,53 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
         contentInset.bottom = keyboardFrame.size.height + 100
         scrollView.contentInset = contentInset
     }
-
-    /// Resets the content inset of a scroll view when the keyboard is about to be hidden.
-    /// - Parameter notification: The NSNotification object containing information about the keyboard.
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }
-
-    /// Prepares the view controller for display.
+    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        // Observe keyboard changes
+        //  Observe keyboard change
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        // Set country button title if selected
-        if let selectedName = UserDefaults.standard.value(forKey: "selectedname") as? String {
-            countryBtn.setTitle(selectedName, for: .normal)
+        if((UserDefaults.standard.value(forKey: "selectedname")) != nil){
+            let object = UserDefaults.standard.value(forKey: "selectedname") as! String
+            countryBtn.setTitle(object, for: .normal)
         }
         
-        // Set Google sign-in delegate
         GIDSignIn.sharedInstance().delegate = self
-    }
 
-    /// Cleans up resources before the view controller's view is removed from the view hierarchy.
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
-
-    /// Checks if a given string is a valid email address.
-    /// - Parameter testStr: The string to be validated.
-    /// - Returns: A Boolean value indicating whether the string is a valid email address.
-    func isValidEmail(testStr: String) -> Bool {
+    
+    func isValidEmail(testStr:String) -> Bool {
+        // print("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
     }
-
-    // MARK: - Actions
-
-    /// Handles the action when the user taps a button to sign in with Google.
-    /// - Parameter sender: The UIButton triggering the action.
+//    func isValidText(testStr:String) -> Bool {
+//        // print("validate calendar: \(testStr)")
+//        let emailRegEx = "[A-Za-z_-]"
+//
+//        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+//        return emailTest.evaluate(with: testStr)
+//    }
+    
     @IBAction func googleSignIN(_ sender: UIButton) {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.shouldFetchBasicProfile = true
         GIDSignIn.sharedInstance()?.signIn()
+        
     }
-
     
     @IBAction func facebookLogin(_ sender:UIButton) {
         
@@ -980,7 +1105,7 @@ class RegisterVC: BaseViewController,GIDSignInDelegate {
             UserDefaults.standard.set(encodedData, forKey: "people")
             UserDefaults.standard.set( self.loginArray!.name, forKey: "username")
             
-            if(loginType == "Social") &&  (self.isSkipUpdateProfile == false){
+            if(loginType == "Social") &&  (self.isSKipUpdateProfile == false){
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileVC
                 vc?.userName = self.userName
                 vc?.userEmail = self.email
@@ -1062,7 +1187,7 @@ extension RegisterVC:UITextFieldDelegate {
 //            else{
 //                let isValid = isValidText(testStr: nameText.text!)
 //                if(isValid == false) {
-//                    
+//
 //                }
 //            }
         }
@@ -1289,7 +1414,7 @@ extension RegisterVC: ASAuthorizationControllerDelegate {
     }
     
     func doAppleLogin(email:String? = "",name:String? = "") {
-        self.isSkipUpdateProfile = true
+        self.isSKipUpdateProfile = true
         self.userName = name ?? ""
         self.email = email ?? ""
         self.profileUrl = ""

@@ -226,7 +226,9 @@ class SearchDetailsVC: BaseViewController, UICollectionViewDelegate, UICollectio
         // Set address label text to charity street and city
         adderssLbl.text = charityList!.street! + "," + charityList!.city!
         // Set like button title with like count
-        let likeString = charityList!.likeCount! + " Likes"
+        let likeCount = charityList?.like_count ?? "0"
+        let likeString = likeCount + " Likes"
+        // Use likeString
         likeBTN.setTitle(likeString, for: .normal)
         
         // Set placeholder image
@@ -285,6 +287,7 @@ class SearchDetailsVC: BaseViewController, UICollectionViewDelegate, UICollectio
             if sender.isSelected {
                 sender.isSelected = false
                 likeCount = "0"
+                
             } else {
                 likeCount = "1"
                 sender.isSelected = true
@@ -420,35 +423,36 @@ class SearchDetailsVC: BaseViewController, UICollectionViewDelegate, UICollectio
     /**
      Performs the donation to charity action.
      */
-    func donateToCharity() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if let data = UserDefaults.standard.data(forKey: "people"),
-               let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
-                let userID = myPeopleList.userID
-                let charityID = self.charityList?.id ?? ""
-                // Construct parameters for donation
-                let postDict = ["user_id": userID, "charity_id": charityID]
-                let iDonateTransString = String(format: URLHelper.iDonateTrans)
-                // Perform API call for donation
-                WebserviceClass.sharedAPI.performRequest(type: [String: String].self, urlString: iDonateTransString, methodType: .post, parameters: postDict, success: { (response) in
-                    MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true) // Hide loading indicator
-                    print("RESPONSE",response)
-                    if let url = response["url"], let paymentURL = URL(string: url) {
-                        // Display payment URL in Safari view controller
+    func donateToCharity(charityID: String) {
+        // Display loading indicator
+        MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+        
+        if let data = UserDefaults.standard.data(forKey: "people"), let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
+            let userID = myPeopleList.userID
+            let postDict: [String: String] = ["user_id": userID, "charity_id": charityID]
+            let iDonateTransString = String(format: URLHelper.iDonateTrans)
+            
+            AF.request(iDonateTransString, method: .post, parameters: postDict, encoder: URLEncodedFormParameterEncoder.default).responseJSON { response in
+                MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                
+                switch response.result {
+                case .success(let value):
+                    if let json = value as? [String: Any], let urlString = json["url"] as? String, let paymentURL = URL(string: urlString) {
                         let safariViewController = SFSafariViewController(url: paymentURL)
                         safariViewController.delegate = self
                         self.present(safariViewController, animated: true, completion: nil)
                     } else {
                         print("Error: Invalid payment URL")
+                        // You may display an error message to the user if needed
                     }
-                }) { (error) in
-                    MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true) // Hide loading indicator
-                    print("Error: \(error)") // Log error
+                case .failure(let error):
+                    print("Error: \(error)")
                     // You may display an error message to the user if needed
                 }
             }
         }
     }
+
     
     /**
      Called when the web view finishes loading a navigation.
@@ -485,7 +489,7 @@ class SearchDetailsVC: BaseViewController, UICollectionViewDelegate, UICollectio
     @IBAction func paymentAction(_ sender: UIButton) {
         if let data = UserDefaults.standard.data(forKey: "people"),
            let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
-            donateToCharity() // Proceed with donation if user is logged in
+            donateToCharity(charityID:  charityList!.id!)// Proceed with donation if user is logged in
         }
     }
     

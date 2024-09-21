@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Handles URL opening for various purposes including deep linking.
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if url.scheme == "https", url.host == "prod.i2-donate.com" {
+        if url.scheme == "https", url.host == " .i2-donate.com" {
             if let path = url.pathComponents.last,
                path == "/i2D_DPS_Procs/payment/donation_payment_show_successfull_msg",
                let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems {

@@ -4,6 +4,16 @@
    <FileRef
       location = "group:i2-Donate.xcodeproj">
    </FileRef>
+   <Group
+      location = "group:iDonate/../Pods"
+      name = "Pods">
+      <FileRef
+         location = "group:Pods/Target Support Files/Pods-i2-Donate/Pods-i2-Donate.debug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Pods/Target Support Files/Pods-i2-Donate/Pods-i2-Donate.release.xcconfig">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>

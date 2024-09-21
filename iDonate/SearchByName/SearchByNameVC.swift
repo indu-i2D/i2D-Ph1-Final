@@ -460,8 +460,8 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         searchedName = ""
         self.searchBar.text = ""
         self.searchScrollBar.text = ""
-        searchBar.placeholder = "Enter City/Sate"
-        searchScrollBar.placeholder = "Enter City/Sate"
+        searchBar.placeholder = "Enter City/State"
+        searchScrollBar.placeholder = "Enter City/State"
     }
 
     /**
@@ -475,32 +475,51 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         searchedName = ""
         self.searchBar.text = ""
         self.searchScrollBar.text = ""
-        searchBar.placeholder = "Enter City/Sate"
-        searchScrollBar.placeholder = "Enter City/Sate"
+        searchBar.placeholder = "Enter City/State"
+        searchScrollBar.placeholder = "Enter City/State"
         self.filterType = "location"
     }
+    
 
     /**
      Handles the action when the like button is tapped, toggling the like status of a charity and performing the respective action.
 
      - Parameter sender: The button that triggered the action.
      */
-    @IBAction func likeAction(_ sender:UIButton)  {
+    @IBAction func likeAction(_ sender: UIButton) {
         // Check if user is logged in
-        if let data = UserDefaults.standard.data(forKey: "people"), let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
-            var likeCount:String = ""
+        if let data = UserDefaults.standard.data(forKey: "people"),
+           let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
+            
+            var likeCount: String = ""
             userID = myPeopleList.userID
-            let charityObject = charityListArray![sender.tag]
+            var charityObject = charityListArray![sender.tag]
+            let currentLikeCount = Int(charityObject.like_count ?? "0") ?? 0
+
             if sender.isSelected {
+                // If already liked, unlike it
                 sender.isSelected = false
                 likeCount = "0"
+                charityObject.like_count = "\(currentLikeCount - 1)"
             } else {
-                likeCount = "1"
+                // If not liked, like it
                 sender.isSelected = true
+                likeCount = "1"
+                charityObject.like_count = "\(currentLikeCount + 1)"
             }
+            
             selectedIndex = sender.tag
+            charityListArray![sender.tag] = charityObject // Update the array
+            
+            // Call the API or perform any network-related actions
             charityLikeAction(like: likeCount, charityId: charityObject.id!)
-        } else {
+            
+            // Reload the specific row to show the updated like count
+            let indexPath = IndexPath(row: sender.tag, section: 0)
+            self.searchTableView.reloadRows(at: [indexPath], with: .none)
+        }
+    
+else {
             // Display login/register prompt if not logged in
             let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
                        let messageFont = [NSAttributedString.Key.font: UIFont(name: "Avenir-Roman", size: 18.0)!]
@@ -616,28 +635,34 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
      */
     func donateToCharity(charityID: String) {
         // Display loading indicator
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if let data = UserDefaults.standard.data(forKey: "people"), let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
-                let userID = myPeopleList.userID
-                let postDict = ["user_id": userID, "charity_id": charityID]
-                let iDonateTransString = "https://devb.i2-donate.com/i2d_mob/webservice/donate_trans"
-                WebserviceClass.sharedAPI.performRequest(type: [String: String].self, urlString: iDonateTransString, methodType: .post, parameters: postDict, success: { (response) in
-                    MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
-                    if let url = response["url"] as? String, let paymentURL = URL(string: url) {
+        MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+        
+        if let data = UserDefaults.standard.data(forKey: "people"), let myPeopleList = NSKeyedUnarchiver.unarchiveObject(with: data) as? UserDetails {
+            let userID = myPeopleList.userID
+            let postDict: [String: String] = ["user_id": userID, "charity_id": charityID]
+            let iDonateTransString = String(format: URLHelper.iDonateTrans)
+            
+            AF.request(iDonateTransString, method: .post, parameters: postDict, encoder: URLEncodedFormParameterEncoder.default).responseJSON { response in
+                MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                
+                switch response.result {
+                case .success(let value):
+                    if let json = value as? [String: Any], let urlString = json["url"] as? String, let paymentURL = URL(string: urlString) {
                         let safariViewController = SFSafariViewController(url: paymentURL)
                         safariViewController.delegate = self
                         self.present(safariViewController, animated: true, completion: nil)
                     } else {
                         print("Error: Invalid payment URL")
+                        // You may display an error message to the user if needed
                     }
-                }) { (error) in
-                    MBProgressHUD.hide(for: UIApplication.shared.keyWindow!, animated: true)
+                case .failure(let error):
                     print("Error: \(error)")
                     // You may display an error message to the user if needed
                 }
             }
         }
     }
+
 
     // Function to dismiss the web view
     @objc func dismissWebView() {
@@ -746,8 +771,15 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
         let cell = searchTableView.dequeueReusableCell(withIdentifier: "searchcell") as! SearchTableViewCell
         cell.title.text = charity.name
         cell.address.text = charity.street!+","+charity.city!
-        let likeString = charity.likeCount! + " Likes"
-        cell.likeBtn.setTitle(likeString, for: .normal)
+         var likeCount = charity.like_count
+        if let likeCount = charity.like_count {
+            let likeString = "\(likeCount) Likes"
+            cell.likeBtn.setTitle(likeString, for: .normal)
+        } else {
+            cell.likeBtn.setTitle("0 Likes", for: .normal)  // Fallback if likeCount is nil
+        }
+
+       
         let placeholderImage = UIImage(named: "defaultImageCharity")!
         
         if charity.logo != nil {
@@ -772,7 +804,7 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             cell.likeBtn.isSelected = true
         }
         
-        let count = charity.followedCount
+        let count = charity.followed_count
         if(charity.followed == "0"){
             cell.followingBtn.isSelected = false
             cell.followingBtn.setTitle((count ?? "0") + " Follow", for: .normal)
@@ -831,8 +863,8 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
             searchedName = ""
             self.searchBar.text = ""
             self.searchScrollBar.text = ""
-            searchBar.placeholder = "Enter City/Sate"
-            searchScrollBar.placeholder = "Enter City/Sate"
+            searchBar.placeholder = "Enter City/State"
+            searchScrollBar.placeholder = "Enter City/State"
     
         } else{
             searchBar.placeholder = ""
@@ -841,8 +873,8 @@ class SearchByNameVC: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if(nameFlg == false){
-            searchBar.placeholder = "Enter City/Sate"
-            searchScrollBar.placeholder = "Enter City/Sate"
+            searchBar.placeholder = "Enter City/State"
+            searchScrollBar.placeholder = "Enter City/State"
             nameScrollbtn.isSelected = false
             nameFlg = false
         } else{

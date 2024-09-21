@@ -86,7 +86,7 @@ class SubTypesViewController: BaseViewController {
         case "US":
             // If the country code is "US", navigate to the SearchByLocationVC for United States.
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
-            vc?.headerTitleText = "UNITED STATES"
+            vc?.headertitle = "UNITED STATES"
             vc?.country = countryCode
             vc?.deductible = taxDeductible
             vc?.subCategoryCode = selectedSubTypesCodeArray
@@ -98,7 +98,7 @@ class SubTypesViewController: BaseViewController {
         case "INT":
             // If the country code is "INT", navigate to the SearchByLocationVC for international charities registered in the USA.
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SearchByLocationVC") as? SearchByLocationVC
-            vc?.headerTitleText = "INTERNATIONAL CHARITIES REGISTERED IN USA"
+            vc?.headertitle = "INTERNATIONAL CHARITIES REGISTERED IN USA"
             vc?.country = countryCode
             vc?.deductible = taxDeductible
             vc?.subCategoryCode = selectedSubTypesCodeArray
