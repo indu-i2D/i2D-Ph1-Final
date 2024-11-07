@@ -141,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         let sheetApiKey = "AIzaSyDQzTsnTRgYvCDfEUm1ac0rQgHZbiiB_ew"
         let sheetID = "1O-8LD2wcWDqBiKw9I3QDI0JuwWCVrenyN_IzVHVMd4E"
-        let sheetTabName = "i2D-Prod"
+        let sheetTabName = "i2D-Dev"
         let url = "https://sheets.googleapis.com/v4/spreadsheets/" + sheetID + "/values/" + sheetTabName + "?key=" + sheetApiKey
         
         var request = URLRequest(url: URL(string: url)!)

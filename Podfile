@@ -13,8 +13,6 @@ target 'i2-Donate' do
   pod 'GoogleMaps/Maps'
   pod 'GooglePlaces'
   pod 'SwiftyJSON'
-  pod 'TwitterKit5'
-  pod 'TwitterCore'
   pod 'IQKeyboardManagerSwift'
   pod 'KeychainSwift', '~> 20.0'
 
